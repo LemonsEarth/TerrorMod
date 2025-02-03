@@ -1,0 +1,3 @@
+displayName = Terror Mode
+author = LemonEarth
+version = 0.1
