@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TerrorMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abb1746cd89dbacad083ae10f00e02208100c83a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TerrorMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TerrorMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

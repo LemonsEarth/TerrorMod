@@ -230,3 +230,4 @@ C:\Users\bonix\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\Terror
 C:\Users\bonix\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\TerrorMod\obj\Debug\net8.0\refint\TerrorMod.dll
 C:\Users\bonix\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\TerrorMod\obj\Debug\net8.0\TerrorMod.pdb
 C:\Users\bonix\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\TerrorMod\obj\Debug\net8.0\ref\TerrorMod.dll
+C:\Users\bonix\OneDrive\Documents\My Games\Terraria\tModLoader\ModSources\TerrorMod\obj\Debug\net8.0\TerrorMod.sourcelink.json

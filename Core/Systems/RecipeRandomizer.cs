@@ -12,9 +12,9 @@ namespace TerrorMod.Core.Systems
 {
     public class RecipeRandomizer : ModSystem
     {
-        string worldSeed => WorldGen.currentWorldSeed; // World seed is used to remove and add ingredients
-
-        public override void OnWorldLoad()
+        string playedID => Main.clientUUID; // Player ID makes each recipe unique and is kept the same every reload
+        Recipe[] originalRecipes;
+        public override void PostAddRecipes()
         {
             foreach (Recipe recipe in Main.recipe)
             {
@@ -36,23 +36,11 @@ namespace TerrorMod.Core.Systems
             }
         }
 
-        public override void OnWorldUnload()
-        {
-            foreach (Recipe recipe in Main.recipe)
-            {
-                if (ItemLists.PreHM_Items.Contains(recipe.createItem.type))
-                {
-                    UnifiedRandom random = GetUnifiedRandomForRecipe(recipe.createItem.type);
-                    int numOfIngredients = GetNewIngredientAmount(random);
-
-                    recipe.requiredItem.RemoveRange(recipe.requiredItem.Count - numOfIngredients, numOfIngredients);   
-                }
-            }
-        }
-
         int GetSeedForRandom(int recipeItemID)
         {
-            int seedRand = int.Parse(worldSeed.Substring(0, 7));  // Seed for random is comprised of the first 7 numbers of the world seed +
+            IEnumerable<int> playerIDASCII_Collection = playedID.Select(character => (int)character); // convert to ASCII values so the ID is only numbers
+            string playedIDASCII = string.Join("", playerIDASCII_Collection); // Join collection elements into string
+            int seedRand = int.Parse(playedIDASCII.Substring(0, 7));  // Seed for random is comprised of the first 7 numbers of the player ID seed +
             seedRand += recipeItemID;                             // the id of the item whose recipe is being randomized
             return seedRand;
         }
