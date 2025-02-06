@@ -7,11 +7,17 @@
 	<PropertyGroup>
 		
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Content\Buffs\Debuffs\InfectedCorrupt.png" />
+	  <None Remove="Content\Buffs\Debuffs\InfectedCrimson.png" />
+	  <None Remove="Localization\en-US\Mods.TerrorMod.Buffs.hjson" />
+	  <None Remove="Localization\en-US\Mods.TerrorMod.Items.hjson" />
+	  <None Remove="Localization\en-US\Mods.TerrorMod.Projectiles.hjson" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Core\Globals\Buffs\Debuffs\" />
+	</ItemGroup>
 
 	<!-- References -->
-	<ItemGroup>
-	  <Folder Include="Content\Buffs\Debuffs\" />
-	  <Folder Include="Content\Items\" />
-	</ItemGroup>
 
 </Project>

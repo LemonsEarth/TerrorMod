@@ -48,6 +48,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
                 });
         }
 
+        const int FIRE_RATE = 90;
         public override void AI()
         {
             if (NPC.target < 0 || NPC.target == 255)
@@ -61,7 +62,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
             Player player = Main.player[NPC.target];
             NPC.rotation = NPC.Center.DirectionTo(player.Center).ToRotation();
 
-            if (AttackTimer == 90)
+            if (AttackTimer == FIRE_RATE)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
@@ -73,7 +74,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
 
             NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.Zero, 1f / 60f);
 
-            if (AttackTimer < 90)
+            if (AttackTimer < FIRE_RATE)
             {
                 AttackTimer++;
             }

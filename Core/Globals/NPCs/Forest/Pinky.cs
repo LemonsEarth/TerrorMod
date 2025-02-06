@@ -18,7 +18,6 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.OgreSpit, 60);
-            target.AddBuff(BuffID.VortexDebuff, 120);
         }
     }
 }

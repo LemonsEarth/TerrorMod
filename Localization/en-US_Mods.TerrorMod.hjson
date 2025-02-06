@@ -1,6 +1,0 @@
-NPCs: {
-	TreeSpirit.DisplayName: Tree Spirit
-	ZombieMiner.DisplayName: Zombie Miner
-}
-
-Projectiles.ThrownPickaxe.DisplayName: Thrown Pickaxe

@@ -12,25 +12,38 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
 
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
-            return entity.type == NPCID.IceSlime
+            return entity.type == NPCID.BlueSlime
                 || entity.type == NPCID.Slimer
-                || entity.type == NPCID.Slimeling
-                || entity.type == NPCID.SlimedZombie
-                || entity.type == NPCID.BlueSlime
-                || entity.type == NPCID.GreenSlime
-                || entity.type == NPCID.RedSlime
-                || entity.type == NPCID.YellowSlime
-                || entity.type == NPCID.PurpleSlime
-                || entity.type == NPCID.BlackSlime
                 || entity.type == NPCID.MotherSlime
+                || entity.type == NPCID.Crimslime
+                || entity.type == NPCID.IceSlime
                 || entity.type == NPCID.ShimmerSlime
-                || entity.type == NPCID.JungleSlime
-                || entity.type == NPCID.SandSlime;
+                || entity.type == NPCID.SandSlime
+                || entity.type == NPCID.SlimeSpiked
+                || entity.type == NPCID.SpikedIceSlime
+                || entity.type == NPCID.SpikedJungleSlime;
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.OgreSpit, 60);
+            if (npc.netID == NPCID.Pinky)
+            {
+                target.AddBuff(BuffID.VortexDebuff, 120);
+            }
+        }
+
+        public override bool PreAI(NPC npc)
+        {
+            if (npc.netID == NPCID.Pinky)
+            {
+                npc.ai[0] = -2000; // setting it to anything negative just makes the slime jump constantly, at -2000 is the highest jump a slime can do
+            }
+            else if (npc.type == NPCID.BlueSlime)
+            {
+                npc.ai[0] += 3; // ai0 is the jump timer for slimes. It decrements every frame for 120 frames before jumping, this just speeds it up
+            }
+            return true;
         }
     }
 }

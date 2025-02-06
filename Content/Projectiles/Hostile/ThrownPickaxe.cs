@@ -13,7 +13,6 @@ namespace TerrorMod.Content.Projectiles.Hostile
         public override string Texture => "Terraria/Images/Item_" + ItemID.IronPickaxe; // Use Iron Pickaxe texture cause im lazy
 
         ref float AITimer => ref Projectile.ai[0];
-        ref float Acceleration => ref Projectile.ai[1];
 
         public override void SetDefaults()
         {
@@ -23,7 +22,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.timeLeft = 120;
+            Projectile.timeLeft = 180;
         }
 
         public override void AI()

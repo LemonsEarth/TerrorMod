@@ -16,6 +16,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
     {
         float AITimer = 0;
         float AttackTimer = 0;
+        float AttackCount = 0;
 
         public override void SetStaticDefaults()
         {
@@ -50,6 +51,8 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
                 });
         }
 
+        const int FIRE_RATE = 180;
+        const int MAX_ATTACK_COUNT = 4;
         public override void AI()
         {
             if (NPC.target < 0 || NPC.target == 255)
@@ -65,16 +68,17 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
 
             NPC.spriteDirection = Math.Sign(NPC.Center.DirectionTo(player.Center).X);
 
-            if (AttackTimer == 180)
+            if (AttackTimer == FIRE_RATE && NPC.Center.Distance(player.Center) < 500 && AttackCount < MAX_ATTACK_COUNT)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(player.Center) * 10, ModContent.ProjectileType<ThrownPickaxe>(), NPC.damage, 1f);
                 }
+                AttackCount++;
                 AttackTimer = 0;
             }
 
-            if (AttackTimer < 180)
+            if (AttackTimer < FIRE_RATE)
             {
                 AttackTimer++;
             }
@@ -100,7 +104,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
         {
             if (!Main.dayTime)
             {
-                return (spawnInfo.Player.ZoneForest && Main.bloodMoon) ? 0.06f : 0.005f;
+                return (spawnInfo.Player.ZoneForest && Main.bloodMoon) ? 0.1f : 0.05f;
             }
             else
             {
@@ -110,8 +114,9 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemID.Wood, minimumDropped: 1, maximumDropped: 3));
-            npcLoot.Add(ItemDropRule.Common(ItemID.WoodenArrow, 5, minimumDropped: 2, maximumDropped: 3));
+            npcLoot.Add(ItemDropRule.Common(ItemID.IronOre, minimumDropped: 8, maximumDropped: 22));
+            npcLoot.Add(ItemDropRule.Common(ItemID.IronPickaxe, 3));
+            npcLoot.Add(ItemDropRule.Common(ItemID.MiningHelmet, 5));
         }
 
         public override bool? CanFallThroughPlatforms()

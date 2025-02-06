@@ -3,8 +3,88 @@
   "WorkspaceRootPath": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\projectiles\\hostile\\thrownpickaxe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\projectiles\\hostile\\thrownpickaxe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\bosses\\kingslime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\bosses\\kingslime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\forest\\slimes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\forest\\slimes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\forest\\pinky.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\forest\\pinky.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\players\\terrorplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\players\\terrorplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\items\\consumables\\antidoteneedle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\items\\consumables\\antidoteneedle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\buffs\\buffs\\antidotebuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\buffs\\buffs\\antidotebuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\localization\\en-us\\mods.terrormod.buffs.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:localization\\en-us\\mods.terrormod.buffs.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\localization\\en-us\\mods.terrormod.items.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:localization\\en-us\\mods.terrormod.items.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\localization\\en-us\\mods.terrormod.npcs.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:localization\\en-us\\mods.terrormod.npcs.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\localization\\en-us\\mods.terrormod.projectiles.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:localization\\en-us\\mods.terrormod.projectiles.hjson||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\corruption\\infectedcorruptnpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\corruption\\infectedcorruptnpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\common\\utils\\npcextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:common\\utils\\npcextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\projectiles\\hostile\\corruptcarrierproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\projectiles\\hostile\\corruptcarrierproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\buffs\\debuffs\\infectedcorrupt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\buffs\\debuffs\\infectedcorrupt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\npcs\\hostile\\corruption\\corruptcarrier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\npcs\\hostile\\corruption\\corruptcarrier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\projectiles\\hostile\\crimsoncarrierproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\projectiles\\hostile\\crimsoncarrierproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\npcs\\hostile\\crimson\\crimsoncarrier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\npcs\\hostile\\crimson\\crimsoncarrier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\tiles\\npctile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\tiles\\npctile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\underground\\spiders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\underground\\spiders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\crimson\\infectedcrimsonnpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\crimson\\infectedcrimsonnpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\buffs\\debuffs\\infectedcrimson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\buffs\\debuffs\\infectedcrimson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\npcs\\hostile\\forest\\zombieminer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,6 +95,10 @@
       "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\npcs\\hostile\\forest\\treespirit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\content\\projectiles\\hostile\\thrownpickaxe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:content\\projectiles\\hostile\\thrownpickaxe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\common\\utils\\lemonutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:common\\utils\\lemonutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,24 +107,8 @@
       "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\dungeon\\skeletons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\tiles\\npctile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\tiles\\npctile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\systems\\reciperandomizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\systems\\reciperandomizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\forest\\pinky.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\forest\\pinky.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\forest\\slimes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\forest\\slimes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\underground\\spiders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\globals\\npcs\\underground\\spiders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\globals\\npcs\\underground\\graniteelemental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,10 +117,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\common\\utils\\itemlists.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:common\\utils\\itemlists.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|c:\\users\\bonix\\onedrive\\documents\\my games\\terraria\\tmodloader\\modsources\\terrormod\\core\\players\\terrorplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B1E2C0A-A934-4E06-B864-815ED54ACD42}|TerrorMod.csproj|solutionrelative:core\\players\\terrorplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,32 +131,240 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "KingSlime.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Bosses\\KingSlime.cs",
+              "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Bosses\\KingSlime.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Bosses\\KingSlime.cs",
+              "RelativeToolTip": "Core\\Globals\\NPCs\\Bosses\\KingSlime.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T17:30:14.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Mods.TerrorMod.Items.hjson",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.Items.hjson",
+              "RelativeDocumentMoniker": "Localization\\en-US\\Mods.TerrorMod.Items.hjson",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.Items.hjson",
+              "RelativeToolTip": "Localization\\en-US\\Mods.TerrorMod.Items.hjson",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-06T16:59:20.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AntidoteBuff.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Buffs\\Buffs\\AntidoteBuff.cs",
+              "RelativeDocumentMoniker": "Content\\Buffs\\Buffs\\AntidoteBuff.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Buffs\\Buffs\\AntidoteBuff.cs",
+              "RelativeToolTip": "Content\\Buffs\\Buffs\\AntidoteBuff.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T16:50:45.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AntidoteNeedle.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Items\\Consumables\\AntidoteNeedle.cs",
+              "RelativeDocumentMoniker": "Content\\Items\\Consumables\\AntidoteNeedle.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Items\\Consumables\\AntidoteNeedle.cs",
+              "RelativeToolTip": "Content\\Items\\Consumables\\AntidoteNeedle.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T16:46:25.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Mods.TerrorMod.Buffs.hjson",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.Buffs.hjson",
+              "RelativeDocumentMoniker": "Localization\\en-US\\Mods.TerrorMod.Buffs.hjson",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.Buffs.hjson",
+              "RelativeToolTip": "Localization\\en-US\\Mods.TerrorMod.Buffs.hjson",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-06T16:16:52.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Mods.TerrorMod.Projectiles.hjson",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.Projectiles.hjson",
+              "RelativeDocumentMoniker": "Localization\\en-US\\Mods.TerrorMod.Projectiles.hjson",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.Projectiles.hjson",
+              "RelativeToolTip": "Localization\\en-US\\Mods.TerrorMod.Projectiles.hjson",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-06T16:16:26.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Mods.TerrorMod.NPCs.hjson",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.NPCs.hjson",
+              "RelativeDocumentMoniker": "Localization\\en-US\\Mods.TerrorMod.NPCs.hjson",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Localization\\en-US\\Mods.TerrorMod.NPCs.hjson",
+              "RelativeToolTip": "Localization\\en-US\\Mods.TerrorMod.NPCs.hjson",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-06T16:15:29.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NPCExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Common\\Utils\\NPCExtensions.cs",
+              "RelativeDocumentMoniker": "Common\\Utils\\NPCExtensions.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Common\\Utils\\NPCExtensions.cs",
+              "RelativeToolTip": "Common\\Utils\\NPCExtensions.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAA4AAACAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T15:00:08.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "InfectedCrimsonNPC.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Crimson\\InfectedCrimsonNPC.cs",
+              "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Crimson\\InfectedCrimsonNPC.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Crimson\\InfectedCrimsonNPC.cs",
+              "RelativeToolTip": "Core\\Globals\\NPCs\\Crimson\\InfectedCrimsonNPC.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAwwC8AAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T14:51:38.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "InfectedCrimson.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Buffs\\Debuffs\\InfectedCrimson.cs",
+              "RelativeDocumentMoniker": "Content\\Buffs\\Debuffs\\InfectedCrimson.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Buffs\\Debuffs\\InfectedCrimson.cs",
+              "RelativeToolTip": "Content\\Buffs\\Debuffs\\InfectedCrimson.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAcAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T14:51:02.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "InfectedCorruptNPC.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Corruption\\InfectedCorruptNPC.cs",
+              "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Corruption\\InfectedCorruptNPC.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Corruption\\InfectedCorruptNPC.cs",
+              "RelativeToolTip": "Core\\Globals\\NPCs\\Corruption\\InfectedCorruptNPC.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAwwC4AAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T14:32:21.954Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "InfectedCorrupt.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Buffs\\Debuffs\\InfectedCorrupt.cs",
+              "RelativeDocumentMoniker": "Content\\Buffs\\Debuffs\\InfectedCorrupt.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Buffs\\Debuffs\\InfectedCorrupt.cs",
+              "RelativeToolTip": "Content\\Buffs\\Debuffs\\InfectedCorrupt.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAABIAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T14:30:56.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CorruptCarrierProj.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Projectiles\\Hostile\\CorruptCarrierProj.cs",
+              "RelativeDocumentMoniker": "Content\\Projectiles\\Hostile\\CorruptCarrierProj.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Projectiles\\Hostile\\CorruptCarrierProj.cs",
+              "RelativeToolTip": "Content\\Projectiles\\Hostile\\CorruptCarrierProj.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACQAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T14:20:24.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CorruptCarrier.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Corruption\\CorruptCarrier.cs",
+              "RelativeDocumentMoniker": "Content\\NPCs\\Hostile\\Corruption\\CorruptCarrier.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Corruption\\CorruptCarrier.cs",
+              "RelativeToolTip": "Content\\NPCs\\Hostile\\Corruption\\CorruptCarrier.cs",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAAAFMAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T14:17:32.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CrimsonCarrierProj.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Projectiles\\Hostile\\CrimsonCarrierProj.cs",
+              "RelativeDocumentMoniker": "Content\\Projectiles\\Hostile\\CrimsonCarrierProj.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Projectiles\\Hostile\\CrimsonCarrierProj.cs",
+              "RelativeToolTip": "Content\\Projectiles\\Hostile\\CrimsonCarrierProj.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAAC4AAACsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T12:52:45.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CrimsonCarrier.cs",
+              "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Crimson\\CrimsonCarrier.cs",
+              "RelativeDocumentMoniker": "Content\\NPCs\\Hostile\\Crimson\\CrimsonCarrier.cs",
+              "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Crimson\\CrimsonCarrier.cs",
+              "RelativeToolTip": "Content\\NPCs\\Hostile\\Crimson\\CrimsonCarrier.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAqwFMAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-06T12:31:29.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
               "Title": "ThrownPickaxe.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Projectiles\\Hostile\\ThrownPickaxe.cs",
               "RelativeDocumentMoniker": "Content\\Projectiles\\Hostile\\ThrownPickaxe.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\Projectiles\\Hostile\\ThrownPickaxe.cs",
               "RelativeToolTip": "Content\\Projectiles\\Hostile\\ThrownPickaxe.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAgwCYAAABCAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAgwA4AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T18:46:07.773Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 21,
               "Title": "ZombieMiner.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Forest\\ZombieMiner.cs",
               "RelativeDocumentMoniker": "Content\\NPCs\\Hostile\\Forest\\ZombieMiner.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Forest\\ZombieMiner.cs",
               "RelativeToolTip": "Content\\NPCs\\Hostile\\Forest\\ZombieMiner.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAAABAAAAAZAAAA",
+              "ViewState": "AQIAAGoAAAAAAAAAAAAAAHYAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T18:36:54.5Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 24,
               "Title": "LemonUtils.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Common\\Utils\\LemonUtils.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\LemonUtils.cs",
@@ -100,64 +372,63 @@
               "RelativeToolTip": "Common\\Utils\\LemonUtils.cs",
               "ViewState": "AQIAAFEAAAAAAAAAAAAcwF8AAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T16:32:27.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T16:32:27.767Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 22,
               "Title": "TreeSpirit.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Forest\\TreeSpirit.cs",
               "RelativeDocumentMoniker": "Content\\NPCs\\Hostile\\Forest\\TreeSpirit.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Content\\NPCs\\Hostile\\Forest\\TreeSpirit.cs",
               "RelativeToolTip": "Content\\NPCs\\Hostile\\Forest\\TreeSpirit.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACAAAAAdAAAA",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAAEwAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T16:14:21.423Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Pinky.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Forest\\Pinky.cs",
               "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Forest\\Pinky.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Forest\\Pinky.cs",
               "RelativeToolTip": "Core\\Globals\\NPCs\\Forest\\Pinky.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T15:46:20.144Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "Slimes.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Forest\\Slimes.cs",
               "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Forest\\Slimes.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Forest\\Slimes.cs",
               "RelativeToolTip": "Core\\Globals\\NPCs\\Forest\\Slimes.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAABwAAAAJAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAUwCsAAACUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T15:41:49.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "Spiders.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Underground\\Spiders.cs",
               "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Underground\\Spiders.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Underground\\Spiders.cs",
               "RelativeToolTip": "Core\\Globals\\NPCs\\Underground\\Spiders.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAxAAAA",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAADkAAAC0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T15:34:05.449Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 25,
               "Title": "Skeletons.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Dungeon\\Skeletons.cs",
               "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Dungeon\\Skeletons.cs",
@@ -165,12 +436,11 @@
               "RelativeToolTip": "Core\\Globals\\NPCs\\Dungeon\\Skeletons.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T14:57:52.745Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T14:57:52.745Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 28,
               "Title": "ItemLists.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Common\\Utils\\ItemLists.cs",
               "RelativeDocumentMoniker": "Common\\Utils\\ItemLists.cs",
@@ -178,12 +448,11 @@
               "RelativeToolTip": "Common\\Utils\\ItemLists.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAwwDEAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T15:54:21.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T15:54:21.595Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 26,
               "Title": "RecipeRandomizer.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Systems\\RecipeRandomizer.cs",
               "RelativeDocumentMoniker": "Core\\Systems\\RecipeRandomizer.cs",
@@ -191,12 +460,11 @@
               "RelativeToolTip": "Core\\Systems\\RecipeRandomizer.cs",
               "ViewState": "AQIAACEAAAAAAAAAAAAAACoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T13:52:48.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T13:52:48.967Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 27,
               "Title": "GraniteElemental.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\NPCs\\Underground\\GraniteElemental.cs",
               "RelativeDocumentMoniker": "Core\\Globals\\NPCs\\Underground\\GraniteElemental.cs",
@@ -204,30 +472,30 @@
               "RelativeToolTip": "Core\\Globals\\NPCs\\Underground\\GraniteElemental.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAIwA4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T12:07:07.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T12:07:07.675Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 3,
               "Title": "TerrorPlayer.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Players\\TerrorPlayer.cs",
               "RelativeDocumentMoniker": "Core\\Players\\TerrorPlayer.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Players\\TerrorPlayer.cs",
               "RelativeToolTip": "Core\\Players\\TerrorPlayer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAMAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAAABwAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T12:06:10.362Z"
+              "WhenOpened": "2025-02-03T12:06:10.362Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 17,
               "Title": "NPCTile.cs",
               "DocumentMoniker": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\Tiles\\NPCTile.cs",
               "RelativeDocumentMoniker": "Core\\Globals\\Tiles\\NPCTile.cs",
               "ToolTip": "C:\\Users\\bonix\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\TerrorMod\\Core\\Globals\\Tiles\\NPCTile.cs",
               "RelativeToolTip": "Core\\Globals\\Tiles\\NPCTile.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAAEgAAAAtAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACcAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T11:22:27.737Z",
               "EditorCaption": ""

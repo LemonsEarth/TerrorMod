@@ -31,7 +31,7 @@ namespace TerrorMod.Core.Globals.NPCs.Underground
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 5, ProjectileID.WebSpit, npc.damage, 1f);
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 5, ProjectileID.WebSpit, (int)(npc.damage * 0.4f), 1f);
                         }
                         AttackTimer = 0;
                     }
@@ -55,7 +55,7 @@ namespace TerrorMod.Core.Globals.NPCs.Underground
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4) * 5, ProjectileID.WebSpit, npc.damage, 1f);
+                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4) * 5, ProjectileID.WebSpit, (int)(npc.damage * 0.4f), 1f);
                 }
             }
         }

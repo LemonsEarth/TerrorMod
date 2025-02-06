@@ -1,0 +1,16 @@
+InfectedCorrupt: {
+	DisplayName: Infected
+	Description: The world is getting darker...
+	DeathMessage: "{0} was infected."
+}
+
+InfectedCrimson: {
+	DisplayName: Infected
+	Description: You are bleeding from every pore...
+	DeathMessage: "{0} was infected."
+}
+
+AntidoteBuff: {
+	DisplayName: Antidote
+	Description: You're safe for now...
+}
