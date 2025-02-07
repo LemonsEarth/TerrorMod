@@ -14,3 +14,44 @@ AntidoteBuff: {
 	DisplayName: Antidote
 	Description: You're safe for now...
 }
+
+AcrophobiaDebuff: {
+	DisplayName: Acrophobia
+	Description: 
+	'''
+	Your fear of heights is making you panic!
+	Maybe it's not the height...
+	'''
+}
+
+ArachnophobiaDebuff: {
+	DisplayName: Arachnophobia
+	Description: 
+	'''
+	Your fear of spiders is making you panic!
+	Maybe try befriending one?
+	'''
+}
+
+HemophobiaDebuff: {
+	DisplayName: Hemophobia
+	Description:
+	'''
+	Your fear of blood is making you panic!
+	Exposure therapy may be the only way to help...
+	'''
+}
+
+NyctophobiaDebuff: {
+	DisplayName: Nyctophobia
+	Description: 
+	'''
+	You shouldn't be alone in the dark
+	Maybe if you brought something with you you'd feel a little better
+	'''
+}
+
+ThalassophobiaDebuff: {
+	DisplayName: Thalassophobia
+	Description: Your fear of depths is making you panic!
+}

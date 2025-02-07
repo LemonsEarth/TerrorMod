@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerrorMod.Content.Buffs.Debuffs;
 
 namespace TerrorMod.Core.Globals.NPCs.Underground
 {
@@ -47,6 +48,7 @@ namespace TerrorMod.Core.Globals.NPCs.Underground
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.Venom, 60);
+            target.AddBuff(ModContent.BuffType<ArachnophobiaDebuff>(), 600);
         }
 
         public override void OnKill(NPC npc)

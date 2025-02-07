@@ -9,6 +9,8 @@ using TerrorMod.Content.Buffs.Debuffs;
 using Terraria.Localization;
 using Humanizer;
 using TerrorMod.Common.Utils;
+using System.Linq;
+using Terraria.GameContent.Bestiary;
 
 namespace TerrorMod.Core.Players
 {
@@ -52,16 +54,61 @@ namespace TerrorMod.Core.Players
                 Player.KillMe(PlayerDeathReason.ByCustomReason(Language.GetText("Mods.TerrorMod.Buffs.InfectedCrimson.DeathMessage").Format(Main.LocalPlayer.name)), 9999, 0);
                 infectedTimer = 0;
             }
+
+            PhobiaCheck();
+        }
+
+        void PhobiaCheck()
+        {
+            // Phobia immunities
+
+            if (Player.buffType.Any(buff => Main.vanityPet[buff] == true))
+            {
+                Player.buffImmune[ModContent.BuffType<NyctophobiaDebuff>()] = true; // Immune to fear of dark if any pet is active
+            }
+
+            if (Player.HasBuff(BuffID.SpiderMinion) || Player.HasBuff(BuffID.PetSpider) 
+                || Player.head == ItemID.SpiderMask || Player.miscEquips[4].type == ItemID.WebSlinger)
+            {
+                Player.buffImmune[ModContent.BuffType<ArachnophobiaDebuff>()] = true; // Immune to fear of spiders if player has spider-related items
+            }
+
+            if (NPC.killCount[Item.NPCtoBanner(NPCID.BloodZombie)] > 50 || NPC.killCount[Item.NPCtoBanner(NPCID.Drippler)] > 50 || NPC.killCount[Item.NPCtoBanner(NPCID.FaceMonster)] > 50 || NPC.killCount[Item.NPCtoBanner(NPCID.Crimera)] > 50)
+            {
+                Player.buffImmune[ModContent.BuffType<HemophobiaDebuff>()] = true;
+            }
+
+            if (Player.noFallDmg || Player.equippedWings != null || Player.mount.Active)
+            {
+                Player.buffImmune[ModContent.BuffType<AcrophobiaDebuff>()] = true;
+            }
+
+            if (NPC.downedFishron)
+            {
+                Player.buffImmune[ModContent.BuffType<ThalassophobiaDebuff>()] = true;
+            }
+
+
+            if (Player.ZoneSkyHeight) Player.AddBuff(ModContent.BuffType<AcrophobiaDebuff>(), 2);
+            if (Player.wet) Player.AddBuff(ModContent.BuffType<ThalassophobiaDebuff>(), 2);
+            if (Player.ZoneCrimson || (Main.bloodMoon && Player.ZoneOverworldHeight)) Player.AddBuff(ModContent.BuffType<HemophobiaDebuff>(), 2);
+
+            bool lightCheck = LemonUtils.CheckAllForLight(0.3f, Player.Center + new Vector2(32, 0), Player.Center - new Vector2(32, 0));
+            if (Player.ZoneCorrupt || !lightCheck) Player.AddBuff(ModContent.BuffType<NyctophobiaDebuff>(), 2);
+            if (Main.tile[(int)Player.Center.X / 16, (int)Player.Center.Y / 16].WallType == WallID.SpiderUnsafe)
+            {
+                Player.AddBuff(ModContent.BuffType<ArachnophobiaDebuff>(), 2);
+            }
         }
 
         public override void PostUpdateBuffs()
         {
-            
+
         }
 
         public override void PostUpdateEquips()
         {
-            
+
         }
     }
 }

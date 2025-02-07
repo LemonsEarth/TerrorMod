@@ -105,5 +105,29 @@ namespace TerrorMod.Common.Utils
             if (Main.getGoodWorld) difficulty *= 2;
             return difficulty;
         }
+
+        public static bool CheckAllForLight(float lightLevel, params Vector2[] positions)
+        {
+            foreach (Vector2 pos in positions)
+            {
+                float h = Lighting.Brightness((int)pos.X / 16, (int)pos.Y / 16);
+                if (Lighting.Brightness((int)pos.X / 16, (int)pos.Y / 16) < lightLevel && !Main.tile[(int)pos.X / 16, (int)pos.Y / 16].HasTile)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static void AddPhobiaDebuffs(Player player)
+        {
+            if (Main.rand.NextBool(300)) player.AddBuff(BuffID.Weak, 300);
+            if (Main.rand.NextBool(500)) player.AddBuff(BuffID.Blackout, 180);
+            if (Main.rand.NextBool(300)) player.AddBuff(BuffID.Slow, 300);
+            if (Main.rand.NextBool(1200)) player.AddBuff(BuffID.Silenced, 90);
+            if (Main.rand.NextBool(1600)) player.AddBuff(BuffID.Cursed, 90);
+            if (Main.rand.NextBool(2000)) player.AddBuff(BuffID.Confused, 180);
+            if (Main.rand.NextBool(3000)) player.AddBuff(BuffID.Stoned, 180);
+        }
     }
 }
