@@ -11,6 +11,7 @@ using Humanizer;
 using TerrorMod.Common.Utils;
 using System.Linq;
 using Terraria.GameContent.Bestiary;
+using Terraria.Audio;
 
 namespace TerrorMod.Core.Players
 {
@@ -32,6 +33,12 @@ namespace TerrorMod.Core.Players
         }
 
         public override void PostUpdate()
+        {
+            BiomeDebuffs();
+            PhobiaCheck();
+        }
+
+        void BiomeDebuffs()
         {
             if (Player.ZoneCrimson) Player.AddBuff(ModContent.BuffType<InfectedCrimson>(), 3);
             if (Player.ZoneCorrupt) Player.AddBuff(ModContent.BuffType<InfectedCorrupt>(), 3);
@@ -55,7 +62,36 @@ namespace TerrorMod.Core.Players
                 infectedTimer = 0;
             }
 
-            PhobiaCheck();
+
+            if (Player.ZoneSnow && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff(BuffID.Warmth))
+            {
+                Player.AddBuff(BuffID.Frostburn, 2);
+                Player.AddBuff(BuffID.Chilled, 2);
+                if (Main.rand.NextBool(1000))
+                {
+                    Player.AddBuff(BuffID.Frozen, 120);
+                }
+            }
+
+            if (Player.ZoneDesert)
+            {
+                if (Main.dayTime &&
+                    !(Player.armor[0].type == ItemID.CactusHelmet && Player.armor[1].type == ItemID.CactusBreastplate && Player.armor[2].type == ItemID.CactusLeggings))
+                {
+                    Player.AddBuff(BuffID.OnFire, 2);
+                }
+                
+                if (!Main.dayTime && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff(BuffID.Warmth))
+                {
+                    Player.AddBuff(BuffID.Frostburn, 2);
+                }
+            }
+
+            if (Player.ZoneJungle)
+            {
+                Player.AddBuff(BuffID.Darkness, 2);
+                Player.AddBuff(BuffID.Wet, 2);
+            }
         }
 
         void PhobiaCheck()
@@ -68,7 +104,7 @@ namespace TerrorMod.Core.Players
             }
 
             if (Player.HasBuff(BuffID.SpiderMinion) || Player.HasBuff(BuffID.PetSpider) 
-                || Player.head == ItemID.SpiderMask || Player.miscEquips[4].type == ItemID.WebSlinger)
+                || Player.armor[0].type == ItemID.SpiderMask || Player.miscEquips[4].type == ItemID.WebSlinger)
             {
                 Player.buffImmune[ModContent.BuffType<ArachnophobiaDebuff>()] = true; // Immune to fear of spiders if player has spider-related items
             }
