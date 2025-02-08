@@ -42,7 +42,8 @@ namespace TerrorMod.Common.Utils
             /* Combat */ FeralClaws, BandofStarpower, CelestialMagnet, CelestialCuffs, MagicCuffs, MagnetFlower, ManaFlower, BeeCloak, ObsidianShield, WhiteString,
 
 
-            /* Armor */ CopperHelmet, CopperChainmail, CopperGreaves, TinHelmet, TinChainmail, TinGreaves, LeadHelmet, LeadAnvil, LeadGreaves, SilverHelmet, SilverChainmail, SilverGreaves, TungstenHelmet, TungstenChainmail, TungstenGreaves, GoldHelmet, GoldChainmail, GoldGreaves, PlatinumHelmet, PlatinumChainmail, PlatinumGreaves, IronHelmet, IronChainmail, IronGreaves, FossilHelm, FossilPants, FossilShirt, ShadowHelmet, ShadowGreaves, ShadowScalemail, CrimsonHelmet, CrimsonGreaves, CrimsonScalemail, MoltenHelmet, MoltenGreaves, MoltenBreastplate, Robe, FlinxFurCoat, NecroBreastplate, NecroGreaves, NecroHelmet, BeeHeadgear, BeeBreastplate, BeeGreaves, ObsidianHelm, ObsidianPants, ObsidianShirt, MeteorHelmet, MeteorLeggings, MeteorSuit, JunglePants, JungleShirt, JungleHat,
+            /* Armor */ CopperHelmet, CopperChainmail, CopperGreaves, TinHelmet, TinChainmail, TinGreaves, LeadHelmet, LeadAnvil, LeadGreaves, SilverHelmet, SilverChainmail, SilverGreaves, TungstenHelmet, TungstenChainmail, TungstenGreaves, GoldHelmet, GoldChainmail, GoldGreaves, PlatinumHelmet, PlatinumChainmail, PlatinumGreaves, IronHelmet, IronChainmail, IronGreaves, FossilHelm, FossilPants, FossilShirt, 
+                        ShadowHelmet, ShadowGreaves, ShadowScalemail, CrimsonHelmet, CrimsonGreaves, CrimsonScalemail, MoltenHelmet, MoltenGreaves, MoltenBreastplate, Robe, FlinxFurCoat, NecroBreastplate, NecroGreaves, NecroHelmet, BeeHeadgear, BeeBreastplate, BeeGreaves, ObsidianHelm, ObsidianPants, ObsidianShirt, MeteorHelmet, MeteorLeggings, MeteorSuit, JunglePants, JungleShirt, JungleHat, CactusHelmet, CactusLeggings, CactusBreastplate,
 
 
             /* Crafting Stations */ Furnace, WorkBench, IronAnvil, LeadAnvil, Loom, Sawmill, Bottle, HeavyWorkBench, Keg,

@@ -49,8 +49,8 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC clone = NPC.NewNPCDirect(npc.GetSource_FromAI("Half-Health"), (int)Main.player[npc.target].Center.X, (int)Main.player[npc.target].position.Y - 1000, npc.type);
-                    clone.life = Main.masterMode ? 1200 : 800;
-                    clone.color = Color.Green;
+                    clone.life = npc.lifeMax / 4;
+                    clone.color = Color.LimeGreen;
                     NetMessage.SendData(MessageID.SyncNPC, number: clone.whoAmI);
                 }
             }

@@ -55,3 +55,8 @@ ThalassophobiaDebuff: {
 	DisplayName: Thalassophobia
 	Description: Your fear of depths is making you panic!
 }
+
+FearDebuff: {
+	DisplayName: Fear Debuff
+	Description: You can't help but run away from what's in front of you...
+}

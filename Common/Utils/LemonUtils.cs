@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
+using TerrorMod.Content.Buffs.Debuffs;
 
 namespace TerrorMod.Common.Utils
 {
@@ -128,6 +131,7 @@ namespace TerrorMod.Common.Utils
             if (Main.rand.NextBool(1600)) player.AddBuff(BuffID.Cursed, 90);
             if (Main.rand.NextBool(2000)) player.AddBuff(BuffID.Confused, 180);
             if (Main.rand.NextBool(3000)) player.AddBuff(BuffID.Stoned, 180);
+            if (Main.rand.NextBool(5000)) player.AddBuff(ModContent.BuffType<FearDebuff>(), 120);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace TerrorMod.Core.Players
 
         public override bool CanUseItem(Item item)
         {
-            return !Player.HasBuff(BuffID.OgreSpit);
+            return !Player.HasBuff(BuffID.OgreSpit) && !Player.HasBuff(ModContent.BuffType<FearDebuff>());
         }
 
         public override void PostUpdate()
@@ -40,6 +40,11 @@ namespace TerrorMod.Core.Players
 
         void BiomeDebuffs()
         {
+            if (Main.bloodMoon)
+            {
+                Player.AddBuff(BuffID.Bleeding, 2);
+            }
+
             if (Player.ZoneCrimson) Player.AddBuff(ModContent.BuffType<InfectedCrimson>(), 3);
             if (Player.ZoneCorrupt) Player.AddBuff(ModContent.BuffType<InfectedCorrupt>(), 3);
 
