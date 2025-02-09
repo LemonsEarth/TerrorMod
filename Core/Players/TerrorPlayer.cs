@@ -12,6 +12,7 @@ using TerrorMod.Common.Utils;
 using System.Linq;
 using Terraria.GameContent.Bestiary;
 using Terraria.Audio;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Players
 {
@@ -34,16 +35,14 @@ namespace TerrorMod.Core.Players
 
         public override void PostUpdate()
         {
+            EventDebuffs();
             BiomeDebuffs();
             PhobiaCheck();
         }
 
         void BiomeDebuffs()
         {
-            if (Main.bloodMoon)
-            {
-                Player.AddBuff(BuffID.Bleeding, 2);
-            }
+            if (Player.ZoneUnderworldHeight) Player.AddBuff(BuffID.OnFire, 2);
 
             if (Player.ZoneCrimson) Player.AddBuff(ModContent.BuffType<InfectedCrimson>(), 3);
             if (Player.ZoneCorrupt) Player.AddBuff(ModContent.BuffType<InfectedCorrupt>(), 3);
@@ -96,6 +95,19 @@ namespace TerrorMod.Core.Players
             {
                 Player.AddBuff(BuffID.Darkness, 2);
                 Player.AddBuff(BuffID.Wet, 2);
+            }
+        }
+
+        void EventDebuffs()
+        {
+            if (EventSystem.hellbreachActive)
+            {
+                Player.AddBuff(BuffID.ShadowCandle, 2);
+            }
+
+            if (Main.bloodMoon)
+            {
+                Player.AddBuff(BuffID.Bleeding, 2);
             }
         }
 
