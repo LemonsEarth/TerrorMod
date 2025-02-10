@@ -66,6 +66,7 @@ namespace TerrorMod.Core.Globals.Tiles
                     }
                 }
             }
+
             if (type == TileID.Trees)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -73,6 +74,17 @@ namespace TerrorMod.Core.Globals.Tiles
                     if (Main.rand.NextBool(10))
                     {
                         NPC.NewNPC(new EntitySource_TileBreak(i, j), i * 16, j * 16, ModContent.NPCType<TreeSpirit>());
+                    }
+                }
+            }
+
+            if (type == TileID.ShadowOrbs)
+            {
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    if (Main.rand.NextBool(3))
+                    {
+                        NPC.NewNPC(new EntitySource_TileBreak(i, j), i * 16, j * 16, NPCID.ServantofCthulhu, ai3: 0.1f);
                     }
                 }
             }

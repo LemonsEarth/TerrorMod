@@ -1,0 +1,21 @@
+﻿using Microsoft.Xna.Framework;
+using Steamworks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.Utilities;
+
+namespace TerrorMod.Common.Utils
+{
+    public class NPCLists : NPCID
+    {
+        public static HashSet<int> SafeNPCs { get; private set; } = new HashSet<int>()
+        {
+            Creeper, ServantofCthulhu, EaterofWorldsHead, EaterofWorldsBody, EaterofWorldsTail, SkeletronHand, CultistArcherBlue, CultistDevote,
+            OldMan
+        };
+    }
+}

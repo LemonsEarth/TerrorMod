@@ -29,6 +29,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override void AI()
         {
+            if (AITimer == 0)
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.Center);
+            }
+
             if (Projectile.alpha > 0)
             {
                 Projectile.alpha -= 7;

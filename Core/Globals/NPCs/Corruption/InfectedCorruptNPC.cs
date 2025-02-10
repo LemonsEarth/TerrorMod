@@ -25,12 +25,17 @@ namespace TerrorMod.Core.Globals.NPCs.Corruption
 
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
-            return !entity.boss;
+            return !entity.boss
+                && entity.type != NPCID.Creeper
+                && entity.type != NPCID.ServantofCthulhu
+                && entity.type != NPCID.EaterofWorldsBody
+                && entity.type != NPCID.EaterofWorldsTail
+                && entity.type != NPCID.SkeletronHand;
         }
 
         public override void PostAI(NPC npc)
         {
-            if (!npc.dontTakeDamage && npc.type != NPCID.CultistArcherBlue && npc.type != NPCID.CultistDevote && npc.type != NPCID.OldMan && !npc.SpawnedFromStatue
+            if (!npc.dontTakeDamage && !NPCLists.SafeNPCs.Contains(npc.type) && !npc.SpawnedFromStatue
                 && npc.HasValidTarget && Main.player[npc.target].ZoneCorrupt && npc.life < 50)
             {
                 npc.AddBuff(ModContent.BuffType<InfectedCorrupt>(), 180);

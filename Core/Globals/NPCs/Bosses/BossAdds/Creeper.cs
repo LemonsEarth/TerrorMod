@@ -22,14 +22,14 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void SetDefaults(NPC entity)
         {
-            entity.lifeMax = 110;
+            entity.lifeMax = 60;
         }
 
         public override void OnKill(NPC npc)
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu, npc.whoAmI, ai3: 0.1f);
+                NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu, npc.whoAmI, ai3: 0.3f);
             }
         }
     }

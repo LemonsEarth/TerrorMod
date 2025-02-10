@@ -20,7 +20,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void SetDefaults(NPC entity)
         {
-            entity.lifeMax = 1600;
+            entity.lifeMax = 1300;
             entity.defense = 16;
         }
 
@@ -45,7 +45,6 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 }
                 else if (phase2Timer % 30 == 0 && phase2Timer > 60)
                 {
-                    SoundEngine.PlaySound(SoundID.NPCDeath13, npc.Center);
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ModContent.ProjectileType<CrimsonCarrierProj>(), npc.damage / 3, 1f);
