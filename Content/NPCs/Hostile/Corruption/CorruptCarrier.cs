@@ -34,7 +34,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
             NPC.height = 60;
             NPC.lifeMax = 150;
             NPC.defense = 12;
-            NPC.damage = 20;
+            NPC.damage = 40;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.value = 100;
@@ -45,7 +45,6 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.damage = (int)(NPC.damage * balance * 0.5f);
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -76,7 +75,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Vector2 direction = NPC.Center.Distance(player.Center) < 600 ? NPC.Center.DirectionTo(player.Center) : Vector2.UnitY;
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 10, ModContent.ProjectileType<CorruptCarrierProj>(), NPC.damage, 1f);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 10, ModContent.ProjectileType<CorruptCarrierProj>(), NPC.damage / 3, 1f);
                     LemonUtils.DustCircle(NPC.Center, 8, 6, DustID.Corruption);
                 }
                 AttackTimer = 0;

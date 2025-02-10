@@ -9,15 +9,16 @@ using Terraria.ModLoader;
 
 namespace TerrorMod.Content.Projectiles.Hostile
 {
-    public class FireballClone : ModProjectile
+    public class EyeFireClone : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.Fireball;
+        public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.EyeFire;
 
         ref float AITimer => ref Projectile.ai[0];
 
         public override void SetDefaults()
         {
-            Projectile.CloneDefaults(ProjectileID.Fireball);
+            Projectile.CloneDefaults(ProjectileID.EyeFire);
+            AIType = ProjectileID.EyeFire;
             Projectile.tileCollide = false;
         }
     }

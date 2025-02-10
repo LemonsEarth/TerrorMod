@@ -13,7 +13,6 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         public override bool InstancePerEntity => true;
 
         int AITimer = 0;
-        int phase2Timer = 0;
 
         public override void SetDefaults(NPC entity)
         {
