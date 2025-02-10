@@ -66,7 +66,6 @@ namespace TerrorMod.Core.Players
                 infectedTimer = 0;
             }
 
-
             if (Player.ZoneSnow && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff(BuffID.Warmth))
             {
                 Player.AddBuff(BuffID.Frostburn, 2);

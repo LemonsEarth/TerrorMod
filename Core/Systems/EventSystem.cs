@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Chat;
@@ -15,8 +16,8 @@ namespace TerrorMod.Core.Systems
 {
     public class EventSystem : ModSystem
     {
-        public static bool hellbreachActive { get; private set; } = false;
-        public static bool finishedHellbreach { get; private set; } = false;
+        public static bool hellbreachActive = false;
+        public static bool finishedHellbreach = false;
 
         public override void PostUpdateWorld()
         {
@@ -36,8 +37,8 @@ namespace TerrorMod.Core.Systems
 
         bool HellbreachStartCheck()
         {
-            int chanceDenominator = finishedHellbreach ? 1000 : 200;
-            if (Utils.GetDayTimeAs24FloatStartingFromMidnight() > 7.50f && Utils.GetDayTimeAs24FloatStartingFromMidnight() < 8f && DayCountSystem.dayCount > 2 && !hellbreachActive)
+            int chanceDenominator = !finishedHellbreach ? 3 : 20;
+            if (Math.Floor(Main.time) == 1 && DayCountSystem.dayCount > 2 && !hellbreachActive)
             {
                 if (Main.rand.NextBool(chanceDenominator)) return true;
             }
@@ -60,6 +61,16 @@ namespace TerrorMod.Core.Systems
         {
             hellbreachActive = tag.GetBool("hellbreachActive");
             finishedHellbreach = tag.GetBool("finishedHellbreach");
+        }
+
+        public override void NetSend(BinaryWriter writer)
+        {
+            writer.WriteFlags(hellbreachActive, finishedHellbreach);
+        }
+
+        public override void NetReceive(BinaryReader reader)
+        {
+            reader.ReadFlags(out hellbreachActive, out finishedHellbreach);
         }
     }
 }

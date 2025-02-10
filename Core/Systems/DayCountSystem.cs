@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -13,7 +14,7 @@ namespace TerrorMod.Core.Systems
 {
     public class DayCountSystem : ModSystem
     {
-        public static int dayCount { get; private set; } = 0;
+        public static int dayCount = 0;
 
         public override void ClearWorld()
         {
@@ -36,6 +37,16 @@ namespace TerrorMod.Core.Systems
             {
                 dayCount++;
             }
+        }
+
+        public override void NetSend(BinaryWriter writer)
+        {
+            writer.Write(dayCount);
+        }
+
+        public override void NetReceive(BinaryReader reader)
+        {
+            reader.ReadInt32();
         }
     }
 }

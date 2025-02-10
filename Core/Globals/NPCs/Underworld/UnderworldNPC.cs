@@ -20,7 +20,8 @@ namespace TerrorMod.Core.Globals.NPCs.Underworld
                 || entity.type == NPCID.Demon
                 || entity.type == NPCID.VoodooDemon
                 || entity.type == NPCID.LavaSlime
-                || entity.type == NPCID.Hellbat;
+                || entity.type == NPCID.Hellbat
+                || entity.type == NPCID.BoneSerpentHead;
         }
 
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
@@ -41,6 +42,7 @@ namespace TerrorMod.Core.Globals.NPCs.Underworld
                 pool.Add(NPCID.Hellbat, 0.35f);
                 pool.Add(NPCID.FireImp, 0.25f);
                 pool.Add(NPCID.Demon, 0.15f);
+                pool.Add(NPCID.BoneSerpentHead, 0.1f);
                 pool.Add(NPCID.VoodooDemon, 0.05f);
             }
         }
