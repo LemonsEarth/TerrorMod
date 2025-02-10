@@ -14,6 +14,7 @@
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Items.hjson" />
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Messages.hjson" />
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Projectiles.hjson" />
+	  <None Remove="Localization\en-US\Mods.TerrorMod.Tiles.hjson" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Core\Globals\Buffs\Debuffs\" />

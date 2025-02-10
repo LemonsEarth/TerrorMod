@@ -2,3 +2,13 @@ AntidoteNeedle: {
 	DisplayName: Antidote
 	Tooltip: Temporarily protects you from the infection
 }
+
+SimpleGoldenKey: {
+	DisplayName: Simple Golden Key
+	Tooltip: ""
+}
+
+SimpleGoldenChest: {
+	DisplayName: Simple Golden Chest
+	Tooltip: ""
+}
