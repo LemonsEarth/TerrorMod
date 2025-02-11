@@ -64,7 +64,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     int amount = Main.masterMode ? 8 : 4;
                     for (int i = 0; i < amount; i++)
                     {
-                        Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 800).RotatedBy(i * (MathHelper.Pi / amount));
+                        Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 800).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
                         LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
                         NPC slime = NPC.NewNPCDirect(npc.GetSource_FromAI("PeriodicSlimeSpawn"), (int)pos.X, (int)pos.Y, NPCID.SlimeSpiked);
                     }

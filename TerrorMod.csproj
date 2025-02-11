@@ -10,6 +10,7 @@
 	<ItemGroup>
 	  <None Remove="Content\Buffs\Debuffs\InfectedCorrupt.png" />
 	  <None Remove="Content\Buffs\Debuffs\InfectedCrimson.png" />
+	  <None Remove="Content\Tiles\Furniture\SimpleIceChest_Highlight.png" />
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Buffs.hjson" />
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Items.hjson" />
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Messages.hjson" />

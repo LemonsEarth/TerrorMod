@@ -1,6 +1,7 @@
 CorruptCarrierProj.DisplayName: Corrupt Carrier Proj
 CrimsonCarrierProj.DisplayName: Crimson Carrier Proj
 ThrownPickaxe.DisplayName: Thrown Pickaxe
-ExplosionSmall.DisplayName: Explosion Small
-FireballClone.DisplayName: Fireball Clone
-EyeFireClone.DisplayName: Eye Fire Clone
+ExplosionSmall.DisplayName: Explosion
+FireballClone.DisplayName: Fireball
+EyeFireClone.DisplayName: Eye Fire
+SkeletronGlock.DisplayName: Skeletron Glock

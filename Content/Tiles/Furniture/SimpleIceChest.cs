@@ -14,7 +14,7 @@ using TerrorMod.Content.Items.Consumables;
 
 namespace TerrorMod.Content.Tiles.Furniture
 {
-    public class SimpleGoldenChest : ModTile
+    public class SimpleIceChest : ModTile
     {
         public override void SetStaticDefaults()
         {
@@ -35,17 +35,17 @@ namespace TerrorMod.Content.Tiles.Furniture
             TileID.Sets.FriendlyFairyCanLureTo[Type] = true;
             TileID.Sets.GeneralPlacementTiles[Type] = false;
 
-            DustType = DustID.Gold;
+            DustType = DustID.Ice;
             AdjTiles = new int[] { TileID.Containers };
 
             // Other tiles with just one map entry use CreateMapEntryName() to use the default translationkey, "MapEntry"
             // Since ExampleChest needs multiple, we register our own MapEntry keys
-            AddMapEntry(new Color(200, 200, 0), this.GetLocalization("MapEntry0"), MapChestName);
-            AddMapEntry(new Color(200, 200, 0), this.GetLocalization("MapEntry1"), MapChestName);
+            AddMapEntry(new Color(50, 50, 200), this.GetLocalization("MapEntry0"), MapChestName);
+            AddMapEntry(new Color(50, 50, 200), this.GetLocalization("MapEntry1"), MapChestName);
 
             // Style 1 is ExampleChest when locked. We want that tile style to drop the ExampleChest item as well. Use the Chest Lock item to lock this chest.
             // No item places ExampleChest in the locked style, so the automatically determined item drop is unknown, this is why RegisterItemDrop is necessary in this situation. 
-            RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.SimpleGoldenChest>(), 1);
+            RegisterItemDrop(ModContent.ItemType<Items.Placeable.Furniture.SimpleIceChest>(), 1);
             // Sometimes mods remove content, such as tile styles, or tiles accidentally get corrupted. We can, if desired, register a fallback item for any tile style that doesn't have an automatically determined item drop. This is done by omitting the tileStyles parameter.
             RegisterItemDrop(ItemID.Chest);
 
@@ -278,7 +278,7 @@ namespace TerrorMod.Content.Tiles.Furniture
                 player.cursorItemIconText = Main.chest[chest].name.Length > 0 ? Main.chest[chest].name : defaultName;
                 if (player.cursorItemIconText == defaultName)
                 {
-                    player.cursorItemIconID = ModContent.ItemType<Items.Placeable.Furniture.SimpleGoldenChest>();
+                    player.cursorItemIconID = ModContent.ItemType<Items.Placeable.Furniture.SimpleIceChest>();
                     if (Main.tile[left, top].TileFrameX / 36 == 1)
                     {
                         player.cursorItemIconID = ModContent.ItemType<SimpleGoldenKey>();

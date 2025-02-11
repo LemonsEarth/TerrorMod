@@ -35,13 +35,13 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 }
             }
 
-            if (AITimer % npc.ai[0] == 0 && Main.npc.Count(segment => segment.active && (segment.type == NPCID.EaterofWorldsBody || segment.type == NPCID.EaterofWorldsHead || segment.type == NPCID.EaterofWorldsTail)) <= 35)
+            if (AITimer % npc.ai[0] == 0 && Main.npc.Count(segment => segment.active && (segment.type == NPCID.EaterofWorldsBody || segment.type == NPCID.EaterofWorldsHead || segment.type == NPCID.EaterofWorldsTail)) <= 45)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     for (int i = -1; i <= 1; i += 2)
                     {
-                        Vector2 pos = player.Center + new Vector2(100 * i, 900);
+                        Vector2 pos = player.Center + new Vector2(70 * i, 900);
                         Projectile.NewProjectile(npc.GetSource_FromAI(), pos, -Vector2.UnitY * 20, ModContent.ProjectileType<EyeFireClone>(), npc.damage / 2, 1f);
                     }
                 }

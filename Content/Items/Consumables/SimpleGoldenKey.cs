@@ -23,12 +23,12 @@ namespace TerrorMod.Content.Items.Consumables
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.GoldBar, 4);
+            recipe.AddIngredient(ItemID.GoldBar, 8);
             recipe.AddTile(TileID.Anvils);
             recipe.Register();
 
             Recipe recipe2 = CreateRecipe();
-            recipe2.AddIngredient(ItemID.PlatinumBar, 4);
+            recipe2.AddIngredient(ItemID.PlatinumBar, 8);
             recipe2.AddTile(TileID.Anvils);
             recipe2.Register();
         }

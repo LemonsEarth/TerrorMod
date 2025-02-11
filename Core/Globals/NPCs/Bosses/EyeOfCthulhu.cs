@@ -35,13 +35,8 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             }
             else
             {
-                if (npc.alpha < 255 && npc.life > npc.lifeMax / 4) npc.alpha++;
+                if (npc.alpha < 255) npc.alpha++;
 
-                if (npc.life <= npc.lifeMax / 4)
-                {
-                    npc.alpha = 0;
-                    
-                }
                 if (npc.velocity.Length() > 14) // if dashing
                 {
                     if (AITimer % 20 == 0)

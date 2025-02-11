@@ -1,4 +1,9 @@
 SimpleGoldenChest: {
 	MapEntry0: Simple Golden Chest
-	MapEntry1: Simple Golden Chest
+	MapEntry1: Locked Simple Golden Chest
+}
+
+SimpleIceChest: {
+	MapEntry0: Simple Ice Chest
+	MapEntry1: Locked Simple Ice Chest
 }

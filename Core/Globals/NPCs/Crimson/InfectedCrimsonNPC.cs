@@ -36,7 +36,7 @@ namespace TerrorMod.Core.Globals.NPCs.Crimson
         public override void PostAI(NPC npc)
         {
             if (!npc.dontTakeDamage && !NPCLists.SafeNPCs.Contains(npc.type) && !npc.SpawnedFromStatue
-                && npc.HasValidTarget && Main.player[npc.target].ZoneCrimson && npc.life < 50)
+                && npc.HasPlayerTarget && Main.player[npc.target].ZoneCrimson && npc.life < 50 && !NPCID.Sets.ProjectileNPC[npc.type])
             {
                 npc.AddBuff(ModContent.BuffType<InfectedCrimson>(), 180);
             }

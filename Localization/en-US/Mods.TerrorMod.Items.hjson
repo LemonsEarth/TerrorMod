@@ -5,10 +5,15 @@ AntidoteNeedle: {
 
 SimpleGoldenKey: {
 	DisplayName: Simple Golden Key
-	Tooltip: ""
+	Tooltip: Can be used to open simple chests
 }
 
 SimpleGoldenChest: {
 	DisplayName: Simple Golden Chest
+	Tooltip: ""
+}
+
+SimpleIceChest: {
+	DisplayName: Simple Ice Chest
 	Tooltip: ""
 }

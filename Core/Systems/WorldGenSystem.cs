@@ -11,6 +11,7 @@ using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 using TerrorMod.Common.Utils;
@@ -34,21 +35,32 @@ namespace TerrorMod.Core.Systems
                 int y = chest.y;
 
                 Tile chestTile = Main.tile[x, y];
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 1 * 36)
+                if (chestTile.TileType == TileID.Containers)
                 {
-                    Item[] items = chest.item;
-                    Chest.DestroyChestDirect(x, y, i); // Seems to only delete the chest items and make the chest unusable?
-                    WorldGen.KillTile(x, y); // Actually destroys the chest
-
-                    int index = WorldGen.PlaceChest(x, y + 1, (ushort)ModContent.TileType<SimpleGoldenChest>(), style: 1);
-                    if (index == -1)
+                    if (chestTile.TileFrameX == 1 * 36)
                     {
-                        Mod.Logger.Warn("A chest wasn't properly replaced");
-                        continue;
+                        ReplaceChest(chest, x, y, i, ModContent.TileType<SimpleGoldenChest>());
                     }
-                    Main.chest[index].item = items;
-                }       
+                    else if (chestTile.TileFrameX == 11 * 36)
+                    {
+                        ReplaceChest(chest, x, y, i, ModContent.TileType<SimpleIceChest>());
+                    }
+                }
             }
+        }
+
+        void ReplaceChest(Chest originalChest, int originalX, int originalY, int originalIndex, int replaceType, int style = 1)
+        {
+            Item[] items = originalChest.item;
+            Chest.DestroyChestDirect(originalX, originalY, originalIndex); // Seems to only delete the chest items and make the chest unusable?
+            WorldGen.KillTile(originalX, originalY); // Actually destroys the chest
+
+            int index = WorldGen.PlaceChest(originalX, originalY + 1, (ushort)replaceType, style: style);
+            if (index == -1)
+            {
+                Mod.Logger.Warn("A chest wasn't properly replaced");
+            }
+            Main.chest[index].item = items;
         }
 
         public override void PostWorldGen()
