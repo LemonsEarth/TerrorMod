@@ -164,7 +164,7 @@ namespace TerrorMod.Core.Players
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-            curseLevel++;
+            if (Player.difficulty == 0) curseLevel++;
         }
 
         public override void PostUpdateMiscEffects()

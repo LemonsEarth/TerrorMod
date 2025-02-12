@@ -15,7 +15,7 @@ namespace TerrorMod.Common.Utils
         public static HashSet<int> SafeNPCs { get; private set; } = new HashSet<int>()
         {
             Creeper, ServantofCthulhu, EaterofWorldsHead, EaterofWorldsBody, EaterofWorldsTail, SkeletronHand, CultistArcherBlue, CultistDevote,
-            OldMan
+            OldMan, TheHungry, TheHungryII, LeechHead, LeechBody, LeechTail
         };
     }
 }

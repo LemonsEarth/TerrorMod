@@ -38,7 +38,7 @@ namespace TerrorMod.Common.Utils
             /* Whips */ BlandWhip, BoneWhip, ThornWhip,
 
 
-            /* Movement */ SpectreBoots, LightningBoots, FrostsparkBoots, TerrasparkBoots, LavaWaders, ObsidianWaterWalkingBoots, AmphibianBoots, FrogGear, FrogFlipper, BalloonPufferfish, WhiteHorseshoeBalloon, YellowHorseshoeBalloon, FartInABalloon, BlueHorseshoeBalloon, BundleofBalloons, BlizzardinaBalloon, SandstorminaBalloon, CloudinaBalloon, ArcticDivingGear, JellyfishDivingGear, TigerClimbingGear, FairyBoots, Magiluminescence, MoltenCharm, ObsidianSkull, ObsidianHorseshoe,
+            /* Movement */ SpectreBoots, LightningBoots, FrostsparkBoots, TerrasparkBoots, LavaWaders, ObsidianWaterWalkingBoots, AmphibianBoots, FrogGear, FrogFlipper, BalloonPufferfish, WhiteHorseshoeBalloon, YellowHorseshoeBalloon, FartInABalloon, BlueHorseshoeBalloon, BundleofBalloons, BlizzardinaBalloon, SandstorminaBalloon, CloudinaBalloon, ArcticDivingGear, JellyfishDivingGear, TigerClimbingGear, FairyBoots, Magiluminescence, MoltenCharm, ObsidianSkull, ObsidianHorseshoe, Aglet, AnkletoftheWind, IceSkates,
             /* Combat */ FeralClaws, BandofStarpower, CelestialMagnet, CelestialCuffs, MagicCuffs, MagnetFlower, ManaFlower, BeeCloak, ObsidianShield, WhiteString,
 
 
@@ -60,6 +60,7 @@ namespace TerrorMod.Common.Utils
             /* Gems */ Ruby, Sapphire, Topaz, Amber, Diamond, Emerald, Amethyst,
             /* Herbs */ Daybloom, Waterleaf, Blinkroot, Moonglow, Deathweed, Shiverthorn, Fireblossom,
             /* Seeds */ DaybloomSeeds, WaterleafSeeds, BlinkrootSeeds, MoonglowSeeds, DeathweedSeeds, ShiverthornSeeds, FireblossomSeeds,
+            /* Blocks */ Wood, StoneBlock, GrayBrick, Snowball, SnowBlock, IceBlock, SandBlock, HardenedSand, DesertFossil, FossilOre, DirtBlock, Glass,
         };
     }
 }

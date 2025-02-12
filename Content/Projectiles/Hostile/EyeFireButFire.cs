@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace TerrorMod.Content.Projectiles.Hostile
 {
-    public class EyeFireClone : ModProjectile
+    public class EyeFireButFire : ModProjectile
     {
         public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.EyeFire;
 
@@ -18,13 +18,12 @@ namespace TerrorMod.Content.Projectiles.Hostile
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.EyeFire);
-            AIType = ProjectileID.EyeFire;
             Projectile.tileCollide = false;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.CursedInferno, 90);
+            target.AddBuff(BuffID.Burning, 120);
         }
     }
 }
