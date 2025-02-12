@@ -60,3 +60,12 @@ FearDebuff: {
 	DisplayName: Fear Debuff
 	Description: You can't help but run away from what's in front of you...
 }
+
+CurseDebuff: {
+	DisplayName: Curse of the Undying
+	Description:
+		'''
+		Breaking the rules of life has consequences...
+		Curse level: {0}
+		'''
+}

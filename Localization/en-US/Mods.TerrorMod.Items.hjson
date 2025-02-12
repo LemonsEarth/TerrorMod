@@ -17,3 +17,8 @@ SimpleIceChest: {
 	DisplayName: Simple Ice Chest
 	Tooltip: ""
 }
+
+LifeEssence: {
+	DisplayName: Life Essence
+	Tooltip: Reduces your curse level by 1
+}

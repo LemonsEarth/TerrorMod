@@ -55,11 +55,12 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     case 0:
                         if (AttackTimer % 120 == 0 && AttackTimer > 60)
                         {
+                            int amount = npc.life < npc.lifeMax * 0.75f ? 2 : 1;
                             if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                for (int i = 0; i < 8; i++)
+                                for (int i = 0; i < 8 * amount; i++)
                                 {
-                                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4) * 5, ProjectileID.LostSoulHostile, npc.damage / 4, 1f);
+                                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(i * (MathHelper.PiOver4 / amount)) * 5, ProjectileID.LostSoulHostile, npc.damage / 4, 1f, ai0: player.Center.X, ai1: player.Center.Y);
                                 }
                             };
                         }
@@ -95,6 +96,26 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                             }
                         }
                         break;
+                    case 3:
+                        if (AttackTimer % 120 == 0 && AttackTimer > 60)
+                        {
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
+                            {
+                                for (int i = -2; i <= 2; i++)
+                                {
+                                    Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center + new Vector2(i * 48, 900), -Vector2.UnitY * 15, ProjectileID.InfernoHostileBolt, npc.damage / 4, 1f);
+                                }
+                            };
+                        }
+
+                        if (AttackTimer % 60 < 10 && AttackTimer % 2 == 0)
+                        {
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
+                            {
+                                Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ProjectileID.Skull, npc.damage / 4, 1f);
+                            };
+                        }
+                        break;
                 }
                 AttackTimer++;
             }
@@ -109,9 +130,19 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         void SwitchPhase(NPC npc)
         {
             npc.ai[3]++;
-            if (npc.ai[3] >= 3)
+            if (npc.life > npc.lifeMax * 0.5f)
             {
-                npc.ai[3] = 0;
+                if (npc.ai[3] >= 3)
+                {
+                    npc.ai[3] = 0;
+                }
+            }
+            else
+            {
+                if (npc.ai[3] >= 4)
+                {
+                    npc.ai[3] = 0;
+                }
             }
             switch (npc.ai[3])
             {
@@ -126,6 +157,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     break;
             }
             AttackTimer = 0;
+        }
+
+        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+        {
+            if (npc.ai[1] == 1) modifiers.FinalDamage *= 0.5f; 
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

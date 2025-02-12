@@ -13,6 +13,8 @@ using System.Linq;
 using Terraria.GameContent.Bestiary;
 using Terraria.Audio;
 using TerrorMod.Core.Systems;
+using Terraria.ModLoader.IO;
+using System.IO;
 
 namespace TerrorMod.Core.Players
 {
@@ -22,6 +24,8 @@ namespace TerrorMod.Core.Players
 
         float infectedTimer = 0;
         float maxInfectedTimer = 600;
+
+        public int curseLevel = 0;
 
         public override void ResetEffects()
         {
@@ -83,7 +87,7 @@ namespace TerrorMod.Core.Players
                 {
                     Player.AddBuff(BuffID.OnFire, 2);
                 }
-                
+
                 if (!Main.dayTime && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff(BuffID.Warmth))
                 {
                     Player.AddBuff(BuffID.Frostburn, 2);
@@ -108,6 +112,11 @@ namespace TerrorMod.Core.Players
             {
                 Player.AddBuff(BuffID.Bleeding, 2);
             }
+
+            if (curseLevel > 0)
+            {
+                Player.AddBuff(ModContent.BuffType<CurseDebuff>(), 2);
+            }
         }
 
         void PhobiaCheck()
@@ -119,7 +128,7 @@ namespace TerrorMod.Core.Players
                 Player.buffImmune[ModContent.BuffType<NyctophobiaDebuff>()] = true; // Immune to fear of dark if any pet is active
             }
 
-            if (Player.HasBuff(BuffID.SpiderMinion) || Player.HasBuff(BuffID.PetSpider) 
+            if (Player.HasBuff(BuffID.SpiderMinion) || Player.HasBuff(BuffID.PetSpider)
                 || Player.armor[0].type == ItemID.SpiderMask || Player.miscEquips[4].type == ItemID.WebSlinger)
             {
                 Player.buffImmune[ModContent.BuffType<ArachnophobiaDebuff>()] = true; // Immune to fear of spiders if player has spider-related items
@@ -153,14 +162,65 @@ namespace TerrorMod.Core.Players
             }
         }
 
-        public override void PostUpdateBuffs()
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-
+            curseLevel++;
         }
 
-        public override void PostUpdateEquips()
+        public override void PostUpdateMiscEffects()
         {
+            for (int i = 0; i < curseLevel; i++)
+            {
+                if (Player.statLifeMax2 > 50)
+                {
+                    Player.statLifeMax2 -= 10;
+                }
+            }
+        }
 
+        public override void Initialize()
+        {
+            curseLevel = 0;
+        }
+
+        public override void SaveData(TagCompound tag)
+        {
+            tag["curseLevel"] = curseLevel;
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+            curseLevel = tag.GetInt("curseLevel");
+        }
+
+        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
+        {
+            ModPacket packet = Mod.GetPacket();
+            packet.Write((byte)TerrorMod.MessageType.CurseLevelSync);
+            packet.Write((byte)Player.whoAmI);
+            packet.Write((byte)curseLevel);
+            packet.Send(toWho, fromWho);
+        }
+
+        public void ReceivePlayerSync(BinaryReader reader)
+        {
+            curseLevel = reader.ReadByte();
+        }
+
+        public override void CopyClientState(ModPlayer targetCopy)
+        {
+            TerrorPlayer clone = (TerrorPlayer)targetCopy;
+            clone.curseLevel = curseLevel;
+        }
+
+        public override void SendClientChanges(ModPlayer clientPlayer)
+        {
+            TerrorPlayer clone = (TerrorPlayer)clientPlayer;
+
+            if (clone.curseLevel != curseLevel)
+            {
+                SyncPlayer(-1, Main.myPlayer, false);
+            }
         }
     }
 }
