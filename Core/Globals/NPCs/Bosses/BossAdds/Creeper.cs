@@ -15,6 +15,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         int AITimer = 0;
 
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.NeverDropsResourcePickups[NPCID.Creeper] = true;
+        }
+
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.type == NPCID.Creeper;
