@@ -23,8 +23,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void AI(NPC npc)
         {
-            int attackInterval = (int)MathHelper.Clamp(npc.whoAmI * 10, 120, 600);
-            if (AITimer % attackInterval == 0 && npc.HasValidTarget && AITimer > 0)
+            if (AITimer % 600 == 0 && npc.HasValidTarget && AITimer > 0)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {

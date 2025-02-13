@@ -41,20 +41,20 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             //Main.NewText("ai1: " + npc.localAI[1]);
             //Main.NewText("ai2: " + npc.localAI[2]);
             //Main.NewText("ai3: " + npc.localAI[3]);
-            
-            if (AITimer % 300 == 0 && AITimer > 0)
+            int attackRate = npc.life < npc.lifeMax * 0.5f ? 600 : 300;
+            if (AITimer % attackRate == 0 && AITimer > 0)
             {
                 doFlamethrower = !doFlamethrower;
                 snappedPosition = player.Center;
                 SoundEngine.PlaySound(SoundID.NPCDeath10 with { Volume = 2f, PitchRange = (-0.6f, -0.3f), }, npc.Center);
             }
 
-            if (npc.life > npc.lifeMax * 0.2f)
+            if (doFlamethrower)
             {
-                if (doFlamethrower && AITimer % 5 == 0)
+                if (AITimer % 5 == 0)
                 {
                     float rot = npc.direction == 1 ? 0 : MathHelper.Pi;
-                    npc.rotation = Utils.AngleLerp(rot, npc.Center.DirectionTo(snappedPosition).ToRotation(), (AITimer % 300) / 300f);
+                    npc.rotation = Utils.AngleLerp(rot, npc.Center.DirectionTo(snappedPosition).ToRotation(), (AITimer % attackRate) / (float)attackRate);
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitX.RotatedBy(npc.rotation) * 20, ModContent.ProjectileType<EyeFireButFire>(), npc.damage / 5, 1f);
@@ -63,15 +63,16 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             }
             else
             {
-                if (AITimer % 5 == 0)
+                if (AITimer % 120 == 0 && npc.life < npc.lifeMax * 0.5f)
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitX * npc.direction * 25, ModContent.ProjectileType<EyeFireButFire>(), npc.damage / 5, 1f);
+                        Vector2 position = player.Center + new Vector2(npc.direction * Main.rand.Next(450, 750), Main.rand.Next(-500, 500));
+                        int above = position.Y > player.Center.Y ? 1 : 0;
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), position, Vector2.Zero, ModContent.ProjectileType<HungryCannon>(), npc.damage / 5, 1f, ai1: above);
                     }
-                }   
+                }
             }
-            
 
             for (int i = 0; i < 144; i++)
             {
