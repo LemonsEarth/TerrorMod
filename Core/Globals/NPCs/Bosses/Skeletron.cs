@@ -76,7 +76,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                             {
                                 for (int i = 0; i < 8; i++)
                                 {
-                                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4) * 10, ProjectileID.ShadowBeamHostile, npc.damage / 4, 1f);
+                                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4) * 10, ProjectileID.ShadowBeamHostile, npc.damage / 4, 1f, ai1: player.Center.X, ai2: player.Center.Y);
                                 }
                             }
                         }
@@ -157,6 +157,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     break;
             }
             AttackTimer = 0;
+            npc.netUpdate = true;
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)

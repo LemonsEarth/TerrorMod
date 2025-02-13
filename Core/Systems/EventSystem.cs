@@ -24,26 +24,27 @@ namespace TerrorMod.Core.Systems
             if (HellbreachStartCheck())
             {
                 hellbreachActive = true;
-                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.StartMessage"), Color.OrangeRed);
+                if (Main.netMode == NetmodeID.Server) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.StartMessage"), Color.OrangeRed);
             }
 
             if (hellbreachActive && Utils.GetDayTimeAs24FloatStartingFromMidnight() > 19.50f)
             {
                 hellbreachActive = false;
                 finishedHellbreach = true;
-                ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.EndMessage"), Color.OrangeRed);
+                if (Main.netMode == NetmodeID.Server) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.EndMessage"), Color.OrangeRed);
             }
 
             if ((int)Main.time == 1 && !Main.dayTime && DayCountSystem.dayCount == 3)
             {
                 Main.bloodMoon = true;
+                if (Main.netMode == NetmodeID.Server) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("The Bloody Moon rises..."), Color.Red);
             }
         }
 
         bool HellbreachStartCheck()
         {
             int chanceDenominator = !finishedHellbreach ? 3 : 20;
-            if (Math.Floor(Main.time) == 1 && DayCountSystem.dayCount > 2 && !hellbreachActive)
+            if (Math.Floor(Main.time) == 1 && Main.dayTime && DayCountSystem.dayCount > 2 && !hellbreachActive)
             {
                 if (Main.rand.NextBool(chanceDenominator)) return true;
             }

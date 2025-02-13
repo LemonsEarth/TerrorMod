@@ -40,6 +40,7 @@ namespace TerrorMod.Core.Players
 
         public override void PostUpdate()
         {
+            if (Main.netMode == NetmodeID.Server) return;
             EventDebuffs();
             BiomeDebuffs();
             PhobiaCheck();

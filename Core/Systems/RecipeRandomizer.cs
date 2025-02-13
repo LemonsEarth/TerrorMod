@@ -39,9 +39,14 @@ namespace TerrorMod.Core.Systems
 
         int GetSeedForRandom(int recipeItemID)
         {
-            IEnumerable<int> playerIDASCII_Collection = playedID.Select(character => (int)character); // convert to ASCII values so the ID is only numbers
-            string playedIDASCII = string.Join("", playerIDASCII_Collection); // Join collection elements into string
-            int seedRand = int.Parse(playedIDASCII.Substring(0, 7));  // Seed for random is comprised of the first 7 numbers of the player ID +
+            int seedRand = 148259367; // some random number idk lol
+            if (Main.netMode != NetmodeID.Server)
+            {
+                IEnumerable<int> playerIDASCII_Collection = playedID.Select(character => (int)character); // convert to ASCII values so the ID is only numbers
+                string playedIDASCII = string.Join("", playerIDASCII_Collection); // Join collection elements into string
+                seedRand = int.Parse(playedIDASCII.Substring(0, 7));  // Seed for random is comprised of the first 7 numbers of the player ID +
+            }
+            
             seedRand += recipeItemID;                                 // the id of the item whose recipe is being randomized
             return seedRand;
         }

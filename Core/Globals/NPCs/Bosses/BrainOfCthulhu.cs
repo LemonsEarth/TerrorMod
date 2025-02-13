@@ -41,6 +41,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     if (npc.localAI[1] < 75) // tp timer
                     {
                         npc.localAI[1] = 75;
+                        npc.netUpdate = true;
                     }
                 }
                 else if (phase2Timer % 30 == 0 && phase2Timer > 60)

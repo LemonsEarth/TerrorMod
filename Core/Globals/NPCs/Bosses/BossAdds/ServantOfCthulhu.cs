@@ -20,6 +20,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
             return entity.type == NPCID.ServantofCthulhu;
         }
 
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.NeverDropsResourcePickups[NPCID.ServantofCthulhu] = true;
+        }
+
         public override void SetDefaults(NPC entity)
         {
             entity.lifeMax = 32;
