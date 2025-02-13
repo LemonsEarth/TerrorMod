@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerrorMod.Content.Buffs.Debuffs;
 
 namespace TerrorMod.Core.Globals.NPCs.Forest
 {
@@ -30,6 +31,11 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
             if (npc.netID == NPCID.Pinky)
             {
                 target.AddBuff(BuffID.VortexDebuff, 120);
+            }
+
+            if (npc.type == NPCID.MotherSlime || npc.netID == NPCID.BlackSlime || npc.netID == NPCID.RedSlime)
+            {
+                target.AddBuff(ModContent.BuffType<Weight>(), 240);
             }
         }
 

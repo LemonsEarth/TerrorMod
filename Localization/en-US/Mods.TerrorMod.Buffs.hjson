@@ -69,3 +69,8 @@ CurseDebuff: {
 		Curse level: {0}
 		'''
 }
+
+Weight: {
+	DisplayName: Weight
+	Description: You are heavy!
+}

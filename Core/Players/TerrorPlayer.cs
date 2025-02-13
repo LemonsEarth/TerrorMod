@@ -15,6 +15,7 @@ using Terraria.Audio;
 using TerrorMod.Core.Systems;
 using Terraria.ModLoader.IO;
 using System.IO;
+using System.Collections.Generic;
 
 namespace TerrorMod.Core.Players
 {
@@ -111,6 +112,7 @@ namespace TerrorMod.Core.Players
             if (Main.bloodMoon)
             {
                 Player.AddBuff(BuffID.Bleeding, 2);
+                Player.AddBuff(BuffID.WaterCandle, 2);
             }
 
             if (curseLevel > 0)
@@ -176,6 +178,18 @@ namespace TerrorMod.Core.Players
                     Player.statLifeMax2 -= 10;
                 }
             }
+        }
+
+        public override void ModifyStartingInventory(IReadOnlyDictionary<string, List<Item>> itemsByMod, bool mediumCoreDeath)
+        {
+            itemsByMod["Terraria"].Clear();
+        }
+
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+        {
+            return new Item[] {
+                new Item(ItemID.Wood, 10, 1)
+            };
         }
 
         public override void Initialize()

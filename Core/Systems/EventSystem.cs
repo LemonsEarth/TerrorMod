@@ -33,6 +33,11 @@ namespace TerrorMod.Core.Systems
                 finishedHellbreach = true;
                 ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.EndMessage"), Color.OrangeRed);
             }
+
+            if ((int)Main.time == 1 && !Main.dayTime && DayCountSystem.dayCount == 3)
+            {
+                Main.bloodMoon = true;
+            }
         }
 
         bool HellbreachStartCheck()
