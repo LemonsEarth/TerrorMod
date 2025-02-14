@@ -7,7 +7,6 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using TerrorMod.Content.Buffs.Debuffs;
 using Terraria.Localization;
-using Humanizer;
 using TerrorMod.Common.Utils;
 using System.Linq;
 using Terraria.GameContent.Bestiary;
@@ -16,12 +15,15 @@ using TerrorMod.Core.Systems;
 using Terraria.ModLoader.IO;
 using System.IO;
 using System.Collections.Generic;
+using TerrorMod.Content.Buffs.Buffs;
 
 namespace TerrorMod.Core.Players
 {
     public class TerrorPlayer : ModPlayer
     {
         public bool infected = false;
+        public bool overdosed = false;
+        public bool leadArmorSet = false;
 
         float infectedTimer = 0;
         float maxInfectedTimer = 600;
@@ -31,6 +33,16 @@ namespace TerrorMod.Core.Players
         public override void ResetEffects()
         {
             infected = false;
+            overdosed = false;
+            leadArmorSet = false;
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (Player.HasBuff(ModContent.BuffType<TungstenPenetration>()))
+            {
+                modifiers.ArmorPenetration += 5;
+            }
         }
 
         public override bool CanUseItem(Item item)
@@ -48,6 +60,17 @@ namespace TerrorMod.Core.Players
 
         void BiomeDebuffs()
         {
+            int buffLimit = 3;
+
+            if (NPC.downedBoss1) buffLimit++;
+            if (NPC.downedBoss2) buffLimit++;
+            if (NPC.downedBoss3) buffLimit++;
+
+            if (Player.buffType.Count(buff => buff != 0 && Main.debuff[buff] == false) > buffLimit)
+            {
+                Player.AddBuff(ModContent.BuffType<Overdosed>(), 2);
+            }
+
             if (Player.ZoneUnderworldHeight) Player.AddBuff(BuffID.OnFire, 2);
 
             if (Player.ZoneCrimson) Player.AddBuff(ModContent.BuffType<InfectedCrimson>(), 3);
@@ -120,6 +143,14 @@ namespace TerrorMod.Core.Players
             {
                 Player.AddBuff(ModContent.BuffType<CurseDebuff>(), 2);
             }
+        }
+
+        public override void UpdateBadLifeRegen()
+        {
+            if (!overdosed) return;
+
+            Player.lifeRegen -= 3;
+            
         }
 
         void PhobiaCheck()

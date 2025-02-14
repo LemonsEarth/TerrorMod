@@ -16,7 +16,7 @@ namespace TerrorMod.Content.Buffs.Debuffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            LemonUtils.AddPhobiaDebuffs(player);
+            LemonUtils.AddPhobiaDebuffs(player, 1.3f);
         }
     }
 }

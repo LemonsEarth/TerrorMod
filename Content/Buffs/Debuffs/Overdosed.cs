@@ -2,12 +2,11 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
-using TerrorMod.Core.Globals.NPCs.Corruption;
 using TerrorMod.Core.Players;
 
 namespace TerrorMod.Content.Buffs.Debuffs
 {
-    public class AcrophobiaDebuff : ModBuff
+    public class Overdosed : ModBuff
     {
         public override void SetStaticDefaults()
         {
@@ -16,7 +15,8 @@ namespace TerrorMod.Content.Buffs.Debuffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            LemonUtils.AddPhobiaDebuffs(player, 1.2f);
+            player.GetModPlayer<TerrorPlayer>().overdosed = true;
+            LemonUtils.AddPhobiaDebuffs(player, 2f);
         }
     }
 }

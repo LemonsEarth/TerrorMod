@@ -122,16 +122,17 @@ namespace TerrorMod.Common.Utils
             return true;
         }
 
-        public static void AddPhobiaDebuffs(Player player)
+        public static void AddPhobiaDebuffs(Player player, float mul = 1f)
         {
-            if (Main.rand.NextBool(300)) player.AddBuff(BuffID.Weak, 300);
-            if (Main.rand.NextBool(500)) player.AddBuff(BuffID.Blackout, 180);
-            if (Main.rand.NextBool(300)) player.AddBuff(BuffID.Slow, 300);
-            if (Main.rand.NextBool(1200)) player.AddBuff(BuffID.Silenced, 90);
-            if (Main.rand.NextBool(1600)) player.AddBuff(BuffID.Cursed, 90);
-            if (Main.rand.NextBool(2000)) player.AddBuff(BuffID.Confused, 180);
-            if (Main.rand.NextBool(3000)) player.AddBuff(BuffID.Stoned, 180);
-            if (Main.rand.NextBool(5000)) player.AddBuff(ModContent.BuffType<FearDebuff>(), 120);
+            if (mul <= 0) mul = 1;
+            if (Main.rand.NextBool((int)(300 / mul))) player.AddBuff(BuffID.Weak, (int)(300 * mul));
+            if (Main.rand.NextBool((int)(500 / mul))) player.AddBuff(BuffID.Blackout, (int)(180 * mul));
+            if (Main.rand.NextBool((int)(300 / mul))) player.AddBuff(BuffID.Slow, (int)(300 * mul));
+            if (Main.rand.NextBool((int)(1200 / mul))) player.AddBuff(BuffID.Silenced, (int)(90 * mul));
+            if (Main.rand.NextBool((int)(1600 / mul))) player.AddBuff(BuffID.Cursed, (int)(90 * mul));
+            if (Main.rand.NextBool((int)(2000 / mul))) player.AddBuff(BuffID.Confused, (int)(180 * mul));
+            if (Main.rand.NextBool((int)(3000 / mul))) player.AddBuff(BuffID.Stoned, 180);
+            if (Main.rand.NextBool((int)(5000 / mul))) player.AddBuff(ModContent.BuffType<FearDebuff>(), (int)(120 * mul));
         }
     }
 }

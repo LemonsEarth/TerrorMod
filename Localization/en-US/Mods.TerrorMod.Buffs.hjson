@@ -74,3 +74,13 @@ Weight: {
 	DisplayName: Weight
 	Description: You are heavy!
 }
+
+Overdosed: {
+	DisplayName: Overdosed on Buffs
+	Description: Do you have a prescription for those?
+}
+
+TungstenPenetration: {
+	DisplayName: Tungsten Penetration
+	Description: Increases your armor penetration by 5
+}
