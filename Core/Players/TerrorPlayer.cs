@@ -60,7 +60,7 @@ namespace TerrorMod.Core.Players
 
         void BiomeDebuffs()
         {
-            int buffLimit = 3;
+            int buffLimit = 5;
 
             if (NPC.downedBoss1) buffLimit++;
             if (NPC.downedBoss2) buffLimit++;
