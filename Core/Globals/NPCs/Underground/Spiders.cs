@@ -18,7 +18,11 @@ namespace TerrorMod.Core.Globals.NPCs.Underground
             return entity.type == NPCID.BloodCrawler
                 || entity.type == NPCID.BloodCrawlerWall
                 || entity.type == NPCID.WallCreeper
-                || entity.type == NPCID.WallCreeperWall;
+                || entity.type == NPCID.WallCreeperWall
+                || entity.type == NPCID.BlackRecluse
+                || entity.type == NPCID.BlackRecluseWall
+                || entity.type == NPCID.JungleCreeper
+                || entity.type == NPCID.JungleCreeperWall;
         }
 
         public override void PostAI(NPC npc)

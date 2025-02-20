@@ -50,6 +50,8 @@ namespace TerrorMod.Common.Utils
             /* Tiles */ WoodenChair, WoodenDoor, WoodenTable, Campfire, HeartLantern,
             /* Misc */ Torch, WoodenArrow, MagicMirror, 
 
+            /* Potions */ IronskinPotion, SwiftnessPotion, RegenerationPotion, ThornsPotion, SpelunkerPotion, MiningPotion, HunterPotion
+
         };
 
         public static HashSet<int> PreHM_Materials { get; private set; } = new HashSet<int>()

@@ -21,7 +21,14 @@ namespace TerrorMod.Core.Globals.NPCs.Jungle
 
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
-            return entity.type == NPCID.Hornet || entity.type == NPCID.MossHornet || entity.type == NPCID.Bee || entity.type == NPCID.BeeSmall;
+            return entity.type == NPCID.Hornet 
+                || entity.type == NPCID.MossHornet 
+                || entity.type == NPCID.HornetFatty
+                || entity.type == NPCID.HornetHoney
+                || entity.type == NPCID.HornetLeafy
+                || entity.type == NPCID.HornetStingy
+                || entity.type == NPCID.Bee 
+                || entity.type == NPCID.BeeSmall;
         }
 
         public override void OnSpawn(NPC npc, IEntitySource source)

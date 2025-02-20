@@ -17,6 +17,12 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
                 || entity.type == NPCID.Slimer
                 || entity.type == NPCID.MotherSlime
                 || entity.type == NPCID.Crimslime
+                || entity.type == NPCID.CorruptSlime
+                || entity.type == NPCID.IlluminantSlime
+                || entity.type == NPCID.Slimer
+                || entity.type == NPCID.QueenSlimeMinionBlue
+                || entity.type == NPCID.QueenSlimeMinionPink
+                || entity.type == NPCID.QueenSlimeMinionPurple
                 || entity.type == NPCID.IceSlime
                 || entity.type == NPCID.ShimmerSlime
                 || entity.type == NPCID.SandSlime

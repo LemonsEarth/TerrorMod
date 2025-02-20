@@ -55,7 +55,9 @@ namespace TerrorMod.Core.Globals.Projectiles.Hostile
                                     continue;
                                 }
                                 WorldGen.KillTile(x, y, noItem: true);
+
                                 WorldGen.PlaceTile(x, y, TileID.Ash);
+
                                 NetMessage.SendTileSquare(-1, x, y);
                             }
                         }

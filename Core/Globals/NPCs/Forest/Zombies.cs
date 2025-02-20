@@ -25,7 +25,9 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
                 || entity.type == NPCID.TwiggyZombie
                 || entity.type == NPCID.FemaleZombie
                 || entity.type == NPCID.ZombieRaincoat
-                || entity.type == NPCID.ZombieMushroomHat;
+                || entity.type == NPCID.ZombieMushroomHat
+                || entity.type == NPCID.TheGroom
+                || entity.type == NPCID.TheBride;
         }
 
         public override void OnKill(NPC npc)

@@ -19,6 +19,10 @@ namespace TerrorMod.Core.Systems
             foreach (Recipe recipe in Main.recipe)
             {
                 int itemType = recipe.createItem.type;
+                if (ContentSamples.ItemsByType[itemType].damage > 0 && ContentSamples.ItemsByType[itemType].damage < 30 && !ItemLists.PreHM_Items.Contains(itemType))
+                {
+                    ItemLists.PreHM_Items.Add(itemType);
+                }
                 if (ItemLists.PreHM_Items.Contains(itemType))
                 {
                     UnifiedRandom random = GetUnifiedRandomForRecipe(itemType);

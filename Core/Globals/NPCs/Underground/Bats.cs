@@ -19,7 +19,10 @@ namespace TerrorMod.Core.Globals.NPCs.Underground
             return entity.type == NPCID.CaveBat
                 || entity.type == NPCID.IceBat
                 || entity.type == NPCID.JungleBat
-                || entity.type == NPCID.Hellbat;
+                || entity.type == NPCID.Hellbat
+                || entity.type == NPCID.GiantBat
+                || entity.type == NPCID.Lavabat
+                || entity.type == NPCID.IlluminantBat;
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

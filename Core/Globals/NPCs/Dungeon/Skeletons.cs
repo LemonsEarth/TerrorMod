@@ -16,6 +16,7 @@ namespace TerrorMod.Core.Globals.NPCs.Dungeon
                 || entity.type == NPCID.Skeleton
                 || entity.type == NPCID.UndeadMiner
                 || entity.type == NPCID.UndeadViking
+                || entity.type == NPCID.ArmoredViking
                 || entity.type == NPCID.BoneThrowingSkeleton
                 || entity.type == NPCID.CursedSkull
                 || entity.type == NPCID.BoneSerpentHead
@@ -23,7 +24,27 @@ namespace TerrorMod.Core.Globals.NPCs.Dungeon
                 || entity.type == NPCID.GreekSkeleton
                 || entity.type == NPCID.HeadacheSkeleton
                 || entity.type == NPCID.MisassembledSkeleton
-                || entity.type == NPCID.PantlessSkeleton;
+                || entity.type == NPCID.PantlessSkeleton
+                || entity.type == NPCID.ArmoredSkeleton
+                || entity.type == NPCID.SkeletonArcher
+                || entity.type == NPCID.Tim
+                || entity.type == NPCID.RuneWizard
+                || entity.type == NPCID.GiantCursedSkull
+                || entity.type == NPCID.Necromancer
+                || entity.type == NPCID.DiabolistRed
+                || entity.type == NPCID.DiabolistWhite
+                || entity.type == NPCID.RaggedCaster
+                || entity.type == NPCID.HellArmoredBones
+                || entity.type == NPCID.HellArmoredBonesMace
+                || entity.type == NPCID.HellArmoredBonesSpikeShield
+                || entity.type == NPCID.HellArmoredBonesSword
+                || entity.type == NPCID.BlueArmoredBones
+                || entity.type == NPCID.BlueArmoredBonesMace
+                || entity.type == NPCID.BlueArmoredBonesSword
+                || entity.type == NPCID.BoneLee
+                || entity.type == NPCID.SkeletonSniper
+                || entity.type == NPCID.SkeletonCommando
+                || entity.type == NPCID.TacticalSkeleton;
         }
 
         public override void OnKill(NPC npc)
