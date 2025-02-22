@@ -13,6 +13,7 @@ namespace TerrorMod.Content.Buffs.Debuffs
         {
             Main.debuff[Type] = true;
             BuffID.Sets.LongerExpertDebuff[Type] = true;
+            Main.buffNoTimeDisplay[Type] = true;
         }
 
         public override void Update(Player player, ref int buffIndex)
