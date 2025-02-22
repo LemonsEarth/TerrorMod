@@ -15,6 +15,7 @@ using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 using TerrorMod.Common.Utils;
+using TerrorMod.Content.Tiles.Blocks;
 using TerrorMod.Content.Tiles.Furniture;
 
 namespace TerrorMod.Core.Systems
@@ -63,9 +64,36 @@ namespace TerrorMod.Core.Systems
             Main.chest[index].item = items;
         }
 
+        void PlaceDungeonPactTiles()
+        {
+            int count = LemonUtils.GetWorldSize() * 8; // Starting at the maximum amount of pact tiles that can be placed
+
+            while (count > 0)
+            {
+                int i = WorldGen.genRand.Next(0, Main.maxTilesX);
+                int j = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200);
+                Tile tile = Main.tile[i, j];
+                if (tile == null || !tile.HasTile)
+                {
+                    continue;
+                }
+
+                if (tile.TileType == TileID.BlueDungeonBrick || tile.TileType == TileID.PinkDungeonBrick || tile.TileType == TileID.GreenDungeonBrick)
+                {
+                    if (WorldGen.InWorld(i, j, 5) && !Main.tile[i, j - 1].HasTile)
+                    {
+                        WorldGen.PlaceTile(i, j - 1, ModContent.TileType<DungeonPactTile>());
+                        count--;
+                    }
+                }
+            }           
+
+        }
+
         public override void PostWorldGen()
         {
             ReplaceChests();
+            PlaceDungeonPactTiles();
         }
     }
 }

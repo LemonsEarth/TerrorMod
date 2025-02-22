@@ -84,3 +84,8 @@ TungstenPenetration: {
 	DisplayName: Tungsten Penetration
 	Description: Increases your armor penetration by 5
 }
+
+UndeadPact: {
+	DisplayName: Undead Pact
+	Description: The Dungeon enforces a non-agression pact on the living...
+}
