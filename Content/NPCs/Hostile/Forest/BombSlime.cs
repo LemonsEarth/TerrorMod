@@ -12,11 +12,9 @@ using TerrorMod.Content.Projectiles.Hostile;
 
 namespace TerrorMod.Content.NPCs.Hostile.Forest
 {
-    public class ZombieMiner : ModNPC
+    public class BombSlime : ModNPC
     {
         float AITimer = 0;
-        float AttackTimer = 0;
-        float AttackCount = 0;
 
         public override void SetStaticDefaults()
         {
@@ -25,21 +23,16 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
 
         public override void SetDefaults()
         {
-            NPC.width = 26;
-            NPC.height = 40;
+            NPC.width = 36;
+            NPC.height = 34;
             NPC.lifeMax = 50;
             NPC.defense = 2;
             NPC.damage = 20;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.value = 200;
-            NPC.aiStyle = NPCAIStyleID.Fighter;
-            NPC.knockBackResist = 0.7f;
-        }
-
-        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
-        {
-            NPC.damage = (int)(NPC.damage * balance * 0.5f);
+            NPC.aiStyle = NPCAIStyleID.Slime;
+            NPC.knockBackResist = 0.2f;
         }
 
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -47,42 +40,36 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>()
                 {
                     BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-                    BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.NightTime,
                 });
         }
 
-        const int FIRE_RATE = 180;
-        const int MAX_ATTACK_COUNT = 4;
         public override void AI()
         {
             if (NPC.target < 0 || NPC.target == 255)
             {
                 NPC.TargetClosest(false);
             }
-            Lighting.AddLight(NPC.Center, 2, 2, 2);
             if (!NPC.HasValidTarget)
             {
                 return;
             }
             Player player = Main.player[NPC.target];
 
-            NPC.spriteDirection = Math.Sign(NPC.Center.DirectionTo(player.Center).X);
+            if (NPC.life < NPC.lifeMax)
+            {
+                AITimer++;
+                Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Torch);
+                SoundEngine.PlaySound(SoundID.Item13, NPC.Center);
+            }
 
-            if (AttackTimer == FIRE_RATE && NPC.Center.Distance(player.Center) < 500 && AttackCount < MAX_ATTACK_COUNT)
+            if (AITimer >= 300)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(player.Center) * 10, ModContent.ProjectileType<ThrownPickaxe>(), NPC.damage, 1f);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<BombExplosion>(), NPC.damage, 1f);
                 }
-                AttackCount++;
-                AttackTimer = 0;
+                NPC.SimpleStrikeNPC(1000, 0, noPlayerInteraction: true);
             }
-
-            if (AttackTimer < FIRE_RATE)
-            {
-                AttackTimer++;
-            }
-            AITimer++;
         }
 
         public override void FindFrame(int frameHeight)
@@ -102,26 +89,13 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (!Main.dayTime)
-            {
-                return (spawnInfo.Player.ZoneForest && Main.bloodMoon) ? 0.1f : 0.05f;
-            }
-            else
-            {
-                return spawnInfo.Player.ZoneRockLayerHeight ? 0.02f : 0f;
-            }
+            return (spawnInfo.Player.ZoneForest) ? 0.1f : 0f;
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemID.IronOre, minimumDropped: 8, maximumDropped: 22));
-            npcLoot.Add(ItemDropRule.Common(ItemID.PlatinumPickaxe, 5));
-            npcLoot.Add(ItemDropRule.Common(ItemID.MiningHelmet, 5));
-        }
-
-        public override bool? CanFallThroughPlatforms()
-        {
-            return true;
+            npcLoot.Add(ItemDropRule.Common(ItemID.Bomb, minimumDropped: 1, maximumDropped: 4));
+            npcLoot.Add(ItemDropRule.Common(ItemID.Gel, minimumDropped: 2, maximumDropped: 4));
         }
     }
 }

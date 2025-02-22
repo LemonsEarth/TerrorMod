@@ -1,0 +1,11 @@
+﻿Version 0.15:
+
+Main:
+- Added changes to the Goblin Army
+- Added Legendary enemies, which are rare and much stronger versions of normal enemies, that also drop more loot and can teleport to your location
+- Added bomb slimes
+- Nymphs now attract you
+
+Fixes and Misc:
+- Phobias and curse should no longer display time remaining
+- Some changes such as those for skeletons and spiders now apply to hardmode versions of those enemies

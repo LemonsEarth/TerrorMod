@@ -44,7 +44,7 @@ namespace TerrorMod.Core.Systems
         bool HellbreachStartCheck()
         {
             int chanceDenominator = !finishedHellbreach ? 3 : 20;
-            if (Math.Floor(Main.time) == 1 && Main.dayTime && DayCountSystem.dayCount > 2 && !hellbreachActive)
+            if (Math.Floor(Main.time) == 1 && Main.dayTime && DayCountSystem.dayCount > 4 && !hellbreachActive)
             {
                 if (Main.rand.NextBool(chanceDenominator)) return true;
             }

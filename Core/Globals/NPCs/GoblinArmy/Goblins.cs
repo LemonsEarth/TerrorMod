@@ -14,7 +14,7 @@ namespace TerrorMod.Core.Globals.NPCs.GoblinArmy
         {
             if (entity.type == NPCID.GoblinThief)
             {
-                entity.Opacity = 0.3f;
+                entity.alpha = 200;
             }
 
             if (entity.type == NPCID.GoblinWarrior)
@@ -29,6 +29,7 @@ namespace TerrorMod.Core.Globals.NPCs.GoblinArmy
                 || entity.type == NPCID.GoblinPeon
                 || entity.type == NPCID.GoblinScout
                 || entity.type == NPCID.GoblinShark
+                || entity.type == NPCID.GoblinThief
                 || entity.type == NPCID.GoblinSorcerer
                 || entity.type == NPCID.GoblinSummoner
                 || entity.type == NPCID.GoblinWarrior
