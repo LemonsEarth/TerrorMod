@@ -20,12 +20,14 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
         ref float AttackTimer => ref NPC.ai[1];
 
         readonly string GlowMask_Path = "TerrorMod/Content/NPCs/Hostile/Corruption/CorruptCarrier_Glow";
+        static Asset<Texture2D> GlowMask;
 
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 3;
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type][ModContent.BuffType<InfectedCorrupt>()] = true;
+            GlowMask = ModContent.Request<Texture2D>(GlowMask_Path);
         }
 
         public override void SetDefaults()
@@ -75,7 +77,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Vector2 direction = NPC.Center.Distance(player.Center) < 600 ? NPC.Center.DirectionTo(player.Center) : Vector2.UnitY;
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 10, ModContent.ProjectileType<CorruptCarrierProj>(), NPC.damage / 3, 1f);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 2, ModContent.ProjectileType<CorruptCarrierProj>(), NPC.damage / 3, 1f);
                     LemonUtils.DustCircle(NPC.Center, 8, 6, DustID.Corruption);
                 }
                 AttackTimer = 0;
@@ -128,9 +130,8 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
 
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Texture2D glowmask = ModContent.Request<Texture2D>(GlowMask_Path, AssetRequestMode.ImmediateLoad).Value;
             SpriteEffects effects = NPC.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-            Main.EntitySpriteDraw(glowmask, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, NPC.frame.Size() * 0.5f, NPC.scale, effects);
+            Main.EntitySpriteDraw(GlowMask.Value, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, NPC.frame.Size() * 0.5f, NPC.scale, effects);
         }
     }
 }

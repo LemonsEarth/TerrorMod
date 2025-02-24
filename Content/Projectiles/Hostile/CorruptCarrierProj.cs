@@ -1,20 +1,52 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
+using TerrorMod.Common.Utils.Prim;
 
 namespace TerrorMod.Content.Projectiles.Hostile
 {
     public class CorruptCarrierProj : ModProjectile
     {
-        string GlowMask_Path = "TerrorMod/Content/Projectiles/Hostile/CorruptCarrierProj_Glow";
+        string GlowMask_Path => Texture + "_Glow";
+        static Asset<Texture2D> GlowMask;
 
         ref float AITimer => ref Projectile.ai[0];
+
+        static BasicEffect BasicEffect;
+        GraphicsDevice GraphicsDevice => Main.instance.GraphicsDevice;
+
+        public override void Load()
+        {
+            Main.RunOnMainThread(() =>
+            {
+                BasicEffect = new BasicEffect(GraphicsDevice)
+                {
+                    TextureEnabled = true,
+                    VertexColorEnabled = true,
+                };
+            });
+            
+        }
+
+        public override void Unload()
+        {
+            BasicEffect?.Dispose();
+            BasicEffect = null;
+        }
+
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 15;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
+            GlowMask = ModContent.Request<Texture2D>(GlowMask_Path);
+        }
 
         public override void SetDefaults()
         {
@@ -39,6 +71,8 @@ namespace TerrorMod.Content.Projectiles.Hostile
                 Projectile.alpha -= 7;
             }
 
+            Projectile.velocity *= 1.05f;
+
             LemonUtils.DustCircle(Projectile.Center, 4, 3, DustID.Corruption);
             Projectile.rotation = MathHelper.ToRadians(AITimer * 6);
 
@@ -49,14 +83,20 @@ namespace TerrorMod.Content.Projectiles.Hostile
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.Zero) * 3, ProjectileID.VilePowder, 0, 1);
-            }   
+                Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.Zero), ProjectileID.VilePowder, 0, 1);
+            }
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            PrimHelper.DrawBasicProjectilePrimTrail(Projectile, 12, Color.MediumPurple, Color.Black, BasicEffect, GraphicsDevice);
+
+            return true;
         }
 
         public override void PostDraw(Color lightColor)
         {
-            Texture2D glowmask = ModContent.Request<Texture2D>(GlowMask_Path, AssetRequestMode.ImmediateLoad).Value;
-            Main.EntitySpriteDraw(glowmask, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, Color.White, Projectile.rotation, glowmask.Size() * 0.5f, 1f, SpriteEffects.None);
+            Main.EntitySpriteDraw(GlowMask.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, Color.White, Projectile.rotation, GlowMask.Value.Size() * 0.5f, 1f, SpriteEffects.None);
         }
     }
 }
