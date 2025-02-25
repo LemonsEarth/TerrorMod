@@ -11,5 +11,7 @@ Main:
 
 Fixes and Misc:
 - Updated visuals for some projectiles
+- Increased starting wood amount 10 -> 16
+- Nerfed damage of Carriers and Tree Spirits
 - Phobias and curse should no longer display time remaining
 - Some changes such as those for skeletons and spiders now apply to hardmode versions of those enemies

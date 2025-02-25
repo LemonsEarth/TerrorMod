@@ -25,5 +25,5 @@ LifeEssence: {
 
 LootToken: {
 	DisplayName: Loot Token
-	Tooltip: "Right click to obtain a starting item"
+	Tooltip: Right click to obtain a starting item
 }
