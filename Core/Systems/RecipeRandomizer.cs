@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using TerrorMod.Common.Utils;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Systems
 {
@@ -16,6 +17,7 @@ namespace TerrorMod.Core.Systems
         Recipe[] originalRecipes;
         public override void PostAddRecipes()
         {
+            if (!TerrorClientConfigs.clientConfig.EnableRecipeRandomizer) return;
             foreach (Recipe recipe in Main.recipe)
             {
                 int itemType = recipe.createItem.type;

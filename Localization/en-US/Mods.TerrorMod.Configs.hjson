@@ -1,0 +1,19 @@
+TerrorClientConfigs: {
+	DisplayName: Terror Client Configs
+	Headers.General: General
+
+	EnableRecipeRandomizer: {
+		Label: Enable Recipe Randomizer
+		Tooltip: Keep this enabled for the true Terror mode experience
+	}
+}
+
+TerrorServerConfigs: {
+	DisplayName: Terror Server Configs
+	Headers.NPCs: NPCs
+
+	EnableBossChanges: {
+		Label: Enable Boss Changes
+		Tooltip: Disabling this will prevent Boss AIs from being changed (useful if you're playing with other mods)
+	}
+}

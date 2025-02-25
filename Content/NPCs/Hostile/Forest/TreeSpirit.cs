@@ -26,7 +26,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
             NPC.height = 16;
             NPC.lifeMax = 24;
             NPC.defense = 2;
-            NPC.damage = 20;
+            NPC.damage = 10;
             NPC.HitSound = SoundID.Dig;
             NPC.DeathSound = SoundID.Dig;
             NPC.value = 10;

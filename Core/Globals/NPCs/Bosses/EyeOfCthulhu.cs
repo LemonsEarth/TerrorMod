@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -27,6 +28,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (!npc.HasValidTarget) return;
 
             if (npc.ai[0] == 0) // if in phase 1
@@ -53,6 +55,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override bool? DrawHealthBar(NPC npc, byte hbPosition, ref float scale, ref Vector2 position)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return true;
             return npc.ai[0] == 0;
         }
 

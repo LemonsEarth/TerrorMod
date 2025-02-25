@@ -36,7 +36,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Corruption
             NPC.height = 60;
             NPC.lifeMax = 150;
             NPC.defense = 12;
-            NPC.damage = 40;
+            NPC.damage = 20;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.value = 100;

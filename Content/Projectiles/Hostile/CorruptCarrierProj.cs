@@ -24,6 +24,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override void Load()
         {
+            if (Main.dedServ) return;
             Main.RunOnMainThread(() =>
             {
                 BasicEffect = new BasicEffect(GraphicsDevice)
@@ -37,8 +38,12 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override void Unload()
         {
-            BasicEffect?.Dispose();
-            BasicEffect = null;
+            if (Main.dedServ) return;
+            Main.RunOnMainThread(() =>
+            {
+                BasicEffect?.Dispose();
+                BasicEffect = null;
+            });
         }
 
         public override void SetStaticDefaults()
@@ -89,6 +94,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Main.dedServ) return true;
             PrimHelper.DrawBasicProjectilePrimTrail(Projectile, 12, Color.MediumPurple, Color.Black, BasicEffect, GraphicsDevice);
 
             return true;

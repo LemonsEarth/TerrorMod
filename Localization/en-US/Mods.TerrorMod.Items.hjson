@@ -22,3 +22,8 @@ LifeEssence: {
 	DisplayName: Life Essence
 	Tooltip: Reduces your curse level by 1
 }
+
+LootToken: {
+	DisplayName: Loot Token
+	Tooltip: "Right click to obtain a starting item"
+}

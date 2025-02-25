@@ -9,6 +9,7 @@ using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
 using System.Collections.Generic;
 using System.Linq;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -26,6 +27,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (!npc.HasValidTarget) return;
             Player player = Main.player[npc.target];
 

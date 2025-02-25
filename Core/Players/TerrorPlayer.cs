@@ -16,6 +16,9 @@ using Terraria.ModLoader.IO;
 using System.IO;
 using System.Collections.Generic;
 using TerrorMod.Content.Buffs.Buffs;
+using TerrorMod.Content.Items.Special;
+using System.Collections;
+using System;
 
 namespace TerrorMod.Core.Players
 {
@@ -220,7 +223,8 @@ namespace TerrorMod.Core.Players
         public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
         {
             return new Item[] {
-                new Item(ItemID.Wood, 10, 1)
+                new Item(ItemID.Wood, 16, 1),
+                new Item(ModContent.ItemType<LootToken>(), 16, 1)
             };
         }
 

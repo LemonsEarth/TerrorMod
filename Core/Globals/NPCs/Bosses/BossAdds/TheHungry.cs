@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 {
@@ -23,6 +24,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (AITimer % 600 == 0 && npc.HasValidTarget && AITimer > 0)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)

@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 {
@@ -29,6 +30,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (!npc.HasValidTarget) return;
             Player player = Main.player[npc.target];
             if (AITimer == 0 || !Main.projectile.Any(proj => proj.active && proj.type == ModContent.ProjectileType<SkeletronGlock>() && proj.ai[1] == npc.whoAmI))

@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -22,6 +23,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (npc.life > npc.lifeMax * 0.9f)
             {
                 original = true;
@@ -84,6 +86,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override bool CheckDead(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return true;
             if (!original)
             {
                 for (int i = 0; i < 8; i++)

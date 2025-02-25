@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -25,6 +26,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (!npc.HasValidTarget) return;
             Player player = Main.player[npc.target];
             if (npc.ai[0] % 4 == 0 && AITimer % (420 + npc.ai[0]) == 0) // ai0 is the segment number

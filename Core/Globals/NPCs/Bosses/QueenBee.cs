@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.NPCs.Hostile.Forest;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -23,6 +24,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             // ai0 is state
             // 0 - dashing
             // 1 - summoning bees
