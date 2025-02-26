@@ -10,6 +10,8 @@ using TerrorMod.Content.Projectiles.Hostile;
 using System.Collections.Generic;
 using System.Linq;
 using TerrorMod.Core.Configs;
+using TerrorMod.Content.NPCs.Hostile.Special;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -93,6 +95,32 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             }
 
             AITimer++;
+        }
+
+        public override void OnKill(NPC npc)
+        {
+            if (Main.hardMode) return;
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    int counter = 0;
+                    while (counter < 1000)
+                    {
+                        bool placed = false;
+                        int x = WorldGen.genRand.Next(500, Main.maxTilesX - 500);
+                        int y = WorldGen.genRand.Next(400, Main.maxTilesY - 400);
+                        if (!Main.tile[x, y].HasTile && Main.tile[x, y].WallType == 0)
+                        {
+                            NPC.NewNPC(npc.GetSource_Death("Hardmode conversion"), x * 16, y * 16, ModContent.NPCType<MechanicalCore>(), ai1: i);
+                            EventSystem.mechanicalCorePositions[i] = new Vector2(x * 16, y * 16);
+                            placed = true;
+                        }
+                        if (placed) break;
+                        counter++;
+                    }                      
+                }
+            }
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)

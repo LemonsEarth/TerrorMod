@@ -1,5 +1,5 @@
 displayName = Terror Mode
 author = LemonEarth
-version = 0.15
+version = 0.16
 homepage = https://github.com/LemonsEarth/TerrorMod
 buildIgnore = .vs\*, Properties\*, *.csproj, *.user, obj\*, bin\*, *.config, .git\*, .github\*, LICENSE, README.md, .editorconfig, .gitignore, .gitattributes

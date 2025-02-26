@@ -19,6 +19,7 @@ using TerrorMod.Content.Buffs.Buffs;
 using TerrorMod.Content.Items.Special;
 using System.Collections;
 using System;
+using TerrorMod.Content.NPCs.Hostile.Special;
 
 namespace TerrorMod.Core.Players
 {
@@ -152,8 +153,22 @@ namespace TerrorMod.Core.Players
         {
             if (!overdosed) return;
 
-            Player.lifeRegen -= 3;
+            Player.lifeRegen -= 7;
             
+        }
+
+        public override void OnEnterWorld()
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                for (int i = 0; i < EventSystem.mechanicalCorePositions.Count; i++)
+                {
+                    if (EventSystem.mechanicalCorePositions[i] != Vector2.Zero)
+                    {
+                        NPC.NewNPC(Player.GetSource_FromThis(), (int)EventSystem.mechanicalCorePositions[i].X, (int)EventSystem.mechanicalCorePositions[i].Y, ModContent.NPCType<MechanicalCore>(), ai1: i);
+                    }
+                }
+            }
         }
 
         void PhobiaCheck()

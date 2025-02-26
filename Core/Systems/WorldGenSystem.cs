@@ -60,6 +60,7 @@ namespace TerrorMod.Core.Systems
             if (index == -1)
             {
                 Mod.Logger.Warn("A chest wasn't properly replaced");
+                return;
             }
             Main.chest[index].item = items;
         }

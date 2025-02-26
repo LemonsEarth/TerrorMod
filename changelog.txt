@@ -1,17 +1,3 @@
-﻿Version 0.15:
+﻿Version 0.16:
 
-Main:
-- Added config toggles for Boss AI Changes and the Recipe Randomizer (you will be looked down upon)
-- Added Legendary enemies, which are rare and much stronger versions of normal enemies, that also drop more loot and can teleport to your location
-- Added the Loot Token, which you get on a new character, that gives you a random early-game item
-- Goblins now forcibly drop your items on the ground
-- Pact tiles now spawn in the Dungeon, preventing you from dealing damage until they are destroyed. You'll know where they are.
-- Added bomb slimes
-- Nymphs now attract you
-
-Fixes and Misc:
-- Updated visuals for some projectiles
-- Increased starting wood amount 10 -> 16
-- Nerfed damage of Carriers and Tree Spirits
-- Phobias and curse should no longer display time remaining
-- Some changes such as those for skeletons and spiders now apply to hardmode versions of those enemies
+- Fixed world gen error relating to chests
