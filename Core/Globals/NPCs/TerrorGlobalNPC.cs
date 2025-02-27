@@ -90,6 +90,7 @@ namespace TerrorMod.Core.Globals.NPCs
             {
                 npc.Teleport(teleportPos);
                 teleportPos = Vector2.Zero;
+                npc.netUpdate = true;
             }
 
             AITimer++;

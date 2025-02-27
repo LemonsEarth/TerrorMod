@@ -1,3 +1,15 @@
-﻿Version 0.17:
+﻿Version 0.2:
 
-- Added Mechanical Cores, which spawn in your world after defeating the Wall of Flesh and they must be destroyed before the Mechanical bosses can be fought
+- Plant enemies like Man Eaters and Snatchers regenerate health over time
+- Jellyfish inflict Acid Venom and Electrified
+- Armored Skeletons take much less damage the more health they have
+- Skeleton Archers fire much faster
+- Herplings and Derplings move much faster
+- Hallow enemies spawn Enchanted Swords on death
+- Unicorns fire ethereal lances at the player
+- Pixies fire prismatic bolts at the player
+- Chaos Elementals teleport a bit more often
+- Tortoises are much faster
+- Mimics and Biome Mimics can forcibly drop your held item on the ground
+- Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
+- Paladins heal nearby enemies

@@ -157,20 +157,6 @@ namespace TerrorMod.Core.Players
             
         }
 
-        public override void OnEnterWorld()
-        {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                for (int i = 0; i < EventSystem.mechanicalCorePositions.Count; i++)
-                {
-                    if (EventSystem.mechanicalCorePositions[i] != Vector2.Zero)
-                    {
-                        NPC.NewNPC(Player.GetSource_FromThis(), (int)EventSystem.mechanicalCorePositions[i].X, (int)EventSystem.mechanicalCorePositions[i].Y, ModContent.NPCType<MechanicalCore>(), ai1: i);
-                    }
-                }
-            }
-        }
-
         void PhobiaCheck()
         {
             // Phobia immunities

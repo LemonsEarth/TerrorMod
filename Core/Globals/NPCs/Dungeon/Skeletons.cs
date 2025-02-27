@@ -44,7 +44,25 @@ namespace TerrorMod.Core.Globals.NPCs.Dungeon
                 || entity.type == NPCID.BoneLee
                 || entity.type == NPCID.SkeletonSniper
                 || entity.type == NPCID.SkeletonCommando
-                || entity.type == NPCID.TacticalSkeleton;
+                || entity.type == NPCID.TacticalSkeleton
+                || entity.type == NPCID.PossessedArmor;
+        }
+
+        public override void AI(NPC npc)
+        {
+            if (npc.type == NPCID.SkeletonArcher)
+            {
+                npc.ai[1] = MathHelper.Clamp(npc.ai[1], 0, 40);
+            }
+        }
+
+        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+        {
+            if (npc.type == NPCID.ArmoredSkeleton)
+            {
+                float mod = (float)(npc.lifeMax - npc.life) / npc.lifeMax;
+                modifiers.FinalDamage *= MathHelper.Clamp(mod, 0.2f, 1f);
+            }
         }
 
         public override void OnKill(NPC npc)

@@ -18,7 +18,6 @@ namespace TerrorMod.Core.Systems
     {
         public static bool hellbreachActive = false;
         public static bool finishedHellbreach = false;
-        public static List<Vector2> mechanicalCorePositions = new List<Vector2>(){Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero}; 
 
         public override void PostUpdateWorld()
         {
@@ -56,42 +55,28 @@ namespace TerrorMod.Core.Systems
         {
             hellbreachActive = false;
             finishedHellbreach = false;
-            for (int i = 0; i < mechanicalCorePositions.Count; i++)
-            {
-                mechanicalCorePositions[i] = Vector2.Zero;
-            }
         }
 
         public override void SaveWorldData(TagCompound tag)
         {
             tag["hellbreachActive"] = hellbreachActive;
             tag["finishedHellbreach"] = finishedHellbreach;
-            tag["mechanicalCorePositions"] = mechanicalCorePositions;
         }
 
         public override void LoadWorldData(TagCompound tag)
         {
             hellbreachActive = tag.GetBool("hellbreachActive");
             finishedHellbreach = tag.GetBool("finishedHellbreach");
-            mechanicalCorePositions = tag.GetList<Vector2>("mechanicalCorePositions").ToList<Vector2>();
         }
 
         public override void NetSend(BinaryWriter writer)
         {
             writer.WriteFlags(hellbreachActive, finishedHellbreach);
-            foreach (var pos in mechanicalCorePositions)
-            {
-                writer.WriteVector2(pos);
-            }
         }
 
         public override void NetReceive(BinaryReader reader)
         {
             reader.ReadFlags(out hellbreachActive, out finishedHellbreach);
-            for (int i = 0; i < 4; i++)
-            {
-                mechanicalCorePositions[i] = reader.ReadVector2();
-            }
         }
     }
 }

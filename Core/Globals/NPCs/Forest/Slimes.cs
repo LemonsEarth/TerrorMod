@@ -28,7 +28,13 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
                 || entity.type == NPCID.SandSlime
                 || entity.type == NPCID.SlimeSpiked
                 || entity.type == NPCID.SpikedIceSlime
-                || entity.type == NPCID.SpikedJungleSlime;
+                || entity.type == NPCID.SpikedJungleSlime
+                || entity.type == NPCID.SlimeMasked
+                || entity.type == NPCID.HoppinJack
+                || entity.type == NPCID.ToxicSludge
+                || entity.type == NPCID.SlimeRibbonWhite
+                || entity.type == NPCID.SlimeRibbonYellow
+                || entity.type == NPCID.SlimeRibbonRed;
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

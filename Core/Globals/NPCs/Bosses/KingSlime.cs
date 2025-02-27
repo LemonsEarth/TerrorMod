@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using TerrorMod.Common.Utils;
 using TerrorMod.Core.Configs;
 
@@ -19,6 +21,22 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.type == NPCID.KingSlime;
+        }
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write(npc.color.R);
+            binaryWriter.Write(npc.color.G);
+            binaryWriter.Write(npc.color.B);
+            binaryWriter.Write(npc.color.A);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            npc.color.R = binaryReader.ReadByte();
+            npc.color.G = binaryReader.ReadByte();
+            npc.color.B = binaryReader.ReadByte();
+            npc.color.A = binaryReader.ReadByte();
         }
 
         public override void AI(NPC npc)
@@ -61,16 +79,17 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
             if (AITimer % attackInterval == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                int amount = Main.masterMode ? 8 : 4;
+                for (int i = 0; i < amount; i++)
                 {
-                    int amount = Main.masterMode ? 8 : 4;
-                    for (int i = 0; i < amount; i++)
+                    Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 800).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
+                    LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 800).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
-                        LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
                         NPC slime = NPC.NewNPCDirect(npc.GetSource_FromAI("PeriodicSlimeSpawn"), (int)pos.X, (int)pos.Y, NPCID.SlimeSpiked);
                     }
                 }
+
             }
         }
 

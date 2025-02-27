@@ -86,13 +86,13 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     case 2:
                         if (AttackTimer % 240 == 0)
                         {
-                            if (Main.netMode != NetmodeID.MultiplayerClient)
+                            int amount = Main.masterMode ? 8 : 4;
+                            for (int i = 0; i < amount; i++)
                             {
-                                int amount = Main.masterMode ? 8 : 4;
-                                for (int i = 0; i < amount; i++)
+                                Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 600).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
+                                LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 600).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
-                                    LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
                                     NPC slime = NPC.NewNPCDirect(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, NPCID.CursedSkull);
                                 }
                             }
@@ -164,7 +164,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
-            if (npc.ai[1] == 1) modifiers.FinalDamage *= 0.5f; 
+            if (npc.ai[1] == 1) modifiers.FinalDamage *= 0.5f;
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

@@ -27,7 +27,16 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
                 || entity.type == NPCID.ZombieRaincoat
                 || entity.type == NPCID.ZombieMushroomHat
                 || entity.type == NPCID.TheGroom
-                || entity.type == NPCID.TheBride;
+                || entity.type == NPCID.TheBride
+                || entity.type == NPCID.DesertGhoul
+                || entity.type == NPCID.DesertGhoulCorruption
+                || entity.type == NPCID.DesertGhoulCrimson
+                || entity.type == NPCID.DesertGhoulHallow
+                || entity.type == NPCID.Mummy
+                || entity.type == NPCID.BloodMummy
+                || entity.type == NPCID.DarkMummy
+                || entity.type == NPCID.LightMummy
+                || entity.type == NPCID.ZombieMerman;
         }
 
         public override void OnKill(NPC npc)
