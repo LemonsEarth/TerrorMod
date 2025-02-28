@@ -9,6 +9,8 @@ namespace TerrorMod.Core.Globals.NPCs.Crimson
 {
     public class Herpling : GlobalNPC
     {
+        public override bool InstancePerEntity => true;
+
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.aiStyle == NPCAIStyleID.Herpling;

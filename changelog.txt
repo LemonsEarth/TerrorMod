@@ -1,5 +1,6 @@
 ﻿Version 0.2:
 
+Main:
 - Plant enemies like Man Eaters and Snatchers regenerate health over time
 - Jellyfish inflict Acid Venom and Electrified
 - Armored Skeletons take much less damage the more health they have
@@ -13,3 +14,9 @@
 - Mimics and Biome Mimics can forcibly drop your held item on the ground
 - Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
 - Paladins heal nearby enemies
+
+
+Other:
+- Increased Life Essence drop rate and amount from undead enemies
+- Life Essence can be crafted from Boss Trophies
+- When Recipe Randomizer is enabled, only certain items can be ingredients, which should hopefully fix any possible conflicts

@@ -9,6 +9,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="changelog.txt" />
+	  <None Remove="Common\Assets\Shaders\MetaballShader.fx" />
+	  <None Remove="Common\Assets\Shaders\ProjectileLightShader.fx" />
 	  <None Remove="Content\Buffs\Debuffs\InfectedCorrupt.png" />
 	  <None Remove="Content\Buffs\Debuffs\InfectedCrimson.png" />
 	  <None Remove="Content\Tiles\Furniture\SimpleIceChest_Highlight.png" />

@@ -9,6 +9,8 @@ namespace TerrorMod.Core.Globals.NPCs.Hallow
 {
     public class Pixie : GlobalNPC
     {
+        public override bool InstancePerEntity => true;
+
         int AITimer = 0;
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {

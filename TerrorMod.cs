@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -5,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Core.Players;
@@ -35,6 +38,14 @@ namespace TerrorMod
                     }
                     break;
             }
+        }
+
+        public override void Load()
+        {
+            if (Main.netMode == NetmodeID.Server) return;
+
+            Asset<Effect> MetaballShader = this.Assets.Request<Effect>("Common/Assets/Shaders/MetaballShader");
+            GameShaders.Misc["TerrorMod:MetaballShader"] = new MiscShaderData(MetaballShader, "MetaballShader");
         }
     }
 }

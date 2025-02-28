@@ -33,7 +33,7 @@ namespace TerrorMod.Core.Systems
                     for (int i = 0; i < numOfIngredients; i++)
                     {
                         int itemID = itemIDs[i];
-                        if (itemID == itemType) itemID = ItemID.GlowingMushroom; // Should prevent an item from becoming its own ingredient
+                        if (!ItemIsValidIngredient(itemType, itemID)) itemID = ItemID.GlowingMushroom; // Should prevent an item from becoming its own ingredient
                         int ingredientMaxStack = ContentSamples.ItemsByType[itemID].maxStack;
                         int stackCount = 1;
                         if (ingredientMaxStack > 1) stackCount = random.Next(4, 16);
@@ -41,6 +41,11 @@ namespace TerrorMod.Core.Systems
                     }
                 }
             }
+        }
+
+        bool ItemIsValidIngredient(int resultID, int ingredientID)
+        {;
+            return (resultID != ingredientID) && !Main.recipe.Any(rec => rec.createItem.type == ingredientID && rec.requiredTile.Contains(resultID));
         }
 
         int GetSeedForRandom(int recipeItemID)
@@ -68,7 +73,7 @@ namespace TerrorMod.Core.Systems
             List<int> itemIDs = new List<int>();
             for (int i = 0; i < amount; i++)
             {
-                int itemID = random.NextFromCollection(ItemLists.PreHM_Materials.Concat(ItemLists.PreHM_Items).ToList());
+                int itemID = random.NextFromCollection(ItemLists.PreHM_Materials.ToList());
 
                 itemIDs.Add(itemID);
             }

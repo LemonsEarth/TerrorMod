@@ -51,5 +51,12 @@ namespace TerrorMod.Content.Items.Consumables
             }
             return true;
         }
+
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe(5);
+            recipe.AddRecipeGroup("TerrorMod:AnyBossTrophy", 1);
+            recipe.Register();
+        }
     }
 }
