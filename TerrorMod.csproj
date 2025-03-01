@@ -9,7 +9,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="changelog.txt" />
-	  <None Remove="Common\Assets\Shaders\MetaballShader.fx" />
 	  <None Remove="Common\Assets\Shaders\ProjectileLightShader.fx" />
 	  <None Remove="Content\Buffs\Debuffs\InfectedCorrupt.png" />
 	  <None Remove="Content\Buffs\Debuffs\InfectedCrimson.png" />
@@ -22,6 +21,8 @@
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Tiles.hjson" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Common\Assets\Shaders\" />
+	  <Folder Include="Content\NPCs\Hostile\Boss\" />
 	  <Folder Include="Core\Globals\Buffs\Debuffs\" />
 	</ItemGroup>
 

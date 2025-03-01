@@ -15,6 +15,15 @@ Main:
 - Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
 - Paladins heal nearby enemies
 
+Bosses:
+- The Destroyer:
+	Has a laser spam attack, summons bomb slimes periodically and a chase attack
+	Enters desparation phase when below 10% hp
+- The Twins:
+	Retinazer fires laser barrages faster in both phases, dashes faster in first phase
+	Spazmatism dashes much faster in phase 2, and fires barrages of cursed flames alongside its flamethrower
+	A Forgotten Sibling spawns alongside them and reduces their damage taken by 50% until it is destroyed
+
 
 Other:
 - Increased Life Essence drop rate and amount from undead enemies
