@@ -124,12 +124,12 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
-            if (Main.npc.Any(n => n.active && n.type == ModContent.NPCType<MechanicalCore>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<MechanicalCore>()))
             {
                 modifiers.FinalDamage *= 0;
             }
 
-            if (Main.npc.Any(n => n.active && n.type == ModContent.NPCType<ForgottenSibling>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<ForgottenSibling>()))
             {
                 modifiers.FinalDamage *= 0.5f;
             }
@@ -143,7 +143,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (Main.npc.Any(n => n.active && n.type == ModContent.NPCType<ForgottenSibling>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<ForgottenSibling>()))
             {
                 spriteBatch.Draw(WhiteCircle.Value, npc.position + WhiteCircle.Size() * 0.25f - screenPos, null, Color.Blue * 0.2f, 0f, WhiteCircle.Size(), 0.3f, SpriteEffects.None, 0);
             }

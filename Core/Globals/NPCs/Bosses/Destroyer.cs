@@ -83,7 +83,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Vector2 dir = npc.DirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-15, 15)));
+                        Vector2 dir = npc.DirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-5, 5)));
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, dir * 7, ProjectileID.DeathLaser, npc.damage / 5, 1f);
                     }
                 }
@@ -116,7 +116,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Vector2 dir = npc.DirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-15, 15)));
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, dir * 7, ProjectileID.DeathLaser, npc.damage / 5, 1f);
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, dir * 7, ProjectileID.DeathLaser, npc.damage / 7, 1f);
                     }
                 }
             }
@@ -166,6 +166,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         {
             if (AttackTimer > 0 && AttackTimer % 200 == 0 && npc.ai[0] % 16 == 0)
             {
+                SoundEngine.PlaySound(SoundID.Zombie68 with { MaxInstances = 1, Pitch = 0f });
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<BombSlime>());
@@ -176,7 +177,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
-            if (Main.npc.Any(n => n.active && n.type == ModContent.NPCType<MechanicalCore>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<MechanicalCore>()))
             {
                 modifiers.FinalDamage *= 0;
             }

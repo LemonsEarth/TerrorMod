@@ -17,12 +17,22 @@ Main:
 
 Bosses:
 - The Destroyer:
-	Has a laser spam attack, summons bomb slimes periodically and a chase attack
-	Enters desparation phase when below 10% hp
+	Now has 4 phases:
+		- Slows down, moves towards the player and fires a barrage of lasers from its mouth
+		- Slows down further, summoning Bomb Slimes from its body
+		- Chases the player aggressively
+		- Standard Behaviour
+	Enters desparation phase when below 10% hp, constantly firing a barrage of lasers
 - The Twins:
-	Retinazer fires laser barrages faster in both phases, dashes faster in first phase
+	Retinazer fires lasers faster in both phases, dashes faster in first phase
 	Spazmatism dashes much faster in phase 2, and fires barrages of cursed flames alongside its flamethrower
 	A Forgotten Sibling spawns alongside them and reduces their damage taken by 50% until it is destroyed
+- Skeletron Prime:
+	Vice and Saw despawn minions on hit and inflict Withered Armor, Cursed, Bleeding and Weak
+	Laser now periodically hovers above the player, firing lasers downwards
+	Cannon can fire volleys of bombs upwards
+	When all arms are dead, Prime becomes more aggressive, moving much faster and firing skulls and lasers
+
 
 
 Other:

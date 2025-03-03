@@ -33,15 +33,16 @@ namespace TerrorMod.Content.NPCs.Bosses.BossAdds
             NPC.color = Color.LightBlue;
             NPC.scale = 5f;
             NPC.noTileCollide = true;
-            NPC.color = Color.LightBlue;
+            NPC.color = Color.Blue;
         }
 
         public override void AI()
         {
-            if (!Main.npc.Any(npc => npc.active && (npc.type == NPCID.Retinazer || npc.type == NPCID.Spazmatism)))
+            if (!(NPC.AnyNPCs(NPCID.Spazmatism) || NPC.AnyNPCs(NPCID.Retinazer)))
             {
                 NPC.velocity.Y -= 5;
             }
+            NPC.color = Color.Blue;
             //NPC retinazer = Main.npc.First(npc => npc.type == NPCID.Retinazer);
             //NPC spazmatism = Main.npc.First(npc => npc.type == NPCID.Spazmatism);
 

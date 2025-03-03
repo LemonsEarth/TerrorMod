@@ -35,7 +35,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             //ai2 is a timer
             //ai3 will be used for attack phases when hands are dead
 
-            int handCount = Main.npc.Count(npc => npc.active && npc.type == NPCID.SkeletronHand);
+            int handCount = NPC.CountNPCS(NPCID.SkeletronHand);
             if (handCount > 0)
             {
                 npc.dontTakeDamage = true;

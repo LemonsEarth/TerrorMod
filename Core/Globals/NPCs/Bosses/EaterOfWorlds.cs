@@ -37,7 +37,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 }
             }
 
-            if (AITimer % npc.ai[0] == 0 && Main.npc.Count(segment => segment.active && (segment.type == NPCID.EaterofWorldsBody || segment.type == NPCID.EaterofWorldsHead || segment.type == NPCID.EaterofWorldsTail)) <= 45)
+            if (AITimer % npc.ai[0] == 0 && (NPC.CountNPCS(NPCID.EaterofWorldsBody) + NPC.CountNPCS(NPCID.EaterofWorldsHead) + NPC.CountNPCS(NPCID.EaterofWorldsTail)) <= 45)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
