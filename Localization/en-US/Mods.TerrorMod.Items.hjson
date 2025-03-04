@@ -27,3 +27,8 @@ LootToken: {
 	DisplayName: Loot Token
 	Tooltip: Right click to obtain a starting item
 }
+
+UndeadAmulet: {
+	DisplayName: Undead Amulet
+	Tooltip: Prevents your curse level from rising upon death
+}

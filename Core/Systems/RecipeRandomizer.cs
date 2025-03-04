@@ -20,32 +20,81 @@ namespace TerrorMod.Core.Systems
             if (!TerrorClientConfigs.clientConfig.EnableRecipeRandomizer) return;
             foreach (Recipe recipe in Main.recipe)
             {
-                int itemType = recipe.createItem.type;
-                if (ContentSamples.ItemsByType[itemType].damage > 0 && ContentSamples.ItemsByType[itemType].damage < 30 && !ItemLists.PreHM_Items.Contains(itemType))
+                AddItemToProgressionList(recipe);
+
+                RandomizePreHMRecipes(recipe);
+                RandomizeEarlyHMRecipes(recipe);
+            }
+        }
+
+        void AddItemToProgressionList(Recipe recipe)
+        {
+            Item item = recipe.createItem;
+            if (item.damage <= 0 || ItemLists.PreHM_Items.Contains(item.type)) return;
+            if (item.damage < 30 && item.rare <= ItemRarityID.Green)
+            {
+                if (item.type != ItemID.DeathbringerPickaxe && item.type != ItemID.NightmarePickaxe && item.type != ItemID.MoltenPickaxe)
                 {
-                    ItemLists.PreHM_Items.Add(itemType);
+                    ItemLists.PreHM_Items.Add(item.type); // Adding potentially missed and modded items to the list
                 }
-                if (ItemLists.PreHM_Items.Contains(itemType))
+            }
+            else if (item.damage < 60 && item.rare <= ItemRarityID.LightPurple)
+            {
+                if (item.type != ItemID.PalladiumDrill && item.type != ItemID.CobaltPickaxe
+                    && item.type != ItemID.MythrilDrill && item.type != ItemID.OrichalcumPickaxe
+                    && item.type != ItemID.PickaxeAxe && item.type != ItemID.Drax)
                 {
-                    UnifiedRandom random = GetUnifiedRandomForRecipe(itemType);
-                    int numOfIngredients = GetNewIngredientAmount(random);
-                    List<int> itemIDs = GetRandomItemIDs(random, numOfIngredients);
-                    for (int i = 0; i < numOfIngredients; i++)
-                    {
-                        int itemID = itemIDs[i];
-                        if (!ItemIsValidIngredient(itemType, itemID)) itemID = ItemID.GlowingMushroom; // Should prevent an item from becoming its own ingredient
-                        int ingredientMaxStack = ContentSamples.ItemsByType[itemID].maxStack;
-                        int stackCount = 1;
-                        if (ingredientMaxStack > 1) stackCount = random.Next(4, 16);
-                        recipe.AddIngredient(itemID, stackCount);
-                    }
+                    ItemLists.EarlyHM_Items.Add(item.type);
                 }
             }
         }
 
+        void RandomizePreHMRecipes(Recipe recipe)
+        {
+            int itemType = recipe.createItem.type;
+            if (ItemLists.PreHM_Items.Contains(itemType))
+            {
+                UnifiedRandom random = GetUnifiedRandomForRecipe(itemType);
+                int numOfIngredients = GetNewIngredientAmount(random);
+                List<int> itemIDs = GetRandomItemIDs(random, numOfIngredients, false);
+                for (int i = 0; i < numOfIngredients; i++)
+                {
+                    int itemID = itemIDs[i];
+                    if (!ItemIsValidIngredient(itemType, itemID)) itemID = ItemID.GlowingMushroom; // Should prevent an item from becoming its own ingredient
+                    int ingredientMaxStack = ContentSamples.ItemsByType[itemID].maxStack;
+                    int stackCount = 1;
+                    if (ingredientMaxStack > 1) stackCount = random.Next(4, 16);
+                    recipe.AddIngredient(itemID, stackCount);
+                }
+            }
+        }
+
+        void RandomizeEarlyHMRecipes(Recipe recipe)
+        {
+            int itemType = recipe.createItem.type;
+            if (ItemLists.EarlyHM_Items.Contains(itemType))
+            {
+                UnifiedRandom random = GetUnifiedRandomForRecipe(itemType);
+                int numOfIngredients = GetNewIngredientAmount(random);
+                List<int> itemIDs = GetRandomItemIDs(random, numOfIngredients, true);
+                for (int i = 0; i < numOfIngredients; i++)
+                {
+                    int itemID = itemIDs[i];
+                    if (!ItemIsValidIngredient(itemType, itemID)) itemID = ItemID.GlowingMushroom; // Should prevent an item from becoming its own ingredient
+                    int ingredientMaxStack = ContentSamples.ItemsByType[itemID].maxStack;
+                    int stackCount = 1;
+                    if (ingredientMaxStack > 1) stackCount = random.Next(4, 16);
+                    recipe.AddIngredient(itemID, stackCount);
+                }
+            }
+        }
+
+
         bool ItemIsValidIngredient(int resultID, int ingredientID)
-        {;
-            return (resultID != ingredientID) && !Main.recipe.Any(rec => rec.createItem.type == ingredientID && rec.requiredTile.Contains(resultID));
+        {
+            bool valid = (resultID != ingredientID)
+                && !Main.recipe.Any(rec => rec.createItem.type == ingredientID && rec.requiredTile.Contains(resultID));
+            return valid;
         }
 
         int GetSeedForRandom(int recipeItemID)
@@ -57,7 +106,7 @@ namespace TerrorMod.Core.Systems
                 string playedIDASCII = string.Join("", playerIDASCII_Collection); // Join collection elements into string
                 seedRand = int.Parse(playedIDASCII.Substring(0, 7));  // Seed for random is comprised of the first 7 numbers of the player ID +
             }
-            
+
             seedRand += recipeItemID;                                 // the id of the item whose recipe is being randomized
             return seedRand;
         }
@@ -68,12 +117,13 @@ namespace TerrorMod.Core.Systems
             return random;
         }
 
-        List<int> GetRandomItemIDs(UnifiedRandom random, int amount)
+        List<int> GetRandomItemIDs(UnifiedRandom random, int amount, bool hardmode)
         {
             List<int> itemIDs = new List<int>();
+            List<int> collection = !hardmode ? ItemLists.PreHM_Materials.ToList() : ItemLists.EarlyHM_Materials.ToList();
             for (int i = 0; i < amount; i++)
             {
-                int itemID = random.NextFromCollection(ItemLists.PreHM_Materials.ToList());
+                int itemID = random.NextFromCollection(collection);
 
                 itemIDs.Add(itemID);
             }

@@ -8,6 +8,8 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
+using TerrorMod.Content.Buffs.Buffs;
+using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Content.NPCs.Hostile.Special
@@ -36,7 +38,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Special
         {
             NPC.width = 88;
             NPC.height = 88;
-            NPC.lifeMax = 15000;
+            NPC.lifeMax = 7500;
             NPC.defense = 20;
             NPC.damage = 40;
             NPC.HitSound = SoundID.NPCHit4;
@@ -47,6 +49,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Special
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             NPC.netAlways = true;
+            NPC.chaseable = false;
         }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
@@ -110,7 +113,15 @@ namespace TerrorMod.Content.NPCs.Hostile.Special
                             AttackCount = -1;
                             break;
                     }
-                    AttackCount++;   
+                    AttackCount++;
+                }
+            }
+
+            foreach (var allPlayer in Main.ActivePlayers)
+            {
+                if (!allPlayer.HasBuff(ModContent.BuffType<BeforeTheStormBuff>()) && NPC.Distance(player.Center) > 3000)
+                {
+                    allPlayer.AddBuff(ModContent.BuffType<TheStormDebuff>(), 2);    
                 }
             }
 

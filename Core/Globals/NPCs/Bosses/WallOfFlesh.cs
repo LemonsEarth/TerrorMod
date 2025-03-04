@@ -12,6 +12,7 @@ using System.Linq;
 using TerrorMod.Core.Configs;
 using TerrorMod.Content.NPCs.Hostile.Special;
 using TerrorMod.Core.Systems;
+using TerrorMod.Content.Buffs.Buffs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -113,19 +114,24 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                         int x = WorldGen.genRand.Next(500, Main.maxTilesX - 500);
                         int y = WorldGen.genRand.Next(400, Main.maxTilesY - 400);
                         int minDistance = !Main.masterMode ? 5000 : 2000;
-                        if (!Main.tile[x, y].HasTile && Main.tile[x, y].WallType == 0 
+                        if (!Main.tile[x, y].HasTile && Main.tile[x, y].WallType == 0
                             && !Main.npc.Any(n => n.active && n.type == ModContent.NPCType<MechanicalCore>() && n.Center.Distance(new Vector2(x * 16, y * 16)) < minDistance))
                         {
                             NPC.NewNPC(npc.GetSource_FromAI(), x * 16, y * 16, ModContent.NPCType<MechanicalCore>());
-                            
+
                             placed = true;
                         }
                         counter++;
                         if (placed) break;
-                    }                      
+                    }
                 }
                 placedAll = true;
             }
+            foreach (var player in Main.ActivePlayers)
+            {
+                player.AddBuff(ModContent.BuffType<BeforeTheStormBuff>(), 36000);
+            }
+
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)

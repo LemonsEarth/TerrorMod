@@ -3,6 +3,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using Terraria.GameContent.ItemDropRules;
+using TerrorMod.Content.Items.Accessories;
 
 namespace TerrorMod.Core.Globals.NPCs.Dungeon
 {
@@ -74,6 +76,14 @@ namespace TerrorMod.Core.Globals.NPCs.Dungeon
             else if (Main.rand.NextBool(4))
             {
                 NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.CursedSkull, npc.whoAmI);
+            }
+        }
+
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            if (npc.type == NPCID.AngryBones || npc.type == NPCID.DarkCaster || npc.type == NPCID.AngryBonesBig || npc.type == NPCID.AngryBonesBigHelmet || npc.type == NPCID.AngryBonesBigMuscle)
+            {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<UndeadAmulet>(), 100));
             }
         }
     }

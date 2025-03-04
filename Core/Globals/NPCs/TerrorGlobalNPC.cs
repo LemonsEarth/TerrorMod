@@ -7,10 +7,12 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Conditions;
 using TerrorMod.Common.Utils;
+using TerrorMod.Content.Buffs.Buffs;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Items.Consumables;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Players;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.NPCs
 {
@@ -23,6 +25,21 @@ namespace TerrorMod.Core.Globals.NPCs
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return !entity.SpawnedFromStatue && entity.CanBeChasedBy() && !NPCLists.SafeNPCs.Contains(entity.type);
+        }
+
+        public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+        {
+            if (player.HasBuff<BeforeTheStormBuff>())
+            {
+                spawnRate = (int)(spawnRate * 5f);
+                maxSpawns = (int)(maxSpawns * 0.5f);
+            }
+
+            if (player.HasBuff<TheStormDebuff>())
+            {
+                spawnRate = (int)(spawnRate * 0.8f);
+                maxSpawns = (int)(maxSpawns * 1.5f);
+            }
         }
 
         public override void OnSpawn(NPC npc, IEntitySource source)
@@ -80,7 +97,7 @@ namespace TerrorMod.Core.Globals.NPCs
                         Vector2 pos = Vector2.Lerp(npc.Center, teleportPos, i);
                         for (int j = 0; j < 3; j++)
                         {
-                            Dust.NewDustDirect(pos, 1, 1, DustID.GemRuby).noGravity = true;
+                            Dust.NewDustDirect(pos, 1, 1, DustID.GemRuby, Scale: 1.5f).noGravity = true;
                         }
                     }
                     AITimer = 0;

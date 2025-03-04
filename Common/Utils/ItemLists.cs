@@ -7,14 +7,15 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using static Terraria.ID.ItemID;
 
 namespace TerrorMod.Common.Utils
 {
-    public class ItemLists : ItemID
+    public class ItemLists
     {
         public static HashSet<int> PreHM_Items { get; private set; } = new HashSet<int>()
         {
-            /* Pickaxes */ CactusPickaxe, CopperPickaxe, IronPickaxe, TinPickaxe, LeadPickaxe, SilverPickaxe, TungstenPickaxe, GoldPickaxe, PlatinumPickaxe, BonePickaxe, ReaverShark, FossilPickaxe, NightmarePickaxe, DeathbringerPickaxe, MoltenPickaxe,
+            /* Pickaxes */ CactusPickaxe, CopperPickaxe, IronPickaxe, TinPickaxe, LeadPickaxe, SilverPickaxe, TungstenPickaxe, GoldPickaxe, PlatinumPickaxe, BonePickaxe, ReaverShark, FossilPickaxe,
             /* Axes */ CopperAxe, IronAxe, TinAxe, GoldAxe, PlatinumAxe, LeadAxe, SilverAxe, TungstenAxe, SawtoothShark, WarAxeoftheNight, BloodLustCluster, LucyTheAxe,
             /* Hammers */ WoodenHammer, CopperHammer, IronHammer, TinHammer, GoldHammer, PlatinumHammer, LeadHammer, SilverHammer, TungstenHammer, FleshGrinder, TheBreaker, EbonwoodHammer, ShadewoodHammer, AshWoodHammer, MoltenHamaxe, MeteorHamaxe, Rockfish,
             /* Hooks */ GrapplingHook, AmberHook, AmethystHook, TopazHook, DiamondHook, EmeraldHook, SapphireHook, WebSlinger, RubyHook, IvyWhip,
@@ -63,6 +64,37 @@ namespace TerrorMod.Common.Utils
             /* Herbs */ Daybloom, Waterleaf, Blinkroot, Moonglow, Deathweed, Shiverthorn, Fireblossom,
             /* Seeds */ DaybloomSeeds, WaterleafSeeds, BlinkrootSeeds, MoonglowSeeds, DeathweedSeeds, ShiverthornSeeds, FireblossomSeeds,
             /* Blocks */ Wood, StoneBlock, GrayBrick, Snowball, SnowBlock, IceBlock, SandBlock, HardenedSand, DesertFossil, FossilOre, DirtBlock, Glass,
+            /* Misc */ EmptyBucket, LavaBucket, HoneyBucket, WaterBucket,
+            /* Special */ IllegalGunParts
+        };
+
+
+        public static HashSet<int> EarlyHM_Items { get; private set; } = new HashSet<int>()
+        {
+            /* Swords */ PearlwoodSword, PalladiumSword, CobaltSword, MythrilSword, OrichalcumSword, AdamantiteSword, TitaniumSword, ChlorophyteClaymore, ChlorophyteSaber, Excalibur, TrueExcalibur, TrueNightsEdge,
+            /* Yoyos/Maces/Boomerangs */ DaoofPow, Chik, LightDisc,
+            /* Spears */ CobaltNaginata, PalladiumPike, MythrilHalberd, OrichalcumHalberd, TitaniumTrident, AdamantiteGlaive, Gungnir, ChlorophytePartisan,
+            
+            /* Bows */ CobaltRepeater, PalladiumRepeater, MythrilRepeater, OrichalcumRepeater, AdamantiteRepeater, TitaniumRepeater, ChlorophyteShotbow, HallowedRepeater,
+            /* Guns */ Megashark, OnyxBlaster, DartRifle, DartPistol, CrystalBullet, HolyArrow, CursedBullet, IchorArrow, IchorBullet, ChlorophyteBullet,
+            /* Special */ SuperStarCannon, Flamethrower,
+
+            /* Magic icba */ SkyFracture, MeteorStaff, CrystalStorm, VenomStaff, RainbowRod, CursedFlames, GoldenShower, SpiritFlame, MagicalHarp,
+
+            /* Minion */ SpiderStaff, QueenSpiderStaff, OpticStaff,
+
+            /* Armor */ CobaltHelmet, CobaltLeggings, CobaltBreastplate, PalladiumHelmet, PalladiumLeggings, PalladiumBreastplate, TitaniumHelmet, TitaniumLeggings, TitaniumBreastplate, AdamantiteHelmet, AdamantiteLeggings, AdamantiteBreastplate,
+            MythrilHelmet, MythrilGreaves, MythrilChainmail, OrichalcumHelmet, OrichalcumLeggings, OrichalcumBreastplate, PalladiumMask, CobaltMask, TitaniumMask, AdamantiteMask, MythrilHood, OrichalcumMask, OrichalcumHeadgear, MythrilHat, CobaltHat, AdamantiteHeadgear, TitaniumHeadgear, PalladiumHeadgear, SpiderMask, SpiderBreastplate, SpiderGreaves,
+
+            /* Accessories */ MasterNinjaGear, MoonShell, CelestialShell, CelestialEmblem, AvengerEmblem, SniperScope, ReconScope, AnkhShield, MechanicalGlove, BerserkerGlove, HeroShield, FrozenShield, CelestialStone, StarVeil, CharmofMyths, FireGauntlet, MoltenQuiver, PowerGlove, PapyrusScarab
+        };
+
+        public static HashSet<int> EarlyHM_Materials { get; private set; } = new HashSet<int>()
+        {
+            /* Bars */ CobaltBar, PalladiumBar, AdamantiteBar, TitaniumBar, MythrilBar, OrichalcumBar, HallowedBar, ChlorophyteBar,
+            /* Ores */ CobaltOre, PalladiumOre, AdamantiteOre, TitaniumOre, MythrilOre, OrichalcumOre, ChlorophyteOre,
+            /* Materials */ AncientCloth, SoulofNight, SoulofFlight, SoulofLight, SoulofFright, SoulofSight, SoulofMight, DarkShard, LightShard, PixieDust, UnicornHorn, SpiderFang, WormTooth, TurtleShell, FrostCore, AncientBattleArmorMaterial, CursedFlame, Ichor, 
+            /* Blocks */ Pearlwood, PearlstoneBlock, PearlsandBlock, PinkIceBlock,
         };
     }
 }

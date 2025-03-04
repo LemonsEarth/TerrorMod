@@ -10,6 +10,8 @@ using TerrorMod.Content.Projectiles.Hostile;
 using System.Collections.Generic;
 using System.Linq;
 using TerrorMod.Core.Configs;
+using Terraria.GameContent.ItemDropRules;
+using TerrorMod.Content.Items.Accessories;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -171,6 +173,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         {
             target.AddBuff(BuffID.Cursed, 75);
             target.AddBuff(BuffID.Weak, 120);
+        }
+
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<UndeadAmulet>()));
         }
     }
 }

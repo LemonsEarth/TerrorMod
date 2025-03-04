@@ -28,6 +28,7 @@ namespace TerrorMod.Core.Players
         public bool infected = false;
         public bool overdosed = false;
         public bool leadArmorSet = false;
+        public bool undeadAmulet = false;
 
         float infectedTimer = 0;
         float maxInfectedTimer = 600;
@@ -39,6 +40,7 @@ namespace TerrorMod.Core.Players
             infected = false;
             overdosed = false;
             leadArmorSet = false;
+            undeadAmulet = false;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -64,11 +66,15 @@ namespace TerrorMod.Core.Players
 
         void BiomeDebuffs()
         {
-            int buffLimit = 5;
+            int buffLimit = 4;
 
             if (NPC.downedBoss1) buffLimit++;
-            if (NPC.downedBoss2) buffLimit++;
+            if (NPC.downedQueenBee) buffLimit += 2;
             if (NPC.downedBoss3) buffLimit++;
+            if (NPC.downedDeerclops) buffLimit++;
+            if (NPC.downedQueenSlime) buffLimit += 2;
+            if (NPC.downedHalloweenKing) buffLimit += 2;
+            if (NPC.downedChristmasIceQueen) buffLimit += 2;
 
             if (Player.buffType.Count(buff => buff != 0 && Main.debuff[buff] == false) > buffLimit)
             {
@@ -202,7 +208,7 @@ namespace TerrorMod.Core.Players
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-            if (Player.difficulty == 0) curseLevel++;
+            if (Player.difficulty == 0 && !undeadAmulet) curseLevel++;
         }
 
         public override void PostUpdateMiscEffects()

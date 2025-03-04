@@ -89,3 +89,17 @@ UndeadPact: {
 	DisplayName: Undead Pact
 	Description: The Dungeon enforces a non-agression pact on the living...
 }
+
+BeforeTheStormBuff: {
+	DisplayName: Before the Storm
+	Description:
+		'''
+		Spawn Rates reduced
+		Spend this time wisely
+		'''
+}
+
+TheStormDebuff: {
+	DisplayName: The Storm
+	Description: The apocalypse begins...
+}

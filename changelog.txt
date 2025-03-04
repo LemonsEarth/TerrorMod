@@ -1,6 +1,11 @@
 ﻿Version 0.2:
 
 Main:
+- Upon defeating the Wall of Flesh:
+	Players are inflicted with the "Before the Storm" buff, which greatly reduces spawnrates for 10 minutes
+	Mechanical Cores spawn throughout the world
+		After the "Before the Storm" buff is cleared, they will inflict "The Storm" debuff onto all distant* players
+	
 - Plant enemies like Man Eaters and Snatchers regenerate health over time
 - Jellyfish inflict Acid Venom and Electrified
 - Armored Skeletons take much less damage the more health they have
@@ -14,6 +19,7 @@ Main:
 - Mimics and Biome Mimics can forcibly drop your held item on the ground
 - Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
 - Paladins heal nearby enemies
+
 
 Bosses:
 - The Destroyer:
@@ -34,8 +40,21 @@ Bosses:
 	When all arms are dead, Prime becomes more aggressive, moving much faster and firing skulls and lasers
 
 
+Items:
+	- Undead Amulet (Dropped by Skeletron [100%] and Angry Bones [1%])
+		While equipped, prevents curse level from increasing when dying
+
+
+Buffs/Debuffs:
+	- "Before the Storm" decreases spawn rates. 
+		Cannot be re-obtained once removed. Spend those 10 minutes wisely
+	- "The Storm" increases spawn rates and max spawns, and also allows spirits to spawn.
+		Spirits can move through tiles and can spawn anywhere, aggressively hunting the player down until they destroy all Mechanical Cores
 
 Other:
 - Increased Life Essence drop rate and amount from undead enemies
 - Life Essence can be crafted from Boss Trophies
 - When Recipe Randomizer is enabled, only certain items can be ingredients, which should hopefully fix any possible conflicts
+- Base Buff Limit before overdosed occurs reduced 5 -> 4
+	Bosses which increase the buff limit by 1 on defeat are: Eye of Cthulhu, Skeletron, Deerclops
+	Bosses which increase the buff limit by 2 on defeat are: Queen Bee, Queen Slime, Pumpking, Ice Queen
