@@ -21,11 +21,13 @@ using System.Collections;
 using System;
 using TerrorMod.Content.NPCs.Hostile.Special;
 using TerrorMod.Content.Projectiles.Hostile;
+using Terraria.WorldBuilding;
 
 namespace TerrorMod.Core.Players
 {
     public class TerrorPlayer : ModPlayer
     {
+        int timer = 0;
         public bool infected = false;
         public bool overdosed = false;
         public bool leadArmorSet = false;
@@ -91,6 +93,7 @@ namespace TerrorMod.Core.Players
             EventDebuffs();
             BiomeDebuffs();
             PhobiaCheck();
+            timer++;
         }
 
         void BiomeDebuffs()

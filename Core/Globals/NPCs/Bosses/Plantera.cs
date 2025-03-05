@@ -9,6 +9,7 @@ using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.NPCs.Hostile.Forest;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Configs;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -86,6 +87,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
 
             AITimer++;
+        }
+
+        public override void OnKill(NPC npc)
+        {
+            if (!NPC.downedPlantBoss) WorldGenSystem.PlaceDungeonPactTiles();
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

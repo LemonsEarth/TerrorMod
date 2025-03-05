@@ -19,6 +19,9 @@ Main:
 - Mimics and Biome Mimics can forcibly drop your held item on the ground
 - Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
 - Paladins heal nearby enemies
+- Pirates forcefully drop your held item on the ground and any pirate may turn into a Pirate's Curse after death
+- Pirate Deadeyes fire a spread of bullets, Pirate Crossbowers fire much faster
+- Pirate Captains periodically summon Sharknadoes
 
 
 Bosses:
@@ -51,6 +54,7 @@ Bosses:
 	In phase 1, periodically dashes and fires thorn balls in all directions
 	In phase 2, constantly dashes towards the player, spawns spores more often and gains a Venom-Flamethrower attack
 	Tentacles have reduced hp
+	Generates Dungeon Pact Tiles on first kill
 
 
 Items:
@@ -62,6 +66,14 @@ Items:
 			Body pieces can inflict Shadowflame or Cursed Flames
 			Leg pieces can inflict Ichor or Oiled
 		Mythril armor pieces increase damage reduction by 5% each
+
+
+Biomes:
+	The temple is now guarded by the Temple Guardian, who will annihilate any trespassers until they've defeated Plantera
+	Statues in the temple inflict debuffs when the player is nearby
+		Lihzahrd Statues inflict Water Candle
+		Watcher Statues inflict Blackout
+		Guardian Statues inflict Withered Armor and Withered Weapon
 
 
 Buffs/Debuffs:

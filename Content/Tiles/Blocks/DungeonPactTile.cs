@@ -27,11 +27,10 @@ namespace TerrorMod.Content.Tiles.Blocks
         public override void NearbyEffects(int i, int j, bool closer)
         {
             if (closer) return;
-
             if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
             {
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<UndeadPact>(), 30);
-                for (float x = 0.05f; x < 1f; x += 0.05f)
+                for (float x = 0.1f; x < 1f; x += 0.1f)
                 {
                     Vector2 pos = Vector2.Lerp(new Vector2(i, j).ToWorldCoordinates(), Main.LocalPlayer.Center, x);
                     for (int y = 0; y < 3; y++)

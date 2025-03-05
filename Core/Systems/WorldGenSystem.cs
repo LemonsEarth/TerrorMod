@@ -65,14 +65,16 @@ namespace TerrorMod.Core.Systems
             Main.chest[index].item = items;
         }
 
-        void PlaceDungeonPactTiles()
+        public static void PlaceDungeonPactTiles() // Generated after wof and plantera kill
         {
             int count = LemonUtils.GetWorldSize() * 8; // Starting at the maximum amount of pact tiles that can be placed
-
-            while (count > 0)
+            int attemptnum = 0;
+            while (count > 0 && attemptnum < 2500)
             {
+                attemptnum++;
                 int i = WorldGen.genRand.Next(0, Main.maxTilesX);
                 int j = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200);
+                if (!WorldGen.InWorld(i, j)) continue;
                 Tile tile = Main.tile[i, j];
                 if (tile == null || !tile.HasTile)
                 {
@@ -88,7 +90,6 @@ namespace TerrorMod.Core.Systems
                     }
                 }
             }           
-
         }
 
         public override void PostWorldGen()
