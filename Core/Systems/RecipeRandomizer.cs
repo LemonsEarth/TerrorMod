@@ -30,22 +30,15 @@ namespace TerrorMod.Core.Systems
         void AddItemToProgressionList(Recipe recipe)
         {
             Item item = recipe.createItem;
+            if (ItemLists.ItemBlacklist.Contains(item.type)) return;
             if (item.damage <= 0 || ItemLists.PreHM_Items.Contains(item.type)) return;
             if (item.damage < 30 && item.rare <= ItemRarityID.Green)
             {
-                if (item.type != ItemID.DeathbringerPickaxe && item.type != ItemID.NightmarePickaxe && item.type != ItemID.MoltenPickaxe)
-                {
-                    ItemLists.PreHM_Items.Add(item.type); // Adding potentially missed and modded items to the list
-                }
+                ItemLists.PreHM_Items.Add(item.type); // Adding potentially missed and modded items to the list
             }
             else if (item.damage < 60 && item.rare <= ItemRarityID.LightPurple)
             {
-                if (item.type != ItemID.PalladiumDrill && item.type != ItemID.CobaltPickaxe
-                    && item.type != ItemID.MythrilDrill && item.type != ItemID.OrichalcumPickaxe
-                    && item.type != ItemID.PickaxeAxe && item.type != ItemID.Drax)
-                {
-                    ItemLists.EarlyHM_Items.Add(item.type);
-                }
+                ItemLists.EarlyHM_Items.Add(item.type);
             }
         }
 
@@ -120,7 +113,7 @@ namespace TerrorMod.Core.Systems
         List<int> GetRandomItemIDs(UnifiedRandom random, int amount, bool hardmode)
         {
             List<int> itemIDs = new List<int>();
-            List<int> collection = !hardmode ? ItemLists.PreHM_Materials.ToList() : ItemLists.EarlyHM_Materials.ToList();
+            List<int> collection = !hardmode ? ItemLists.PreHM_Materials.ToList() : ItemLists.EarlyHM_Materials.Union(ItemLists.PreHM_Materials).ToList();
             for (int i = 0; i < amount; i++)
             {
                 int itemID = random.NextFromCollection(collection);

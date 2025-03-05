@@ -20,6 +20,7 @@ using TerrorMod.Content.Items.Special;
 using System.Collections;
 using System;
 using TerrorMod.Content.NPCs.Hostile.Special;
+using TerrorMod.Content.Projectiles.Hostile;
 
 namespace TerrorMod.Core.Players
 {
@@ -29,6 +30,10 @@ namespace TerrorMod.Core.Players
         public bool overdosed = false;
         public bool leadArmorSet = false;
         public bool undeadAmulet = false;
+
+        public bool cobaltHead = false;
+        public bool cobaltBody = false;
+        public bool cobaltLegs = false;
 
         float infectedTimer = 0;
         float maxInfectedTimer = 600;
@@ -41,6 +46,9 @@ namespace TerrorMod.Core.Players
             overdosed = false;
             leadArmorSet = false;
             undeadAmulet = false;
+            cobaltHead = false;
+            cobaltBody = false;
+            cobaltLegs = false;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -48,6 +56,27 @@ namespace TerrorMod.Core.Players
             if (Player.HasBuff(ModContent.BuffType<TungstenPenetration>()))
             {
                 modifiers.ArmorPenetration += 5;
+            }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (cobaltHead)
+            {
+                if (Main.rand.NextBool(10)) target.AddBuff(BuffID.Poisoned, 300);
+                if (Main.rand.NextBool(10)) target.AddBuff(BuffID.Venom, 300);
+            }
+
+            if (cobaltBody)
+            {
+                if (Main.rand.NextBool(10)) target.AddBuff(BuffID.ShadowFlame, 300);
+                if (Main.rand.NextBool(10)) target.AddBuff(BuffID.CursedInferno, 300);
+            }
+
+            if (cobaltLegs)
+            {
+                if (Main.rand.NextBool(10)) target.AddBuff(BuffID.Ichor, 300);
+                if (Main.rand.NextBool(10)) target.AddBuff(BuffID.Oiled, 300);
             }
         }
 

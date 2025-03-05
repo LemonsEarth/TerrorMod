@@ -182,6 +182,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 modifiers.FinalDamage *= 0;
             }
 
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (AITimer < 300)
             {
                 modifiers.FinalDamage *= 0.05f;

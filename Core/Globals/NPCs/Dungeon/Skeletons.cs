@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.ItemDropRules;
 using TerrorMod.Content.Items.Accessories;
+using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Core.Globals.NPCs.Dungeon
 {
@@ -65,6 +66,17 @@ namespace TerrorMod.Core.Globals.NPCs.Dungeon
                 float mod = (float)(npc.lifeMax - npc.life) / npc.lifeMax;
                 modifiers.FinalDamage *= MathHelper.Clamp(mod, 0.2f, 1f);
             }
+        }
+
+        public override bool CheckDead(NPC npc)
+        {
+            if (npc.type == NPCID.CursedSkull && npc.ai[3] == 1)
+            {
+                LemonUtils.DustCircle(npc.Center, 16, 5, DustID.GemDiamond, 1.3f);
+                npc.active = false;
+                return false;
+            }
+            return true;
         }
 
         public override void OnKill(NPC npc)

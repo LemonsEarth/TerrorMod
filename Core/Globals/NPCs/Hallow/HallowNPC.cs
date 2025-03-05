@@ -33,8 +33,11 @@ namespace TerrorMod.Core.Globals.NPCs.Hallow
             if (!npc.HasValidTarget) return;
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Vector2 pos = Main.player[npc.target].Center + Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 900;
-                NPC.NewNPC(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, NPCID.EnchantedSword);
+                if (Main.rand.NextBool(3))
+                {
+                    Vector2 pos = Main.player[npc.target].Center + Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 900;
+                    NPC.NewNPC(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, NPCID.EnchantedSword);
+                }    
             }
         }
     }

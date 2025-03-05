@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
+using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 {
@@ -27,12 +28,14 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void SetDefaults(NPC entity)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             entity.lifeMax = 32;
             entity.DeathSound = null;
         }
 
         public override void AI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (npc.HasValidTarget && AITimer > 30)
             {
                 npc.MoveToPos(Main.player[npc.target].Center, 0.001f, 0.001f, 0.2f + npc.ai[3], 0.2f + npc.ai[3]);
@@ -48,6 +51,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void OnKill(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, Vector2.Zero, ModContent.ProjectileType<ExplosionSmall>(), npc.damage, 1f);
@@ -67,6 +71,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             npc.SimpleStrikeNPC(100, 0, noPlayerInteraction: true);
             modifiers.Cancel();
         }

@@ -34,6 +34,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override bool PreAI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return true;
             if (!AnyArms && npc.ai[1] == 1) return false;
             return true;
         }
@@ -96,7 +97,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             {
                 modifiers.FinalDamage *= 0;
             }
-
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (AnyArms)
             {
                 modifiers.FinalDamage *= 0.5f;

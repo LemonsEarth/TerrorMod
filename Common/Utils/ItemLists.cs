@@ -13,6 +13,11 @@ namespace TerrorMod.Common.Utils
 {
     public class ItemLists
     {
+        public static HashSet<int> ItemBlacklist { get; private set; } = new HashSet<int>()
+        {
+            MoltenPickaxe, NightmarePickaxe, DeathbringerPickaxe, CobaltDrill, PalladiumPickaxe, OrichalcumDrill, MythrilPickaxe, PickaxeAxe, Drax
+        };
+
         public static HashSet<int> PreHM_Items { get; private set; } = new HashSet<int>()
         {
             /* Pickaxes */ CactusPickaxe, CopperPickaxe, IronPickaxe, TinPickaxe, LeadPickaxe, SilverPickaxe, TungstenPickaxe, GoldPickaxe, PlatinumPickaxe, BonePickaxe, ReaverShark, FossilPickaxe,
@@ -43,7 +48,7 @@ namespace TerrorMod.Common.Utils
             /* Combat */ FeralClaws, BandofStarpower, CelestialMagnet, CelestialCuffs, MagicCuffs, MagnetFlower, ManaFlower, BeeCloak, ObsidianShield, WhiteString,
 
 
-            /* Armor */ CopperHelmet, CopperChainmail, CopperGreaves, TinHelmet, TinChainmail, TinGreaves, LeadHelmet, LeadAnvil, LeadGreaves, SilverHelmet, SilverChainmail, SilverGreaves, TungstenHelmet, TungstenChainmail, TungstenGreaves, GoldHelmet, GoldChainmail, GoldGreaves, PlatinumHelmet, PlatinumChainmail, PlatinumGreaves, IronHelmet, IronChainmail, IronGreaves, FossilHelm, FossilPants, FossilShirt, 
+            /* Armor */ CopperHelmet, CopperChainmail, CopperGreaves, TinHelmet, TinChainmail, TinGreaves, LeadHelmet, LeadAnvil, LeadGreaves, SilverHelmet, SilverChainmail, SilverGreaves, TungstenHelmet, TungstenChainmail, TungstenGreaves, GoldHelmet, GoldChainmail, GoldGreaves, PlatinumHelmet, PlatinumChainmail, PlatinumGreaves, IronHelmet, IronChainmail, IronGreaves, FossilHelm, FossilPants, FossilShirt,
                         ShadowHelmet, ShadowGreaves, ShadowScalemail, CrimsonHelmet, CrimsonGreaves, CrimsonScalemail, MoltenHelmet, MoltenGreaves, MoltenBreastplate, Robe, FlinxFurCoat, NecroBreastplate, NecroGreaves, NecroHelmet, BeeHeadgear, BeeBreastplate, BeeGreaves, ObsidianHelm, ObsidianPants, ObsidianShirt, MeteorHelmet, MeteorLeggings, MeteorSuit, JunglePants, JungleShirt, JungleHat, CactusHelmet, CactusLeggings, CactusBreastplate,
 
 
@@ -91,8 +96,8 @@ namespace TerrorMod.Common.Utils
 
         public static HashSet<int> EarlyHM_Materials { get; private set; } = new HashSet<int>()
         {
-            /* Bars */ CobaltBar, PalladiumBar, AdamantiteBar, TitaniumBar, MythrilBar, OrichalcumBar, HallowedBar, ChlorophyteBar,
-            /* Ores */ CobaltOre, PalladiumOre, AdamantiteOre, TitaniumOre, MythrilOre, OrichalcumOre, ChlorophyteOre,
+            /* Bars */ CobaltBar, PalladiumBar, AdamantiteBar, TitaniumBar, MythrilBar, OrichalcumBar,
+            /* Ores */ CobaltOre, PalladiumOre, AdamantiteOre, TitaniumOre, MythrilOre, OrichalcumOre,
             /* Materials */ AncientCloth, SoulofNight, SoulofFlight, SoulofLight, SoulofFright, SoulofSight, SoulofMight, DarkShard, LightShard, PixieDust, UnicornHorn, SpiderFang, WormTooth, TurtleShell, FrostCore, AncientBattleArmorMaterial, CursedFlame, Ichor, 
             /* Blocks */ Pearlwood, PearlstoneBlock, PearlsandBlock, PinkIceBlock,
         };

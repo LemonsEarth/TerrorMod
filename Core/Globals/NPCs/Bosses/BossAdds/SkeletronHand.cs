@@ -20,6 +20,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override void SetDefaults(NPC entity)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             entity.defense = 16;
         }
 

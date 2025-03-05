@@ -129,6 +129,8 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 modifiers.FinalDamage *= 0;
             }
 
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
+
             if (NPC.AnyNPCs(ModContent.NPCType<ForgottenSibling>()))
             {
                 modifiers.FinalDamage *= 0.5f;

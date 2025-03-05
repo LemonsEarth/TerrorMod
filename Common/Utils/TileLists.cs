@@ -16,7 +16,7 @@ namespace TerrorMod.Common.Utils
         {
             /* Ground Tiles */ Grass, Plants,
             /* Wood */ WoodBlock, Ebonwood, Shadewood, PalmWood, RichMahogany, BorealWood, LeafBlock, DynastyWood, LivingWood,
-            /* Furniture */ Bookcases, ClosedDoor, Tables, Chairs, WorkBenches, Saplings, Sunflower,
+            /* Furniture */ Saplings, Sunflower,
             /* Plants */ BloomingHerbs, ImmatureHerbs, MatureHerbs
         };
     }

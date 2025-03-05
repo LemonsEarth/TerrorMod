@@ -22,6 +22,12 @@ Main:
 
 
 Bosses:
+-Queen Slime
+	Hops faster and creates bouncy gel when she touches the ground
+	Big stomp causes pink bouncy balls to drop from above the player and inflicts them with Weight
+	Minions summon enchanted swords on death
+	Inflicts Oozed and Weight on hit
+
 - The Destroyer:
 	Now has 4 phases:
 		- Slows down, moves towards the player and fires a barrage of lasers from its mouth
@@ -29,20 +35,33 @@ Bosses:
 		- Chases the player aggressively
 		- Standard Behaviour
 	Enters desparation phase when below 10% hp, constantly firing a barrage of lasers
+
 - The Twins:
 	Retinazer fires lasers faster in both phases, dashes faster in first phase
 	Spazmatism dashes much faster in phase 2, and fires barrages of cursed flames alongside its flamethrower
 	A Forgotten Sibling spawns alongside them and reduces their damage taken by 50% until it is destroyed
+
 - Skeletron Prime:
 	Vice and Saw despawn minions on hit and inflict Withered Armor, Cursed, Bleeding and Weak
 	Laser now periodically hovers above the player, firing lasers downwards
 	Cannon can fire volleys of bombs upwards
 	When all arms are dead, Prime becomes more aggressive, moving much faster and firing skulls and lasers
 
+- Plantera:
+	In phase 1, periodically dashes and fires thorn balls in all directions
+	In phase 2, constantly dashes towards the player, spawns spores more often and gains a Venom-Flamethrower attack
+	Tentacles have reduced hp
+
 
 Items:
 	- Undead Amulet (Dropped by Skeletron [100%] and Angry Bones [1%])
 		While equipped, prevents curse level from increasing when dying
+	Armor:
+		Cobalt Armor pieces cause the player to inflict different debuffs on hit:
+			Head pieces can inflict Poisoned or Acid Venom
+			Body pieces can inflict Shadowflame or Cursed Flames
+			Leg pieces can inflict Ichor or Oiled
+		Mythril armor pieces increase damage reduction by 5% each
 
 
 Buffs/Debuffs:
@@ -55,6 +74,8 @@ Other:
 - Increased Life Essence drop rate and amount from undead enemies
 - Life Essence can be crafted from Boss Trophies
 - When Recipe Randomizer is enabled, only certain items can be ingredients, which should hopefully fix any possible conflicts
+- Blacklisted certain items from the recipe randomizer, such as progression-relevant pickaxes
 - Base Buff Limit before overdosed occurs reduced 5 -> 4
 	Bosses which increase the buff limit by 1 on defeat are: Eye of Cthulhu, Skeletron, Deerclops
 	Bosses which increase the buff limit by 2 on defeat are: Queen Bee, Queen Slime, Pumpking, Ice Queen
+- Hot projectiles can no longer destroy furniture because of weird interactions

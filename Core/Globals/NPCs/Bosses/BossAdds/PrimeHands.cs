@@ -34,6 +34,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
 
         public override bool PreAI(NPC npc)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return true;
             if (npc.type == NPCID.PrimeLaser && AITimer > 300 && AITimer < 600) return false;
             return true;
         }

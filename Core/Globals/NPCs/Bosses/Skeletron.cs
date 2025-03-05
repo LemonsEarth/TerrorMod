@@ -95,7 +95,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                                 LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
                                 if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    NPC slime = NPC.NewNPCDirect(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, NPCID.CursedSkull);
+                                    NPC skull = NPC.NewNPCDirect(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, NPCID.CursedSkull, ai3: 1);
                                 }
                             }
                         }
@@ -107,7 +107,9 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                             {
                                 for (int i = -2; i <= 2; i++)
                                 {
-                                    Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center + new Vector2(i * 48, 900), -Vector2.UnitY * 15, ProjectileID.InfernoHostileBolt, npc.damage / 4, 1f);
+                                    Vector2 pos = player.Center + new Vector2(i * 48, 900);
+                                    Vector2 explodePos = pos - new Vector2(0, 900);
+                                    Projectile.NewProjectile(npc.GetSource_FromAI(), pos, -Vector2.UnitY * 15, ProjectileID.InfernoHostileBolt, npc.damage / 4, 1f, ai0: explodePos.X, ai1:explodePos.Y);
                                 }
                             };
                         }
@@ -166,6 +168,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
+            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (npc.ai[1] == 1) modifiers.FinalDamage *= 0.5f;
         }
 
