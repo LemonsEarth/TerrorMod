@@ -76,6 +76,18 @@ Bosses:
 	Tentacles have reduced hp
 	Generates Dungeon Pact Tiles on first kill
 
+- Golem:
+	All parts gain high damage reduction
+	Fists are more aggressive
+	Flying head periodically summon lightning orbs
+	Summons dart traps to the left and right of the player, which fire volleys of darts after a short cooldown
+
+- Duke Fishron
+	Heals 200 life per second
+	Dashes faster in all phases
+	In phase 2, summons 4 additional Sharknado Bolts around the player when summoning one normally
+	In phase 3, heals to 25% hp, summons Lightning from the sky before the first dash cycle, and a Sharknado Bolt before the second
+
 
 Items:
 	- Undead Amulet (Dropped by Skeletron [100%] and Angry Bones [1%])

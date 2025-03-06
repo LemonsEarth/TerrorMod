@@ -21,6 +21,13 @@ namespace TerrorMod.Content.Buffs.Debuffs
             if (Main.myPlayer == player.whoAmI)
             {
                 player.velocity.Y += 2f;
+                Tile tileBelow = Main.tile[(int)player.Center.X / 16, (int)player.Center.Y / 16 + 2];
+                if (tileBelow.HasTile && tileBelow.TileType == TileID.Platforms)
+                {
+                    Vector2 center = player.Center;
+                    center.Y += 0.1f;
+                    player.Center = center;
+                }
             }
         }
     }
