@@ -30,5 +30,9 @@ LootToken: {
 
 UndeadAmulet: {
 	DisplayName: Undead Amulet
-	Tooltip: Prevents your curse level from rising upon death
+	Tooltip:
+		'''
+		Prevents your curse level from rising upon death
+		Grants immunity to the Shadow Candle Debuff
+		'''
 }

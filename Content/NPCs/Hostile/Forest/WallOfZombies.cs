@@ -40,6 +40,17 @@ namespace TerrorMod.Content.NPCs.Hostile.Forest
             NPC.spriteDirection = Math.Sign(NPC.Center.DirectionTo(player.Center).X);
         }
 
+        public override void HitEffect(NPC.HitInfo hit)
+        {
+            if (NPC.life <= 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Gore.NewGore(NPC.GetSource_FromAI(), NPC.position + new Vector2(Main.rand.Next(0, NPC.width), Main.rand.Next(0, NPC.height)), Vector2.UnitX.RotatedByRandom(MathHelper.Pi * 2) * Main.rand.NextFloat(2f, 5f), Main.rand.Next(3, 6));
+                }
+            }
+        }
+
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>()

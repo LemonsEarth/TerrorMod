@@ -19,9 +19,29 @@ Main:
 - Mimics and Biome Mimics can forcibly drop your held item on the ground
 - Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
 - Paladins heal nearby enemies
-- Pirates forcefully drop your held item on the ground and any pirate may turn into a Pirate's Curse after death
-- Pirate Deadeyes fire a spread of bullets, Pirate Crossbowers fire much faster
-- Pirate Captains periodically summon Sharknadoes
+
+Events:
+	- Pirate Invasion
+		Pirates forcefully drop your held item on the ground and any pirate may turn into a Pirate's Curse after death
+		Pirate Deadeyes fire a spread of bullets, Pirate Crossbowers fire much faster
+		Pirate Captains periodically summon Sharknadoes
+
+	- Pumpkin Moon
+		Hellhounds may jump very high
+		Poltergeists fire lost souls
+		Headless Horsemen fire projectiles more often and may jump very high
+		Mourning Wood may spawn Tree Spirits on hit and on death, reduced downtime between attacks
+		Pumpking blades are more aggresive and the Head fires out pumpkins
+		All enemies have a chance to inflict Fear and Weight
+
+	- Frost Moon
+		Elf Archers fire much faster
+		Elf Copters drop off Bomb Slimes every 10 seconds
+		Flocko fire Frost Waves towards the player when spinning
+		Everscream may spawn Tree Spirits on hit and on death, reduced downtime between attacks
+		SantaNK1 has reduced downtime between attacks
+		Ice Queen moves towards the player when spinning and periodically fires Ice Mist from the sky
+		All enemies have a chance to inflict Frozen, Frostburn and Weight
 
 
 Bosses:

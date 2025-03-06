@@ -27,7 +27,7 @@ namespace TerrorMod.Core.Globals.Tiles
                     Main.LocalPlayer.AddBuff(BuffID.Blackout, 60);
                 }
 
-                if (Main.tile[i, j].TileFrameX == 45 * 36) // Watcher Statue
+                if (Main.tile[i, j].TileFrameX == 45 * 36) // Guardian Statue
                 {
                     Main.LocalPlayer.AddBuff(BuffID.WitheredWeapon, 60);
                     Main.LocalPlayer.AddBuff(BuffID.WitheredArmor, 60);

@@ -20,6 +20,7 @@ namespace TerrorMod.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<TerrorPlayer>().undeadAmulet = true;
+            player.buffImmune[BuffID.ShadowCandle] = true;
         }
     }
 }

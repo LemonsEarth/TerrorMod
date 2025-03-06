@@ -14,15 +14,7 @@ namespace TerrorMod.Core.Globals.NPCs.PirateInvasion
 
         public override void SetDefaults(NPC entity)
         {
-            if (entity.type == NPCID.GoblinThief)
-            {
-                entity.alpha = 200;
-            }
-
-            if (entity.type == NPCID.GoblinWarrior)
-            {
-                entity.knockBackResist = 0f;
-            }
+            
         }
 
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
