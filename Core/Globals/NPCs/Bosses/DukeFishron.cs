@@ -33,23 +33,17 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         }
 
-        public override bool PreAI(NPC npc)
-        {
-            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return true;
-            return true;
-        }
-
         public override void AI(NPC npc)
         {
             if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (!npc.HasValidTarget) return;
             Player player = Main.player[npc.target];
-            if (AITimer % 60 == 0 && npc.life + 1000 < npc.lifeMax)
+            if (AITimer % 60 == 0 && npc.life + 100 < npc.lifeMax && npc.life > npc.lifeMax / 3)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     npc.HealEffect(200);
-                    npc.life += 200;
+                    npc.life += 100;
                 }
                 npc.netUpdate = true;
             }
@@ -126,13 +120,6 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     break;
             }
             AITimer++;
-        }
-
-        public override void PostAI(NPC npc)
-        {
-            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
-            if (!npc.HasValidTarget) return;
-            Player player = Main.player[npc.target];
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)

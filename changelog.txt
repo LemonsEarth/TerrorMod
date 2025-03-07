@@ -83,10 +83,19 @@ Bosses:
 	Summons dart traps to the left and right of the player, which fire volleys of darts after a short cooldown
 
 - Duke Fishron
-	Heals 200 life per second
+	Heals 100 hp per second when hp is above 33%
 	Dashes faster in all phases
 	In phase 2, summons 4 additional Sharknado Bolts around the player when summoning one normally
 	In phase 3, heals to 25% hp, summons Lightning from the sky before the first dash cycle, and a Sharknado Bolt before the second
+
+- Empress of Light
+	A lot of projectiles...
+
+- Lunatic Cultist
+	Fires 6 additional Lightning Orbs when firing one normally
+	Fires Shadow fireballs when firing fireballs
+	Spawns 2 Phantasm Dragons at 50% hp
+	Phantasm Dragon body segments have massive damage reduction
 
 
 Items:

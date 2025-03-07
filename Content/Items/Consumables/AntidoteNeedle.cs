@@ -39,7 +39,9 @@ namespace TerrorMod.Content.Items.Consumables
         {
             if (player.whoAmI == Main.myPlayer)
             {
-                player.AddBuff(ModContent.BuffType<AntidoteBuff>(), 36000); // Adding the buff here instead of via Item.buffType prevents QoL mods from doing the infinite buff nonsense :D
+                int duration = 36000;
+                if (NPC.downedPlantBoss) duration *= 3;
+                player.AddBuff(ModContent.BuffType<AntidoteBuff>(), duration); // Adding the buff here instead of via Item.buffType prevents QoL mods from doing the infinite buff nonsense :D
             }
             return true;
         }

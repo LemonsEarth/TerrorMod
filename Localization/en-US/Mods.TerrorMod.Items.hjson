@@ -1,6 +1,10 @@
 AntidoteNeedle: {
 	DisplayName: Antidote
-	Tooltip: Temporarily protects you from the infection
+	Tooltip:
+		'''
+		Temporarily protects you from the infection
+		Duration tripled if Plantera has been defeated
+		'''
 }
 
 SimpleGoldenKey: {
