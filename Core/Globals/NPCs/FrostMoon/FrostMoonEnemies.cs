@@ -8,7 +8,7 @@ using TerrorMod.Content.NPCs.Hostile.Forest;
 
 namespace TerrorMod.Core.Globals.NPCs.FrostMoonEnemies
 {
-    public class FrostMoonEnemires : GlobalNPC
+    public class FrostMoonEnemies : GlobalNPC
     {
         public override bool InstancePerEntity => true;
 

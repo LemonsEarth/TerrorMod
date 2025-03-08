@@ -17,7 +17,8 @@ namespace TerrorMod.Core.Globals.NPCs.Underworld
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return entity.type == NPCID.Demon
-                || entity.type == NPCID.VoodooDemon;
+                || entity.type == NPCID.VoodooDemon
+                || entity.type == NPCID.RedDevil;
         }
 
         public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)

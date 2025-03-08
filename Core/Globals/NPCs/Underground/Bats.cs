@@ -22,7 +22,8 @@ namespace TerrorMod.Core.Globals.NPCs.Underground
                 || entity.type == NPCID.Hellbat
                 || entity.type == NPCID.GiantBat
                 || entity.type == NPCID.Lavabat
-                || entity.type == NPCID.IlluminantBat;
+                || entity.type == NPCID.IlluminantBat
+                || entity.type == NPCID.VampireBat;
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

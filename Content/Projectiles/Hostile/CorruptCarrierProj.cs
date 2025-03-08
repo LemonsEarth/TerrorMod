@@ -95,7 +95,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
         public override bool PreDraw(ref Color lightColor)
         {
             if (Main.dedServ) return true;
-            PrimHelper.DrawBasicProjectilePrimTrail(Projectile, 12, Color.MediumPurple, Color.Black, BasicEffect, GraphicsDevice);
+            PrimHelper.DrawBasicProjectilePrimTrail(Projectile, 12, Color.MediumPurple, Color.Black * 0.5f, BasicEffect, GraphicsDevice);
 
             return true;
         }

@@ -26,6 +26,17 @@ Events:
 		Pirate Deadeyes fire a spread of bullets, Pirate Crossbowers fire much faster
 		Pirate Captains periodically summon Sharknadoes
 
+	- Solar Eclipse
+		Frankensteins heal over time
+		Eyezor fires much faster
+		Dr Man Fly can't stop throwing flasks
+		Reapers fire sickles
+		Deadly Spheres dash towards the player
+		Mothron spawns eggs while dashing, and takes reduced damage when laying eggs
+		Mothron Eggs hatch much faster
+		Enemies inflict Fear and Obstructed
+		Water Candle and Battle Potion effect
+
 	- Pumpkin Moon
 		Hellhounds may jump very high
 		Poltergeists fire lost souls
@@ -42,6 +53,9 @@ Events:
 		SantaNK1 has reduced downtime between attacks
 		Ice Queen moves towards the player when spinning and periodically fires Ice Mist from the sky
 		All enemies have a chance to inflict Frozen, Frostburn and Weight
+
+	- Lunar Pillars
+		All enemies can spawn anywhere
 
 
 Bosses:
@@ -96,6 +110,11 @@ Bosses:
 	Fires Shadow fireballs when firing fireballs
 	Spawns 2 Phantasm Dragons at 50% hp
 	Phantasm Dragon body segments have massive damage reduction
+
+- Moon Lord
+	Every 10 seconds summons a laser wall ahead of the player, indicated by a burst of dust at the core's position
+	Hands cycle through attacks faster the lower their hp
+	True Eyes cycle through attacks faster and teleport ahead of the player every 15 seconds
 
 
 Items:

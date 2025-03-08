@@ -39,5 +39,14 @@ namespace TerrorMod
                     break;
             }
         }
+
+        public override void Load()
+        {
+            Asset<Effect> laserShader = Assets.Request<Effect>("Common/Assets/Shaders/LaserShader");
+            GameShaders.Misc["TerrorMod:LaserShader"] = new MiscShaderData(laserShader, "LaserShader");
+
+            Asset<Effect> sphereShader = Assets.Request<Effect>("Common/Assets/Shaders/SphereShader");
+            GameShaders.Misc["TerrorMod:SphereShader"] = new MiscShaderData(sphereShader, "SphereShader");
+        }
     }
 }

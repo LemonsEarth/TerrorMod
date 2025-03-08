@@ -39,6 +39,12 @@ namespace TerrorMod.Core.Systems
                 Main.bloodMoon = true;
                 if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("The Bloody Moon rises..."), Color.Red);
             }
+
+            if ((int)Main.time == 1 && Main.dayTime && DayCountSystem.dayCount % 3 == 0 && Main.hardMode)
+            {
+                Main.eclipse = true;
+                if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("A Solar Eclipse has begun!"), Color.OrangeRed);
+            }
         }
 
         bool HellbreachStartCheck()

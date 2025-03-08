@@ -42,7 +42,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    npc.HealEffect(200);
+                    npc.HealEffect(100);
                     npc.life += 100;
                 }
                 npc.netUpdate = true;

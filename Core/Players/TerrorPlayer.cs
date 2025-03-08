@@ -181,6 +181,12 @@ namespace TerrorMod.Core.Players
                 Player.AddBuff(BuffID.WaterCandle, 2);
             }
 
+            if (Main.eclipse)
+            {
+                Player.AddBuff(BuffID.WaterCandle, 2);
+                Player.AddBuff(BuffID.Battle, 2);
+            }
+
             if (curseLevel > 0)
             {
                 Player.AddBuff(ModContent.BuffType<CurseDebuff>(), 2);

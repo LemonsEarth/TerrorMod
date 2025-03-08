@@ -8,7 +8,7 @@ using TerrorMod.Content.NPCs.Hostile.Forest;
 
 namespace TerrorMod.Core.Globals.NPCs.PumpkinMoonEnemies
 {
-    public class PumpkinMoonEnemires : GlobalNPC
+    public class PumpkinMoonEnemies : GlobalNPC
     {
         public override bool InstancePerEntity => true;
 

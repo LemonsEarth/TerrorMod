@@ -38,6 +38,11 @@ namespace TerrorMod.Core.Globals.NPCs.Underworld
             if (spawnInfo.Player.ZoneOverworldHeight && EventSystem.hellbreachActive)
             {
                 pool.Clear();
+                if (Main.hardMode)
+                {
+                    pool.Add(NPCID.RedDevil, 0.15f);
+                    pool.Add(NPCID.Lavabat, 0.4f);
+                }
                 pool.Add(NPCID.LavaSlime, 0.4f);
                 pool.Add(NPCID.Hellbat, 0.35f);
                 pool.Add(NPCID.FireImp, 0.25f);
