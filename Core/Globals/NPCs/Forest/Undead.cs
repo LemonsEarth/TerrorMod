@@ -76,7 +76,7 @@ namespace TerrorMod.Core.Globals.NPCs.Forest
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeEssence>(), 200, 2, 5));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeEssence>(), 400, 1, 3));
         }
     }
 }

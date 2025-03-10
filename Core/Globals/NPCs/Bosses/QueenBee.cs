@@ -34,6 +34,10 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             // ai1 is a timer
             if (!npc.HasValidTarget) return;
             Player player = Main.player[npc.target];
+            //if (!Terraria.Graphics.Effects.Filters.Scene["TerrorMod:DesaturateShader"].IsActive() && Main.netMode != NetmodeID.Server)
+            //{
+            //    Terraria.Graphics.Effects.Filters.Scene.Activate("TerrorMod:DesaturateShader");
+            //}
             switch (npc.ai[0])
             {
                 case 1:

@@ -22,6 +22,7 @@ using System;
 using TerrorMod.Content.NPCs.Hostile.Special;
 using TerrorMod.Content.Projectiles.Hostile;
 using Terraria.WorldBuilding;
+using TerrorMod.Content.NPCs.Bosses;
 
 namespace TerrorMod.Core.Players
 {
@@ -93,6 +94,10 @@ namespace TerrorMod.Core.Players
             EventDebuffs();
             BiomeDebuffs();
             PhobiaCheck();
+            if (timer % 20 == 0 && Terraria.Graphics.Effects.Filters.Scene["TerrorMod:DesaturateShader"].IsActive() && !NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorCage>()))
+            {
+                Terraria.Graphics.Effects.Filters.Scene.Deactivate("TerrorMod:DesaturateShader");
+            }
             timer++;
         }
 
@@ -107,6 +112,7 @@ namespace TerrorMod.Core.Players
             if (NPC.downedQueenSlime) buffLimit += 2;
             if (NPC.downedHalloweenKing) buffLimit += 2;
             if (NPC.downedChristmasIceQueen) buffLimit += 2;
+            if (NPC.downedAncientCultist) buffLimit += 2;
 
             if (Player.buffType.Count(buff => buff != 0 && Main.debuff[buff] == false) > buffLimit)
             {

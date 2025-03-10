@@ -5,7 +5,7 @@ Main:
 	Players are inflicted with the "Before the Storm" buff, which greatly reduces spawnrates for 10 minutes
 	Mechanical Cores spawn throughout the world
 		After the "Before the Storm" buff is cleared, they will inflict "The Storm" debuff onto all distant* players
-	
+
 - Plant enemies like Man Eaters and Snatchers regenerate health over time
 - Jellyfish inflict Acid Venom and Electrified
 - Armored Skeletons take much less damage the more health they have
@@ -36,6 +36,7 @@ Events:
 		Mothron Eggs hatch much faster
 		Enemies inflict Fear and Obstructed
 		Water Candle and Battle Potion effect
+		Guaranteed to occur every three days
 
 	- Pumpkin Moon
 		Hellhounds may jump very high
@@ -59,7 +60,7 @@ Events:
 
 
 Bosses:
--Queen Slime
+- Queen Slime
 	Hops faster and creates bouncy gel when she touches the ground
 	Big stomp causes pink bouncy balls to drop from above the player and inflicts them with Weight
 	Minions summon enchanted swords on death
@@ -126,6 +127,8 @@ Items:
 			Body pieces can inflict Shadowflame or Cursed Flames
 			Leg pieces can inflict Ichor or Oiled
 		Mythril armor pieces increase damage reduction by 5% each
+	Other:
+		Normal Bombs and Dynamite may drop while in the player's inventory. Hold on to them tight.
 
 
 Biomes:
@@ -147,7 +150,7 @@ Other:
 - Life Essence can be crafted from Boss Trophies
 - When Recipe Randomizer is enabled, only certain items can be ingredients, which should hopefully fix any possible conflicts
 - Blacklisted certain items from the recipe randomizer, such as progression-relevant pickaxes
-- Base Buff Limit before overdosed occurs reduced 5 -> 4
+- Base Buff Limit before Overdosed occurs reduced 5 -> 4
 	Bosses which increase the buff limit by 1 on defeat are: Eye of Cthulhu, Skeletron, Deerclops
-	Bosses which increase the buff limit by 2 on defeat are: Queen Bee, Queen Slime, Pumpking, Ice Queen
+	Bosses which increase the buff limit by 2 on defeat are: Queen Bee, Queen Slime, Pumpking, Ice Queen, Lunatic Cultist
 - Hot projectiles can no longer destroy furniture because of weird interactions

@@ -38,7 +38,7 @@ namespace TerrorMod.Core.Globals.NPCs
             if (player.HasBuff<TheStormDebuff>())
             {
                 spawnRate = (int)(spawnRate * 0.8f);
-                maxSpawns = (int)(maxSpawns * 1.5f);
+                maxSpawns = (int)(maxSpawns * 1.3f);
             }
         }
 

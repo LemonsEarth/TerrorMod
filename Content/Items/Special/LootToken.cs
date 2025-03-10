@@ -33,9 +33,9 @@ namespace TerrorMod.Content.Items.Special
 
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            IItemDropRule bombRule = ItemDropRule.Common(ItemID.Bomb, 1, 5, 5);
+            IItemDropRule bombRule = ItemDropRule.Common(ItemID.StickyBomb, 1, 5, 5);
             IItemDropRule grenadeRule = ItemDropRule.Common(ItemID.Grenade, 1, 15, 15);
-            IItemDropRule campRule = ItemDropRule.Common(ItemID.Campfire, 1, 1, 1);
+            IItemDropRule campRule = ItemDropRule.Common(ItemID.Campfire, 1, 2, 2);
             IItemDropRule swordRule = ItemDropRule.Common(ItemID.CopperBroadsword, 1, 1, 1);
             IItemDropRule regenRule = ItemDropRule.Common(ItemID.BandofRegeneration, 1, 1, 1);
             itemLoot.Add(new OneFromRulesRule(1, bombRule, grenadeRule, campRule, swordRule, regenRule));

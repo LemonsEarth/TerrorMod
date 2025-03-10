@@ -55,7 +55,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     npcLoot.Add(rule7);
                     break;
                 case NPCID.Plantera:
-                    ItemDropWithConditionRule rule8 = new ItemDropWithConditionRule(ModContent.ItemType<LifeEssence>(), 1, 4, 8, new PlanteraNotDowned());
+                    ItemDropWithConditionRule rule8 = new ItemDropWithConditionRule(ModContent.ItemType<LifeEssence>(), 1, 12, 18, new PlanteraNotDowned());
                     npcLoot.Add(rule8);
                     break;
                 case NPCID.Golem:

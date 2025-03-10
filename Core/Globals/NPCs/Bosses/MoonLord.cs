@@ -13,6 +13,8 @@ using TerrorMod.Core.Configs;
 using Terraria.GameContent.ItemDropRules;
 using TerrorMod.Content.Items.Accessories;
 using System;
+using TerrorMod.Content.NPCs.Hostile.Special;
+using TerrorMod.Content.NPCs.Bosses;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -102,6 +104,37 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             }
 
             AITimer++;
+        }
+
+        bool placedAll = false;
+        public override void OnKill(NPC npc)
+        {
+            if (NPC.downedMoonlord || placedAll) return;
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int maxCages = !Main.masterMode ? 4 : 8;
+                for (int i = 0; i < maxCages; i++)
+                {
+                    int counter = 0;
+                    while (counter < 1000)
+                    {
+                        bool placed = false;
+                        int x = WorldGen.genRand.Next(500, Main.maxTilesX - 500);
+                        int y = WorldGen.genRand.Next(400, Main.maxTilesY - 400);
+                        int minDistance = !Main.masterMode ? 5000 : 2000;
+                        if (!Main.tile[x, y].HasTile && Main.tile[x, y].WallType == 0
+                            && !Main.npc.Any(n => n.active && n.type == ModContent.NPCType<InfiniteTerrorCage>() && n.Center.Distance(new Vector2(x * 16, y * 16)) < minDistance))
+                        {
+                            NPC.NewNPC(npc.GetSource_FromAI(), x * 16, y * 16, ModContent.NPCType<InfiniteTerrorCage>());
+
+                            placed = true;
+                        }
+                        counter++;
+                        if (placed) break;
+                    }
+                }
+                placedAll = true;
+            }
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
