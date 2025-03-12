@@ -18,6 +18,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
         const string NoisePath = "TerrorMod/Common/Assets/Textures/NoiseTexture";
         static Asset<Texture2D> Noise;
         float scale = 1f;
+        float laserLength = 9f;
 
         public override void Load()
         {
@@ -26,7 +27,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override void SetStaticDefaults()
         {
-            Main.projFrames[Type] = 3;
+            Main.projFrames[Type] = 1;
             ProjectileID.Sets.DrawScreenCheckFluff[Type] = 5000;
         }
 
@@ -44,11 +45,12 @@ namespace TerrorMod.Content.Projectiles.Hostile
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float _ = float.NaN;
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, new Vector2(Projectile.Center.X, Projectile.Center.Y + 18 * Projectile.height), Projectile.width * 0.7f, ref _);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, new Vector2(Projectile.Center.X, Projectile.Center.Y + laserLength * Projectile.height), Projectile.width * 0.7f, ref _);
         }
 
         public override void AI()
         {
+            Projectile.damage = 10;
             if (AITimer == 0)
             {
                 SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 0}, Projectile.Center);
@@ -76,7 +78,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, shader.Shader, Main.GameViewMatrix.TransformationMatrix);
             Main.instance.GraphicsDevice.Textures[1] = Noise.Value;
             shader.Apply();
-            Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition, null, Color.Blue, Projectile.rotation, drawOrigin, new Vector2(scale, 6f), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition, null, Color.Blue, Projectile.rotation, drawOrigin, new Vector2(scale, laserLength), SpriteEffects.None, 0);
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, default, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
 
