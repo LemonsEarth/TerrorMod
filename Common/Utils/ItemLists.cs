@@ -49,14 +49,14 @@ namespace TerrorMod.Common.Utils
 
 
             /* Armor */ CopperHelmet, CopperChainmail, CopperGreaves, TinHelmet, TinChainmail, TinGreaves, LeadHelmet, LeadAnvil, LeadGreaves, SilverHelmet, SilverChainmail, SilverGreaves, TungstenHelmet, TungstenChainmail, TungstenGreaves, GoldHelmet, GoldChainmail, GoldGreaves, PlatinumHelmet, PlatinumChainmail, PlatinumGreaves, IronHelmet, IronChainmail, IronGreaves, FossilHelm, FossilPants, FossilShirt,
-                        ShadowHelmet, ShadowGreaves, ShadowScalemail, CrimsonHelmet, CrimsonGreaves, CrimsonScalemail, MoltenHelmet, MoltenGreaves, MoltenBreastplate, Robe, FlinxFurCoat, NecroBreastplate, NecroGreaves, NecroHelmet, BeeHeadgear, BeeBreastplate, BeeGreaves, ObsidianHelm, ObsidianPants, ObsidianShirt, MeteorHelmet, MeteorLeggings, MeteorSuit, JunglePants, JungleShirt, JungleHat, CactusHelmet, CactusLeggings, CactusBreastplate,
+                        ShadowHelmet, ShadowGreaves, ShadowScalemail, CrimsonHelmet, CrimsonGreaves, CrimsonScalemail, MoltenHelmet, MoltenGreaves, MoltenBreastplate, Robe, FlinxFurCoat, NecroBreastplate, NecroGreaves, NecroHelmet, BeeHeadgear, BeeBreastplate, BeeGreaves, ObsidianHelm, ObsidianPants, ObsidianShirt, MeteorHelmet, MeteorLeggings, MeteorSuit, JunglePants, JungleShirt, JungleHat, CactusHelmet, CactusLeggings, CactusBreastplate, Robe, AmberRobe, AmethystRobe, EmeraldRobe, SapphireRobe, DiamondRobe, TopazRobe, RubyRobe,
 
 
             /* Crafting Stations */ Furnace, WorkBench, IronAnvil, LeadAnvil, Loom, Sawmill, Bottle, HeavyWorkBench, Keg,
             /* Tiles */ WoodenChair, WoodenDoor, WoodenTable, Campfire, HeartLantern,
             /* Misc */ Torch, WoodenArrow, MagicMirror, 
 
-            /* Potions */ IronskinPotion, SwiftnessPotion, RegenerationPotion, ThornsPotion, SpelunkerPotion, MiningPotion, HunterPotion
+            /* Potions */ IronskinPotion, SwiftnessPotion, RegenerationPotion, ThornsPotion, SpelunkerPotion, MiningPotion, HunterPotion, ManaRegenerationPotion, MagicPowerPotion, SummoningPotion
 
         };
 
@@ -74,7 +74,7 @@ namespace TerrorMod.Common.Utils
         };
 
 
-        public static HashSet<int> EarlyHM_Items { get; private set; } = new HashSet<int>()
+        public static HashSet<int> HM_Items { get; private set; } = new HashSet<int>()
         {
             /* Swords */ PearlwoodSword, PalladiumSword, CobaltSword, MythrilSword, OrichalcumSword, AdamantiteSword, TitaniumSword, ChlorophyteClaymore, ChlorophyteSaber, Excalibur, TrueExcalibur, TrueNightsEdge,
             /* Yoyos/Maces/Boomerangs */ DaoofPow, Chik, LightDisc,
@@ -90,11 +90,15 @@ namespace TerrorMod.Common.Utils
 
             /* Armor */ CobaltHelmet, CobaltLeggings, CobaltBreastplate, PalladiumHelmet, PalladiumLeggings, PalladiumBreastplate, TitaniumHelmet, TitaniumLeggings, TitaniumBreastplate, AdamantiteHelmet, AdamantiteLeggings, AdamantiteBreastplate,
             MythrilHelmet, MythrilGreaves, MythrilChainmail, OrichalcumHelmet, OrichalcumLeggings, OrichalcumBreastplate, PalladiumMask, CobaltMask, TitaniumMask, AdamantiteMask, MythrilHood, OrichalcumMask, OrichalcumHeadgear, MythrilHat, CobaltHat, AdamantiteHeadgear, TitaniumHeadgear, PalladiumHeadgear, SpiderMask, SpiderBreastplate, SpiderGreaves,
+            ShroomiteBreastplate, ShroomiteLeggings, ShroomiteHeadgear, ShroomiteHelmet, ShroomiteMask, SpectreHood, SpectreMask, SpectrePants, SpectreRobe, TurtleHelmet, TurtleLeggings, TurtleScaleMail, BeetleHelmet, BeetleShell, BeetleScaleMail, BeetleLeggings,
+            /* Accessories */ MasterNinjaGear, MoonShell, CelestialShell, CelestialEmblem, AvengerEmblem, SniperScope, ReconScope, AnkhShield, MechanicalGlove, BerserkerGlove, HeroShield, FrozenShield, CelestialStone, StarVeil, CharmofMyths, FireGauntlet, MoltenQuiver, PowerGlove, PapyrusScarab, 
+            FairyWings, TatteredFairyWings, AngelWings, DemonWings, FrozenWings, FlameWings, BoneWings, HarpyWings,
 
-            /* Accessories */ MasterNinjaGear, MoonShell, CelestialShell, CelestialEmblem, AvengerEmblem, SniperScope, ReconScope, AnkhShield, MechanicalGlove, BerserkerGlove, HeroShield, FrozenShield, CelestialStone, StarVeil, CharmofMyths, FireGauntlet, MoltenQuiver, PowerGlove, PapyrusScarab
+            /* Potions*/ EndurancePotion, LifeforcePotion
+
         };
 
-        public static HashSet<int> EarlyHM_Materials { get; private set; } = new HashSet<int>()
+        public static HashSet<int> HM_Materials { get; private set; } = new HashSet<int>()
         {
             /* Bars */ CobaltBar, PalladiumBar, AdamantiteBar, TitaniumBar, MythrilBar, OrichalcumBar,
             /* Ores */ CobaltOre, PalladiumOre, AdamantiteOre, TitaniumOre, MythrilOre, OrichalcumOre,

@@ -16,6 +16,8 @@ using System;
 using TerrorMod.Content.NPCs.Hostile.Special;
 using TerrorMod.Content.NPCs.Bosses;
 using Terraria.WorldBuilding;
+using Terraria.Chat;
+using Terraria.Localization;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses
 {
@@ -126,7 +128,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                         placed = true;
                     }
                     counter++;
-                    if (placed) break;
+                    if (placed)
+                    {
+                        ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.InfiniteTerrorCageSpawn.SpawnMessage"), Color.DarkGray);
+                        break;
+                    }
                 }
             }
         }

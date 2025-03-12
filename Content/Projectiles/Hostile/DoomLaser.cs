@@ -50,7 +50,6 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override void AI()
         {
-            Projectile.damage = 10;
             if (AITimer == 0)
             {
                 SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 0}, Projectile.Center);

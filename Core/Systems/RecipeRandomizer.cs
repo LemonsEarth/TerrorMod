@@ -38,7 +38,7 @@ namespace TerrorMod.Core.Systems
             }
             else if (item.damage < 60 && item.rare <= ItemRarityID.LightPurple)
             {
-                ItemLists.EarlyHM_Items.Add(item.type);
+                ItemLists.HM_Items.Add(item.type);
             }
         }
 
@@ -65,7 +65,7 @@ namespace TerrorMod.Core.Systems
         void RandomizeEarlyHMRecipes(Recipe recipe)
         {
             int itemType = recipe.createItem.type;
-            if (ItemLists.EarlyHM_Items.Contains(itemType))
+            if (ItemLists.HM_Items.Contains(itemType))
             {
                 UnifiedRandom random = GetUnifiedRandomForRecipe(itemType);
                 int numOfIngredients = GetNewIngredientAmount(random);
@@ -113,7 +113,7 @@ namespace TerrorMod.Core.Systems
         List<int> GetRandomItemIDs(UnifiedRandom random, int amount, bool hardmode)
         {
             List<int> itemIDs = new List<int>();
-            List<int> collection = !hardmode ? ItemLists.PreHM_Materials.ToList() : ItemLists.EarlyHM_Materials.Union(ItemLists.PreHM_Materials).ToList();
+            List<int> collection = !hardmode ? ItemLists.PreHM_Materials.ToList() : ItemLists.HM_Materials.Union(ItemLists.PreHM_Materials).ToList();
             for (int i = 0; i < amount; i++)
             {
                 int itemID = random.NextFromCollection(collection);
