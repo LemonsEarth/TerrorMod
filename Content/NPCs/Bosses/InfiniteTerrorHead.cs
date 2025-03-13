@@ -36,13 +36,14 @@ namespace TerrorMod.Content.NPCs.Bosses
         int HeadProj => ModContent.ProjectileType<InfiniteTerrorHeadProj>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 120, 480, 900, 1200, 600 };
+        int[] attackDurations = { 360, 480, 900, 1200, 600 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
         public enum Attacks
         {
-            DashWithFollowers
+            DashWithFollowers,
+            LaserSkulls
         }
 
         public enum Attacks2
@@ -83,8 +84,8 @@ namespace TerrorMod.Content.NPCs.Bosses
         {
             NPC.boss = true;
             NPC.aiStyle = -1;
-            NPC.width = 194;
-            NPC.height = 162;
+            NPC.width = 97;
+            NPC.height = 97;
             NPC.Opacity = 1;
             NPC.lifeMax = 800000;
             NPC.defense = 40;
@@ -183,9 +184,9 @@ namespace TerrorMod.Content.NPCs.Bosses
         }
 
         float DashSpeed = 40;
-        const float DashWithFollower_Duration = 90;
-        const float DashWithFollower_ChargeTime = 60;
-        const float DashWithFollower_DashTime = 60;
+        const float DashWithFollower_Duration = 120;
+        const float DashWithFollower_ChargeTime = 90;
+        const float DashWithFollower_DashTime = 90;
         void DashWithFollowers()
         {
             switch (AttackTimer)
@@ -209,10 +210,10 @@ namespace TerrorMod.Content.NPCs.Bosses
                 case DashWithFollower_DashTime:
                     if (NotHost && Main.rand.NextBool(4))
                     {
-                        AttackTimer = 90;
+                        AttackTimer = DashWithFollower_Duration;
                     }
                     NPC.netUpdate = true;
-                    if (AttackTimer == 90) return;
+                    if (AttackTimer == DashWithFollower_Duration) return;
                     NPC.velocity = savedDirection * DashSpeed;
                     if (NotHost)
                     {
@@ -220,12 +221,12 @@ namespace TerrorMod.Content.NPCs.Bosses
                         {
                             Vector2 perpendicularDirection = savedDirection.RotatedBy(MathHelper.PiOver2);
                             Vector2 pos = NPC.Center + perpendicularDirection * i * 400;
-                            NewProj(pos, Vector2.Zero, HeadProj, ai0: savedDirection.ToRotation(), ai1: 60, ai2: DashSpeed);
+                            NewProj(pos, Vector2.Zero, HeadProj, ai0: savedDirection.ToRotation(), ai1: 30, ai2: DashSpeed);
                         }
                     }
                     break;
                 case 0:
-                    AttackTimer = 90;
+                    AttackTimer = DashWithFollower_Duration;
                     return;
             }
 
@@ -333,16 +334,16 @@ namespace TerrorMod.Content.NPCs.Bosses
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Texture2D texture = TextureAssets.Npc[Type].Value;
-            Rectangle drawRect = texture.Frame(1, Main.npcFrameCount[Type], 0, 0);
 
-            Vector2 drawOrigin = new Vector2(texture.Width * 0.5f, NPC.height * 0.5f);
+            Vector2 drawOrigin = new Vector2(texture.Width * 0.5f, texture.Height * 0.5f);
             for (int k = NPC.oldPos.Length - 1; k > 0; k--)
             {
-                Vector2 drawPos = NPC.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, NPC.gfxOffY);
-                Color color = NPC.GetAlpha(drawColor) * ((NPC.oldPos.Length - k) / (float)NPC.oldPos.Length);
-                Main.EntitySpriteDraw(texture, drawPos, drawRect, color, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
+                Vector2 drawPos = NPC.oldPos[k] - Main.screenPosition;
+                Color color = NPC.GetAlpha(drawColor * 0.5f) * ((NPC.oldPos.Length - k) / (float)NPC.oldPos.Length);
+                Main.EntitySpriteDraw(texture, drawPos + drawOrigin / 2, null, color, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
             }
-            return true;
+            Main.EntitySpriteDraw(texture, NPC.Center - Main.screenPosition, null, Color.White, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
+            return false;
         }
 
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
