@@ -55,7 +55,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Vector2 pos = player.Center + new Vector2(Math.Sign(player.velocity.X) * 300, -1500);
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), pos, Vector2.Zero, ModContent.ProjectileType<DoomSphere>(), 50, 2f);
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), pos, Vector2.Zero, ModContent.ProjectileType<DoomSphere>(), 50, 2f, ai0: 2f);
                     }
                     AITimer = 0;
                 }

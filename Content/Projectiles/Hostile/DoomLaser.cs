@@ -14,11 +14,15 @@ namespace TerrorMod.Content.Projectiles.Hostile
 {
     public class DoomLaser : ModProjectile
     {
-        ref float AITimer => ref Projectile.ai[0];
+        int AITimer = 0;
+        ref float Size => ref Projectile.ai[0];
         const string NoisePath = "TerrorMod/Common/Assets/Textures/NoiseTexture";
         static Asset<Texture2D> Noise;
         float scale = 1f;
         float laserLength = 9f;
+
+        ref float Rotation => ref Projectile.ai[1];
+        ref float RotPerSecond => ref Projectile.ai[2];
 
         public override void Load()
         {
@@ -40,23 +44,31 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 1200;
+            Projectile.penetrate = -1;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float _ = float.NaN;
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, new Vector2(Projectile.Center.X, Projectile.Center.Y + laserLength * Projectile.height), Projectile.width * 0.7f, ref _);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + Vector2.UnitY.RotatedBy(Rotation) * laserLength * Projectile.height, Projectile.width * 0.7f * Size, ref _);
         }
 
         public override void AI()
         {
             if (AITimer == 0)
             {
-                SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 0}, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 0 }, Projectile.Center);
+                if (Size == 0) Size = 1;
             }
-            scale = AITimer / 5f;
-            if (Projectile.timeLeft < 15) scale = Projectile.timeLeft / 5f;
-            scale = MathHelper.Clamp(scale, 0f, 1f);
+            Projectile.velocity = Vector2.Zero;
+            scale = (AITimer / 5f) * Size;
+            Projectile.rotation = Rotation;
+            Rotation += RotPerSecond;
+            if (Projectile.timeLeft < 15)
+            {
+                scale = (Projectile.timeLeft * Size) / 5f;
+            }
+            scale = MathHelper.Clamp(scale, 0f, Size);
             AITimer++;
         }
 
@@ -73,6 +85,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
             //Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition, texture.Frame(1, 3, 0, 0), Color.White, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None);
             var shader = GameShaders.Misc["TerrorMod:LaserShader"];
+            shader.Shader.Parameters["moveSpeed"].SetValue(-2f);
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, shader.Shader, Main.GameViewMatrix.TransformationMatrix);
             Main.instance.GraphicsDevice.Textures[1] = Noise.Value;

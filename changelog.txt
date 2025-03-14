@@ -129,6 +129,8 @@ Items:
 		Mythril armor pieces increase damage reduction by 5% each
 	Other:
 		Normal Bombs and Dynamite may drop while in the player's inventory. Hold on to them tight.
+		Ankh Charm now requires Chlorophyte bars to craft
+		Ankh Shield now requires Ectoplasm to craft
 
 
 Biomes:

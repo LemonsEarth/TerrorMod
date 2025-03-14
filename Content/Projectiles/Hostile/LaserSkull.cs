@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.Cil;
 using ReLogic.Content;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -24,8 +25,8 @@ namespace TerrorMod.Content.Projectiles.Hostile
         int AITimer = 0;
 
         ref float WaitTime => ref Projectile.ai[0];
-        ref float MoveDistance => ref Projectile.ai[2];
         ref float Rotation => ref Projectile.ai[1];
+        ref float MoveDistance => ref Projectile.ai[2];
 
         public override void SetStaticDefaults()
         {
@@ -44,6 +45,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 120;
+            Projectile.hide = true;
         }
 
         float maxDistance = 50;
@@ -51,11 +53,20 @@ namespace TerrorMod.Content.Projectiles.Hostile
         {
             if (AITimer == 0)
             {
-                SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.Center);
+                LemonUtils.DustCircle(Projectile.Center, 32, 15, DustID.GemDiamond, 4f);
+                LemonUtils.DustCircle(Projectile.Center, 32, 10, DustID.GemDiamond, 4f);
+                LemonUtils.DustCircle(Projectile.Center, 32, 5, DustID.GemDiamond, 4f);
+                SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
             }
 
-            if (AITimer > WaitTime)
+            if (AITimer >= WaitTime)
             {
+                if (Main.netMode != NetmodeID.MultiplayerClient && AITimer == WaitTime)
+                {
+                    var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DoomSphere>(), Projectile.damage, 1f, ai0: 0.75f, ai1: Rotation - MathHelper.PiOver2, ai2: 0);
+                    proj.timeLeft = 180;
+                    NetMessage.SendData(MessageID.SyncProjectile, number: proj.whoAmI);
+                }
                 if (MoveDistance < maxDistance)
                 {
                     MoveDistance += (MoveDistance + 1) * 0.8f;
@@ -89,6 +100,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Main.EntitySpriteDraw(rightTexture, rightPos - Main.screenPosition, null, Color.White * Projectile.Opacity, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.FlipHorizontally);
 
             return false;
+        }
+
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            overPlayers.Add(index);
         }
     }
 }

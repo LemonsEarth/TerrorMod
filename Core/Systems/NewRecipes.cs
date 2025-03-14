@@ -29,5 +29,20 @@ namespace TerrorMod.Core.Systems
             eskimoPants.AddTile(TileID.Loom);
             eskimoPants.Register();
         }
+
+        public override void PostAddRecipes()
+        {
+            foreach (Recipe recipe in Main.recipe)
+            {
+                if (recipe.createItem.type == ItemID.AnkhCharm)
+                {
+                    recipe.AddIngredient(ItemID.ChlorophyteBar, 10);
+                }
+                else if (recipe.createItem.type == ItemID.AnkhShield)
+                {
+                    recipe.AddIngredient(ItemID.Ectoplasm, 10);
+                }
+            }
+        }
     }
 }

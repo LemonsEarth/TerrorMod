@@ -91,7 +91,7 @@ namespace TerrorMod.Common.Utils
             /* Armor */ CobaltHelmet, CobaltLeggings, CobaltBreastplate, PalladiumHelmet, PalladiumLeggings, PalladiumBreastplate, TitaniumHelmet, TitaniumLeggings, TitaniumBreastplate, AdamantiteHelmet, AdamantiteLeggings, AdamantiteBreastplate,
             MythrilHelmet, MythrilGreaves, MythrilChainmail, OrichalcumHelmet, OrichalcumLeggings, OrichalcumBreastplate, PalladiumMask, CobaltMask, TitaniumMask, AdamantiteMask, MythrilHood, OrichalcumMask, OrichalcumHeadgear, MythrilHat, CobaltHat, AdamantiteHeadgear, TitaniumHeadgear, PalladiumHeadgear, SpiderMask, SpiderBreastplate, SpiderGreaves,
             ShroomiteBreastplate, ShroomiteLeggings, ShroomiteHeadgear, ShroomiteHelmet, ShroomiteMask, SpectreHood, SpectreMask, SpectrePants, SpectreRobe, TurtleHelmet, TurtleLeggings, TurtleScaleMail, BeetleHelmet, BeetleShell, BeetleScaleMail, BeetleLeggings,
-            /* Accessories */ MasterNinjaGear, MoonShell, CelestialShell, CelestialEmblem, AvengerEmblem, SniperScope, ReconScope, AnkhShield, MechanicalGlove, BerserkerGlove, HeroShield, FrozenShield, CelestialStone, StarVeil, CharmofMyths, FireGauntlet, MoltenQuiver, PowerGlove, PapyrusScarab, 
+            /* Accessories */ MasterNinjaGear, MoonShell, CelestialShell, CelestialEmblem, AvengerEmblem, SniperScope, ReconScope, MechanicalGlove, BerserkerGlove, HeroShield, FrozenShield, CelestialStone, StarVeil, CharmofMyths, FireGauntlet, MoltenQuiver, PowerGlove, PapyrusScarab, 
             FairyWings, TatteredFairyWings, AngelWings, DemonWings, FrozenWings, FlameWings, BoneWings, HarpyWings,
 
             /* Potions*/ EndurancePotion, LifeforcePotion
