@@ -49,6 +49,9 @@ namespace TerrorMod
             Asset<Effect> sphereShader = Assets.Request<Effect>("Common/Assets/Shaders/SphereShader");
             GameShaders.Misc["TerrorMod:SphereShader"] = new MiscShaderData(sphereShader, "SphereShader");
 
+            Asset<Effect> projLightShader = Assets.Request<Effect>("Common/Assets/Shaders/ProjectileLightShader");
+            GameShaders.Misc["TerrorMod:ProjectileLightShader"] = new MiscShaderData(projLightShader, "ProjectileLight");
+
             Asset<Effect> desaturateShader = Assets.Request<Effect>("Common/Assets/Shaders/DesaturateShader");
             Filters.Scene["TerrorMod:DesaturateShader"] = new Filter(new ScreenShaderData(desaturateShader, "DesaturateShader"), EffectPriority.VeryHigh);
         }

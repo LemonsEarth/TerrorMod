@@ -34,9 +34,11 @@ namespace TerrorMod.Content.NPCs.Bosses
         bool NotHost => Main.netMode != NetmodeID.MultiplayerClient;
 
         int HeadProj => ModContent.ProjectileType<InfiniteTerrorHeadProj>();
+        int LaserSkull => ModContent.ProjectileType<LaserSkull>();
+        int DoomSphere => ModContent.ProjectileType<DoomSphere>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 360, 480, 900, 1200, 600 };
+        int[] attackDurations = { 480, 600, 900, 1200, 600 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
@@ -157,7 +159,6 @@ namespace TerrorMod.Content.NPCs.Bosses
             {
                 SwitchAttacks();
             }
-            Attack = 0;
 
             if (phase == 1)
             {
@@ -165,6 +166,9 @@ namespace TerrorMod.Content.NPCs.Bosses
                 {
                     case (int)Attacks.DashWithFollowers:
                         DashWithFollowers();
+                        break;
+                    case (int)Attacks.LaserSkulls:
+                        LaserSkulls();
                         break;
                 }
             }
@@ -233,6 +237,63 @@ namespace TerrorMod.Content.NPCs.Bosses
             AttackTimer--;
         }
 
+        const float LaserSkullsDuration = 600;
+        float rot => NPC.DirectionTo(player.Center).ToRotation() - MathHelper.ToRadians(60) - MathHelper.PiOver2;
+        float rotPerSecond => MathHelper.ToRadians(1f);
+        void LaserSkulls()
+        {
+            switch (AttackTimer)
+            {
+                case LaserSkullsDuration:
+                    DustEffect();
+                    if (NotHost)
+                    {
+                        savedPosition = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 600;
+                    }
+                    NPC.netUpdate = true;
+                    NPC.Center = savedPosition;
+                    DustEffect();
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    break;
+                case > 240:
+                    if (AttackTimer % 60 == 0)
+                    {
+                        if (NotHost)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                Vector2 pos = player.Center + Main.rand.NextVector2CircularEdge(400, 400);
+                                NewProj(pos, Vector2.Zero, LaserSkull, ai0: 90, ai1: pos.DirectionTo(player.Center).ToRotation());
+                            }
+                        }
+                    }
+                    NPC.velocity = NPC.DirectionTo(player.Center) * 6;
+                    NPC.Opacity = (float)(Math.Sin(AITimer / 4) * 0.5f + 0.5f);
+                    NPC.rotation = rot;
+                    break;
+                case > 120:
+                    NPC.velocity = NPC.DirectionTo(player.Center) * 6;
+                    NPC.Opacity = (float)(Math.Sin(AITimer / 4) * 0.5f + 0.5f);
+                    NPC.rotation = rot;
+                    break;
+                case 120:
+                    NPC.velocity = Vector2.Zero;  
+                    if (NotHost)
+                    {
+                        NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 2f, ai1: rot, ai2: rotPerSecond);
+                    }
+                    break;
+                case > 0:
+                    NPC.velocity = Vector2.Zero;
+                    NPC.rotation += rotPerSecond;
+                    break;
+                case 0:
+                    AttackTimer = LaserSkullsDuration;
+                    return;
+            }
+            AttackTimer--;
+        }
+
         void DustEffect()
         {
             LemonUtils.DustCircle(NPC.Center, 32, 15, DustID.GemDiamond, 4f);
@@ -289,6 +350,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Attack++;
+                if (Attack > 1) Attack = 0;
                 if (phase == 1) attackDuration = attackDurations[(int)Attack];
                 else attackDuration = attackDurations2[(int)Attack];
 
@@ -340,9 +402,9 @@ namespace TerrorMod.Content.NPCs.Bosses
             {
                 Vector2 drawPos = NPC.oldPos[k] - Main.screenPosition;
                 Color color = NPC.GetAlpha(drawColor * 0.5f) * ((NPC.oldPos.Length - k) / (float)NPC.oldPos.Length);
-                Main.EntitySpriteDraw(texture, drawPos + drawOrigin / 2, null, color, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture, drawPos + drawOrigin / 2, null, color * NPC.Opacity, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
             }
-            Main.EntitySpriteDraw(texture, NPC.Center - Main.screenPosition, null, Color.White, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, NPC.Center - Main.screenPosition, null, Color.White * NPC.Opacity, NPC.rotation, drawOrigin, NPC.scale, SpriteEffects.None, 0);
             return false;
         }
 

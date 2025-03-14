@@ -64,7 +64,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
                 if (Main.netMode != NetmodeID.MultiplayerClient && AITimer == WaitTime)
                 {
                     var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DoomSphere>(), Projectile.damage, 1f, ai0: 0.75f, ai1: Rotation - MathHelper.PiOver2, ai2: 0);
-                    proj.timeLeft = 180;
+                    proj.timeLeft = 120;
                     NetMessage.SendData(MessageID.SyncProjectile, number: proj.whoAmI);
                 }
                 if (MoveDistance < maxDistance)

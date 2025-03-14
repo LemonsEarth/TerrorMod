@@ -43,7 +43,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 1200;
+            Projectile.timeLeft = 120;
             Projectile.penetrate = -1;
         }
 

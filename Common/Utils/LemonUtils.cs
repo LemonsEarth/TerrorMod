@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,6 +10,15 @@ namespace TerrorMod.Common.Utils
 {
     public static class LemonUtils
     {
+        public static Vector2 BezierCurve(Vector2 pointA, Vector2 pointB, Vector2 controlPoint, float fracComplete)
+        {
+            Vector2 AToControl = Vector2.Lerp(pointA, controlPoint, fracComplete);
+            Vector2 ControlToB = Vector2.Lerp(controlPoint, pointB, fracComplete);
+            Vector2 finalPoint = Vector2.Lerp(AToControl, ControlToB, fracComplete);
+
+            return finalPoint;
+        }
+
         /// <summary>
         /// <para>Creates a circle of dust around a given position.</para>
         /// <para><paramref name="noGrav"/> - if false, dust will be affected by gravity.</para>
