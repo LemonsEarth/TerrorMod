@@ -11,6 +11,7 @@ using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerrorMod.Common.Assets.Sky;
 using TerrorMod.Core.Players;
 
 namespace TerrorMod
@@ -18,6 +19,11 @@ namespace TerrorMod
 	// Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
 	public class TerrorMod : Mod
 	{
+        public TerrorMod()
+        {
+            MusicSkipsVolumeRemap = true;
+        }
+
         internal enum MessageType : byte
         {
             CurseLevelSync
@@ -54,6 +60,8 @@ namespace TerrorMod
 
             Asset<Effect> desaturateShader = Assets.Request<Effect>("Common/Assets/Shaders/DesaturateShader");
             Filters.Scene["TerrorMod:DesaturateShader"] = new Filter(new ScreenShaderData(desaturateShader, "DesaturateShader"), EffectPriority.VeryHigh);
+
+            SkyManager.Instance["TerrorMod:TerrorSky"] = new TerrorSky();
         }
     }
 }

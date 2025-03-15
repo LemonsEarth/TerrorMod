@@ -10,11 +10,13 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.CameraModifiers;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
+using TerrorMod.Content.NPCs.Bosses.BossAdds;
 using TerrorMod.Content.Projectiles.Hostile;
 
 
@@ -36,16 +38,18 @@ namespace TerrorMod.Content.NPCs.Bosses
         int HeadProj => ModContent.ProjectileType<InfiniteTerrorHeadProj>();
         int LaserSkull => ModContent.ProjectileType<LaserSkull>();
         int DoomSphere => ModContent.ProjectileType<DoomSphere>();
+        int Chain => ModContent.ProjectileType<ChainProj>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 480, 600, 900, 1200, 600 };
+        int[] attackDurations = { 480, 600, 600, 1200, 600 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
         public enum Attacks
         {
             DashWithFollowers,
-            LaserSkulls
+            LaserSkulls,
+            ChainSpam
         }
 
         public enum Attacks2
@@ -103,7 +107,7 @@ namespace TerrorMod.Content.NPCs.Bosses
 
             if (!Main.dedServ)
             {
-                //Music = MusicLoader.GetMusicSlot(Mod, "Content/Audio/Music/AnotherSamePlace");
+                Music = MusicLoader.GetMusicSlot(Mod, "Common/Assets/Audio/Music/ChampionVIP");
             }
         }
 
@@ -144,6 +148,9 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (AITimer == 0)
             {
                 DustEffect();
+                SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) });
+                SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) });
+                SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (-0.7f, -0.4f) });
             }
             Visuals();
 
@@ -169,6 +176,9 @@ namespace TerrorMod.Content.NPCs.Bosses
                         break;
                     case (int)Attacks.LaserSkulls:
                         LaserSkulls();
+                        break;
+                    case (int)Attacks.ChainSpam:
+                        ChainSpam();
                         break;
                 }
             }
@@ -240,6 +250,8 @@ namespace TerrorMod.Content.NPCs.Bosses
         const float LaserSkullsDuration = 600;
         float rot => NPC.DirectionTo(player.Center).ToRotation() - MathHelper.ToRadians(60) - MathHelper.PiOver2;
         float rotPerSecond => MathHelper.ToRadians(1f);
+        const float SkullSpamTime = 240;
+        const float BigLaserTime = 120;
         void LaserSkulls()
         {
             switch (AttackTimer)
@@ -255,7 +267,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     DustEffect();
                     SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                     break;
-                case > 240:
+                case > SkullSpamTime:
                     if (AttackTimer % 60 == 0)
                     {
                         if (NotHost)
@@ -271,13 +283,13 @@ namespace TerrorMod.Content.NPCs.Bosses
                     NPC.Opacity = (float)(Math.Sin(AITimer / 4) * 0.5f + 0.5f);
                     NPC.rotation = rot;
                     break;
-                case > 120:
+                case > BigLaserTime:
                     NPC.velocity = NPC.DirectionTo(player.Center) * 6;
                     NPC.Opacity = (float)(Math.Sin(AITimer / 4) * 0.5f + 0.5f);
                     NPC.rotation = rot;
                     break;
-                case 120:
-                    NPC.velocity = Vector2.Zero;  
+                case BigLaserTime:
+                    NPC.velocity = Vector2.Zero;
                     if (NotHost)
                     {
                         NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 2f, ai1: rot, ai2: rotPerSecond);
@@ -294,6 +306,65 @@ namespace TerrorMod.Content.NPCs.Bosses
             AttackTimer--;
         }
 
+        const float ChainSpamDuration = 600;
+        const float ChainFireFromNPCTime = 480;
+        const float ChainFireFromSkyTime = 240;
+        const float ServantSpawnTime = 60;
+        void ChainSpam()
+        {
+            switch (AttackTimer)
+            {
+                case > ChainFireFromNPCTime:
+                    if (AttackTimer % 20 == 0)
+                    {
+                        if (NotHost)
+                        {
+                            NewProj(NPC.Center, NPC.DirectionTo(player.Center) * Main.rand.NextFloat(12, 24), Chain, ai0: 6, ai1: 6);
+                        }
+                    }
+                    if (AttackTimer % 10 == 0)
+                    {
+                        // Uppies
+                        if (NotHost)
+                        {
+                            NewProj(NPC.Center, -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))) * Main.rand.NextFloat(24, 36), Chain, ai0: 6, ai1: 6);
+                        }
+                    }
+                    break;
+                case > ChainFireFromSkyTime:
+                    if (AttackTimer % 60 == 0)
+                    {
+                        if (NotHost)
+                        {
+                            for (int i = -4; i <= 4; i++)
+                            {
+                                Vector2 pos = player.Center + new Vector2(600 * i, -800);
+                                float speed = Main.rand.NextFloat(4, 8);
+                                NewProj(pos, Vector2.UnitY * speed, Chain, ai0: 14, ai1: 14);
+                                NewProj(pos, Vector2.UnitY * speed, Chain, ai0: 14, ai1: -14);
+                            }
+                        }
+                    }
+                    break;
+                case > ServantSpawnTime:
+                    if (AttackTimer % 15 == 0)
+                    {
+                        if (NotHost)
+                        {
+                            Vector2 pos = NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height));
+                            NewNPC(pos, ModContent.NPCType<GiantServant>(), ai3: 0.1f);
+                        }
+                    }
+                    break;
+                case 0:
+                    AttackTimer = ChainSpamDuration;
+                    return;
+            }
+            NPC.velocity = Vector2.Zero;
+            NPC.rotation = 0;
+            AttackTimer--;
+        }
+
         void DustEffect()
         {
             LemonUtils.DustCircle(NPC.Center, 32, 15, DustID.GemDiamond, 4f);
@@ -305,6 +376,11 @@ namespace TerrorMod.Content.NPCs.Bosses
         {
             if (damage == 0) damage = NPC.damage / 4;
             return Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, velocity, type, damage, knockback, -1, ai0, ai1, ai2);
+        }
+
+        NPC NewNPC(Vector2 position, int type, float ai0 = 0, float ai1 = 1, float ai2 = 0, float ai3 = 0)
+        {
+            return NPC.NewNPCDirect(NPC.GetSource_FromAI(), (int)position.X, (int)position.Y, type, 0, ai0, ai1, ai2, ai3);
         }
 
         void DespawnCheck()
@@ -329,16 +405,22 @@ namespace TerrorMod.Content.NPCs.Bosses
             {
                 Terraria.Graphics.Effects.Filters.Scene.Activate("TerrorMod:DesaturateShader");
             }
-
-            foreach (var allPlayer in Main.ActivePlayers)
+            if (SkyManager.Instance["TerrorMod:TerrorSky"] != null && !SkyManager.Instance["TerrorMod:TerrorSky"].IsActive() && Main.netMode != NetmodeID.Server)
             {
-                allPlayer.moonLordMonolithShader = true;
+                SkyManager.Instance.Activate("TerrorMod:TerrorSky");
             }
+
+            //foreach (var allPlayer in Main.ActivePlayers)
+            //{
+            //    allPlayer.moonLordMonolithShader = true;
+            //}
         }
 
-        int IntroDuration = 60;
+        int IntroDuration = 120;
         void Intro()
         {
+            PunchCameraModifier modifier = new PunchCameraModifier(NPC.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 15f, 6f, 20, 1000f, FullName);
+            Main.instance.CameraModifiers.Add(modifier);
             NPC.dontTakeDamage = true;
             NPC.velocity = Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 2;
             Attack = 0;
@@ -350,7 +432,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Attack++;
-                if (Attack > 1) Attack = 0;
+                if (Attack > 2) Attack = 0;
                 if (phase == 1) attackDuration = attackDurations[(int)Attack];
                 else attackDuration = attackDurations2[(int)Attack];
 

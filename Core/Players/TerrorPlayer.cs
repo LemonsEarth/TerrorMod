@@ -94,10 +94,22 @@ namespace TerrorMod.Core.Players
             EventDebuffs();
             BiomeDebuffs();
             PhobiaCheck();
-            if (timer % 20 == 0 && Terraria.Graphics.Effects.Filters.Scene["TerrorMod:DesaturateShader"].IsActive() && !NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorCage>()))
+            if (timer % 60 == 0 && Terraria.Graphics.Effects.Filters.Scene["TerrorMod:DesaturateShader"].IsActive() && !NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorCage>()))
             {
                 Terraria.Graphics.Effects.Filters.Scene.Deactivate("TerrorMod:DesaturateShader");
             }
+
+            if (timer % 60 == 0)
+            {
+                if (!NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorHead>()))
+                {
+                    if (SkyManager.Instance["TerrorMod:TerrorSky"].IsActive())
+                    {
+                        SkyManager.Instance.Deactivate("TerrorMod:TerrorSky");
+                    }
+                }
+            }
+
             timer++;
         }
 

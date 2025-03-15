@@ -88,6 +88,8 @@ namespace TerrorMod.Content.NPCs.Bosses
                     Gore.NewGore(NPC.GetSource_Death(), new Vector2(Main.rand.NextFloat(NPC.position.X, NPC.position.X + NPC.width), Main.rand.NextFloat(NPC.position.Y, NPC.position.Y + NPC.height)), Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 10, ModContent.GoreType<CageGore>());
                 }
             }
+
+            Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.GemDiamond, Scale: Main.rand.NextFloat(1.5f, 2.5f));
         }
 
         public override void AI()
