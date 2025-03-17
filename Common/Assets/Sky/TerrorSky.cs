@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 
 namespace TerrorMod.Common.Assets.Sky
@@ -19,14 +20,19 @@ namespace TerrorMod.Common.Assets.Sky
 
         public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
-            Texture2D sky = ModContent.Request<Texture2D>("TerrorMod/Common/Assets/Sky/TerrorSky").Value;
-            //spriteBatch.Draw(sky, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), null, Color.White * opacity, 0f, sky.Size() * 0.5f, SpriteEffects.None, 0);
-            Vector2 pos = Vector2.Zero;
-            for (int i = 0; i < 16; i++)
-            {
-                pos = i * (Vector2.UnitX * sky.Width);
-                spriteBatch.Draw(sky, pos, null, Color.Black, 0f, sky.Size() * 0.5f, 2f, SpriteEffects.None, 0);
-            }
+            Texture2D sky = ModContent.Request<Texture2D>("TerrorMod/Common/Assets/Sky/BlackBackground").Value;
+            
+            var shader = GameShaders.Misc["TerrorMod:BlackSunShader"];
+            shader.Shader.Parameters["moveSpeed"].SetValue(-2f);
+            shader.Shader.Parameters["opacity"].SetValue(opacity);
+            shader.Shader.Parameters["uScreenResolution"].SetValue(new Vector2(Main.screenWidth, Main.screenHeight));
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, shader.Shader, Main.GameViewMatrix.TransformationMatrix);
+            Main.instance.GraphicsDevice.Textures[1] = TerrorMod.noiseTexture.Value;
+            shader.Apply();
+            spriteBatch.Draw(sky, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0);
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, default, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
         }
 
         public override bool IsActive()

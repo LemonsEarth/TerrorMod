@@ -9,6 +9,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="changelog.txt" />
+	  <None Remove="Common\Assets\Shaders\BlackSunShader.fx" />
 	  <None Remove="Common\Assets\Shaders\DesaturateShader.fx" />
 	  <None Remove="Common\Assets\Shaders\LaserShader.fx" />
 	  <None Remove="Common\Assets\Shaders\ProjectileLightShader.fx" />
@@ -27,6 +28,7 @@
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Tiles.hjson" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Core\Effects\" />
 	  <Folder Include="Core\Globals\Buffs\Debuffs\" />
 	</ItemGroup>
 

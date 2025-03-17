@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -45,6 +46,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.tileCollide = false;
             Projectile.timeLeft = 120;
             Projectile.penetrate = -1;
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.rotation = Rotation;
         }
 
         public override void AI()

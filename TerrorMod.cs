@@ -19,6 +19,11 @@ namespace TerrorMod
 	// Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
 	public class TerrorMod : Mod
 	{
+        const string NoisePath = "TerrorMod/Common/Assets/Textures/NoiseTexture";
+        public static Asset<Texture2D> noiseTexture;
+
+        public static TerrorMod instance;
+
         public TerrorMod()
         {
             MusicSkipsVolumeRemap = true;
@@ -49,11 +54,16 @@ namespace TerrorMod
 
         public override void Load()
         {
+            instance = this;
+
             Asset<Effect> laserShader = Assets.Request<Effect>("Common/Assets/Shaders/LaserShader");
             GameShaders.Misc["TerrorMod:LaserShader"] = new MiscShaderData(laserShader, "LaserShader");
 
             Asset<Effect> sphereShader = Assets.Request<Effect>("Common/Assets/Shaders/SphereShader");
             GameShaders.Misc["TerrorMod:SphereShader"] = new MiscShaderData(sphereShader, "SphereShader");
+
+            Asset<Effect> blackSunShader = Assets.Request<Effect>("Common/Assets/Shaders/BlackSunShader");
+            GameShaders.Misc["TerrorMod:BlackSunShader"] = new MiscShaderData(blackSunShader, "BlackSunShader");
 
             Asset<Effect> projLightShader = Assets.Request<Effect>("Common/Assets/Shaders/ProjectileLightShader");
             GameShaders.Misc["TerrorMod:ProjectileLightShader"] = new MiscShaderData(projLightShader, "ProjectileLight");
@@ -61,6 +71,7 @@ namespace TerrorMod
             Asset<Effect> desaturateShader = Assets.Request<Effect>("Common/Assets/Shaders/DesaturateShader");
             Filters.Scene["TerrorMod:DesaturateShader"] = new Filter(new ScreenShaderData(desaturateShader, "DesaturateShader"), EffectPriority.VeryHigh);
 
+            noiseTexture = ModContent.Request<Texture2D>(NoisePath);
             SkyManager.Instance["TerrorMod:TerrorSky"] = new TerrorSky();
         }
     }

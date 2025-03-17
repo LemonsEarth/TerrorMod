@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -51,6 +52,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
         {
             float _ = float.NaN;
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + Vector2.UnitY.RotatedBy(Rotation) * laserLength * Projectile.height, Projectile.width * 0.7f * Size, ref _);
+        }
+
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.rotation = Rotation;
         }
 
         public override void AI()

@@ -48,7 +48,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             float sinMovement = (float)Math.Sin(AITimer / Speed) * Distance;
             Vector2 normal = Projectile.velocity.RotatedBy(MathHelper.PiOver2).SafeNormalize(Vector2.Zero);
             Projectile.Center += normal * sinMovement;
-            Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation = Projectile.oldPos[1].DirectionTo(Projectile.position).ToRotation();
 
             if (Projectile.timeLeft < 30)
             {
