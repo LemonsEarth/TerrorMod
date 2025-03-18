@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -21,6 +22,8 @@ namespace TerrorMod
 	{
         const string NoisePath = "TerrorMod/Common/Assets/Textures/NoiseTexture";
         public static Asset<Texture2D> noiseTexture;
+
+        public static SoundStyle Jumpscare => new SoundStyle("TerrorMod/Common/Assets/Audio/SFX/Jumpscare_", 3);
 
         public static TerrorMod instance;
 

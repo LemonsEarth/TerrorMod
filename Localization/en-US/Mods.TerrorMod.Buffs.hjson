@@ -103,3 +103,13 @@ TheStormDebuff: {
 	DisplayName: The Storm
 	Description: The apocalypse begins...
 }
+
+HalloweenHorrorDebuff: {
+	DisplayName: Halloween Horror
+	Description: The harvest moon is hungry...
+}
+
+GunpowderedSnowDebuff: {
+	DisplayName: Gunpowdered Snow Debuff
+	Description: Mods.TerrorMod.Buffs.GunpowderedSnowDebuff.Description
+}

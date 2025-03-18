@@ -21,6 +21,8 @@ Main:
 - Mimics and Biome Mimics can forcibly drop your held item on the ground
 - Biome Mimics are faster, shoot projectiles when closed and periodically spawn living weapons depending on mimic type
 - Paladins heal nearby enemies
+- The Pumpking gets angry if you don't do his event after defeating Plantera
+- The Ice Queen's secret mafia is not pleased with your ignorance
 
 Events:
 	- Pirate Invasion
@@ -28,6 +30,12 @@ Events:
 		Pirate Deadeyes fire a spread of bullets, Pirate Crossbowers fire much faster
 		Pirate Captains periodically summon Sharknadoes
 
+	- Frost Legion
+		Massively increased stats
+		Mister Stabby is less visible
+		Gangsta fires faster
+		Balla fires snowballs in 8 directions
+	
 	- Solar Eclipse
 		Frankensteins heal over time
 		Eyezor fires much faster
@@ -57,11 +65,21 @@ Events:
 		Ice Queen moves towards the player when spinning and periodically fires Ice Mist from the sky
 		All enemies have a chance to inflict Frozen, Frostburn and Weight
 
+	- Martian Madness
+		All enemies have a chance to inflict Distorted and Electrified
+		Tesla Turrets fire lightning
+		Scutlix Riders fire faster
+
 	- Lunar Pillars
 		All enemies can spawn anywhere
 
 
 Bosses:
+- Deerclops
+	Periodically freezes the player, indicated by bursts of dust at the player's location
+	Drops down skulls from above the player when below 50% hp
+	Massively increases shadow hand spawn rate when below 25% hp
+
 - Queen Slime
 	Hops faster and creates bouncy gel when she touches the ground
 	Big stomp causes pink bouncy balls to drop from above the player and inflicts them with Weight
@@ -158,3 +176,5 @@ Other:
 	Bosses which increase the buff limit by 1 on defeat are: Eye of Cthulhu, Skeletron, Deerclops
 	Bosses which increase the buff limit by 2 on defeat are: Queen Bee, Queen Slime, Pumpking, Ice Queen, Lunatic Cultist
 - Hot projectiles can no longer destroy furniture because of weird interactions
+- Defeating Golem now stops the desert from inflicting biome debuffs
+- Defeating Ice Queen now stops the snow biome from inflicting biome debuffs

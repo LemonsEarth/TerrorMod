@@ -33,7 +33,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         Vector2 savedPosition = Vector2.Zero;
         Vector2 savedDirection = Vector2.Zero;
 
-        bool NotHost => Main.netMode != NetmodeID.MultiplayerClient;
+        bool NotClient => Main.netMode != NetmodeID.MultiplayerClient;
 
         int HeadProj => ModContent.ProjectileType<InfiniteTerrorHeadProj>();
         int LaserSkull => ModContent.ProjectileType<LaserSkull>();
@@ -193,6 +193,28 @@ namespace TerrorMod.Content.NPCs.Bosses
                 }*/
 
             }
+
+            if (AITimer % 10 == 0)
+            {
+                foreach (var ply in Main.ActivePlayers)
+                {
+                    if (ply.Distance(NPC.Center) > 4000)
+                    {
+                        ply.AddBuff(BuffID.CursedInferno, 60);
+                        ply.AddBuff(BuffID.ShadowFlame, 60);
+                        ply.AddBuff(BuffID.OnFire, 60);
+                        ply.AddBuff(BuffID.Ichor, 60);
+                        ply.AddBuff(BuffID.WitheredArmor, 60);
+                        ply.AddBuff(BuffID.WitheredWeapon, 60);
+                        ply.AddBuff(BuffID.Frostburn, 60);
+                        ply.AddBuff(BuffID.Venom, 60);
+                        ply.AddBuff(BuffID.Poisoned, 60);
+                        ply.AddBuff(BuffID.Burning, 60);
+                        ply.AddBuff(BuffID.Obstructed, 180);
+                    }
+                }
+            }
+
             attackDuration--;
             AITimer++;
         }
@@ -207,7 +229,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             {
                 case DashWithFollower_Duration:
                     DustEffect();
-                    if (NotHost)
+                    if (NotClient)
                     {
                         savedPosition = player.Center + Main.rand.NextVector2CircularEdge(500, 300);
                     }
@@ -222,14 +244,14 @@ namespace TerrorMod.Content.NPCs.Bosses
                     NPC.velocity = -savedDirection;
                     break;
                 case DashWithFollower_DashTime:
-                    if (NotHost && Main.rand.NextBool(4))
+                    if (NotClient && Main.rand.NextBool(4))
                     {
                         AttackTimer = DashWithFollower_Duration;
                     }
                     NPC.netUpdate = true;
                     if (AttackTimer == DashWithFollower_Duration) return;
                     NPC.velocity = savedDirection * DashSpeed;
-                    if (NotHost)
+                    if (NotClient)
                     {
                         for (int i = -8; i <= 8; i++)
                         {
@@ -258,7 +280,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             {
                 case LaserSkullsDuration:
                     DustEffect();
-                    if (NotHost)
+                    if (NotClient)
                     {
                         savedPosition = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 600;
                     }
@@ -270,7 +292,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                 case > SkullSpamTime:
                     if (AttackTimer % 60 == 0)
                     {
-                        if (NotHost)
+                        if (NotClient)
                         {
                             for (int i = 0; i < 3; i++)
                             {
@@ -290,7 +312,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     break;
                 case BigLaserTime:
                     NPC.velocity = Vector2.Zero;
-                    if (NotHost)
+                    if (NotClient)
                     {
                         NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 2f, ai1: rot, ai2: rotPerSecond);
                     }
@@ -314,10 +336,15 @@ namespace TerrorMod.Content.NPCs.Bosses
         {
             switch (AttackTimer)
             {
+                case ChainSpamDuration:
+                    NPC.Center = player.Center - Vector2.UnitY * 300;
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    DustEffect();
+                    break;
                 case > ChainFireFromNPCTime:
                     if (AttackTimer % 20 == 0)
                     {
-                        if (NotHost)
+                        if (NotClient)
                         {
                             NewProj(NPC.Center, NPC.DirectionTo(player.Center) * Main.rand.NextFloat(12, 24), Chain, ai0: 6, ai1: 6);
                         }
@@ -325,16 +352,17 @@ namespace TerrorMod.Content.NPCs.Bosses
                     if (AttackTimer % 10 == 0)
                     {
                         // Uppies
-                        if (NotHost)
+                        if (NotClient)
                         {
                             NewProj(NPC.Center, -Vector2.UnitY.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))) * Main.rand.NextFloat(24, 36), Chain, ai0: 6, ai1: 6);
                         }
                     }
+                    NPC.velocity = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(AttackTimer * 4)) * 2;
                     break;
                 case > ChainFireFromSkyTime:
                     if (AttackTimer % 60 == 0)
                     {
-                        if (NotHost)
+                        if (NotClient)
                         {
                             for (int i = -4; i <= 4; i++)
                             {
@@ -345,22 +373,26 @@ namespace TerrorMod.Content.NPCs.Bosses
                             }
                         }
                     }
+                    NPC.velocity = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(AttackTimer * 8)) * 2;
                     break;
                 case > ServantSpawnTime:
                     if (AttackTimer % 15 == 0)
                     {
-                        if (NotHost)
+                        if (NotClient)
                         {
                             Vector2 pos = NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height));
                             NewNPC(pos, ModContent.NPCType<GiantServant>(), ai3: 0.1f);
                         }
+                        NPC.velocity += -NPC.Center.DirectionTo(player.Center) * 4;
+                        SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
+
                     }
+                    NPC.velocity /= 1.05f;
                     break;
                 case 0:
                     AttackTimer = ChainSpamDuration;
                     return;
             }
-            NPC.velocity = Vector2.Zero;
             NPC.rotation = 0;
             AttackTimer--;
         }

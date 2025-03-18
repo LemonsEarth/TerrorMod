@@ -34,6 +34,9 @@ namespace TerrorMod.Core.Players
         public bool leadArmorSet = false;
         public bool undeadAmulet = false;
 
+        public bool halloweenHorror = false;
+        public bool gunpowderedSnow = false;
+
         public bool cobaltHead = false;
         public bool cobaltBody = false;
         public bool cobaltLegs = false;
@@ -52,6 +55,8 @@ namespace TerrorMod.Core.Players
             cobaltHead = false;
             cobaltBody = false;
             cobaltLegs = false;
+            halloweenHorror = false;
+            gunpowderedSnow = false;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -155,7 +160,7 @@ namespace TerrorMod.Core.Players
                 infectedTimer = 0;
             }
 
-            if (Player.ZoneSnow && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff(BuffID.Warmth))
+            if (Player.ZoneSnow && !Player.HasBuff(BuffID.Campfire) && !Player.HasBuff(BuffID.Warmth) && !NPC.downedChristmasIceQueen)
             {
                 Player.AddBuff(BuffID.Frostburn, 2);
                 Player.AddBuff(BuffID.Chilled, 2);
@@ -165,7 +170,7 @@ namespace TerrorMod.Core.Players
                 }
             }
 
-            if (Player.ZoneDesert)
+            if (Player.ZoneDesert && !NPC.downedGolemBoss)
             {
                 if (Main.dayTime &&
                     !(Player.armor[0].type == ItemID.CactusHelmet && Player.armor[1].type == ItemID.CactusBreastplate && Player.armor[2].type == ItemID.CactusLeggings))
@@ -208,6 +213,43 @@ namespace TerrorMod.Core.Players
             if (curseLevel > 0)
             {
                 Player.AddBuff(ModContent.BuffType<CurseDebuff>(), 2);
+            }
+
+            if (NPC.downedPlantBoss && !NPC.downedHalloweenKing)
+            {
+                Player.AddBuff(ModContent.BuffType<HalloweenHorrorDebuff>(), 2);
+            }
+
+            if (NPC.downedPlantBoss && !NPC.downedChristmasIceQueen)
+            {
+                Player.AddBuff(ModContent.BuffType<GunpowderedSnowDebuff>(), 2);
+            }
+
+            if (halloweenHorror)
+            {
+                if (Main.rand.NextBool(800) && !Main.projectile.Any(proj => proj.active && proj.type == ModContent.ProjectileType<PumpkingHeadProj>()))
+                {
+                    if (Player.whoAmI == Main.myPlayer)
+                    {
+                        Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ModContent.ProjectileType<PumpkingHeadProj>(), 1, 1f, Player.whoAmI);
+                    }
+                }
+            }
+
+            if (gunpowderedSnow && timer % 600 == 0)
+            {
+                if (Main.rand.NextBool(50) && !NPC.AnyNPCs(NPCID.SnowBalla) && !NPC.AnyNPCs(NPCID.SnowmanGangsta) && !NPC.AnyNPCs(NPCID.MisterStabby))
+                {
+                    if (Main.myPlayer == Player.whoAmI)
+                    {
+                        int amount = Main.rand.Next(4, 10);
+                        for (int i = 0; i < amount; i++)
+                        {
+                            Vector2 pos = Player.Center + Main.rand.NextVector2CircularEdge(800, 800);
+                            NPC.NewNPC(Player.GetSource_FromThis("TerrorMod:DebuffSpawn"), (int)pos.X, (int)pos.Y, Main.rand.Next(143, 146));
+                        }
+                    }
+                }
             }
         }
 
