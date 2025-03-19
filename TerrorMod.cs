@@ -24,6 +24,7 @@ namespace TerrorMod
         public static Asset<Texture2D> noiseTexture;
 
         public static SoundStyle Jumpscare => new SoundStyle("TerrorMod/Common/Assets/Audio/SFX/Jumpscare_", 3);
+        public static SoundStyle Thunder => new SoundStyle("TerrorMod/Common/Assets/Audio/SFX/Thunder");
 
         public static TerrorMod instance;
 

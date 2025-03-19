@@ -7,6 +7,7 @@ using Terraria.GameContent;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerrorMod.Common.Utils;
 using TerrorMod.Common.Utils.Prim;
 
 namespace TerrorMod.Content.Projectiles.Hostile
@@ -14,7 +15,9 @@ namespace TerrorMod.Content.Projectiles.Hostile
     public class LightBomb : ModProjectile
     {
         float AITimer = 0;
-        ref float TimeToBlow => ref Projectile.ai[0];
+        ref float xPos => ref Projectile.ai[0];
+        ref float yPos => ref Projectile.ai[1];
+        ref float Time => ref Projectile.ai[2];
 
         public override void SetStaticDefaults()
         {
@@ -27,11 +30,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
         {
             Projectile.width = 32;
             Projectile.height = 32;
-            Projectile.hostile = false;
+            Projectile.hostile = true;
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 1800;
+            Projectile.timeLeft = 120;
             Projectile.alpha = 255;
             Projectile.penetrate = -1;
         }
@@ -42,8 +45,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
             {
                 Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<StardustExplosion>(), Projectile.damage * 2, Projectile.knockBack);
             }*/
+            LemonUtils.DustCircle(Projectile.Center, 8, 8f, DustID.GemDiamond, 1.25f);
         }
 
+        Vector2 pos = Vector2.Zero;
+        Vector2 spawnPos = Vector2.Zero;
         public override void AI()
         {
             if (Projectile.alpha > 0)
@@ -52,15 +58,14 @@ namespace TerrorMod.Content.Projectiles.Hostile
             }
             if (AITimer == 0)
             {
-                //SoundEngine.PlaySound(SoundID.Zombie67 with { Volume = 0.3f, PitchRange = (0.5f, 1f) });
-                if (TimeToBlow != 0)
-                {
-                    Projectile.timeLeft = (int)TimeToBlow;
-                }
+                pos = new Vector2(xPos, yPos);
+                spawnPos = Projectile.Center;
+                SoundEngine.PlaySound(SoundID.Item29, Projectile.Center);
+                Projectile.timeLeft = (int)Time;
             }
-            /*Projectile.velocity = Vector2.Lerp(Projectile.velocity, Vector2.Zero, AITimer / 180);
-            Projectile.rotation = MathHelper.ToRadians(AITimer * Projectile.velocity.Length());
-            Projectile.scale = (float)Math.Sin(MathHelper.ToRadians(AITimer * 4)) / 5 + 1; // 1/5 * sin(4x) + 1 ranges from 0.8 to 1.2*/
+
+            Vector2 controlpoint = spawnPos + (spawnPos.DirectionTo(pos) * spawnPos.Distance(pos) * 0.75f).RotatedBy(MathHelper.PiOver2);
+            Projectile.Center = LemonUtils.BezierCurve(spawnPos, pos, controlpoint, AITimer / Time);
 
             AITimer++;
         }

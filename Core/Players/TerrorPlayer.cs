@@ -115,6 +115,14 @@ namespace TerrorMod.Core.Players
                 }
             }
 
+            if (Player.HasBuff(BuffID.ChaosState))
+            {
+                if (timer % 60 == 0)
+                {
+                    Player.Teleport(Player.Center + Main.rand.NextVector2Circular(800, 800), 1);
+                }
+            }
+
             timer++;
         }
 

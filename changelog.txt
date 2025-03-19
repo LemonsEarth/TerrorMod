@@ -151,6 +151,7 @@ Items:
 		Normal Bombs and Dynamite may drop while in the player's inventory. Hold on to them tight.
 		Ankh Charm now requires Chlorophyte bars to craft
 		Ankh Shield now requires Ectoplasm to craft
+		Rod of Harmony inflicts Chaos State for 5 seconds when a boss is alive
 
 
 Biomes:
@@ -166,6 +167,7 @@ Buffs/Debuffs:
 		Cannot be re-obtained once removed. Spend those 10 minutes wisely
 	- "The Storm" increases spawn rates and max spawns, and also allows spirits to spawn.
 		Spirits can move through tiles and can spawn anywhere, aggressively hunting the player down until they destroy all Mechanical Cores
+	- Chaos state teleports the player to a random nearby position every second
 
 Other:
 - Increased Life Essence drop rate and amount from undead enemies

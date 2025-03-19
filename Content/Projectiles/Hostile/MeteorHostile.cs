@@ -26,7 +26,12 @@ namespace TerrorMod.Content.Projectiles.Hostile
             SoundEngine.PlaySound(SoundID.Item89);
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
+                int num = Main.rand.Next(1, 4);
                 Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BombExplosion>(), 20, 1);
+                for (int i = 0; i < num; i++)
+                {
+                    NPC.NewNPC(Projectile.GetSource_FromAI(), (int)Projectile.Center.X + Main.rand.Next(-20, 20), (int)Projectile.Center.Y + Main.rand.Next(-20, 20), NPCID.MeteorHead);
+                }
             }
             return true;
         }

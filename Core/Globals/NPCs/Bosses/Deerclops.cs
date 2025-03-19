@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,6 +32,8 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             {
                 if (AITimer % 60 == 0)
                 {
+                    SoundEngine.PlaySound(SoundID.Item30);
+                    SoundEngine.PlaySound(SoundID.Item27);
                     foreach (var ply in Main.ActivePlayers)
                     {
                         LemonUtils.DustCircle(player.Center, 8, 10, DustID.GemDiamond, 2f);
@@ -56,7 +59,10 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 foreach (var ply in Main.ActivePlayers)
                 {
                     ply.AddBuff(BuffID.Frozen, 60);
+                    LemonUtils.DustCircle(player.Center, 16, 12, DustID.GemDiamond, 2.5f);
                 }
+                SoundEngine.PlaySound(SoundID.Item30);
+                SoundEngine.PlaySound(SoundID.Item27);
                 AITimer = 0;
             }
             AITimer++;

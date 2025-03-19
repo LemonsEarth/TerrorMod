@@ -95,7 +95,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     {
                         if (npc.ai[2] == 27)
                         {
-                            SoundEngine.PlaySound(SoundID.Thunder);
+                            SoundEngine.PlaySound(TerrorMod.Thunder);
                             SoundEngine.PlaySound(SoundID.Thunder);
                             SoundEngine.PlaySound(SoundID.Thunder);
                             if (Main.netMode != NetmodeID.MultiplayerClient)

@@ -39,9 +39,10 @@ namespace TerrorMod.Content.NPCs.Bosses
         int LaserSkull => ModContent.ProjectileType<LaserSkull>();
         int DoomSphere => ModContent.ProjectileType<DoomSphere>();
         int Chain => ModContent.ProjectileType<ChainProj>();
+        int LightBomb => ModContent.ProjectileType<LightBomb>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 480, 600, 600, 1200, 600 };
+        int[] attackDurations = { 480, 600, 600, 720, 600 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
@@ -49,7 +50,8 @@ namespace TerrorMod.Content.NPCs.Bosses
         {
             DashWithFollowers,
             LaserSkulls,
-            ChainSpam
+            ChainSpam,
+            LightningLances,
         }
 
         public enum Attacks2
@@ -179,6 +181,9 @@ namespace TerrorMod.Content.NPCs.Bosses
                         break;
                     case (int)Attacks.ChainSpam:
                         ChainSpam();
+                        break;
+                    case (int)Attacks.LightningLances:
+                        LightningLances();
                         break;
                 }
             }
@@ -397,6 +402,120 @@ namespace TerrorMod.Content.NPCs.Bosses
             AttackTimer--;
         }
 
+        const float LightningLancesDuration = 720;
+        const float LightningIndicatorTime = 660;
+        const float LightningTime = 600;
+        const float RainbowArenaTime = 540;
+        const float LanceTime = 360;
+        void LightningLances()
+        {
+            switch (AttackTimer)
+            {
+                case LightningLancesDuration:
+                    DustEffect();
+                    if (NotClient)
+                    {
+                        savedPosition = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 600;
+                    }
+                    NPC.netUpdate = true;
+                    NPC.Center = savedPosition;
+                    DustEffect();
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    NPC.velocity = NPC.DirectionTo(player.Center) * 3;
+                    break;
+                case LightningIndicatorTime:
+                    NPC.velocity = Vector2.Zero;
+                    SoundEngine.PlaySound(SoundID.Item29, NPC.Center);
+                    savedPosition = player.Center;
+                    for (int i = -12; i <= 12; i++)
+                    {
+                        Vector2 pos = player.Center + new Vector2(i * 300, 0);
+                        LemonUtils.DustCircle(pos, 16, 2f, DustID.GemDiamond, 2f);
+                    }
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 200;
+                        LemonUtils.DustCircle(pos, 16, 2f, DustID.GemDiamond, 2f);
+                    }
+                    break;
+                case LightningTime:
+                    SoundEngine.PlaySound(TerrorMod.Thunder);
+                    SoundEngine.PlaySound(SoundID.Thunder);
+                    SoundEngine.PlaySound(SoundID.Thunder);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        for (int i = -12; i <= 12; i++)
+                        {
+                            Vector2 pos = savedPosition + new Vector2(i * 300, -1000);
+                            NewProj(pos, Vector2.UnitY * 15, ProjectileID.CultistBossLightningOrbArc, ai0: MathHelper.PiOver2);
+                        }
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            Vector2 dirPos = NPC.Center + Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 200;
+                            NewProj(NPC.Center, NPC.Center.DirectionTo(dirPos) * 10, ProjectileID.CultistBossLightningOrbArc, ai0: NPC.Center.DirectionTo(dirPos).ToRotation());
+                        }
+                    }
+                    break;
+                case RainbowArenaTime:
+                    for (int j = 1; j < 4; j++)
+                    {
+                        for (int i = 0; i < 16; i++)
+                        {
+                            if (NotClient)
+                            {
+                                savedPosition = player.Center;
+                                Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4 + j * (MathHelper.PiOver4 / 2)) * 300 * j;
+                                NewProj(pos, new Vector2(10, 10) * j, ProjectileID.HallowBossLastingRainbow, ai0: 6.6f);
+                            }
+                            NPC.netUpdate = true;
+                        }
+                    }
+                    break;
+                case > LanceTime and < 480:
+                    NPC.MoveToPos(savedPosition, 0.05f, 0.1f, 0.02f, 0.01f);
+                    foreach (var ply in Main.ActivePlayers)
+                    {
+                        if (ply.Distance(savedPosition) > 400)
+                        {
+                            ply.velocity += ply.DirectionTo(savedPosition) * 2f;
+                        }
+                    }
+                    if (AttackTimer % 30 == 0)
+                    {
+                        for (int i = -3; i <= 3; i++)
+                        {
+                            if (NotClient)
+                            {
+                                int dir = Main.rand.NextBool().ToDirectionInt();
+                                Vector2 pos = player.Center + new Vector2(800 * dir, i * 150);
+                                NewProj(pos, Vector2.Zero, ProjectileID.FairyQueenLance, ai0: dir == 1 ? MathHelper.Pi : 0);
+                            }
+                        }
+                    }
+                    break;
+                case > 0 and < 300:
+                    NPC.MoveToPos(savedPosition, 0.05f, 0.1f, 0.02f, 0.01f);
+                    if (AttackTimer % 20 == 0 && AttackTimer < 270)
+                    {
+                        if (NotClient)
+                        {
+                            for (int i = 0; i < 8; i++)
+                            {
+                                Vector2 pos = savedPosition + Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 900; 
+                                NewProj(pos, Vector2.Zero, LightBomb, ai0: player.Center.X, ai1: player.Center.Y, ai2: 60);
+                            }
+                        }
+                    }
+                    LemonUtils.DustCircle(NPC.Center, 8, 8f, DustID.GemDiamond, 1.25f);
+                    break;
+                case 0:
+                    AttackTimer = LightningLancesDuration;
+                    return;
+            }
+            AttackTimer--;
+        }
+
         void DustEffect()
         {
             LemonUtils.DustCircle(NPC.Center, 32, 15, DustID.GemDiamond, 4f);
@@ -428,6 +547,14 @@ namespace TerrorMod.Content.NPCs.Bosses
         public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
 
+        }
+
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            if (projectile.type == ProjectileID.FinalFractal)
+            {
+                modifiers.FinalDamage *= 0.4f;
+            }
         }
 
         void Visuals()
@@ -464,7 +591,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Attack++;
-                if (Attack > 2) Attack = 0;
+                if (Attack > 3) Attack = 0;
                 if (phase == 1) attackDuration = attackDurations[(int)Attack];
                 else attackDuration = attackDurations2[(int)Attack];
 
