@@ -13,7 +13,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
     public class HungryCannon : ModProjectile
     {
         ref float AITimer => ref Projectile.ai[0];
-        ref float directionY => ref Projectile.ai[1]; // 1 is up, 0 is down
+        ref float rotation => ref Projectile.ai[1];
 
         public override void SetDefaults()
         {
@@ -23,7 +23,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 360;
+            Projectile.timeLeft = 480;
         }
 
         public override void AI()
@@ -31,7 +31,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             if (AITimer == 0)
             {
                 SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (0.3f, 0.6f)}, Projectile.Center);
-                LemonUtils.DustCircle(Projectile.Center, 8, 3, DustID.GemRuby);
+                LemonUtils.DustCircle(Projectile.Center, 8, 3, DustID.GemRuby, 2f);
             }
 
             if (Projectile.alpha > 0)
@@ -39,14 +39,13 @@ namespace TerrorMod.Content.Projectiles.Hostile
                 Projectile.alpha -= 7;
             }
 
-            int rot = directionY == 1 ? 1 : -1;
-            Projectile.rotation = rot * MathHelper.PiOver2;
+            Projectile.rotation = rotation;
 
             if (AITimer % 10 == 0)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.UnitY.RotatedBy(directionY * MathHelper.Pi) * 5, ModContent.ProjectileType<EyeFireButFire>(), Projectile.damage, 1f);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.UnitX.RotatedBy(rotation) * 5, ModContent.ProjectileType<EyeFireButFire>(), Projectile.damage, 1f);
                 }
             }
 

@@ -58,6 +58,8 @@ namespace TerrorMod.Content.Projectiles.Hostile
             }
             if (AITimer == 0)
             {
+                LemonUtils.DustCircle(Projectile.Center, 8, 8f, DustID.GemDiamond, 1.25f);
+
                 pos = new Vector2(xPos, yPos);
                 spawnPos = Projectile.Center;
                 SoundEngine.PlaySound(SoundID.Item29, Projectile.Center);

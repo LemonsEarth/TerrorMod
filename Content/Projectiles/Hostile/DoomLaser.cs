@@ -51,7 +51,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float _ = float.NaN;
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + Vector2.UnitY.RotatedBy(Rotation) * laserLength * Projectile.height, Projectile.width * 0.7f * Size, ref _);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + Vector2.UnitY.RotatedBy(Rotation) * laserLength * Size * Projectile.height, Projectile.width * 0.7f * Size, ref _);
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -96,7 +96,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, shader.Shader, Main.GameViewMatrix.TransformationMatrix);
             Main.instance.GraphicsDevice.Textures[1] = Noise.Value;
             shader.Apply();
-            Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition, null, Color.Blue, Projectile.rotation, drawOrigin, new Vector2(scale, laserLength), SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, drawPos - Main.screenPosition, null, Color.Blue, Projectile.rotation, drawOrigin, new Vector2(scale, laserLength * Size), SpriteEffects.None, 0);
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, default, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
 

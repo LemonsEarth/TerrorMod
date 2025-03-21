@@ -40,9 +40,10 @@ namespace TerrorMod.Content.NPCs.Bosses
         int DoomSphere => ModContent.ProjectileType<DoomSphere>();
         int Chain => ModContent.ProjectileType<ChainProj>();
         int LightBomb => ModContent.ProjectileType<LightBomb>();
+        int HungryCannon => ModContent.ProjectileType<HungryCannon>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 480, 600, 600, 720, 600 };
+        int[] attackDurations = { 480, 600, 600, 720, 600, 780 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
@@ -52,6 +53,8 @@ namespace TerrorMod.Content.NPCs.Bosses
             LaserSkulls,
             ChainSpam,
             LightningLances,
+            LaserFlinging,
+            HungryMaze,
         }
 
         public enum Attacks2
@@ -67,7 +70,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
             NPCID.Sets.MPAllowedEnemies[Type] = true;
             NPCID.Sets.TrailCacheLength[NPC.type] = 10;
-            NPCID.Sets.TrailingMode[NPC.type] = 2;
+            NPCID.Sets.TrailingMode[NPC.type] = 3;
             Main.npcFrameCount[NPC.type] = 1;
             NPCID.Sets.CantTakeLunchMoney[Type] = true;
             NPCID.Sets.DontDoHardmodeScaling[Type] = true;
@@ -184,6 +187,12 @@ namespace TerrorMod.Content.NPCs.Bosses
                         break;
                     case (int)Attacks.LightningLances:
                         LightningLances();
+                        break;
+                    case (int)Attacks.LaserFlinging:
+                        LaserFlinging();
+                        break;
+                    case (int)Attacks.HungryMaze:
+                        HungryMaze();
                         break;
                 }
             }
@@ -481,6 +490,12 @@ namespace TerrorMod.Content.NPCs.Bosses
                             ply.velocity += ply.DirectionTo(savedPosition) * 2f;
                         }
                     }
+                    for (int i = 0; i < 16; i++)
+                    {
+                        Vector2 pos = savedPosition + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 16) * i) * 400;
+                        Vector2 directionToCenter = pos.DirectionTo(savedPosition);
+                        Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
+                    }
                     if (AttackTimer % 30 == 0)
                     {
                         for (int i = -3; i <= 3; i++)
@@ -511,6 +526,143 @@ namespace TerrorMod.Content.NPCs.Bosses
                     break;
                 case 0:
                     AttackTimer = LightningLancesDuration;
+                    return;
+            }
+            AttackTimer--;
+        }
+
+        const float LaserFlingingDuration = 600;
+        const float LaserFlingingSpinTime = 420;
+        const float LaserFlingingTime = 60;
+        void LaserFlinging()
+        {
+            switch(AttackTimer)
+            {
+                case LaserFlingingDuration:
+                    NPC.velocity = Vector2.Zero;
+                    DustEffect();
+                    if (NotClient)
+                    {
+                        savedPosition = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 600;
+                    }
+                    NPC.netUpdate = true;
+                    NPC.Center = savedPosition;
+                    DustEffect();
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+
+                    if (NotClient)
+                    {
+                        for (int i = -8; i <= 8; i++)
+                        {
+                            Vector2 pos = player.Center + new Vector2(i * 200, -400);
+                            NewProj(pos, Vector2.Zero, LaserSkull, ai0: 60, ai1: MathHelper.PiOver2);
+                        }
+                    }
+                    break;
+                case > LaserFlingingSpinTime:
+                    if (AttackCount < 10) AttackCount += 0.1f;
+                    NPC.rotation += MathHelper.ToRadians(AttackCount);
+                    break;
+                case > LaserFlingingTime:
+                    NPC.rotation += MathHelper.ToRadians(AttackCount);
+                    NPC.MoveToPos(player.Center, 0.04f, 0.04f, 0.5f, 0.5f);
+                    if (AttackTimer % 60 == 0)
+                    {
+                        if (NotClient)
+                        {
+                            for (int i = 0; i < 8; i++)
+                            {
+                                Vector2 dir = Vector2.UnitY.RotatedBy(i * MathHelper.PiOver4);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, dir * 5, ProjectileID.CultistBossFireBallClone, NPC.damage / 4, 1f);
+                            }
+                        }
+                    }
+                    break;
+                case > 0:
+                    NPC.rotation += MathHelper.ToRadians(AttackCount);
+                    if (AttackCount > 0) AttackCount -= 0.1f;
+                    NPC.velocity /= 1.05f;
+                    break;
+                case 0:
+                    AttackTimer = LaserFlingingDuration;
+                    return;
+            }
+
+            AttackTimer--;
+        }
+
+        const float HungryMazeDuration = 780;
+        const float HungryMazeSpawnTime = 720;
+        const float LaserTime = 240;
+        const float LaserTime2 = 120;
+        void HungryMaze()
+        {
+            switch(AttackTimer)
+            {
+                case HungryMazeDuration:
+                    AttackCount = 1;
+                    NPC.velocity = Vector2.Zero;
+                    DustEffect();
+                    if (NotClient)
+                    {
+                        savedPosition = player.Center + Vector2.UnitX * 2000;
+                    }
+                    NPC.netUpdate = true;
+                    NPC.Center = savedPosition;
+                    DustEffect();
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    NPC.rotation = NPC.DirectionTo(player.Center).ToRotation() - MathHelper.PiOver2;
+                    foreach (var ply in Main.ActivePlayers)
+                    {
+                        ply.Teleport(player.Center);
+                    }
+                    SoundEngine.PlaySound(SoundID.Item37);
+                    break;
+                case > HungryMazeSpawnTime:
+                    if (AttackTimer % 10 == 0)
+                    {
+                        if (NotClient)
+                        {
+                            for (int i = 0; i < 4 * AttackCount; i++)
+                            {
+                                float angle = MathHelper.Pi / ((4 * AttackCount) / 2);
+                                Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(angle * i + MathHelper.PiOver4) * 200 * AttackCount;
+                                float rotation = Main.rand.Next(4) * MathHelper.PiOver2;
+                                NewProj(pos, Vector2.Zero, HungryCannon, ai1: rotation);
+                            }
+                        }
+                        AttackCount++;
+                    }
+                    foreach (var ply in Main.ActivePlayers)
+                    {
+                        ply.velocity = Vector2.Zero;
+                    }
+                    break;
+                case > LaserTime:
+                    if (AttackTimer % 60 == 0)
+                    {
+                        if (NotClient)
+                        {
+                            Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 500;
+                            NewProj(pos, Vector2.Zero, LaserSkull, ai0: 90, ai1: Main.rand.Next(4) * MathHelper.PiOver2);
+                        }
+                        SoundEngine.PlaySound(SoundID.Roar);
+                    }
+                    break;
+                case LaserTime:
+                    if (NotClient)
+                    {
+                        NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 6f, ai1: MathHelper.PiOver2);
+                    }
+                    break;
+                case LaserTime2:
+                    if (NotClient)
+                    {
+                        NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 10f, ai1: MathHelper.PiOver2);
+                    }
+                    break;
+                case 0:
+                    AttackTimer = HungryMazeDuration;
                     return;
             }
             AttackTimer--;
@@ -591,7 +743,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Attack++;
-                if (Attack > 3) Attack = 0;
+                if (Attack > 5) Attack = 0;
                 if (phase == 1) attackDuration = attackDurations[(int)Attack];
                 else attackDuration = attackDurations2[(int)Attack];
 

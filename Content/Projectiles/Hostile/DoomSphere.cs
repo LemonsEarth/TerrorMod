@@ -38,8 +38,8 @@ namespace TerrorMod.Content.Projectiles.Hostile
 
         public override void SetDefaults()
         {
-            Projectile.width = 280;
-            Projectile.height = 280;
+            Projectile.width = 200;
+            Projectile.height = 200;
             Projectile.hostile = true;
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
@@ -51,6 +51,11 @@ namespace TerrorMod.Content.Projectiles.Hostile
         public override void OnSpawn(IEntitySource source)
         {
             Projectile.rotation = Rotation;
+        }
+
+        public override void ModifyDamageHitbox(ref Rectangle hitbox)
+        {
+            
         }
 
         public override void AI()
@@ -66,6 +71,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
                     NetMessage.SendData(MessageID.SyncProjectile, number: proj.whoAmI);
                 }
             }
+            Projectile.damage = 10;
             Projectile.rotation = Rotation;
             Rotation += RotPerSecond;
             scale = AITimer / 5f;

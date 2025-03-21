@@ -73,8 +73,8 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Vector2 position = player.Center + new Vector2(npc.direction * Main.rand.Next(450, 750), Main.rand.Next(-500, 500));
-                        int above = position.Y > player.Center.Y ? 1 : 0;
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), position, Vector2.Zero, ModContent.ProjectileType<HungryCannon>(), npc.damage / 5, 1f, ai1: above);
+                        int above = position.Y > player.Center.Y ? -1 : 1;
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), position, Vector2.Zero, ModContent.ProjectileType<HungryCannon>(), npc.damage / 5, 1f, ai1: above * MathHelper.PiOver2);
                     }
                 }
             }
