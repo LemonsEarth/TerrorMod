@@ -16,6 +16,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerrorMod.Common.Utils;
+using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.NPCs.Bosses.BossAdds;
 using TerrorMod.Content.Projectiles.Hostile;
 
@@ -334,6 +335,36 @@ namespace TerrorMod.Content.NPCs.Bosses
                 case > 0:
                     NPC.velocity = Vector2.Zero;
                     NPC.rotation += rotPerSecond;
+                    for (int i = 0; i < 16; i++)
+                    {
+                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 16) * i) * 800;
+                        Vector2 directionToCenter = pos.DirectionTo(NPC.Center);
+                        Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
+                    }
+                    if (AttackTimer % 10 == 0)
+                    {
+                        foreach (var ply in Main.ActivePlayers)
+                        {
+                            if (NPC.Center.Distance(ply.Center) > 836)
+                            {
+                                ply.AddBuff(ModContent.BuffType<UltimateTerror>(), 12);
+                            }
+                        }
+                    }
+                    if (AttackTimer % 30 == 0)
+                    {
+                        for (int i = -6; i <= 6; i++)
+                        {
+                            if (i >= -1 && i <= 1)
+                            {
+                                continue;
+                            }
+                            if (NotClient)
+                            {
+                                NewProj(NPC.Center, Vector2.UnitX.RotatedBy(NPC.rotation + i * MathHelper.ToRadians(30)) * 8, ProjectileID.LostSoulHostile);
+                            }
+                        }
+                    }
                     break;
                 case 0:
                     AttackTimer = LaserSkullsDuration;
@@ -517,7 +548,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                         {
                             for (int i = 0; i < 8; i++)
                             {
-                                Vector2 pos = savedPosition + Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 900; 
+                                Vector2 pos = savedPosition + Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 900;
                                 NewProj(pos, Vector2.Zero, LightBomb, ai0: player.Center.X, ai1: player.Center.Y, ai2: 60);
                             }
                         }
@@ -536,7 +567,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         const float LaserFlingingTime = 60;
         void LaserFlinging()
         {
-            switch(AttackTimer)
+            switch (AttackTimer)
             {
                 case LaserFlingingDuration:
                     NPC.velocity = Vector2.Zero;
@@ -597,7 +628,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         const float LaserTime2 = 120;
         void HungryMaze()
         {
-            switch(AttackTimer)
+            switch (AttackTimer)
             {
                 case HungryMazeDuration:
                     AttackCount = 1;

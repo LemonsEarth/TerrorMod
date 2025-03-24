@@ -47,7 +47,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         {
             NPC.width = 194;
             NPC.height = 190;
-            NPC.lifeMax = 40000;
+            NPC.lifeMax = 20000;
             NPC.defense = 100;
             NPC.damage = 40;
             NPC.HitSound = SoundID.NPCHit2;
@@ -64,7 +64,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
             NPC.damage = (int)(NPC.damage);
-            NPC.lifeMax = (int)(NPC.lifeMax * balance * 0.5f);
+            NPC.lifeMax = (int)(NPC.lifeMax * balance * 0.4f);
         }
 
         public override bool CheckActive()

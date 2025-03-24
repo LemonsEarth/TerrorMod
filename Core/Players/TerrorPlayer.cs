@@ -33,6 +33,7 @@ namespace TerrorMod.Core.Players
         public bool overdosed = false;
         public bool leadArmorSet = false;
         public bool undeadAmulet = false;
+        public bool ultimateTerror = false;
 
         public bool halloweenHorror = false;
         public bool gunpowderedSnow = false;
@@ -57,6 +58,7 @@ namespace TerrorMod.Core.Players
             cobaltLegs = false;
             halloweenHorror = false;
             gunpowderedSnow = false;
+            ultimateTerror = false;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -263,10 +265,20 @@ namespace TerrorMod.Core.Players
 
         public override void UpdateBadLifeRegen()
         {
-            if (!overdosed) return;
+            if (overdosed)
+            {
+                Player.lifeRegen -= 7;
+            }
 
-            Player.lifeRegen -= 7;
-            
+            if (ultimateTerror)
+            {
+                if (Player.lifeRegen > 0)
+                {
+                    Player.lifeRegen = 0;
+                }
+                Player.lifeRegenTime = 0;
+                Player.lifeRegen -= 150;
+            }
         }
 
         void PhobiaCheck()

@@ -7,16 +7,16 @@ EyeFireClone.DisplayName: Eye Fire
 SkeletronGlock.DisplayName: Gun
 EyeFireButFire.DisplayName: Eye Fire But Fire
 HungryCannon.DisplayName: Hungry Cannon
-BombExplosion.DisplayName: Bomb Explosion
-EyeFireButVenom.DisplayName: Eye Fire But Venom
+BombExplosion.DisplayName: Explosion
+EyeFireButVenom.DisplayName: Venomthrower
 DartHostile.DisplayName: Dart Hostile
 DartTrap.DisplayName: Dart Trap
 DoomLaser.DisplayName: Doom Laser
 DoomSphere.DisplayName: Doom Sphere
-InfiniteTerrorHeadProj.DisplayName: Infinite Terror Head Proj
+InfiniteTerrorHeadProj.DisplayName: Infinite Terror
 LaserSkull.DisplayName: Laser Skull
 LightBomb.DisplayName: Light Bomb
-ChainProj.DisplayName: Chain Proj
-ExplosionLarge.DisplayName: Explosion Large
-MeteorHostile.DisplayName: Meteor Hostile
-PumpkingHeadProj.DisplayName: Pumpking Head Proj
+ChainProj.DisplayName: Nasty Thing
+ExplosionLarge.DisplayName: Explosion
+MeteorHostile.DisplayName: Meteor
+PumpkingHeadProj.DisplayName: Pumpking Head

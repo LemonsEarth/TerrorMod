@@ -40,3 +40,12 @@ UndeadAmulet: {
 		Grants immunity to the Shadow Candle Debuff
 		'''
 }
+
+ApocalypseStone: {
+	DisplayName: Apocalypse Stone
+	Tooltip:
+		'''
+		Not Consumable
+		This is the End
+		'''
+}

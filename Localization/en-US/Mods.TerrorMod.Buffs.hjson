@@ -111,5 +111,10 @@ HalloweenHorrorDebuff: {
 
 GunpowderedSnowDebuff: {
 	DisplayName: Gunpowdered Snow Debuff
-	Description: Mods.TerrorMod.Buffs.GunpowderedSnowDebuff.Description
+	Description: It's getting colder...
+}
+
+UltimateTerror: {
+	DisplayName: Ultimate Terror
+	Description: Mods.TerrorMod.Buffs.UltimateTerror.Description
 }
