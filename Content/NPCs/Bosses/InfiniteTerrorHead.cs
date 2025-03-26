@@ -44,7 +44,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         int HungryCannon => ModContent.ProjectileType<HungryCannon>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 480, 600, 600, 720, 600, 780 };
+        int[] attackDurations = { 480, 600, 600, 720, 600, 780, 660 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
@@ -56,6 +56,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             LightningLances,
             LaserFlinging,
             HungryMaze,
+            TearsOfFire
         }
 
         public enum Attacks2
@@ -194,6 +195,9 @@ namespace TerrorMod.Content.NPCs.Bosses
                         break;
                     case (int)Attacks.HungryMaze:
                         HungryMaze();
+                        break;
+                    case (int)Attacks.TearsOfFire:
+                        TearsOfFire();
                         break;
                 }
             }
@@ -335,9 +339,9 @@ namespace TerrorMod.Content.NPCs.Bosses
                 case > 0:
                     NPC.velocity = Vector2.Zero;
                     NPC.rotation += rotPerSecond;
-                    for (int i = 0; i < 16; i++)
+                    for (int i = 0; i < 64; i++)
                     {
-                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 16) * i) * 800;
+                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 64) * i) * 900;
                         Vector2 directionToCenter = pos.DirectionTo(NPC.Center);
                         Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
                     }
@@ -345,7 +349,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     {
                         foreach (var ply in Main.ActivePlayers)
                         {
-                            if (NPC.Center.Distance(ply.Center) > 836)
+                            if (NPC.Center.Distance(ply.Center) > 900)
                             {
                                 ply.AddBuff(ModContent.BuffType<UltimateTerror>(), 12);
                             }
@@ -385,6 +389,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     NPC.Center = player.Center - Vector2.UnitY * 300;
                     SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                     DustEffect();
+                    NPC.rotation = 0;
                     break;
                 case > ChainFireFromNPCTime:
                     if (AttackTimer % 20 == 0)
@@ -403,6 +408,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                         }
                     }
                     NPC.velocity = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(AttackTimer * 4)) * 2;
+                    NPC.rotation = 0;
                     break;
                 case > ChainFireFromSkyTime:
                     if (AttackTimer % 60 == 0)
@@ -419,6 +425,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                         }
                     }
                     NPC.velocity = Vector2.UnitY.RotatedBy(MathHelper.ToRadians(AttackTimer * 8)) * 2;
+                    NPC.rotation = 0;
                     break;
                 case > ServantSpawnTime:
                     if (AttackTimer % 15 == 0)
@@ -433,12 +440,12 @@ namespace TerrorMod.Content.NPCs.Bosses
 
                     }
                     NPC.velocity /= 1.05f;
+                    NPC.rotation = NPC.DirectionTo(player.Center).ToRotation() + MathHelper.PiOver2;
                     break;
                 case 0:
                     AttackTimer = ChainSpamDuration;
                     return;
             }
-            NPC.rotation = 0;
             AttackTimer--;
         }
 
@@ -462,6 +469,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     DustEffect();
                     SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                     NPC.velocity = NPC.DirectionTo(player.Center) * 3;
+                    NPC.rotation = 0;
                     break;
                 case LightningIndicatorTime:
                     NPC.velocity = Vector2.Zero;
@@ -699,6 +707,70 @@ namespace TerrorMod.Content.NPCs.Bosses
             AttackTimer--;
         }
 
+        const float TearsOfFireDuration = 660;
+        void TearsOfFire()
+        {
+            switch (AttackTimer)
+            {
+                case TearsOfFireDuration:
+                    DustEffect();
+                    if (NotClient)
+                    {
+                        savedPosition = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 500;
+                    }
+                    NPC.netUpdate = true;
+                    NPC.Center = savedPosition;
+                    DustEffect();
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    NPC.rotation = 0;
+                    NPC.velocity = Vector2.Zero;
+                    break;
+                case > 0:
+                    for (int i = 0; i < 64; i++)
+                    {
+                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 64) * i) * 700;
+                        Vector2 directionToCenter = pos.DirectionTo(NPC.Center);
+                        Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
+                    }
+                    if (AttackTimer % 10 == 0)
+                    {
+                        foreach (var ply in Main.ActivePlayers)
+                        {
+                            if (NPC.Center.Distance(ply.Center) > 700)
+                            {
+                                ply.AddBuff(ModContent.BuffType<UltimateTerror>(), 12);
+                            }
+                        }
+                    }
+                    if (AttackTimer < 600)
+                    {
+                        if (AttackTimer % 15 == 0)
+                        {
+                            if (NotClient)
+                            {
+                                NewProj(NPC.Center + new Vector2(-30, 0), Vector2.UnitY.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))) * 5, ProjectileID.Fireball);
+                                NewProj(NPC.Center + new Vector2(30, 0), Vector2.UnitY.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))) * 5, ProjectileID.Fireball);
+                            }
+                        }
+                        if (AttackTimer % 30 == 0)
+                        {
+                            if (NotClient)
+                            {
+                                Vector2 eyeOffset = AttackCount % 2 == 0 ? new Vector2(30, 0) : new Vector2(-30, 0);
+                                Vector2 pos = NPC.Center + eyeOffset;
+                                NewProj(pos, pos.DirectionTo(player.Center) * 10, ProjectileID.InfernoHostileBolt, ai0: player.Center.X, ai1: player.Center.Y);
+                            }
+                            AttackCount++;
+                        }
+                    }
+                    break;
+                case 0:
+                    AttackTimer = TearsOfFireDuration;
+                    return;
+            }
+            AttackTimer--;
+        }
+
         void DustEffect()
         {
             LemonUtils.DustCircle(NPC.Center, 32, 15, DustID.GemDiamond, 4f);
@@ -774,7 +846,7 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Attack++;
-                if (Attack > 5) Attack = 0;
+                if (Attack > 6) Attack = 0;
                 if (phase == 1) attackDuration = attackDurations[(int)Attack];
                 else attackDuration = attackDurations2[(int)Attack];
 
