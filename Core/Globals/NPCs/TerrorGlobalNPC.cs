@@ -22,9 +22,24 @@ namespace TerrorMod.Core.Globals.NPCs
         bool legend = false;
         int AITimer = 0;
 
+        public override void SetDefaults(NPC entity)
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                if (entity.boss)
+                {
+                    entity.lifeMax += (int)(entity.lifeMax * 0.01f * ModLoader.Mods.Length);
+                }
+                else
+                {
+                    entity.lifeMax += (int)(entity.lifeMax * 0.05f * ModLoader.Mods.Length);
+                }
+            }        
+        }
+
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
-            return !entity.SpawnedFromStatue && entity.CanBeChasedBy() && !NPCLists.SafeNPCs.Contains(entity.type);
+            return !entity.SpawnedFromStatue && entity.CanBeChasedBy() && !NPCLists.SafeNPCs.Contains(entity.type) && lateInstantiation;
         }
 
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)

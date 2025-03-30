@@ -18,8 +18,6 @@ namespace TerrorMod.Common.Utils
             OldMan, TheHungry, TheHungryII, LeechHead, LeechBody, LeechTail, TheDestroyerBody, TheDestroyerTail, PrimeCannon, PrimeLaser, PrimeCannon, PrimeSaw,
             PlanterasHook, PlanterasTentacle, GolemFistLeft, GolemFistRight, GolemHead, GolemHeadFree, CultistDragonBody1, CultistDragonBody2, CultistDragonBody3, CultistDragonBody4, CultistDragonHead, CultistDragonTail, MoonLordCore, MoonLordFreeEye, MoonLordHand, MoonLordHead, MoonLordLeechBlob,
             WallofFleshEye
-
-
         };
     }
 }

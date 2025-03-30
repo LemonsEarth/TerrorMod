@@ -44,7 +44,7 @@ namespace TerrorMod.Content.NPCs.Bosses
         int HungryCannon => ModContent.ProjectileType<HungryCannon>();
 
         float attackDuration = 0;
-        int[] attackDurations = { 480, 600, 600, 720, 600, 780, 660 };
+        int[] attackDurations = { 480, 600, 600, 720, 600, 780, 660, 600 };
         int[] attackDurations2 = { 900, 900, 720, 720, 900 };
         public Player player { get; private set; }
 
@@ -56,13 +56,16 @@ namespace TerrorMod.Content.NPCs.Bosses
             LightningLances,
             LaserFlinging,
             HungryMaze,
-            TearsOfFire
+            TearsOfFire,
+            PhantasmalBarrage,
         }
 
         public enum Attacks2
         {
 
         }
+
+        bool hard => Main.masterMode || NPC.life < NPC.lifeMax / 2;
 
         public override void SetStaticDefaults()
         {
@@ -100,9 +103,9 @@ namespace TerrorMod.Content.NPCs.Bosses
             NPC.width = 97;
             NPC.height = 97;
             NPC.Opacity = 1;
-            NPC.lifeMax = 800000;
+            NPC.lifeMax = 500000;
             NPC.defense = 40;
-            NPC.damage = 70;
+            NPC.damage = 100;
             NPC.HitSound = SoundID.NPCHit2;
             NPC.DeathSound = SoundID.NPCDeath52;
             NPC.value = 1000000;
@@ -125,8 +128,10 @@ namespace TerrorMod.Content.NPCs.Bosses
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * balance * bossAdjustment * 0.5f);
-            NPC.damage = (int)(NPC.damage * balance * 1f);
+            NPC.lifeMax = (int)(NPC.lifeMax * balance * bossAdjustment * 0.6f);
+            NPC.damage = 100;
+            if (Main.expertMode) NPC.damage = 130;
+            if (Main.masterMode) NPC.damage = 170;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -199,6 +204,9 @@ namespace TerrorMod.Content.NPCs.Bosses
                     case (int)Attacks.TearsOfFire:
                         TearsOfFire();
                         break;
+                    case (int)Attacks.PhantasmalBarrage:
+                        PhantasmalBarrage();
+                        break;
                 }
             }
             else
@@ -212,7 +220,6 @@ namespace TerrorMod.Content.NPCs.Bosses
                 }*/
 
             }
-
             if (AITimer % 10 == 0)
             {
                 foreach (var ply in Main.ActivePlayers)
@@ -278,6 +285,16 @@ namespace TerrorMod.Content.NPCs.Bosses
                             Vector2 pos = NPC.Center + perpendicularDirection * i * 400;
                             NewProj(pos, Vector2.Zero, HeadProj, ai0: savedDirection.ToRotation(), ai1: 30, ai2: DashSpeed);
                         }
+
+                        if (hard)
+                        {
+                            for (int i = -8; i <= 8; i++)
+                            {
+                                Vector2 perpendicularDirection = savedDirection;
+                                Vector2 pos = player.Center + player.DirectionTo(savedPosition).RotatedBy(MathHelper.PiOver2) * 500 + perpendicularDirection * i * 400;
+                                NewProj(pos, Vector2.Zero, HeadProj, ai0: savedDirection.RotatedBy(MathHelper.PiOver2).ToRotation(), ai1: 60, ai2: DashSpeed * 1.4f);
+                            }
+                        }       
                     }
                     break;
                 case 0:
@@ -313,7 +330,10 @@ namespace TerrorMod.Content.NPCs.Bosses
                     {
                         if (NotClient)
                         {
-                            for (int i = 0; i < 3; i++)
+                            int amount = 3;
+                            if (NPC.life < NPC.lifeMax / 2) amount++;
+                            if (Main.masterMode) amount++;
+                            for (int i = 0; i < amount; i++)
                             {
                                 Vector2 pos = player.Center + Main.rand.NextVector2CircularEdge(400, 400);
                                 NewProj(pos, Vector2.Zero, LaserSkull, ai0: 90, ai1: pos.DirectionTo(player.Center).ToRotation());
@@ -334,16 +354,23 @@ namespace TerrorMod.Content.NPCs.Bosses
                     if (NotClient)
                     {
                         NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 2f, ai1: rot, ai2: rotPerSecond);
-                    }
+                    }             
                     break;
                 case > 0:
                     NPC.velocity = Vector2.Zero;
                     NPC.rotation += rotPerSecond;
-                    for (int i = 0; i < 64; i++)
+                    for (int i = 0; i < 16; i++)
                     {
-                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 64) * i) * 900;
+                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 16 + MathHelper.ToRadians(AttackTimer)) * i) * 900;
                         Vector2 directionToCenter = pos.DirectionTo(NPC.Center);
                         Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
+                    }
+                    if (hard)
+                    {
+                        if (AttackTimer == BigLaserTime / 2)
+                        {
+                            NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 2f, ai1: NPC.rotation, ai2: rotPerSecond * 1.3f);
+                        }
                     }
                     if (AttackTimer % 10 == 0)
                     {
@@ -359,10 +386,6 @@ namespace TerrorMod.Content.NPCs.Bosses
                     {
                         for (int i = -6; i <= 6; i++)
                         {
-                            if (i >= -1 && i <= 1)
-                            {
-                                continue;
-                            }
                             if (NotClient)
                             {
                                 NewProj(NPC.Center, Vector2.UnitX.RotatedBy(NPC.rotation + i * MathHelper.ToRadians(30)) * 8, ProjectileID.LostSoulHostile);
@@ -392,7 +415,8 @@ namespace TerrorMod.Content.NPCs.Bosses
                     NPC.rotation = 0;
                     break;
                 case > ChainFireFromNPCTime:
-                    if (AttackTimer % 20 == 0)
+                    int cd = (hard) ? 10 : 20;
+                    if (AttackTimer % cd == 0)
                     {
                         if (NotClient)
                         {
@@ -418,9 +442,10 @@ namespace TerrorMod.Content.NPCs.Bosses
                             for (int i = -4; i <= 4; i++)
                             {
                                 Vector2 pos = player.Center + new Vector2(600 * i, -800);
-                                float speed = Main.rand.NextFloat(4, 8);
-                                NewProj(pos, Vector2.UnitY * speed, Chain, ai0: 14, ai1: 14);
-                                NewProj(pos, Vector2.UnitY * speed, Chain, ai0: 14, ai1: -14);
+                                float speed = Main.rand.NextFloat(3, 7);
+                                float oscSpeed = hard ? 12 : 10;
+                                NewProj(pos, Vector2.UnitY * speed, Chain, ai0: oscSpeed, ai1: oscSpeed);
+                                NewProj(pos, Vector2.UnitY * speed, Chain, ai0: oscSpeed, ai1: -oscSpeed);
                             }
                         }
                     }
@@ -440,7 +465,7 @@ namespace TerrorMod.Content.NPCs.Bosses
 
                     }
                     NPC.velocity /= 1.05f;
-                    NPC.rotation = NPC.DirectionTo(player.Center).ToRotation() + MathHelper.PiOver2;
+                    NPC.rotation = NPC.DirectionTo(player.Center).ToRotation() - MathHelper.PiOver2;
                     break;
                 case 0:
                     AttackTimer = ChainSpamDuration;
@@ -490,7 +515,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     SoundEngine.PlaySound(TerrorMod.Thunder);
                     SoundEngine.PlaySound(SoundID.Thunder);
                     SoundEngine.PlaySound(SoundID.Thunder);
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (NotClient)
                     {
                         for (int i = -12; i <= 12; i++)
                         {
@@ -531,7 +556,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     }
                     for (int i = 0; i < 16; i++)
                     {
-                        Vector2 pos = savedPosition + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 16) * i) * 400;
+                        Vector2 pos = savedPosition + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 16) + MathHelper.ToRadians(AttackTimer) * i) * 400;
                         Vector2 directionToCenter = pos.DirectionTo(savedPosition);
                         Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
                     }
@@ -542,7 +567,8 @@ namespace TerrorMod.Content.NPCs.Bosses
                             if (NotClient)
                             {
                                 int dir = Main.rand.NextBool().ToDirectionInt();
-                                Vector2 pos = player.Center + new Vector2(800 * dir, i * 150);
+                                int gap = hard ? 100 : 150;
+                                Vector2 pos = player.Center + new Vector2(800 * dir, i * gap);
                                 NewProj(pos, Vector2.Zero, ProjectileID.FairyQueenLance, ai0: dir == 1 ? MathHelper.Pi : 0);
                             }
                         }
@@ -678,11 +704,12 @@ namespace TerrorMod.Content.NPCs.Bosses
                     }
                     break;
                 case > LaserTime:
-                    if (AttackTimer % 60 == 0)
+                    int cd = hard ? 30 : 60;
+                    if (AttackTimer % cd == 0)
                     {
                         if (NotClient)
                         {
-                            Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 500;
+                            Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(Main.rand.Next(4) * MathHelper.PiOver2) * 400;
                             NewProj(pos, Vector2.Zero, LaserSkull, ai0: 90, ai1: Main.rand.Next(4) * MathHelper.PiOver2);
                         }
                         SoundEngine.PlaySound(SoundID.Roar);
@@ -724,14 +751,19 @@ namespace TerrorMod.Content.NPCs.Bosses
                     SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
                     NPC.rotation = 0;
                     NPC.velocity = Vector2.Zero;
-                    break;
-                case > 0:
-                    for (int i = 0; i < 64; i++)
+                    for (int i = 0; i < 32; i++)
                     {
-                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 64) * i) * 700;
+                        Vector2 pos = NPC.Center + Vector2.UnitY.RotatedBy(((2 * MathHelper.Pi) / 32) * i) * 700;
                         Vector2 directionToCenter = pos.DirectionTo(NPC.Center);
-                        Dust.NewDustDirect(pos, 2, 2, DustID.GemDiamond, directionToCenter.X * 5, directionToCenter.Y * 5, Scale: Main.rand.NextFloat(0.8f, 2f)).noGravity = true;
+                        if (NotClient)
+                        {
+                            Projectile proj = NewProj(pos, Vector2.Zero, ProjectileID.PhantasmalSphere, ai0: 30);
+                            proj.timeLeft = 600;
+                            NetMessage.SendData(MessageID.SyncProjectile, number: proj.whoAmI);
+                        }
                     }
+                    break;
+                case > 60:
                     if (AttackTimer % 10 == 0)
                     {
                         foreach (var ply in Main.ActivePlayers)
@@ -751,8 +783,10 @@ namespace TerrorMod.Content.NPCs.Bosses
                                 NewProj(NPC.Center + new Vector2(-30, 0), Vector2.UnitY.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))) * 5, ProjectileID.Fireball);
                                 NewProj(NPC.Center + new Vector2(30, 0), Vector2.UnitY.RotatedBy(MathHelper.ToRadians(Main.rand.NextFloat(-15, 15))) * 5, ProjectileID.Fireball);
                             }
+                            SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (0.3f, 0.6f) }, NPC.Center);
                         }
-                        if (AttackTimer % 30 == 0)
+                        int cd = hard ? 25 : 30;
+                        if (AttackTimer % cd == 0)
                         {
                             if (NotClient)
                             {
@@ -771,6 +805,74 @@ namespace TerrorMod.Content.NPCs.Bosses
             AttackTimer--;
         }
 
+        const float PhantasmalBarrageCooldown = 600;
+        void PhantasmalBarrage()
+        {
+            switch(AttackTimer)
+            {
+                case PhantasmalBarrageCooldown:
+                    DeleteProjectiles();
+                    DustEffect();
+                    if (NotClient)
+                    {
+                        savedPosition = player.Center - Vector2.UnitY * 600;
+                    }
+                    NPC.netUpdate = true;
+                    NPC.Center = savedPosition;
+                    DustEffect();
+                    SoundEngine.PlaySound(SoundID.Item92, NPC.Center);
+                    NPC.rotation = 0;
+                    NPC.velocity = Vector2.Zero;
+
+                    for (int i = 0; i < 16; i++)
+                    {
+                        if (NotClient)
+                        {
+                            savedPosition = player.Center;
+                            Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(i * (MathHelper.PiOver4 / 2)) * 300;
+                            NewProj(pos, Vector2.Zero, ProjectileID.PhantasmalSphere, ai0: 30f);
+                        }
+                        NPC.netUpdate = true;
+                    }
+                    break;
+                case > 0:
+                    NPC.Center = savedPosition - Vector2.UnitY.RotatedBy(MathHelper.ToRadians(AttackCount)) * 600;
+                    AttackCount += 3;
+                    foreach (var ply in Main.ActivePlayers)
+                    {
+                        if (ply.Distance(savedPosition) > 300)
+                        {
+                            ply.velocity += ply.DirectionTo(savedPosition) * 2f;
+                        }
+                    }
+
+                    if (AttackTimer % 30 == 0)
+                    {
+                        if (NotClient)
+                        {
+                            for (int i = 0; i < 8; i++)
+                            {
+                                NewProj(NPC.Center, Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 3, ProjectileID.PhantasmalBolt);
+                            }
+                            if (hard)
+                            {
+                                for (int i = 0; i < 8; i++)
+                                {
+                                    NewProj(NPC.Center, Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * 2.5f, ProjectileID.PhantasmalBolt);
+                                }
+                            }
+                            NewProj(NPC.Center, NPC.DirectionTo(player.Center) * 5, ProjectileID.PhantasmalBolt);
+                        }
+                    }
+                    break;
+                case 0:
+                    AttackTimer = PhantasmalBarrageCooldown;
+                    return;
+            }
+
+            AttackTimer--;
+        }
+
         void DustEffect()
         {
             LemonUtils.DustCircle(NPC.Center, 32, 15, DustID.GemDiamond, 4f);
@@ -780,7 +882,9 @@ namespace TerrorMod.Content.NPCs.Bosses
 
         Projectile NewProj(Vector2 position, Vector2 velocity, int type, int damage = 0, int knockback = 0, float ai0 = 0, float ai1 = 0, float ai2 = 0)
         {
-            if (damage == 0) damage = NPC.damage / 4;
+            if (!Main.expertMode && !Main.masterMode) damage = NPC.damage / 2;
+            else if (Main.expertMode && !Main.masterMode) damage = NPC.damage / 4;
+            else if (Main.masterMode) damage = NPC.damage / 6;
             return Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), position, velocity, type, damage, knockback, -1, ai0, ai1, ai2);
         }
 
@@ -801,7 +905,7 @@ namespace TerrorMod.Content.NPCs.Bosses
 
         public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
-
+            if (Main.expertMode) modifiers.FinalDamage *= 0.8f;
         }
 
         public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
@@ -846,16 +950,27 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Attack++;
-                if (Attack > 6) Attack = 0;
+                if (Attack > 7) Attack = 0;
                 if (phase == 1) attackDuration = attackDurations[(int)Attack];
                 else attackDuration = attackDurations2[(int)Attack];
 
                 AttackCount = 0;
                 AttackTimer = 0;
                 NPC.Opacity = 1f;
-            }
+            }        
 
             NPC.netUpdate = true;
+        }
+
+        void DeleteProjectiles()
+        {
+            foreach (var proj in Main.ActiveProjectiles)
+            {
+                if (proj.hostile && proj.damage > 0 && !proj.netImportant)
+                {
+                    proj.Kill();
+                }
+            }
         }
 
         public override bool CheckActive()
