@@ -34,7 +34,8 @@ namespace TerrorMod.Content.NPCs.Bosses.BossAdds
             NPC.CloneDefaults(NPCID.ServantofCthulhu);
             AIType = NPCID.ServantofCthulhu;
             AnimationType = NPCID.ServantofCthulhu;
-            NPC.lifeMax = 600;
+            NPC.lifeMax = 100;
+            NPC.damage = 20;
             NPC.scale = 2.5f;
             NPC.noTileCollide = true;
         }

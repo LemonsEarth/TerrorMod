@@ -34,6 +34,7 @@ namespace TerrorMod.Content.Projectiles.Hostile
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 150;
+            Projectile.penetrate = -1;
         }
 
         public override void AI()

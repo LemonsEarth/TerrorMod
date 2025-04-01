@@ -4,6 +4,9 @@ Main:
 - Enemy hp is increased depending on the amount of loaded mods
 	- Boss hp is less affected by this change
 
+	Town NPCs have a chance to spawn Skeletron upon death.
+		- Chance increases at night time and FTW, GFB seeds
+
 - Upon defeating the Wall of Flesh:
 	Players are inflicted with the "Before the Storm" buff, which greatly reduces spawnrates for 10 minutes
 	Mechanical Cores spawn throughout the world

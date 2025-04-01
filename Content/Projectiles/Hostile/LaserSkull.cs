@@ -56,6 +56,10 @@ namespace TerrorMod.Content.Projectiles.Hostile
                 LemonUtils.DustCircle(Projectile.Center, 8, 17, DustID.GemDiamond, 4f);
                 LemonUtils.DustCircle(Projectile.Center, 8, 12, DustID.GemDiamond, 4f);
                 SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
+                if (WaitTime > Projectile.timeLeft)
+                {
+                    Projectile.timeLeft = (int)WaitTime + 10;
+                }    
             }
 
             if (AITimer >= WaitTime)
