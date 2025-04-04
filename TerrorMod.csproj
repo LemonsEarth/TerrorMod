@@ -18,6 +18,7 @@
 	  <None Remove="Content\Buffs\Debuffs\InfectedCorrupt.png" />
 	  <None Remove="Content\Buffs\Debuffs\InfectedCrimson.png" />
 	  <None Remove="Content\NPCs\Bosses\InfiniteTerrorCage_Head_Boss.png" />
+	  <None Remove="Content\Projectiles\Hostile\DoomSphereLong.png" />
 	  <None Remove="Content\Projectiles\Hostile\ExplosionLarge.png" />
 	  <None Remove="Content\Tiles\Furniture\SimpleIceChest_Highlight.png" />
 	  <None Remove="Localization\en-US\Mods.TerrorMod.Buffs.hjson" />

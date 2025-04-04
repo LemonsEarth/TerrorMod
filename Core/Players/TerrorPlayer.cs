@@ -61,6 +61,14 @@ namespace TerrorMod.Core.Players
             ultimateTerror = false;
         }
 
+        public override void UpdateDead()
+        {
+            if (SkullSystem.vagrantSkullActive)
+            {
+                Player.RemoveSpawn();
+            }
+        }
+
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Player.HasBuff(ModContent.BuffType<TungstenPenetration>()))
