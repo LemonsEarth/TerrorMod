@@ -47,6 +47,8 @@ namespace TerrorMod.Core.Players
 
         public int curseLevel = 0;
 
+        int savageSkullTimer = 0;
+
         public override void ResetEffects()
         {
             infected = false;
@@ -75,6 +77,11 @@ namespace TerrorMod.Core.Players
             {
                 modifiers.ArmorPenetration += 5;
             }
+        }
+
+        public override void OnHitAnything(float x, float y, Entity victim)
+        {
+            savageSkullTimer = 300;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -133,6 +140,7 @@ namespace TerrorMod.Core.Players
                 }
             }
 
+            if (savageSkullTimer > 0) savageSkullTimer--;
             timer++;
         }
 
@@ -174,7 +182,7 @@ namespace TerrorMod.Core.Players
             {
                 LemonUtils.DustCircle(Player.Center, 8, 5, DustID.Corruption, 3f);
                 LemonUtils.DustCircle(Player.Center, 8, 5, DustID.Crimson, 3f);
-                Player.KillMe(PlayerDeathReason.ByCustomReason(Language.GetText("Mods.TerrorMod.Buffs.InfectedCrimson.DeathMessage").Format(Main.LocalPlayer.name)), 9999, 0);
+                PlayerDeathReason.ByCustomReason(NetworkText.FromKey("Mods.TerrorMod.Buffs.InfectedCrimson.DeathMessage", Main.LocalPlayer.name));
                 infectedTimer = 0;
             }
 
@@ -273,6 +281,10 @@ namespace TerrorMod.Core.Players
 
         public override void UpdateBadLifeRegen()
         {
+            if (SkullSystem.gluttonySkullActive)
+            {
+                Player.lifeRegen -= (int)(Player.manaSickReduction * 10) * 2;
+            }
             if (overdosed)
             {
                 Player.lifeRegen -= 7;
@@ -286,6 +298,14 @@ namespace TerrorMod.Core.Players
                 }
                 Player.lifeRegenTime = 0;
                 Player.lifeRegen -= 150;
+            }
+        }
+
+        public override void UpdateLifeRegen()
+        {
+            if (SkullSystem.savageSkullActive && savageSkullTimer <= 0)
+            {
+                Player.lifeRegenTime = 0;
             }
         }
 

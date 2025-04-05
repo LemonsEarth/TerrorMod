@@ -16,7 +16,7 @@ using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.NPCs
 {
-    public class BlindSkullNPC : GlobalNPC
+    public class AllGlobalNPC : GlobalNPC
     {
         public override bool InstancePerEntity => true;
 
@@ -29,6 +29,17 @@ namespace TerrorMod.Core.Globals.NPCs
         {
             if (!SkullSystem.blindSkullActive) return null;
             return false;
+        }
+
+        public override void OnKill(NPC npc)
+        {
+            if (Main.rand.NextBool(4))
+            {
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, Vector2.Zero, ModContent.ProjectileType<ExplosionLarge>(), 20, 1f);
+                }
+            }
         }
     }
 }

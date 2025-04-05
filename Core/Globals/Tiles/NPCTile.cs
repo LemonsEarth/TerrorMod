@@ -5,11 +5,45 @@ using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using TerrorMod.Content.NPCs.Hostile.Forest;
 using TerrorMod.Common.Utils;
+using Terraria.GameContent.RGB;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.Tiles
 {
     public class NPCTile : GlobalTile
     {
+        bool TileIsValid(int i, int j)
+        {
+            return !Main.tile[i + 1, j].HasTile && Main.tile[i + 1, j].WallType != WallID.None;
+        }
+
+        public override void RandomUpdate(int i, int j, int type)
+        {
+            if (!SkullSystem.briarSkullActive) return;
+            if (type != TileID.Spikes && type != TileID.WoodenSpikes) return;
+            if (WorldGen.InWorld(i, j, 5))
+            {
+                Tile tile = Main.tile[i, j];
+
+                if (TileIsValid(i + 1, j))
+                {
+                    WorldGen.PlaceTile(i + 1, j, tile.TileType);
+                }
+                if (TileIsValid(i - 1, j))
+                {
+                    WorldGen.PlaceTile(i + 1, j, tile.TileType);
+                }
+                if (TileIsValid(i, j + 1))
+                {
+                    WorldGen.PlaceTile(i + 1, j, tile.TileType);
+                }
+                if (TileIsValid(i, j - 1))
+                {
+                    WorldGen.PlaceTile(i + 1, j, tile.TileType);
+                }
+
+            }
+        }
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             if (fail) // Only proceed if the tile was actually broken
@@ -31,9 +65,9 @@ namespace TerrorMod.Core.Globals.Tiles
                                 if (Main.tile[i + x, j + y].HasTile && Main.tile[i + x, j + y].TileType == TileID.Stone)
                                 {
                                     WorldGen.KillTile(i + x, j + y);
-                                } 
+                                }
                             }
-                        }  
+                        }
                     }
                     else if (roll < 2)
                     {
