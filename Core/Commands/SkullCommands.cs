@@ -17,7 +17,8 @@ namespace TerrorMod.Core.Commands
             Main.NewText("Vagrant: " + SkullSystem.vagrantSkullActive);
             Main.NewText("Savage: " + SkullSystem.savageSkullActive);
             Main.NewText("Tough Luck: " + SkullSystem.toughLuckSkullActive);
-            Main.NewText("briar: " + SkullSystem.briarSkullActive);
+            Main.NewText("Briar: " + SkullSystem.briarSkullActive);
+            Main.NewText("Gluttony: " + SkullSystem.gluttonySkullActive);
         }
     }
 
@@ -82,7 +83,7 @@ namespace TerrorMod.Core.Commands
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             SkullSystem.briarSkullActive = !SkullSystem.briarSkullActive;
-            Main.NewText("briar: " + SkullSystem.briarSkullActive);
+            Main.NewText("Briar: " + SkullSystem.briarSkullActive);
         }
     }
 
@@ -95,7 +96,7 @@ namespace TerrorMod.Core.Commands
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             SkullSystem.gluttonySkullActive = !SkullSystem.gluttonySkullActive;
-            Main.NewText("gluttony: " + SkullSystem.gluttonySkullActive);
+            Main.NewText("Gluttony: " + SkullSystem.gluttonySkullActive);
         }
     }
 }

@@ -182,7 +182,7 @@ namespace TerrorMod.Core.Players
             {
                 LemonUtils.DustCircle(Player.Center, 8, 5, DustID.Corruption, 3f);
                 LemonUtils.DustCircle(Player.Center, 8, 5, DustID.Crimson, 3f);
-                PlayerDeathReason.ByCustomReason(NetworkText.FromKey("Mods.TerrorMod.Buffs.InfectedCrimson.DeathMessage", Main.LocalPlayer.name));
+                Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey("Mods.TerrorMod.Buffs.InfectedCrimson.DeathMessage", Main.LocalPlayer.name)), 9999, 1);        
                 infectedTimer = 0;
             }
 
