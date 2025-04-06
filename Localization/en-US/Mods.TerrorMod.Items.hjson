@@ -49,3 +49,75 @@ ApocalypseStone: {
 		This is the End
 		'''
 }
+
+BlindSkull: {
+	DisplayName: Blind Skull
+	Tooltip:
+		'''
+		"Your senses are fading"
+		Hides enemy health bars
+		Cannot be disabled
+		'''
+}
+
+BriarSkull: {
+	DisplayName: Briar Skull
+	Tooltip:
+		'''
+		"Time is ticking"
+		Spikes spread over time
+		Cannot be disabled
+		'''
+}
+
+GluttonySkull: {
+	DisplayName: Gluttony Skull
+	Tooltip:
+		'''
+		"Endless hunger has consequences"
+		Doubled ammo and mana consumption
+		Movement speed reduced by 5% per 1000 ammo in inventory
+		Mana sickness decreases life regeneration
+		Cannot be disabled
+		'''
+}
+
+GreedSkull: {
+	DisplayName: Greed Skull
+	Tooltip:
+		'''
+		"Get your money up"
+		Doubled shop and reforge prices
+		Cannot be disabled
+		'''
+}
+
+SavageSkull: {
+	DisplayName: Savage Skull
+	Tooltip:
+		'''
+		"Your warrior blood thirsts for combat"
+		Cannot regenerate life outside of combat
+		Cannot be disabled
+		'''
+}
+
+ToughLuckSkull: {
+	DisplayName: Tough Luck Skull
+	Tooltip:
+		'''
+		"Don't get too close"
+		Enemies have a chance to explode on death (does not destroy tiles)
+		Cannot be disabled
+		'''
+}
+
+VagrantSkull: {
+	DisplayName: Vagrant Skull
+	Tooltip:
+		'''
+		"No place like home"
+		Spawn point set to world spawn
+		Cannot be disabled
+		'''
+}

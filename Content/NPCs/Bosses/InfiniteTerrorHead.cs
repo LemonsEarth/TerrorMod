@@ -328,7 +328,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                         NewProj(NPC.Center, Vector2.Zero, ModContent.ProjectileType<DoomSphereLong>(), ai0: 2, ai1: NPC.rotation, ai2: MathHelper.ToRadians(1f));
                     }
                     break;
-                case < 1800:
+                case < 1860:
                     if (deathTimer % 100 == 0)
                     {
                         if (NotClient)
@@ -338,6 +338,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                             {
                                 float speed = 6;
                                 if (randProj == ProjectileID.PhantasmalBolt) speed = 3;
+                                if (randProj == ProjectileID.InsanityShadowHostile) speed = 8;
                                 NewProj(NPC.Center, Vector2.UnitY.RotatedBy((MathHelper.PiOver4 / 2) * i) * speed, randProj);
                             }
                         }
@@ -345,13 +346,13 @@ namespace TerrorMod.Content.NPCs.Bosses
                     }
                     NPC.rotation += rotPerSecond;
                     break;
-                case 1800:
+                case 1860:
                     if (NotClient)
                     {
                         NewProj(NPC.Center, Vector2.Zero, ModContent.ProjectileType<DoomSphereLong>(), ai0: 2, ai1: NPC.rotation, ai2: MathHelper.ToRadians(1.8f));
                     }
                     break;
-                case < 2400:
+                case < 2660:
                     if (deathTimer % 100 == 0)
                     {
                         if (NotClient)
@@ -361,6 +362,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                             {
                                 float speed = 8;
                                 if (randProj == ProjectileID.PhantasmalBolt) speed = 4;
+                                if (randProj == ProjectileID.InsanityShadowHostile) speed = 10;
                                 NewProj(NPC.Center, Vector2.UnitY.RotatedBy((MathHelper.PiOver4 / 2) * i) * speed, randProj);
                             }
                         }
@@ -368,7 +370,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     }
                     NPC.rotation += rotPerSecond;
                     break;
-                case 2400:
+                case 2660:
                     SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) });
                     SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) });
                     SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (-0.7f, -0.4f) });
@@ -377,7 +379,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                         NewProj(NPC.Center, Vector2.Zero, DoomSphere, ai0: 2, ai1: NPC.rotation, ai2: MathHelper.ToRadians(2.5f));
                     }
                     break;
-                case < 2500:
+                case < 2760:
                     NPC.velocity = Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 2;
                     NPC.rotation = MathHelper.ToRadians(deathTimer * 3);
                     if (deathTimer % 10 == 0)
@@ -393,7 +395,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                     PunchCameraModifier mod3 = new PunchCameraModifier(NPC.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 15f, 6f, 20, 1000f, FullName);
                     Main.instance.CameraModifiers.Add(mod3);
                     break;
-                case > 2500:
+                case > 2760:
                     canDie = true;
                     NPC.SimpleStrikeNPC(9999999, 1);
                     break;

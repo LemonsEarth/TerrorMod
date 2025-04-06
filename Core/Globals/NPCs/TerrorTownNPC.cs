@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Configuration;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -23,6 +24,17 @@ namespace TerrorMod.Core.Globals.NPCs
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return lateInstantiation && entity.townNPC;
+        }
+
+        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
+        {
+            if (!SkullSystem.greedSkullActive) return;
+            foreach (Item item in items)
+            {
+                if (item == null) continue;
+                int originalPrice = item.shopCustomPrice == null ? item.value : item.shopCustomPrice.Value;
+                item.shopCustomPrice = originalPrice * 2;
+            }
         }
 
         bool spawnedSkelly = false;

@@ -23,10 +23,30 @@ namespace TerrorMod.Core.Globals.Items
             if (ammo.stack > 1) ammo.stack--;
         }
 
-        public override void OnConsumeMana(Item item, Player player, int manaConsumed)
+        public override void UpdateInventory(Item item, Player player)
         {
             if (!SkullSystem.gluttonySkullActive) return;
-            player.CheckMana(manaConsumed, true);
+            if (item.ammo != AmmoID.None && item.stack > 999)
+            {
+                player.moveSpeed -= (item.stack / 1000) * 0.05f;
+            }
+        }
+
+        public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
+        {
+            if (!SkullSystem.gluttonySkullActive) return;
+            mult = 2;
+        }
+
+        public override bool ReforgePrice(Item item, ref int reforgePrice, ref bool canApplyDiscount)
+        {
+            if (SkullSystem.greedSkullActive)
+            {
+                canApplyDiscount = false;
+                reforgePrice *= 2;
+                return false;
+            }
+            return true;
         }
 
         public override void SetStaticDefaults()

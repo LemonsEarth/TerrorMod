@@ -7,7 +7,8 @@ Main:
 		- Savage: You can only regenerate life while dealing damage
 		- Tough Luck: Enemies have a chance to explode on death (does not destroy tiles)
 		- Briar: Spikes spread over time
-		- Gluttony: Doubled mana and ammo consumption. Mana sickness decreases life regeneration
+		- Gluttony: Doubled mana and ammo consumption. Mana sickness decreases life regeneration. Movement speed reduced by 5% per 1000 ammo in inventory.
+		- Greed: Increased shop and reforge prices
 
 	- Enemy hp is increased depending on the amount of loaded mods
 		- Boss hp is less affected by this change
@@ -22,6 +23,7 @@ Main:
 
 	- In hardmode, falling stars have a chance to be replaced by meteors which destroy tiles on impact
 
+	- Harpies and Wyverns are bigger
 	- Plant enemies like Man Eaters and Snatchers regenerate health over time
 	- Jellyfish inflict Acid Venom and Electrified
 	- Armored Skeletons take much less damage the more health they have

@@ -139,7 +139,6 @@ namespace TerrorMod.Core.Players
                     Player.Teleport(Player.Center + Main.rand.NextVector2Circular(800, 800), 1);
                 }
             }
-
             if (savageSkullTimer > 0) savageSkullTimer--;
             timer++;
         }

@@ -19,6 +19,7 @@ namespace TerrorMod.Core.Commands
             Main.NewText("Tough Luck: " + SkullSystem.toughLuckSkullActive);
             Main.NewText("Briar: " + SkullSystem.briarSkullActive);
             Main.NewText("Gluttony: " + SkullSystem.gluttonySkullActive);
+            Main.NewText("Greed: " + SkullSystem.greedSkullActive);
         }
     }
 
@@ -26,12 +27,15 @@ namespace TerrorMod.Core.Commands
     {
         public override CommandType Type => CommandType.World;
 
-        public override string Command => "blindskull";
+        public override string Command => "blind";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            SkullSystem.blindSkullActive = !SkullSystem.blindSkullActive;
-            Main.NewText("Blind: " + SkullSystem.blindSkullActive);
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.blindSkullActive = !SkullSystem.blindSkullActive;
+                Main.NewText("Blind: " + SkullSystem.blindSkullActive);
+            }
         }
     }
 
@@ -39,12 +43,15 @@ namespace TerrorMod.Core.Commands
     {
         public override CommandType Type => CommandType.World;
 
-        public override string Command => "vagrantskull";
+        public override string Command => "vagrant";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            SkullSystem.vagrantSkullActive = !SkullSystem.vagrantSkullActive;
-            Main.NewText("Vagrant: " + SkullSystem.vagrantSkullActive);
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.vagrantSkullActive = !SkullSystem.vagrantSkullActive;
+                Main.NewText("Vagrant: " + SkullSystem.vagrantSkullActive);
+            }
         }
     }
 
@@ -52,12 +59,15 @@ namespace TerrorMod.Core.Commands
     {
         public override CommandType Type => CommandType.World;
 
-        public override string Command => "savageskull";
+        public override string Command => "savage";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            SkullSystem.savageSkullActive = !SkullSystem.savageSkullActive;
-            Main.NewText("Savage: " + SkullSystem.savageSkullActive);
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.savageSkullActive = !SkullSystem.savageSkullActive;
+                Main.NewText("Savage: " + SkullSystem.savageSkullActive);
+            }
         }
     }
 
@@ -65,12 +75,15 @@ namespace TerrorMod.Core.Commands
     {
         public override CommandType Type => CommandType.World;
 
-        public override string Command => "toughluckskull";
+        public override string Command => "toughluck";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            SkullSystem.toughLuckSkullActive = !SkullSystem.toughLuckSkullActive;
-            Main.NewText("Tough Luck: " + SkullSystem.toughLuckSkullActive);
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.toughLuckSkullActive = !SkullSystem.toughLuckSkullActive;
+                Main.NewText("Tough Luck: " + SkullSystem.toughLuckSkullActive);
+            }
         }
     }
 
@@ -78,12 +91,15 @@ namespace TerrorMod.Core.Commands
     {
         public override CommandType Type => CommandType.World;
 
-        public override string Command => "briarskull";
+        public override string Command => "briar";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            SkullSystem.briarSkullActive = !SkullSystem.briarSkullActive;
-            Main.NewText("Briar: " + SkullSystem.briarSkullActive);
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.briarSkullActive = !SkullSystem.briarSkullActive;
+                Main.NewText("Briar: " + SkullSystem.briarSkullActive);
+            }
         }
     }
 
@@ -91,12 +107,31 @@ namespace TerrorMod.Core.Commands
     {
         public override CommandType Type => CommandType.World;
 
-        public override string Command => "gluttonyskull";
+        public override string Command => "gluttony";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            SkullSystem.gluttonySkullActive = !SkullSystem.gluttonySkullActive;
-            Main.NewText("Gluttony: " + SkullSystem.gluttonySkullActive);
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.gluttonySkullActive = !SkullSystem.gluttonySkullActive;
+                Main.NewText("Gluttony: " + SkullSystem.gluttonySkullActive);
+            }
+        }
+    }
+
+    public class GreedSkullCommand : ModCommand
+    {
+        public override CommandType Type => CommandType.World;
+
+        public override string Command => "greed";
+
+        public override void Action(CommandCaller caller, string input, string[] args)
+        {
+            if (ModLoader.TryGetMod("DragonLens", out Mod dragonLens))
+            {
+                SkullSystem.greedSkullActive = !SkullSystem.greedSkullActive;
+                Main.NewText("Greed: " + SkullSystem.greedSkullActive);
+            }
         }
     }
 }

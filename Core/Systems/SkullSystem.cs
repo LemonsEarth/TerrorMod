@@ -23,6 +23,7 @@ namespace TerrorMod.Core.Systems
         public static bool toughLuckSkullActive = false;
         public static bool briarSkullActive = false;
         public static bool gluttonySkullActive = false;
+        public static bool greedSkullActive = false;
 
         public override void ClearWorld()
         {
@@ -32,6 +33,7 @@ namespace TerrorMod.Core.Systems
             toughLuckSkullActive = false;
             briarSkullActive = false;
             gluttonySkullActive = false;
+            greedSkullActive = false;
         }
 
         public override void SaveWorldData(TagCompound tag)
@@ -42,6 +44,7 @@ namespace TerrorMod.Core.Systems
             tag["toughLuckSkullActive"] = toughLuckSkullActive;
             tag["briarSkullActive"] = briarSkullActive;
             tag["gluttonySkullActive"] = gluttonySkullActive;
+            tag["greedSkullActive"] = greedSkullActive;
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -52,16 +55,17 @@ namespace TerrorMod.Core.Systems
             toughLuckSkullActive = tag.GetBool("toughLuckSkullActive");
             briarSkullActive = tag.GetBool("briarSkullActive");
             gluttonySkullActive = tag.GetBool("gluttonySkullActive");
+            greedSkullActive = tag.GetBool("greedSkullActive");
         }
 
         public override void NetSend(BinaryWriter writer)
         {
-            writer.WriteFlags(blindSkullActive, vagrantSkullActive, savageSkullActive, toughLuckSkullActive, briarSkullActive, gluttonySkullActive);
+            writer.WriteFlags(blindSkullActive, vagrantSkullActive, savageSkullActive, toughLuckSkullActive, briarSkullActive, gluttonySkullActive, greedSkullActive);
         }
 
         public override void NetReceive(BinaryReader reader)
         {
-            reader.ReadFlags(out blindSkullActive, out vagrantSkullActive, out savageSkullActive, out toughLuckSkullActive, out briarSkullActive, out gluttonySkullActive);
+            reader.ReadFlags(out blindSkullActive, out vagrantSkullActive, out savageSkullActive, out toughLuckSkullActive, out briarSkullActive, out gluttonySkullActive, out greedSkullActive);
         }
     }
 }
