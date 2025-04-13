@@ -20,7 +20,7 @@ namespace TerrorMod.Core.Globals.Projectiles.Hostile
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)
         {
-            if (Main.rand.NextBool(50) && Main.hardMode)
+            if (Main.rand.NextBool(20) && Main.hardMode)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {

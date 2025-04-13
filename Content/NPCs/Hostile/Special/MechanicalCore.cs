@@ -119,7 +119,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Special
 
             foreach (var allPlayer in Main.ActivePlayers)
             {
-                if (!allPlayer.HasBuff(ModContent.BuffType<BeforeTheStormBuff>()) && NPC.Distance(player.Center) > 3000)
+                if (!allPlayer.HasBuff(ModContent.BuffType<BeforeTheStormBuff>()) && NPC.Distance(allPlayer.Center) > 3000)
                 {
                     allPlayer.AddBuff(ModContent.BuffType<TheStormDebuff>(), 2);    
                 }

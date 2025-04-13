@@ -33,7 +33,7 @@ namespace TerrorMod.Content.Items.Consumables
 
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorCage>());
+            return !NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorCage>()) && !NPC.AnyNPCs(ModContent.NPCType<InfiniteTerrorHead>());
         }
 
         public override bool? UseItem(Player player)

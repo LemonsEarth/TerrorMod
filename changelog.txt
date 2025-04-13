@@ -1,7 +1,9 @@
 ﻿Version 0.2:
 
 Main:
-	- Added Skulls:
+	- Added final boss
+
+	- Added Skulls (World-Based difficulty modifiers that cannot be disabled once enabled):
 		- Blind: Hides enemy health bars
 		- Vagrant: You always respawn at the world spawn point
 		- Savage: You can only regenerate life while dealing damage
@@ -9,9 +11,6 @@ Main:
 		- Briar: Spikes spread over time
 		- Gluttony: Doubled mana and ammo consumption. Mana sickness decreases life regeneration. Movement speed reduced by 5% per 1000 ammo in inventory.
 		- Greed: Increased shop and reforge prices
-
-	- Enemy hp is increased depending on the amount of loaded mods
-		- Boss hp is less affected by this change
 
 	- Town NPCs have a chance to spawn Skeletron upon death.
 		- Chance increases at night time and FTW, GFB seeds
@@ -193,6 +192,8 @@ Other:
 - Base Buff Limit before Overdosed occurs reduced 5 -> 4
 	Bosses which increase the buff limit by 1 on defeat are: Eye of Cthulhu, Skeletron, Deerclops
 	Bosses which increase the buff limit by 2 on defeat are: Queen Bee, Queen Slime, Pumpking, Ice Queen, Lunatic Cultist
+	Defeating pirates increases buff limit by 2
 - Hot projectiles can no longer destroy furniture because of weird interactions
 - Defeating Golem now stops the desert from inflicting biome debuffs
 - Defeating Ice Queen now stops the snow biome from inflicting biome debuffs
+- Removed Terrabrine

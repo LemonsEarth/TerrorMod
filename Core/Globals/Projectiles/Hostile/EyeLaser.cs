@@ -19,7 +19,6 @@ namespace TerrorMod.Core.Globals.Projectiles.Hostile
         public override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
         {
             return entity.type == ProjectileID.EyeLaser;
-
         }
 
         public override void OnSpawn(Projectile projectile, IEntitySource source)

@@ -82,7 +82,7 @@ namespace TerrorMod.Content.NPCs.Bosses
 
         public override void HitEffect(NPC.HitInfo hit)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient && NPC.life <= 0 && canDie)
+            if (!Main.dedServ && NPC.life <= 0 && canDie)
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -117,7 +117,7 @@ namespace TerrorMod.Content.NPCs.Bosses
                 {
                     LemonUtils.DustCircle(new Vector2(Main.rand.NextFloat(NPC.position.X, NPC.position.X + NPC.width), Main.rand.NextFloat(NPC.position.Y, NPC.position.Y + NPC.height)), 16, 8, DustID.GemDiamond, Main.rand.NextFloat(1.2f, 2.5f));
                     SoundEngine.PlaySound(SoundID.NPCHit2);
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (!Main.dedServ)
                     {
                         Gore.NewGore(NPC.GetSource_Death(), new Vector2(Main.rand.NextFloat(NPC.position.X, NPC.position.X + NPC.width), Main.rand.NextFloat(NPC.position.Y, NPC.position.Y + NPC.height)), Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 10, ModContent.GoreType<CageGore>());
                     }

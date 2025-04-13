@@ -28,7 +28,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Special
         {
             NPC.width = 50;
             NPC.height = 72;
-            NPC.lifeMax = 100;
+            NPC.lifeMax = 70;
             NPC.defense = 3;
             NPC.damage = 40;
             NPC.HitSound = SoundID.NPCHit54;
@@ -93,7 +93,7 @@ namespace TerrorMod.Content.NPCs.Hostile.Special
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return (!spawnInfo.PlayerInTown && !spawnInfo.Player.HasBuff(ModContent.BuffType<BeforeTheStormBuff>()) && Main.hardMode && spawnInfo.Player.HasBuff(ModContent.BuffType<TheStormDebuff>())) ? 0.2f : 0f;
+            return (!spawnInfo.PlayerInTown && !spawnInfo.Player.HasBuff(ModContent.BuffType<BeforeTheStormBuff>()) && Main.hardMode && spawnInfo.Player.HasBuff(ModContent.BuffType<TheStormDebuff>())) ? 0.1f : 0f;
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

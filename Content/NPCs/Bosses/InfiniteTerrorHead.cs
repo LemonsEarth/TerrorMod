@@ -17,9 +17,9 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities.Terraria.Utilities;
-using Terraria.WorldBuilding;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Items.Accessories;
 using TerrorMod.Content.NPCs.Bosses.BossAdds;
 using TerrorMod.Content.NPCs.Bosses.Gores;
 using TerrorMod.Content.Projectiles.Hostile;
@@ -143,13 +143,24 @@ namespace TerrorMod.Content.NPCs.Bosses
 
         public override void SendExtraAI(BinaryWriter writer)
         {
+            writer.Write(attackDuration);
             writer.Write(NPC.Opacity);
+            writer.Write(savedPosition.X);
+            writer.Write(savedPosition.Y);
+            writer.Write(savedDirection.X);
+            writer.Write(savedDirection.Y);
+            writer.Write(canDie);
+            writer.Write(doDeath);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             attackDuration = reader.ReadSingle();
             NPC.Opacity = reader.ReadSingle();
+            savedPosition = new Vector2(reader.ReadSingle(), reader.ReadSingle());
+            savedDirection = new Vector2(reader.ReadSingle(), reader.ReadSingle());
+            canDie = reader.ReadBoolean();
+            doDeath = reader.ReadBoolean();
         }
 
         public override void AI()
@@ -164,9 +175,9 @@ namespace TerrorMod.Content.NPCs.Bosses
             if (AITimer == 0)
             {
                 DustEffect();
-                SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) });
-                SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) });
-                SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (-0.7f, -0.4f) });
+                SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) }, player.Center);
+                SoundEngine.PlaySound(SoundID.Roar with { PitchRange = (-0.7f, -0.4f) }, player.Center);
+                SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (-0.7f, -0.4f) }, player.Center);
             }
             Visuals();
 
@@ -1183,8 +1194,8 @@ namespace TerrorMod.Content.NPCs.Bosses
 
                 AttackCount = 0;
                 AttackTimer = 0;
-                NPC.Opacity = 1f;
             }
+            NPC.Opacity = 1f;
 
             NPC.netUpdate = true;
         }
@@ -1259,12 +1270,13 @@ namespace TerrorMod.Content.NPCs.Bosses
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            /*LeadingConditionRule classicRule = new LeadingConditionRule(new Conditions.NotExpert());
-            classicRule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<VoidTremor>(), ModContent.ItemType<DevourerRift>()));
-            classicRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Judgement>(), 4, 1, 1));
+            LeadingConditionRule classicRule = new LeadingConditionRule(new Conditions.NotExpert());
+            LeadingConditionRule expertRule = new LeadingConditionRule(new Conditions.IsExpert());
+            classicRule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<BlueSkull>(), ModContent.ItemType<GreenSkull>(), ModContent.ItemType<RedSkull>()));
+            expertRule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<BlueSkull>(), ModContent.ItemType<GreenSkull>(), ModContent.ItemType<RedSkull>()));
+            expertRule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<BlueSkull>(), ModContent.ItemType<GreenSkull>(), ModContent.ItemType<RedSkull>()));
             npcLoot.Add(classicRule);
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<TheNamelessBossBag>()));
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Placeable.Furniture.TheNamelessRelic>()));*/
+            npcLoot.Add(expertRule);
         }
 
         public override void BossLoot(ref string name, ref int potionType)

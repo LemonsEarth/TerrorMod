@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -34,6 +35,16 @@ namespace TerrorMod.Content.Projectiles.Hostile
         {
             Main.projFrames[Type] = 1;
             ProjectileID.Sets.DrawScreenCheckFluff[Type] = 5000;
+        }
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(Projectile.timeLeft);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            Projectile.timeLeft = reader.ReadInt32();
         }
 
         public override void SetDefaults()

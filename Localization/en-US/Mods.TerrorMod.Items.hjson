@@ -121,3 +121,30 @@ VagrantSkull: {
 		Cannot be disabled
 		'''
 }
+
+BlueSkull: {
+	DisplayName: Blue Skull
+	Tooltip:
+		'''
+		Increases damage reduction by {0}%
+		Grants immunity to fear
+		'''
+}
+
+GreenSkull: {
+	DisplayName: Green Skull
+	Tooltip:
+		'''
+		Increases life regeneration by 6
+		Grants immunity to knockback
+		'''
+}
+
+RedSkull: {
+	DisplayName: Red Skull
+	Tooltip:
+		'''
+		Increases damage by {0}%
+		Grants immunity to weight
+		'''
+}

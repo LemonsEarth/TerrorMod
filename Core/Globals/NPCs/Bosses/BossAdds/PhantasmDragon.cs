@@ -36,7 +36,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
                 || npc.type == NPCID.CultistDragonBody3
                 || npc.type == NPCID.CultistDragonBody4)
             {
-                modifiers.FinalDamage *= 0.1f;
+                modifiers.FinalDamage *= 0.33f;
             }
         }
     }

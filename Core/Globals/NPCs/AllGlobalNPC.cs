@@ -33,7 +33,7 @@ namespace TerrorMod.Core.Globals.NPCs
 
         public override void OnKill(NPC npc)
         {
-            if (Main.rand.NextBool(4))
+            if (SkullSystem.toughLuckSkullActive && Main.rand.NextBool(4))
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {

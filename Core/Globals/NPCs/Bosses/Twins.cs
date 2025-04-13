@@ -140,7 +140,11 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.Darkness, 120);
-            target.AddBuff(ModContent.BuffType<FearDebuff>(), 60);
+            if (Main.rand.NextBool(3))
+            {
+                target.AddBuff(ModContent.BuffType<FearDebuff>(), 60);
+
+            }
         }
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

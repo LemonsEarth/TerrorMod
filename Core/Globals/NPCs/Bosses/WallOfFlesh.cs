@@ -102,6 +102,10 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         public override void OnKill(NPC npc)
         {
             if (Main.hardMode || placedAll) return;
+            foreach (var player in Main.ActivePlayers)
+            {
+                player.AddBuff(ModContent.BuffType<BeforeTheStormBuff>(), 72000);
+            }
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 int maxCores = !Main.masterMode ? 4 : 8;
@@ -126,10 +130,6 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     }
                 }
                 placedAll = true;
-            }
-            foreach (var player in Main.ActivePlayers)
-            {
-                player.AddBuff(ModContent.BuffType<BeforeTheStormBuff>(), 36000);
             }
 
         }

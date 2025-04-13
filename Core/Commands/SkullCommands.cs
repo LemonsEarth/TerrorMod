@@ -1,5 +1,7 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Chat;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using TerrorMod.Core.Systems;
 
@@ -13,13 +15,13 @@ namespace TerrorMod.Core.Commands
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-            Main.NewText("Blind: " + SkullSystem.blindSkullActive);
-            Main.NewText("Vagrant: " + SkullSystem.vagrantSkullActive);
-            Main.NewText("Savage: " + SkullSystem.savageSkullActive);
-            Main.NewText("Tough Luck: " + SkullSystem.toughLuckSkullActive);
-            Main.NewText("Briar: " + SkullSystem.briarSkullActive);
-            Main.NewText("Gluttony: " + SkullSystem.gluttonySkullActive);
-            Main.NewText("Greed: " + SkullSystem.greedSkullActive);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Blind: " + SkullSystem.blindSkullActive), Color.Red);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Vagrant: " + SkullSystem.vagrantSkullActive), Color.Red);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Savage: " + SkullSystem.savageSkullActive), Color.Red);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Tough Luck: " + SkullSystem.toughLuckSkullActive), Color.Red);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Briar: " + SkullSystem.briarSkullActive), Color.Red);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Gluttony: " + SkullSystem.gluttonySkullActive), Color.Red);
+            ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Greed: " + SkullSystem.greedSkullActive), Color.Red);
         }
     }
 

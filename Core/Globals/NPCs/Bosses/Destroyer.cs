@@ -191,7 +191,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(ModContent.BuffType<FearDebuff>(), 60);
+            
         }
     }
 }

@@ -81,17 +81,17 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
             if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
             if (npc.type == NPCID.Golem)
             {
-                modifiers.FinalDamage *= 0.5f;
+                modifiers.FinalDamage *= 0.75f;
             }
 
             else if (EitherArm(npc))
             {
-                modifiers.FinalDamage *= 0.5f;
+                modifiers.FinalDamage *= 0.75f;
             }
 
             else if (npc.type == NPCID.GolemHead)
             {
-                modifiers.FinalDamage *= 0.66f;
+                modifiers.FinalDamage *= 0.75f;
             }
         }
 

@@ -3,7 +3,7 @@ Those who built this place knew what they wrought.
 Do not mistake their intent, or all will perish, as they did before." - Halo 2 Gravemind (kinda)
 
 Terror Mode is a mod that aims to rework many aspects of the game in order to make it worse.
-Currently only changes pre-hardmode content.
+Reworks content from the start to Moon Lord, with a certain entity waiting at the end.
 
 Some of the changes include:
 - Locking chests

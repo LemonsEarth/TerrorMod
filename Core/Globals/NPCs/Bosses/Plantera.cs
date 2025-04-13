@@ -38,6 +38,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                 if (AITimer % 120 == 0)
                 {
                     npc.velocity *= 2.5f;
+                    npc.netUpdate = true;
                 }
                 if (AITimer % 240 == 0)
                 {
@@ -74,6 +75,7 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
                     if (AttackTimer % 60 == 0 && AttackTimer < 240 && AttackTimer > 0)
                     {
                         npc.velocity = npc.DirectionTo(player.Center) * 10;
+                        npc.netUpdate = true;
                     }
                 }
 
@@ -97,7 +99,6 @@ namespace TerrorMod.Core.Globals.NPCs.Bosses
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.Venom, 90);
-            target.AddBuff(ModContent.BuffType<FearDebuff>(), 60);
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)

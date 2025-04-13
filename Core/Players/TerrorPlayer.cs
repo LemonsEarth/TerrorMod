@@ -151,6 +151,7 @@ namespace TerrorMod.Core.Players
             if (NPC.downedQueenBee) buffLimit += 2;
             if (NPC.downedBoss3) buffLimit++;
             if (NPC.downedDeerclops) buffLimit++;
+            if (NPC.downedPirates) buffLimit += 2;
             if (NPC.downedQueenSlime) buffLimit += 2;
             if (NPC.downedHalloweenKing) buffLimit += 2;
             if (NPC.downedChristmasIceQueen) buffLimit += 2;
@@ -252,7 +253,7 @@ namespace TerrorMod.Core.Players
 
             if (halloweenHorror)
             {
-                if (Main.rand.NextBool(800) && !Main.projectile.Any(proj => proj.active && proj.type == ModContent.ProjectileType<PumpkingHeadProj>()))
+                if (Main.rand.NextBool(1000) && !Main.projectile.Any(proj => proj.active && proj.type == ModContent.ProjectileType<PumpkingHeadProj>()))
                 {
                     if (Player.whoAmI == Main.myPlayer)
                     {
@@ -263,9 +264,9 @@ namespace TerrorMod.Core.Players
 
             if (gunpowderedSnow && timer % 600 == 0)
             {
-                if (Main.rand.NextBool(50) && !NPC.AnyNPCs(NPCID.SnowBalla) && !NPC.AnyNPCs(NPCID.SnowmanGangsta) && !NPC.AnyNPCs(NPCID.MisterStabby))
+                if (Main.rand.NextBool(30) && !NPC.AnyNPCs(NPCID.SnowBalla) && !NPC.AnyNPCs(NPCID.SnowmanGangsta) && !NPC.AnyNPCs(NPCID.MisterStabby))
                 {
-                    if (Main.myPlayer == Player.whoAmI)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         int amount = Main.rand.Next(4, 10);
                         for (int i = 0; i < amount; i++)
