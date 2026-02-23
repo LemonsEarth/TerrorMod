@@ -148,3 +148,33 @@ RedSkull: {
 		Grants immunity to weight
 		'''
 }
+
+BasicFishingLicense: {
+	DisplayName: Basic Fishing License
+	Tooltip: Increases your maximum fishing power to 5%
+}
+
+AdvancedFishingLicense: {
+	DisplayName: Advanced Fishing License
+	Tooltip: ""
+}
+
+DukesFishingLicense: {
+	DisplayName: Dukes Fishing License
+	Tooltip: ""
+}
+
+IntermediateFishingLicense: {
+	DisplayName: Intermediate Fishing License
+	Tooltip: ""
+}
+
+MasterFishingLicense: {
+	DisplayName: Master Fishing License
+	Tooltip: ""
+}
+
+Thermometer: {
+	DisplayName: Thermometer
+	Tooltip: ""
+}

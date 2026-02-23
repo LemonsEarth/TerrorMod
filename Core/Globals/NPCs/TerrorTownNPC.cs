@@ -1,59 +1,52 @@
-﻿using Microsoft.Xna.Framework;
-using System.Configuration;
-using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Conditions;
-using TerrorMod.Common.Utils;
-using TerrorMod.Content.Buffs.Buffs;
-using TerrorMod.Content.Buffs.Debuffs;
-using TerrorMod.Content.Items.Consumables;
-using TerrorMod.Content.Projectiles.Hostile;
-using TerrorMod.Core.Players;
+﻿using Terraria.GameContent.ItemDropRules;
+using TerrorMod.Content.Items.Accessories;
 using TerrorMod.Core.Systems;
 
-namespace TerrorMod.Core.Globals.NPCs
+namespace TerrorMod.Core.Globals.NPCs;
+
+public class TerrorTownNPC : GlobalNPC
 {
-    public class TerrorTownNPC : GlobalNPC
+    public override bool InstancePerEntity => true;
+
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
     {
-        public override bool InstancePerEntity => true;
+        return lateInstantiation && entity.townNPC;
+    }
 
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+    public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
+    {
+        if (!SkullSystem.greedSkullActive) return;
+        foreach (Item item in items)
         {
-            return lateInstantiation && entity.townNPC;
+            if (item == null) continue;
+            int originalPrice = item.shopCustomPrice == null ? item.value : item.shopCustomPrice.Value;
+            item.shopCustomPrice = originalPrice * 2;
         }
+    }
 
-        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
+    bool spawnedSkelly = false;
+    public override void OnKill(NPC npc)
+    {
+        int chance = 8;
+        if (!Main.dayTime) chance = 4;
+        if (Main.getGoodWorld) chance = 2;
+        if (Main.zenithWorld) chance = 1;
+
+        if (Main.netMode != NetmodeID.MultiplayerClient)
         {
-            if (!SkullSystem.greedSkullActive) return;
-            foreach (Item item in items)
+            if (!spawnedSkelly && Main.rand.NextBool(chance))
             {
-                if (item == null) continue;
-                int originalPrice = item.shopCustomPrice == null ? item.value : item.shopCustomPrice.Value;
-                item.shopCustomPrice = originalPrice * 2;
+                NPC.NewNPC(npc.GetSource_FromThis(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.SkeletronHead);
+                spawnedSkelly = true;
             }
         }
+    }
 
-        bool spawnedSkelly = false;
-        public override void OnKill(NPC npc)
+    public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+    {
+        if (npc.type == NPCID.Angler)
         {
-            int chance = 8;
-            if (!Main.dayTime) chance = 4;
-            if (Main.getGoodWorld) chance = 2;
-            if (Main.zenithWorld) chance = 1;
-
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                if (!spawnedSkelly && Main.rand.NextBool(chance) )
-                {
-                    NPC.NewNPC(npc.GetSource_FromThis(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.SkeletronHead);
-                    spawnedSkelly = true;
-                }
-            }
-
+            npcLoot.Add(ItemDropRule.Common(ItemType<BasicFishingLicense>()));
         }
     }
 }

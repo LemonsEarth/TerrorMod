@@ -1,101 +1,84 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Terraria;
-using Terraria.Chat;
-using Terraria.GameContent.Generation;
-using Terraria.ID;
-using Terraria.IO;
-using Terraria.Localization;
-using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
-using Terraria.UI;
-using Terraria.Utilities;
-using Terraria.WorldBuilding;
-using TerrorMod.Common.Utils;
+﻿using TerrorMod.Common.Utils;
 using TerrorMod.Content.Tiles.Blocks;
 using TerrorMod.Content.Tiles.Furniture;
 
-namespace TerrorMod.Core.Systems
+namespace TerrorMod.Core.Systems;
+
+public class WorldGenSystem : ModSystem
 {
-    public class WorldGenSystem : ModSystem
+    void ReplaceChests()
     {
-        void ReplaceChests()
+        for (int i = 0; i < Main.maxChests; i++)
         {
-            for (int i = 0; i < Main.maxChests; i++)
+            Chest chest = Main.chest[i];
+            if (chest == null)
             {
-                Chest chest = Main.chest[i];
-                if (chest == null)
+                continue;
+            }
+
+            int x = chest.x;
+            int y = chest.y;
+
+            Tile chestTile = Main.tile[x, y];
+            if (chestTile.TileType == TileID.Containers)
+            {
+                if (chestTile.TileFrameX == 1 * 36)
                 {
-                    continue;
+                    ReplaceChest(chest, x, y, i, TileType<SimpleGoldenChest>());
                 }
-
-                int x = chest.x;
-                int y = chest.y;
-
-                Tile chestTile = Main.tile[x, y];
-                if (chestTile.TileType == TileID.Containers)
+                else if (chestTile.TileFrameX == 11 * 36)
                 {
-                    if (chestTile.TileFrameX == 1 * 36)
-                    {
-                        ReplaceChest(chest, x, y, i, ModContent.TileType<SimpleGoldenChest>());
-                    }
-                    else if (chestTile.TileFrameX == 11 * 36)
-                    {
-                        ReplaceChest(chest, x, y, i, ModContent.TileType<SimpleIceChest>());
-                    }
+                    ReplaceChest(chest, x, y, i, TileType<SimpleIceChest>());
                 }
             }
         }
+    }
 
-        void ReplaceChest(Chest originalChest, int originalX, int originalY, int originalIndex, int replaceType, int style = 1)
+    void ReplaceChest(Chest originalChest, int originalX, int originalY, int originalIndex, int replaceType, int style = 1)
+    {
+        Item[] items = originalChest.item;
+        Chest.DestroyChestDirect(originalX, originalY, originalIndex); // Seems to only delete the chest items and make the chest unusable?
+        WorldGen.KillTile(originalX, originalY); // Actually destroys the chest
+
+        int index = WorldGen.PlaceChest(originalX, originalY + 1, (ushort)replaceType, style: style);
+        if (index == -1)
         {
-            Item[] items = originalChest.item;
-            Chest.DestroyChestDirect(originalX, originalY, originalIndex); // Seems to only delete the chest items and make the chest unusable?
-            WorldGen.KillTile(originalX, originalY); // Actually destroys the chest
+            Mod.Logger.Warn("A chest wasn't properly replaced");
+            return;
+        }
+        Main.chest[index].item = items;
+    }
 
-            int index = WorldGen.PlaceChest(originalX, originalY + 1, (ushort)replaceType, style: style);
-            if (index == -1)
+    public static void PlaceDungeonPactTiles() // Generated after wof and plantera kill
+    {
+        int count = LemonUtils.GetWorldSize() * 8; // Starting at the maximum amount of pact tiles that can be placed
+        int attemptnum = 0;
+        while (count > 0 && attemptnum < 2500)
+        {
+            attemptnum++;
+            int i = WorldGen.genRand.Next(0, Main.maxTilesX);
+            int j = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200);
+            if (!WorldGen.InWorld(i, j)) continue;
+            Tile tile = Main.tile[i, j];
+            if (tile == null || !tile.HasTile)
             {
-                Mod.Logger.Warn("A chest wasn't properly replaced");
-                return;
+                continue;
             }
-            Main.chest[index].item = items;
-        }
 
-        public static void PlaceDungeonPactTiles() // Generated after wof and plantera kill
-        {
-            int count = LemonUtils.GetWorldSize() * 8; // Starting at the maximum amount of pact tiles that can be placed
-            int attemptnum = 0;
-            while (count > 0 && attemptnum < 2500)
+            if (tile.TileType == TileID.BlueDungeonBrick || tile.TileType == TileID.PinkDungeonBrick || tile.TileType == TileID.GreenDungeonBrick)
             {
-                attemptnum++;
-                int i = WorldGen.genRand.Next(0, Main.maxTilesX);
-                int j = WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200);
-                if (!WorldGen.InWorld(i, j)) continue;
-                Tile tile = Main.tile[i, j];
-                if (tile == null || !tile.HasTile)
+                if (WorldGen.InWorld(i, j, 5) && !Main.tile[i, j - 1].HasTile)
                 {
-                    continue;
+                    WorldGen.PlaceTile(i, j - 1, TileType<DungeonPactTile>());
+                    count--;
                 }
+            }
+        }           
+    }
 
-                if (tile.TileType == TileID.BlueDungeonBrick || tile.TileType == TileID.PinkDungeonBrick || tile.TileType == TileID.GreenDungeonBrick)
-                {
-                    if (WorldGen.InWorld(i, j, 5) && !Main.tile[i, j - 1].HasTile)
-                    {
-                        WorldGen.PlaceTile(i, j - 1, ModContent.TileType<DungeonPactTile>());
-                        count--;
-                    }
-                }
-            }           
-        }
-
-        public override void PostWorldGen()
-        {
-            ReplaceChests();
-            PlaceDungeonPactTiles();
-        }
+    public override void PostWorldGen()
+    {
+        ReplaceChests();
+        PlaceDungeonPactTiles();
     }
 }

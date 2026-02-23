@@ -1,13 +1,9 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using TerrorMod.Core.Players;
-namespace TerrorMod.Content.Buffs.Buffs
+﻿namespace TerrorMod.Content.Buffs.Buffs;
+
+public class TungstenPenetration : ModBuff
 {
-    public class TungstenPenetration : ModBuff
+    public override void SetStaticDefaults()
     {
-        public override void SetStaticDefaults()
-        {
-            Main.buffNoTimeDisplay[Type] = true;
-        }
+        Main.buffNoTimeDisplay[Type] = true;
     }
 }

@@ -1,41 +1,31 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Utils;
-using TerrorMod.Content.Buffs.Debuffs;
-using TerrorMod.Content.Projectiles.Hostile;
+﻿using Terraria.DataStructures;
 
-namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds
+namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds;
+
+public class Creeper : GlobalNPC
 {
-    public class Creeper : GlobalNPC
+    public override bool InstancePerEntity => true;
+
+    public override void SetStaticDefaults()
     {
-        public override bool InstancePerEntity => true;
+        NPCID.Sets.NeverDropsResourcePickups[NPCID.Creeper] = true;
+    }
 
-        int AITimer = 0;
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+    {
+        return entity.type == NPCID.Creeper;
+    }
 
-        public override void SetStaticDefaults()
+    public override void SetDefaults(NPC entity)
+    {
+        entity.lifeMax = 60;
+    }
+
+    public override void OnKill(NPC npc)
+    {
+        if (Main.netMode != NetmodeID.MultiplayerClient)
         {
-            NPCID.Sets.NeverDropsResourcePickups[NPCID.Creeper] = true;
-        }
-
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
-        {
-            return entity.type == NPCID.Creeper;
-        }
-
-        public override void SetDefaults(NPC entity)
-        {
-            entity.lifeMax = 60;
-        }
-
-        public override void OnKill(NPC npc)
-        {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu, npc.whoAmI, ai3: 0.3f);
-            }
+            NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu, npc.whoAmI, ai3: 0.3f);
         }
     }
 }

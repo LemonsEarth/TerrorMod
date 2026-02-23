@@ -1,22 +1,16 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Utils;
-using TerrorMod.Core.Globals.NPCs.Corruption;
-using TerrorMod.Core.Players;
+﻿using TerrorMod.Common.Utils;
 
-namespace TerrorMod.Content.Buffs.Debuffs
+namespace TerrorMod.Content.Buffs.Debuffs;
+
+public class ArachnophobiaDebuff : ModBuff
 {
-    public class ArachnophobiaDebuff : ModBuff
+    public override void SetStaticDefaults()
     {
-        public override void SetStaticDefaults()
-        {
-            Main.debuff[Type] = true;
-        }
+        Main.debuff[Type] = true;
+    }
 
-        public override void Update(Player player, ref int buffIndex)
-        {
-            LemonUtils.AddPhobiaDebuffs(player);
-        }
+    public override void Update(Player player, ref int buffIndex)
+    {
+        LemonUtils.AddPhobiaDebuffs(player);
     }
 }

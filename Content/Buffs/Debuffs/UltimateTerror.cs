@@ -1,22 +1,32 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Utils;
-using TerrorMod.Core.Players;
+﻿using TerrorMod.Common.Utils;
 
-namespace TerrorMod.Content.Buffs.Debuffs
+namespace TerrorMod.Content.Buffs.Debuffs;
+
+public class UltimateTerror : ModBuff
 {
-    public class UltimateTerror : ModBuff
+    public override void SetStaticDefaults()
     {
-        public override void SetStaticDefaults()
-        {
-            Main.debuff[Type] = true;
-        }
+        Main.debuff[Type] = true;
+    }
 
-        public override void Update(Player player, ref int buffIndex)
+    public override void Update(Player player, ref int buffIndex)
+    {
+        LemonUtils.AddPhobiaDebuffs(player, 2f);
+    }
+}
+
+public class UltimateTerrorPlayer : ModPlayer
+{
+    public override void UpdateBadLifeRegen()
+    {
+        if (Player.HasBuff(BuffType<UltimateTerror>()))
         {
-            player.GetModPlayer<TerrorPlayer>().ultimateTerror = true;
-            LemonUtils.AddPhobiaDebuffs(player, 2f);
+            if (Player.lifeRegen > 0)
+            {
+                Player.lifeRegen = 0;
+            }
+            Player.lifeRegenTime = 0;
+            Player.lifeRegen -= 150;
         }
     }
 }

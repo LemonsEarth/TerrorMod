@@ -1,22 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.Graphics.Effects;
-using Terraria.Graphics.Shaders;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿namespace TerrorMod.Core.Globals.NPCs.Underground;
 
-namespace TerrorMod.Core.Globals.NPCs.Underground
+public class GraniteElemental : GlobalNPC
 {
-    public class GraniteElemental : GlobalNPC
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
     {
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
-        {
-            return entity.type == NPCID.GraniteFlyer;
-        }
+        return entity.type == NPCID.GraniteFlyer;
+    }
 
-        public override void PostAI(NPC npc)
-        {
-            npc.noTileCollide = true;
-        }
+    public override void PostAI(NPC npc)
+    {
+        npc.noTileCollide = true;
     }
 }

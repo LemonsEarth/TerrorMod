@@ -1,85 +1,78 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Utils;
+﻿using Terraria.Audio;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Configs;
 
-namespace TerrorMod.Core.Globals.NPCs.Bosses
+namespace TerrorMod.Core.Globals.NPCs.Bosses;
+
+public class BrainOfCthulhu : GlobalNPC
 {
-    public class BrainOfCthulhu : GlobalNPC
+    public override bool InstancePerEntity => true;
+
+    int AITimer = 0;
+    int phase2Timer = 0;
+    bool teleportationSpam = false;
+
+    public override void SetDefaults(NPC entity)
     {
-        public override bool InstancePerEntity => true;
+        entity.lifeMax = 1300;
+        entity.defense = 16;
+    }
 
-        int AITimer = 0;
-        int phase2Timer = 0;
-        bool teleportationSpam = false;
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+    {
+        return entity.type == NPCID.BrainofCthulhu;
+    }
 
-        public override void SetDefaults(NPC entity)
+    public override void AI(NPC npc)
+    {
+        if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
+        if (!npc.HasValidTarget) return;
+        Player player = Main.player[npc.target];
+        if (npc.localAI[2] > 0) // if in phase 2
         {
-            entity.lifeMax = 1300;
-            entity.defense = 16;
-        }
-
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
-        {
-            return entity.type == NPCID.BrainofCthulhu;
-        }
-
-        public override void AI(NPC npc)
-        {
-            if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
-            if (!npc.HasValidTarget) return;
-            Player player = Main.player[npc.target];
-            if (npc.localAI[2] > 0) // if in phase 2
+            if (npc.localAI[1] == 0) SoundEngine.PlaySound(SoundID.Item105 with { PitchRange = (0.4f, 6f), Volume = 1f }, npc.Center);
+            if (teleportationSpam)
             {
-                if (npc.localAI[1] == 0) SoundEngine.PlaySound(SoundID.Item105 with { PitchRange = (0.4f, 6f), Volume = 1f }, npc.Center);
-                if (teleportationSpam)
+                if (npc.localAI[1] < 75) // tp timer
                 {
-                    if (npc.localAI[1] < 75) // tp timer
-                    {
-                        npc.localAI[1] = 75;
-                        npc.netUpdate = true;
-                    }
+                    npc.localAI[1] = 75;
+                    npc.netUpdate = true;
                 }
-                else if (phase2Timer % 30 == 0 && phase2Timer > 60)
+            }
+            else if (phase2Timer % 30 == 0 && phase2Timer > 60)
+            {
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ModContent.ProjectileType<CrimsonCarrierProj>(), npc.damage / 3, 1f);
-                    }
+                    Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ProjectileType<CrimsonCarrierProj>(), npc.damage / 3, 1f);
                 }
-
-                //Main.NewText("ai0: " + npc.ai[0]);
-                //Main.NewText("ai1: " + npc.ai[1]);
-                //Main.NewText("ai2: " + npc.ai[2]);
-                //Main.NewText("ai3: " + npc.ai[3]);
-
-                if (phase2Timer == 180 && teleportationSpam)
-                {
-                    teleportationSpam = false;
-                    phase2Timer = 0;
-                }
-
-                if (phase2Timer == 360)
-                {
-                    SoundEngine.PlaySound(SoundID.NPCDeath10, npc.Center);
-                    teleportationSpam = true;
-                    phase2Timer = 0;
-                }
-                phase2Timer++;
             }
 
-            AITimer++;
+            //Main.NewText("ai0: " + npc.ai[0]);
+            //Main.NewText("ai1: " + npc.ai[1]);
+            //Main.NewText("ai2: " + npc.ai[2]);
+            //Main.NewText("ai3: " + npc.ai[3]);
+
+            if (phase2Timer == 180 && teleportationSpam)
+            {
+                teleportationSpam = false;
+                phase2Timer = 0;
+            }
+
+            if (phase2Timer == 360)
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath10, npc.Center);
+                teleportationSpam = true;
+                phase2Timer = 0;
+            }
+            phase2Timer++;
         }
 
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
-        {
-            target.AddBuff(ModContent.BuffType<FearDebuff>(), 60);
-        }
+        AITimer++;
+    }
+
+    public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+    {
+        target.AddBuff(BuffType<FearDebuff>(), 60);
     }
 }

@@ -1,53 +1,44 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.Graphics.Effects;
-using Terraria.Graphics.Shaders;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Content.Projectiles.Hostile;
+﻿namespace TerrorMod.Core.Globals.NPCs.Meteorite;
 
-namespace TerrorMod.Core.Globals.NPCs.Meteorite
+public class MeteorHead : GlobalNPC
 {
-    public class MeteorHead : GlobalNPC
+    int AITimer = 0;
+
+    public override bool InstancePerEntity => true;
+
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
     {
-        int AITimer = 0;
+        return entity.type == NPCID.MeteorHead;
+    }
 
-        public override bool InstancePerEntity => true;
+    public override void SetDefaults(NPC entity)
+    {
+        entity.knockBackResist = 0f;
+    }
 
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+    public override void ApplyDifficultyAndPlayerScaling(NPC npc, int numPlayers, float balance, float bossAdjustment)
+    {
+        if (Main.hardMode)
         {
-            return entity.type == NPCID.MeteorHead;
+            npc.lifeMax *= 4;
+        }
+    }
+
+    public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+    {
+        if (Main.hardMode)
+        {
+            modifiers.FinalDamage /= 2;
+        }
+    }
+
+    public override void AI(NPC npc)
+    {
+        if (AITimer % 180 == 0 && npc.HasValidTarget)
+        {
+            npc.velocity *= 6;
         }
 
-        public override void SetDefaults(NPC entity)
-        {
-            entity.knockBackResist = 0f;
-        }
-
-        public override void ApplyDifficultyAndPlayerScaling(NPC npc, int numPlayers, float balance, float bossAdjustment)
-        {
-            if (Main.hardMode)
-            {
-                npc.lifeMax *= 4;
-            }
-        }
-
-        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
-        {
-            if (Main.hardMode)
-            {
-                modifiers.FinalDamage /= 2;
-            }
-        }
-
-        public override void AI(NPC npc)
-        {
-            if (AITimer % 180 == 0 && npc.HasValidTarget)
-            {
-                npc.velocity *= 6;
-            }
-
-            AITimer++;
-        }
+        AITimer++;
     }
 }

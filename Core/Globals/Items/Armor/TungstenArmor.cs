@@ -1,36 +1,36 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Utils;
-using TerrorMod.Content.Buffs;
-using TerrorMod.Content.Buffs.Buffs;
-using TerrorMod.Content.Buffs.Debuffs;
-using TerrorMod.Content.NPCs.Hostile.Corruption;
+﻿using TerrorMod.Content.Buffs.Buffs;
 
-namespace TerrorMod.Core.Globals.Items.Armor
+namespace TerrorMod.Core.Globals.Items.Armor;
+
+public class TungstenArmor : GlobalItem
 {
-    public class TungstenArmor : GlobalItem
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation)
     {
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return entity.type == ItemID.TungstenHelmet;
-        }
+        return entity.type == ItemID.TungstenHelmet;
+    }
 
-        public override string IsArmorSet(Item head, Item body, Item legs)
+    public override string IsArmorSet(Item head, Item body, Item legs)
+    {
+        if (head.type == ItemID.TungstenHelmet && body.type == ItemID.TungstenChainmail && legs.type == ItemID.TungstenGreaves)
         {
-            if (head.type == ItemID.TungstenHelmet && body.type == ItemID.TungstenChainmail && legs.type == ItemID.TungstenGreaves)
-            {
-                return "TungstenPenetration";
-            }
-            return string.Empty;
+            return "TungstenPenetration";
         }
+        return string.Empty;
+    }
 
-        public override void UpdateArmorSet(Player player, string set)
+    public override void UpdateArmorSet(Player player, string set)
+    {
+        if (set == "TungstenPenetration") player.AddBuff(BuffType<TungstenPenetration>(), 2);
+    }
+}
+
+public class TunstenPlayer : ModPlayer
+{
+    public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+    {
+        if (Player.HasBuff(BuffType<TungstenPenetration>()))
         {
-            if (set == "TungstenPenetration") player.AddBuff(ModContent.BuffType<TungstenPenetration>(), 2);
+            modifiers.ArmorPenetration += 5;
         }
     }
 }

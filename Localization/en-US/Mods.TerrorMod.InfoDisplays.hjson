@@ -1,0 +1,4 @@
+TemperatureInfoDisplay: {
+	DisplayName: Temperature Info Display
+	CurrentTemperature: "{0}°T"
+}

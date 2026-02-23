@@ -1,68 +1,59 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using Terraria;
-using Terraria.Audio;
+﻿using System.Collections.Generic;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
-using TerrorMod.Common.Utils;
 using TerrorMod.Content.Items.Consumables;
-using TerrorMod.Content.Projectiles.Hostile;
 
-namespace TerrorMod.Content.NPCs.Hostile.Jungle
+namespace TerrorMod.Content.NPCs.Hostile.Jungle;
+
+public class TempleGuardian : ModNPC
 {
-    public class TempleGuardian : ModNPC
+    public override void SetStaticDefaults()
     {
-        public override void SetStaticDefaults()
-        {
-            Main.npcFrameCount[NPC.type] = 1;
-        }
+        Main.npcFrameCount[NPC.type] = 1;
+    }
 
-        public override void SetDefaults()
-        {
-            NPC.width = 110;
-            NPC.height = 110;
-            NPC.lifeMax = 99999;
-            NPC.defense = 9999;
-            NPC.damage = 99999;
-            NPC.HitSound = SoundID.NPCHit4;
-            NPC.DeathSound = SoundID.NPCDeath14;
-            NPC.value = 20000;
-            NPC.aiStyle = NPCAIStyleID.SkeletronHead;
-            AIType = NPCID.DungeonGuardian;
-            NPC.knockBackResist = 0f;
-            NPC.noTileCollide = true;
-            NPC.noGravity = true;
-            NPC.SuperArmor = true;
-        }
+    public override void SetDefaults()
+    {
+        NPC.width = 110;
+        NPC.height = 110;
+        NPC.lifeMax = 99999;
+        NPC.defense = 9999;
+        NPC.damage = 99999;
+        NPC.HitSound = SoundID.NPCHit4;
+        NPC.DeathSound = SoundID.NPCDeath14;
+        NPC.value = 20000;
+        NPC.aiStyle = NPCAIStyleID.SkeletronHead;
+        AIType = NPCID.DungeonGuardian;
+        NPC.knockBackResist = 0f;
+        NPC.noTileCollide = true;
+        NPC.noGravity = true;
+        NPC.SuperArmor = true;
+    }
 
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-        {
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>()
-                {
-                    BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheTemple,
-                });
-        }
-
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
-        {
-            if (!NPC.downedPlantBoss)
+    public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+    {
+        bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>()
             {
-                return spawnInfo.Player.ZoneLihzhardTemple ? 0.5f : 0f;
-            }
-            return 0f;
-        }
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheTemple,
+            });
+    }
 
-        public override void ModifyNPCLoot(NPCLoot npcLoot)
+    public override float SpawnChance(NPCSpawnInfo spawnInfo)
+    {
+        if (!NPC.downedPlantBoss)
         {
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeEssence>(), 2, 5, 500));
+            return spawnInfo.Player.ZoneLihzhardTemple ? 0.5f : 0f;
         }
+        return 0f;
+    }
 
-        public override bool? CanFallThroughPlatforms()
-        {
-            return true;
-        }
+    public override void ModifyNPCLoot(NPCLoot npcLoot)
+    {
+        npcLoot.Add(ItemDropRule.Common(ItemType<LifeEssence>(), 2, 5, 500));
+    }
+
+    public override bool? CanFallThroughPlatforms()
+    {
+        return true;
     }
 }

@@ -1,49 +1,42 @@
-﻿using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
+﻿namespace TerrorMod.Core.Globals.NPCs.GoblinArmy;
 
-namespace TerrorMod.Core.Globals.NPCs.GoblinArmy
+public class Goblins : GlobalNPC
 {
-    public class Goblins : GlobalNPC
+    public override bool InstancePerEntity => true;
+
+    public override void SetDefaults(NPC entity)
     {
-        public override bool InstancePerEntity => true;
-
-        public override void SetDefaults(NPC entity)
+        if (entity.type == NPCID.GoblinThief)
         {
-            if (entity.type == NPCID.GoblinThief)
-            {
-                entity.alpha = 200;
-            }
-
-            if (entity.type == NPCID.GoblinWarrior)
-            {
-                entity.knockBackResist = 0f;
-            }
+            entity.alpha = 200;
         }
 
-        public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+        if (entity.type == NPCID.GoblinWarrior)
         {
-            return entity.type == NPCID.GoblinArcher
-                || entity.type == NPCID.GoblinPeon
-                || entity.type == NPCID.GoblinScout
-                || entity.type == NPCID.GoblinShark
-                || entity.type == NPCID.GoblinThief
-                || entity.type == NPCID.GoblinSorcerer
-                || entity.type == NPCID.GoblinSummoner
-                || entity.type == NPCID.GoblinWarrior
-                || entity.type == NPCID.ChaosBall;
+            entity.knockBackResist = 0f;
         }
+    }
 
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
+    {
+        return entity.type == NPCID.GoblinArcher
+            || entity.type == NPCID.GoblinPeon
+            || entity.type == NPCID.GoblinScout
+            || entity.type == NPCID.GoblinShark
+            || entity.type == NPCID.GoblinThief
+            || entity.type == NPCID.GoblinSorcerer
+            || entity.type == NPCID.GoblinSummoner
+            || entity.type == NPCID.GoblinWarrior
+            || entity.type == NPCID.ChaosBall;
+    }
+
+    public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
+    {
+        int chanceDenominator = npc.type == NPCID.GoblinThief ? 1 : 4;
+        if (Main.rand.NextBool(chanceDenominator))
         {
-            int chanceDenominator = npc.type == NPCID.GoblinThief ? 1 : 4;
-            if (Main.rand.NextBool(chanceDenominator))
-            {
-                Item heldItem = target.HeldItem;
-                target.DropItem(npc.GetSource_OnHit(target), target.Center, ref heldItem);
-            }
+            Item heldItem = target.HeldItem;
+            target.TryDroppingSingleItem(npc.GetSource_OnHit(target), heldItem);
         }
     }
 }
