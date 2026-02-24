@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.GameContent;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Content.Projectiles.Hostile;
 
@@ -32,14 +33,14 @@ public class PumpkingHeadProj : ModProjectile
     {
         if (AITimer == 0)
         {
-            SoundEngine.PlaySound(TerrorMod.Jumpscare, Projectile.Center);
+            SoundEngine.PlaySound(TerrorSFX.Jumpscare, Projectile.Center);
             Projectile.Opacity = 0f;
             frame = Main.rand.Next(0, 3);
         }
 
         Projectile.velocity = Vector2.Zero;
         Projectile.Center = Main.player[Projectile.owner].Center;
-        
+
         if (Projectile.timeLeft > 100)
         {
             Projectile.Opacity = MathHelper.Lerp(0, 1, AITimer / 5f);

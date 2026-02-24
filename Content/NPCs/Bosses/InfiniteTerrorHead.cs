@@ -13,6 +13,7 @@ using TerrorMod.Content.Items.Accessories;
 using TerrorMod.Content.NPCs.Bosses.BossAdds;
 using TerrorMod.Content.NPCs.Bosses.Gores;
 using TerrorMod.Content.Projectiles.Hostile;
+using TerrorMod.Core.Systems;
 
 
 namespace TerrorMod.Content.NPCs.Bosses;
@@ -687,7 +688,7 @@ public class InfiniteTerrorHead : ModNPC
                 }
                 break;
             case LightningTime:
-                SoundEngine.PlaySound(TerrorMod.Thunder);
+                SoundEngine.PlaySound(TerrorSFX.Thunder);
                 SoundEngine.PlaySound(SoundID.Thunder);
                 SoundEngine.PlaySound(SoundID.Thunder);
                 if (NotClient)

@@ -2,6 +2,7 @@
 using Terraria.DataStructures;
 using TerrorMod.Common.Utils;
 using TerrorMod.Core.Configs;
+using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses;
 
@@ -84,7 +85,7 @@ public class DukeFishron : GlobalNPC
                 {
                     if (npc.ai[2] == 27)
                     {
-                        SoundEngine.PlaySound(TerrorMod.Thunder);
+                        SoundEngine.PlaySound(TerrorSFX.Thunder);
                         SoundEngine.PlaySound(SoundID.Thunder);
                         SoundEngine.PlaySound(SoundID.Thunder);
                         if (Main.netMode != NetmodeID.MultiplayerClient)

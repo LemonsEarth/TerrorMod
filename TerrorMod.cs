@@ -19,12 +19,6 @@ namespace TerrorMod;
 // Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
 public class TerrorMod : Mod
 {
-    const string NoisePath = "TerrorMod/Common/Assets/Textures/NoiseTexture";
-    public static Asset<Texture2D> noiseTexture;
-
-    public static SoundStyle Jumpscare => new SoundStyle("TerrorMod/Common/Assets/Audio/SFX/Jumpscare_", 3);
-    public static SoundStyle Thunder => new SoundStyle("TerrorMod/Common/Assets/Audio/SFX/Thunder");
-
     public static TerrorMod instance;
 
     public TerrorMod()
@@ -59,22 +53,27 @@ public class TerrorMod : Mod
     {
         instance = this;
 
-        Asset<Effect> laserShader = Assets.Request<Effect>("Common/Assets/Shaders/LaserShader");
-        GameShaders.Misc["TerrorMod:LaserShader"] = new MiscShaderData(laserShader, "LaserShader");
+        LoadMiscShader("LaserShader", "Common/Assets/Shaders/LaserShader");
+        LoadMiscShader("SphereShader", "Common/Assets/Shaders/SphereShader");
+        LoadMiscShader("BlackSunShader", "Common/Assets/Shaders/BlackSunShader");
+        LoadMiscShader("ProjectileLightShader", "Common/Assets/Shaders/ProjectileLightShader");
 
-        Asset<Effect> sphereShader = Assets.Request<Effect>("Common/Assets/Shaders/SphereShader");
-        GameShaders.Misc["TerrorMod:SphereShader"] = new MiscShaderData(sphereShader, "SphereShader");
+        LoadFilterShader("DesaturateShader", "Common/Assets/Shaders/DesaturateShader", EffectPriority.VeryHigh);
+        LoadFilterShader("WavyShader", "Common/Assets/Shaders/WavyShader", EffectPriority.VeryHigh);
+        LoadFilterShader("VignetteShader", "Common/Assets/Shaders/VignetteShader", EffectPriority.VeryHigh);
 
-        Asset<Effect> blackSunShader = Assets.Request<Effect>("Common/Assets/Shaders/BlackSunShader");
-        GameShaders.Misc["TerrorMod:BlackSunShader"] = new MiscShaderData(blackSunShader, "BlackSunShader");
-
-        Asset<Effect> projLightShader = Assets.Request<Effect>("Common/Assets/Shaders/ProjectileLightShader");
-        GameShaders.Misc["TerrorMod:ProjectileLightShader"] = new MiscShaderData(projLightShader, "ProjectileLight");
-
-        Asset<Effect> desaturateShader = Assets.Request<Effect>("Common/Assets/Shaders/DesaturateShader");
-        Filters.Scene["TerrorMod:DesaturateShader"] = new Filter(new ScreenShaderData(desaturateShader, "DesaturateShader"), EffectPriority.VeryHigh);
-
-        noiseTexture = Request<Texture2D>(NoisePath);
         SkyManager.Instance["TerrorMod:TerrorSky"] = new TerrorSky();
+    }
+
+    void LoadFilterShader(string name, string path, EffectPriority priority)
+    {
+        Asset<Effect> filter = Assets.Request<Effect>(path);
+        Filters.Scene[$"TerrorMod:{name}"] = new Filter(new ScreenShaderData(filter, name), priority);
+    }
+
+    void LoadMiscShader(string name, string path)
+    {
+        Asset<Effect> shader = Assets.Request<Effect>(path);
+        GameShaders.Misc[$"TerrorMod:{name}"] = new MiscShaderData(shader, name);
     }
 }

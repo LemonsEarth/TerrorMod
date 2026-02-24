@@ -22,19 +22,19 @@ public class TemperatureInfoDisplay : InfoDisplay
     {
         var player = Main.LocalPlayer.TemperaturePlayer();
         Color color = Color.White;
-        if (player.CurrentTemperature < player.SuperColdTolerance)
+        if (player.CurrentTemperature <= player.SuperColdTolerance)
         {
-            color = Color.DeepSkyBlue;
+            color = Color.Blue;
         }
-        else if (player.CurrentTemperature < player.ColdTolerance)
+        else if (player.CurrentTemperature <= player.ColdTolerance)
         {
-            color = Color.LightBlue;
+            color = Color.Cyan;
         }
-        else if (player.CurrentTemperature > player.SuperHeatTolerance)
+        else if (player.CurrentTemperature >= player.SuperHeatTolerance)
         {
             color = Color.Red;
         }
-        else if (player.CurrentTemperature > player.HeatTolerance)
+        else if (player.CurrentTemperature >= player.HeatTolerance)
         {
             color = Color.Orange;
         }

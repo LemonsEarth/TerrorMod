@@ -1,4 +1,6 @@
-﻿namespace TerrorMod.Core.Players;
+﻿using Terraria.Graphics.Effects;
+
+namespace TerrorMod.Core.Players;
 
 public class TemperaturePlayer : ModPlayer
 {
@@ -150,17 +152,38 @@ public class TemperaturePlayer : ModPlayer
 
         if (Player.ZoneBeach)
         {
-            biomeTemp += 20;
+            if (Main.IsItDay())
+            {
+                biomeTemp += 20;
+            }
+            else
+            {
+                biomeTemp -= 20;
+            }
         }
 
         if (Player.ZoneDesert)
         {
-            biomeTemp += 40;
+            if (Main.IsItDay())
+            {
+                biomeTemp += 50;
+            }
+            else
+            {
+                biomeTemp -= 40;
+            }
         }
 
         if (Player.ZoneSnow)
         {
-            biomeTemp -= 40;
+            if (Main.IsItDay())
+            {
+                biomeTemp -= 40;
+            }
+            else
+            {
+                biomeTemp -= 80;
+            }
         }
 
         if (Player.ZoneDungeon)
@@ -194,11 +217,11 @@ public class TemperaturePlayer : ModPlayer
         {
             if (Main.IsItDay()) // colder during the day, warmer during the night
             {
-                waterTemp -= 30;
+                waterTemp -= 25;
             }
             else
             {
-                waterTemp += 20;
+                waterTemp += 0;
             }
         }
 
@@ -290,6 +313,73 @@ public class TemperaturePlayer : ModPlayer
 
     void LerpCurrentTemperature()
     {
-        CurrentTemperature = MathHelper.Lerp(CurrentTemperature, TargetTemperature, TemperatureChangeRate * (1 / 120f));
+        CurrentTemperature = MathHelper.Lerp(CurrentTemperature, TargetTemperature, TemperatureChangeRate * (1 / 100f));
+    }
+
+    float vignetteIntensity = 0f;
+    public override void PostUpdateMiscEffects()
+    {
+        if (!Main.dedServ)
+        {
+            if (CurrentTemperature > 0)
+            {
+                HeatShaderControl();
+            }
+            else
+            {
+                ColdShaderControl();
+            }
+        }
+    }
+
+    void HeatShaderControl()
+    {
+        float intensity = MathHelper.Clamp((CurrentTemperature - HeatTolerance) / HeatTolerance, 0, 1);
+        if (CurrentTemperature >= HeatTolerance)
+        {
+            vignetteIntensity = MathHelper.Lerp(vignetteIntensity, MathF.Max(intensity, 0.5f), 1 / 60f);
+        }
+        else
+        {
+            vignetteIntensity = MathHelper.Lerp(vignetteIntensity, 0, 1 / 60f);
+        }
+
+        if (!Filters.Scene["TerrorMod:WavyShader"].IsActive())
+        {
+            Filters.Scene.Activate("TerrorMod:WavyShader");
+        }
+        Filters.Scene["TerrorMod:WavyShader"].GetShader().UseIntensity(intensity);
+        Filters.Scene["TerrorMod:WavyShader"].GetShader().UseProgress(intensity);
+
+        if (!Filters.Scene["TerrorMod:VignetteShader"].IsActive())
+        {
+            Filters.Scene.Activate("TerrorMod:VignetteShader");
+        }
+        Filters.Scene["TerrorMod:VignetteShader"].GetShader().UseIntensity(vignetteIntensity * 1);
+        Filters.Scene["TerrorMod:VignetteShader"].GetShader().UseProgress(vignetteIntensity * 1);
+        Filters.Scene["TerrorMod:VignetteShader"].GetShader().UseColor(Color.Red);
+    }
+
+    void ColdShaderControl()
+    {
+        float absColdTolerance = MathF.Abs(ColdTolerance);
+        float absCurrentTemperature = MathF.Abs(CurrentTemperature);
+        float intensity = MathHelper.Clamp((absCurrentTemperature - absColdTolerance) / absColdTolerance, 0, 1);
+        if (absCurrentTemperature >= absColdTolerance)
+        {
+            vignetteIntensity = MathHelper.Lerp(vignetteIntensity, MathF.Max(intensity, 0.5f), 1 / 60f);
+        }
+        else
+        {
+            vignetteIntensity = MathHelper.Lerp(vignetteIntensity, 0, 1 / 60f);
+        }
+
+        if (!Filters.Scene["TerrorMod:VignetteShader"].IsActive())
+        {
+            Filters.Scene.Activate("TerrorMod:VignetteShader");
+        }
+        Filters.Scene["TerrorMod:VignetteShader"].GetShader().UseIntensity(vignetteIntensity * 1);
+        Filters.Scene["TerrorMod:VignetteShader"].GetShader().UseProgress(vignetteIntensity * 1);
+        Filters.Scene["TerrorMod:VignetteShader"].GetShader().UseColor(Color.Blue);
     }
 }
