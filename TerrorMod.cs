@@ -57,6 +57,7 @@ public class TerrorMod : Mod
         LoadMiscShader("SphereShader", "Common/Assets/Shaders/SphereShader");
         LoadMiscShader("BlackSunShader", "Common/Assets/Shaders/BlackSunShader");
         LoadMiscShader("ProjectileLightShader", "Common/Assets/Shaders/ProjectileLightShader");
+        LoadMiscShader("ProjectileLightShader", "Common/Assets/Shaders/ShieldPulseShader");
 
         LoadFilterShader("DesaturateShader", "Common/Assets/Shaders/DesaturateShader", EffectPriority.VeryHigh);
         LoadFilterShader("WavyShader", "Common/Assets/Shaders/WavyShader", EffectPriority.VeryHigh);

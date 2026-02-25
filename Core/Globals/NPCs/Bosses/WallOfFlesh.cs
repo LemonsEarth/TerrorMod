@@ -1,10 +1,10 @@
 ﻿using Terraria.Audio;
-using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Projectiles.Hostile;
 using System.Linq;
 using TerrorMod.Core.Configs;
 using TerrorMod.Content.NPCs.Hostile.Special;
 using TerrorMod.Content.Buffs.Buffs;
+using TerrorMod.Content.Buffs.Debuffs.Movement;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses;
 

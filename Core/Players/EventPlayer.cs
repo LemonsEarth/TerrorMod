@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Buffs.Debuffs.Misc;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Systems;
 

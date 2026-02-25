@@ -1,4 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Debuffs;
+﻿using TerrorMod.Content.Buffs.Debuffs.Movement;
 using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses.BossAdds;

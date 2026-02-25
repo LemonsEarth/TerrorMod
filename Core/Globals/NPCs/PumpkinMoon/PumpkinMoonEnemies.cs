@@ -1,4 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Debuffs;
+﻿using TerrorMod.Content.Buffs.Debuffs.Movement;
 using TerrorMod.Content.NPCs.Hostile.Forest;
 
 namespace TerrorMod.Core.Globals.NPCs.PumpkinMoonEnemies;

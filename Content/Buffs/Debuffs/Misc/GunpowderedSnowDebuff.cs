@@ -1,4 +1,4 @@
-﻿namespace TerrorMod.Content.Buffs.Debuffs;
+﻿namespace TerrorMod.Content.Buffs.Debuffs.Misc;
 
 public class GunpowderedSnowDebuff : ModBuff
 {

@@ -1,5 +1,5 @@
 ﻿using Terraria.Audio;
-using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Buffs.Debuffs.Movement;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Configs;
 

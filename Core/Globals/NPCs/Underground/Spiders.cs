@@ -1,4 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Debuffs;
+﻿using TerrorMod.Content.Buffs.Debuffs.Phobias;
 
 namespace TerrorMod.Core.Globals.NPCs.Underground;
 

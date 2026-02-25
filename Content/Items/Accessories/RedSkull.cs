@@ -1,5 +1,5 @@
 ﻿using Terraria.Localization;
-using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Buffs.Debuffs.Movement;
 
 namespace TerrorMod.Content.Items.Accessories;
 

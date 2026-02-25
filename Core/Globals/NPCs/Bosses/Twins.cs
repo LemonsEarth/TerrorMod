@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.DataStructures;
-using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Buffs.Debuffs.Movement;
 using TerrorMod.Content.NPCs.Bosses.BossAdds;
 using TerrorMod.Content.NPCs.Hostile.Special;
 using TerrorMod.Core.Configs;

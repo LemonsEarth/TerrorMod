@@ -1,8 +1,8 @@
 ﻿using TerrorMod.Common.Utils;
 
-namespace TerrorMod.Content.Buffs.Debuffs;
+namespace TerrorMod.Content.Buffs.Debuffs.Phobias;
 
-public class HemophobiaDebuff : ModBuff
+public class ThalassophobiaDebuff : ModBuff
 {
     public override void SetStaticDefaults()
     {
@@ -12,6 +12,6 @@ public class HemophobiaDebuff : ModBuff
 
     public override void Update(Player player, ref int buffIndex)
     {
-        LemonUtils.AddPhobiaDebuffs(player, 1.3f);
+        LemonUtils.AddPhobiaDebuffs(player);
     }
 }

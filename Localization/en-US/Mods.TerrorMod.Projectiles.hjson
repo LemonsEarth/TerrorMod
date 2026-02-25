@@ -21,3 +21,5 @@ ExplosionLarge.DisplayName: Explosion
 MeteorHostile.DisplayName: Meteor
 PumpkingHeadProj.DisplayName: Pumpking Head
 DoomSphereLong.DisplayName: Doom Sphere Long
+LaserEffect.DisplayName: Laser Effect
+PulseEffect.DisplayName: Pulse Effect

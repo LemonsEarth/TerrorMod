@@ -1,7 +1,7 @@
 ﻿using Terraria.Localization;
 using TerrorMod.Core.Players;
 
-namespace TerrorMod.Content.Buffs.Debuffs;
+namespace TerrorMod.Content.Buffs.Debuffs.Misc;
 
 public class CurseDebuff : ModBuff
 {

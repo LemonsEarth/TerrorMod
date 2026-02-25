@@ -1,13 +1,12 @@
 ﻿using TerrorMod.Common.Utils;
 
-namespace TerrorMod.Content.Buffs.Debuffs;
+namespace TerrorMod.Content.Buffs.Debuffs.Phobias;
 
-public class NyctophobiaDebuff : ModBuff
+public class ArachnophobiaDebuff : ModBuff
 {
     public override void SetStaticDefaults()
     {
         Main.debuff[Type] = true;
-        Main.buffNoTimeDisplay[Type] = true;
     }
 
     public override void Update(Player player, ref int buffIndex)

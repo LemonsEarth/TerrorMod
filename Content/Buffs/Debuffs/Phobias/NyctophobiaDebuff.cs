@@ -1,8 +1,8 @@
 ﻿using TerrorMod.Common.Utils;
 
-namespace TerrorMod.Content.Buffs.Debuffs;
+namespace TerrorMod.Content.Buffs.Debuffs.Phobias;
 
-public class ThalassophobiaDebuff : ModBuff
+public class NyctophobiaDebuff : ModBuff
 {
     public override void SetStaticDefaults()
     {

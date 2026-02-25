@@ -1,6 +1,7 @@
 ﻿using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Common.Utils;
 using System.Linq;
+using TerrorMod.Content.Buffs.Debuffs.Phobias;
 
 namespace TerrorMod.Core.Players;
 

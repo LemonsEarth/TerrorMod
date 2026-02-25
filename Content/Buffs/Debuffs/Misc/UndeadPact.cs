@@ -1,10 +1,11 @@
-﻿namespace TerrorMod.Content.Buffs.Debuffs;
+﻿namespace TerrorMod.Content.Buffs.Debuffs.Misc;
 
-public class FearDebuff : ModBuff
+public class UndeadPact : ModBuff
 {
     public override void SetStaticDefaults()
     {
         Main.debuff[Type] = true;
+        Main.buffNoTimeDisplay[Type] = true;
         BuffID.Sets.LongerExpertDebuff[Type] = false;
     }
 
@@ -12,10 +13,7 @@ public class FearDebuff : ModBuff
     {
         if (Main.myPlayer == player.whoAmI)
         {
-            Vector2 mousePos = Main.MouseWorld;
-            Vector2 mouseToPlayer = mousePos.DirectionTo(player.Center);
-            player.velocity += mouseToPlayer * 0.2f;
-            player.controlDown = true;
+            player.GetDamage(DamageClass.Generic) *= 0;
         }
     }
 }

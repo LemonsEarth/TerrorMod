@@ -1,7 +1,7 @@
 ﻿using Terraria.DataStructures;
 using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Buffs;
-using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Buffs.Debuffs.Misc;
 using TerrorMod.Core.Globals.Items.Armor;
 
 namespace TerrorMod.Core.Globals.NPCs;

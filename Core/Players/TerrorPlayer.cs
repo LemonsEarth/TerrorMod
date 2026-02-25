@@ -1,9 +1,9 @@
 ﻿using Terraria.Graphics.Effects;
 using Terraria.DataStructures;
-using TerrorMod.Content.Buffs.Debuffs;
 using Terraria.ModLoader.IO;
 using System.IO;
 using TerrorMod.Content.NPCs.Bosses;
+using TerrorMod.Content.Buffs.Debuffs.Misc;
 
 namespace TerrorMod.Core.Players;
 

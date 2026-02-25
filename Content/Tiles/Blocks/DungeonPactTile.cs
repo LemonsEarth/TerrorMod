@@ -1,4 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Debuffs;
+﻿using TerrorMod.Content.Buffs.Debuffs.Misc;
 
 namespace TerrorMod.Content.Tiles.Blocks;
 

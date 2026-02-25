@@ -1,4 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Debuffs;
+﻿using TerrorMod.Content.Buffs.Debuffs.Movement;
 
 namespace TerrorMod.Core.Globals.NPCs.Forest;
 

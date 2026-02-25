@@ -118,3 +118,8 @@ UltimateTerror: {
 	DisplayName: Ultimate Terror
 	Description: Your mind is rotting...
 }
+
+ManaMalady: {
+	DisplayName: Mana Malady
+	Description: Mods.TerrorMod.Buffs.ManaMalady.Description
+}
