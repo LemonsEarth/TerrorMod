@@ -1,4 +1,8 @@
-﻿using Terraria.Graphics.Effects;
+﻿using Terraria.DataStructures;
+using Terraria.Graphics.Effects;
+using Terraria.Localization;
+using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Buffs.Debuffs.Temperature;
 
 namespace TerrorMod.Core.Players;
 
@@ -27,18 +31,8 @@ public class TemperaturePlayer : ModPlayer
     public const float DEFAULT_SUPER_COLD_TOLERANCE = -60;
     public float SuperColdTolerance { get; set; } = DEFAULT_SUPER_COLD_TOLERANCE;
 
+    #region Temperature Info Display
     public bool ShowTemperature { get; set; } = false;
-
-    public override void ResetEffects()
-    {
-        TargetTemperature = 0;
-        LavaTemperature = DEFAULT_LAVA_TEMPERATURE;
-        HeatTolerance = DEFAULT_HEAT_TOLERANCE;
-        ColdTolerance = DEFAULT_COLD_TOLERANCE;
-        SuperHeatTolerance = DEFAULT_SUPER_HEAT_TOLERANCE;
-        SuperColdTolerance = DEFAULT_SUPER_COLD_TOLERANCE;
-    }
-
     public override void ResetInfoAccessories()
     {
         ShowTemperature = false;
@@ -51,6 +45,17 @@ public class TemperaturePlayer : ModPlayer
             ShowTemperature = true;
         }
     }
+    #endregion
+
+    public override void ResetEffects()
+    {
+        TargetTemperature = 0;
+        LavaTemperature = DEFAULT_LAVA_TEMPERATURE;
+        HeatTolerance = DEFAULT_HEAT_TOLERANCE;
+        ColdTolerance = DEFAULT_COLD_TOLERANCE;
+        SuperHeatTolerance = DEFAULT_SUPER_HEAT_TOLERANCE;
+        SuperColdTolerance = DEFAULT_SUPER_COLD_TOLERANCE;
+    }
 
     public override void PostUpdate()
     {
@@ -61,6 +66,8 @@ public class TemperaturePlayer : ModPlayer
         CheckAndAddLavaTemperature();
         LerpCurrentTemperature();
     }
+
+    #region Temperature Calculations and Checks
 
     float CalculateFeverBuffTemperatures()
     {
@@ -264,6 +271,11 @@ public class TemperaturePlayer : ModPlayer
         {
             TargetTemperature += LavaTemperature;
         }
+        else if (Player.adjLava)
+        {
+            TargetTemperature += LavaTemperature / 10;
+        }
+
     }
 
     float CheckArmorSetTemperature(int headType, int bodyType, int legsType, float tempPerPiece)
@@ -310,10 +322,20 @@ public class TemperaturePlayer : ModPlayer
     {
         TargetTemperature += CalculateEquipmentTemperature();
     }
+    #endregion
 
     void LerpCurrentTemperature()
     {
         CurrentTemperature = MathHelper.Lerp(CurrentTemperature, TargetTemperature, TemperatureChangeRate * (1 / 100f));
+        if (MathF.Abs(CurrentTemperature - TargetTemperature) <= 0.5f)
+        {
+            CurrentTemperature = TargetTemperature;
+        }
+    }
+
+    public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+    {
+        CurrentTemperature = 0;
     }
 
     float vignetteIntensity = 0f;
@@ -329,6 +351,40 @@ public class TemperaturePlayer : ModPlayer
             {
                 ColdShaderControl();
             }
+        }
+
+        if (CurrentTemperature >= 100)
+        {
+            Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey("Mods.TerrorMod.Buffs.SuperHotDebuff.DeathMessage", Main.LocalPlayer.name)), 9999, 1);
+        }
+        else if (CurrentTemperature <= -100)
+        {
+            Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey("Mods.TerrorMod.Buffs.SuperColdDebuff.DeathMessage", Main.LocalPlayer.name)), 9999, 1);
+        }
+    }
+
+    public override void PreUpdateBuffs()
+    {
+        TemperatureBuffControl();
+    }
+
+    void TemperatureBuffControl()
+    {
+        if (CurrentTemperature <= SuperColdTolerance)
+        {
+            Player.AddBuff(BuffType<SuperColdDebuff>(), 2);
+        }
+        else if (CurrentTemperature <= ColdTolerance)
+        {
+            Player.AddBuff(BuffType<ColdDebuff>(), 2);
+        }
+        else if (CurrentTemperature >= SuperHeatTolerance)
+        {
+            Player.AddBuff(BuffType<SuperHotDebuff>(), 2);
+        }
+        else if (CurrentTemperature >= HeatTolerance)
+        {
+            Player.AddBuff(BuffType<HotDebuff>(), 2);
         }
     }
 

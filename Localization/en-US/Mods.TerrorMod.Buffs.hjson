@@ -123,3 +123,25 @@ ManaMalady: {
 	DisplayName: Mana Malady
 	Description: Mods.TerrorMod.Buffs.ManaMalady.Description
 }
+
+ColdDebuff: {
+	DisplayName: Cold Debuff
+	Description: Mods.TerrorMod.Buffs.ColdDebuff.Description
+}
+
+SuperColdDebuff: {
+	DisplayName: Super Cold Debuff
+	Description: Mods.TerrorMod.Buffs.SuperColdDebuff.Description
+	DeathMessage: "{0}'s mind froze."
+}
+
+HotDebuff: {
+	DisplayName: Hot Debuff
+	Description: Mods.TerrorMod.Buffs.HotDebuff.Description
+}
+
+SuperHotDebuff: {
+	DisplayName: Super Hot Debuff
+	Description: Mods.TerrorMod.Buffs.SuperHotDebuff.Description
+	DeathMessage: "{0}'s soul burned."
+}
