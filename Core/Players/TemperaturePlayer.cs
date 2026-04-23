@@ -3,6 +3,8 @@ using Terraria.Graphics.Effects;
 using Terraria.Localization;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Buffs.Debuffs.Temperature;
+using TerrorMod.Core.Systems.World;
+using static TerrorMod.Core.Systems.World.SeasonSystem;
 
 namespace TerrorMod.Core.Players;
 
@@ -64,6 +66,7 @@ public class TemperaturePlayer : ModPlayer
         CheckAndAddBiomeTemerature();
         CheckAndAddWaterTemperature();
         CheckAndAddLavaTemperature();
+        AddSeasonTemperature();
         LerpCurrentTemperature();
     }
 
@@ -323,6 +326,37 @@ public class TemperaturePlayer : ModPlayer
         TargetTemperature += CalculateEquipmentTemperature();
     }
     #endregion
+
+    void AddSeasonTemperature()
+    {
+        switch (CurrentSeason)
+        {
+            case Season.EarlyAutumn:
+                TargetTemperature += EarlyAutumnTemperature;
+                break;
+            case Season.LateAutumn:
+                TargetTemperature += LateAutumnTemperature;
+                break;
+            case Season.EarlyWinter:
+                TargetTemperature += EarlyWinterTemperature;
+                break;
+            case Season.LateWinter:
+                TargetTemperature += LateWinterTemperature;
+                break;
+            case Season.EarlySpring:
+                TargetTemperature += EarlySpringTemperature;
+                break;
+            case Season.LateSpring:
+                TargetTemperature += LateSpringTemperature;
+                break;
+            case Season.EarlySummer:
+                TargetTemperature += EarlySummerTemperature;
+                break;
+            case Season.LateSummer:
+                TargetTemperature += LateSummerTemperature;
+                break;
+        }
+    }
 
     void LerpCurrentTemperature()
     {

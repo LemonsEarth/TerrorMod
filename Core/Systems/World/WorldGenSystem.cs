@@ -2,7 +2,7 @@
 using TerrorMod.Content.Tiles.Blocks;
 using TerrorMod.Content.Tiles.Furniture;
 
-namespace TerrorMod.Core.Systems;
+namespace TerrorMod.Core.Systems.World;
 
 public class WorldGenSystem : ModSystem
 {

@@ -1,4 +1,9 @@
 TemperatureInfoDisplay: {
-	DisplayName: Temperature Info Display
+	DisplayName: Temperature
 	CurrentTemperature: "{0}°T"
+}
+
+DayCountInfoDisplay: {
+	DisplayName: Day Count
+	DaysPassed: Day count: {0} | {1}
 }

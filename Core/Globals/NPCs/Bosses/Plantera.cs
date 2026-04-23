@@ -1,7 +1,7 @@
 ﻿using TerrorMod.Common.Utils;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Configs;
-using TerrorMod.Core.Systems;
+using TerrorMod.Core.Systems.World;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses;
 

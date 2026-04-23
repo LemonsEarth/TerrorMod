@@ -6,11 +6,7 @@ public class MythrilArmor : GlobalItem
 {
     public override bool AppliesToEntity(Item entity, bool lateInstantiation)
     {
-        return entity.type == ItemID.MythrilHat
-            || entity.type == ItemID.MythrilHelmet
-            || entity.type == ItemID.MythrilHood
-            || entity.type == ItemID.MythrilChainmail
-            || entity.type == ItemID.MythrilGreaves;
+        return entity.type == ItemID.JungleHat;
     }
 
     public override void UpdateEquip(Item item, Player player)

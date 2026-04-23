@@ -176,5 +176,36 @@ MasterFishingLicense: {
 
 Thermometer: {
 	DisplayName: Thermometer
-	Tooltip: ""
+	Tooltip: Displays your current temperature in Terrys
+}
+
+FireStone: {
+	DisplayName: Fire Stone
+	Tooltip:
+		'''
+		Melee attacks inflict On Fire!
+		Makes you warmer
+		'''
+}
+
+FrostStone: {
+	DisplayName: Frost Stone
+	Tooltip:
+		'''
+		Melee attacks inflict Frostburn
+		Makes you colder
+		'''
+}
+
+TheRock: {
+	DisplayName: The Rock
+	Tooltip: The one and only, all purpose rock.
+}
+
+PocketCalendar: {
+	DisplayName: Pocket Calendar
+	Tooltip:
+	'''
+	Displays day count and season
+	'''
 }

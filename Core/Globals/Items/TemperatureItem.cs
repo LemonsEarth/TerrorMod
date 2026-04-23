@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TerrorMod.Content.Buffs.Debuffs;
+using TerrorMod.Content.Items.Accessories;
 using static Terraria.ID.ItemID;
 
 namespace TerrorMod.Core.Globals.Items;

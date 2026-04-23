@@ -2,6 +2,7 @@
 using Terraria.Chat;
 using Terraria.Localization;
 using Terraria.ModLoader.IO;
+using TerrorMod.Core.Systems.World;
 
 namespace TerrorMod.Core.Systems;
 
@@ -25,13 +26,13 @@ public class EventSystem : ModSystem
             if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.EndMessage"), Color.OrangeRed);
         }
 
-        if ((int)Main.time == 1 && !Main.dayTime && DayCountSystem.dayCount == 3)
+        if ((int)Main.time == 1 && !Main.dayTime && DayCountSystem.DayCount == 3)
         {
             Main.bloodMoon = true;
             if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("The Bloody Moon rises..."), Color.Red);
         }
 
-        if ((int)Main.time == 1 && Main.dayTime && DayCountSystem.dayCount % 3 == 0 && Main.hardMode)
+        if ((int)Main.time == 1 && Main.dayTime && DayCountSystem.DayCount % 10 == 0 && Main.hardMode)
         {
             Main.eclipse = true;
             if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("A Solar Eclipse has begun!"), Color.OrangeRed);
@@ -41,7 +42,7 @@ public class EventSystem : ModSystem
     bool HellbreachStartCheck()
     {
         int chanceDenominator = !finishedHellbreach ? 3 : 20;
-        if (Math.Floor(Main.time) == 1 && Main.dayTime && DayCountSystem.dayCount > 4 && !hellbreachActive)
+        if (Math.Floor(Main.time) == 1 && Main.dayTime && DayCountSystem.DayCount > 4 && !hellbreachActive)
         {
             if (Main.rand.NextBool(chanceDenominator)) return true;
         }

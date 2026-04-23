@@ -121,27 +121,27 @@ UltimateTerror: {
 
 ManaMalady: {
 	DisplayName: Mana Malady
-	Description: Mods.TerrorMod.Buffs.ManaMalady.Description
+	Description: Cannot restore mana
 }
 
 ColdDebuff: {
-	DisplayName: Cold Debuff
-	Description: Mods.TerrorMod.Buffs.ColdDebuff.Description
+	DisplayName: Cold
+	Description: You are feeling numb...
 }
 
 SuperColdDebuff: {
 	DisplayName: Super Cold Debuff
-	Description: Mods.TerrorMod.Buffs.SuperColdDebuff.Description
+	Description: You are feeling numb...
 	DeathMessage: "{0}'s mind froze."
 }
 
 HotDebuff: {
 	DisplayName: Hot Debuff
-	Description: Mods.TerrorMod.Buffs.HotDebuff.Description
+	Description: You feel like you're melting...
 }
 
 SuperHotDebuff: {
 	DisplayName: Super Hot Debuff
-	Description: Mods.TerrorMod.Buffs.SuperHotDebuff.Description
+	Description: You feel like you're melting...
 	DeathMessage: "{0}'s soul burned."
 }

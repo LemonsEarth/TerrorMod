@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TerrorMod.Content.Items.Special;
+using TerrorMod.Content.Items.Tools;
 
 namespace TerrorMod.Core.Players;
 
@@ -12,9 +13,9 @@ public class StartingInventoryPlayer : ModPlayer
 
     public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
     {
-        return new Item[] {
-            new Item(ItemID.Wood, 16, 1),
+        return [
+            new Item(ItemType<TheRock>(), 1, 1),
             new Item(ItemType<LootToken>(), 1, 1)
-        };
+        ];
     }
 }
