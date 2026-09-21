@@ -204,8 +204,5 @@ TheRock: {
 
 PocketCalendar: {
 	DisplayName: Pocket Calendar
-	Tooltip:
-	'''
-	Displays day count and season
-	'''
+	Tooltip: Displays day count and season
 }

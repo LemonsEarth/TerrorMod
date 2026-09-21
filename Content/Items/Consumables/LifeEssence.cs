@@ -40,10 +40,9 @@ public class LifeEssence : ModItem
     public override bool? UseItem(Player player)
     {
         LemonUtils.DustCircle(player.Center, 16, 10, DustID.GemDiamond, 1.2f);
-        if (player.whoAmI == Main.myPlayer)
-        {
-            player.GetModPlayer<TerrorPlayer>().curseLevel--;
-        }
+
+        player.GetModPlayer<TerrorPlayer>().curseLevel--;
+
         return true;
     }
 

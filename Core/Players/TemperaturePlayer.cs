@@ -61,6 +61,9 @@ public class TemperaturePlayer : ModPlayer
 
     public override void PostUpdate()
     {
+        //Player.potionDelay = 0;
+        
+        //Player.ClearBuff(BuffID.PotionSickness);
         CheckAndAddEquipmentTemperature();
         CheckAndAddBuffTemerature();
         CheckAndAddBiomeTemerature();
