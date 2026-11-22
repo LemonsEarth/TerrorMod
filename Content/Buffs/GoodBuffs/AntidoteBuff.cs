@@ -1,6 +1,6 @@
 ﻿using TerrorMod.Content.Buffs.Debuffs;
 
-namespace TerrorMod.Content.Buffs.Buffs;
+namespace TerrorMod.Content.Buffs.GoodBuffs;
 
 public class AntidoteBuff : ModBuff
 {

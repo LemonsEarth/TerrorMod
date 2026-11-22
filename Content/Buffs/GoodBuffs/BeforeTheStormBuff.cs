@@ -1,4 +1,4 @@
-﻿namespace TerrorMod.Content.Buffs.Buffs;
+﻿namespace TerrorMod.Content.Buffs.GoodBuffs;
 
 public class BeforeTheStormBuff : ModBuff
 {

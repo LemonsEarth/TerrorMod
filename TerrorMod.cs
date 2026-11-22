@@ -24,6 +24,7 @@ public class TerrorMod : Mod
     public TerrorMod()
     {
         MusicSkipsVolumeRemap = true;
+        MusicAutoloadingEnabled = false;
     }
 
     internal enum MessageType : byte

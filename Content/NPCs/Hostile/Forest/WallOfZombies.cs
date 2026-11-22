@@ -22,7 +22,7 @@ public class WallOfZombies : ModNPC
         NPC.value = 1300;
         NPC.knockBackResist = 0f;
         AIType = NPCID.Zombie;
-        NPC.aiStyle = NPCID.Zombie;
+        NPC.aiStyle = NPCAIStyleID.Fighter;
     }
 
     public override void AI()

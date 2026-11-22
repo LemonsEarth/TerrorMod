@@ -23,7 +23,7 @@ float4 LaserShader(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0, float
     float distanceToCenterX = distance(abs(centeredCoords.x), width);
     float distanceToCenterY = distance(abs(centeredCoords.y), float2(0, 0));
     
-    float2 xMul = (1, 1);
+    float2 xMul = float2(1, 1);
     xMul = float2(1, 1) - float2(distanceToCenterX, distanceToCenterY); // curviness
     float4 finalColor = noiseColor * (1 - distanceToCenterX) * length(xMul);
     

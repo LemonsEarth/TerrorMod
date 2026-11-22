@@ -1,4 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Buffs;
+﻿using TerrorMod.Content.Buffs.GoodBuffs;
 
 namespace TerrorMod.Core.Globals.Items.Armor;
 

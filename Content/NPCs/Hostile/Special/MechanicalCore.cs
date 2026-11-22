@@ -2,7 +2,7 @@
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using TerrorMod.Common.Utils;
-using TerrorMod.Content.Buffs.Buffs;
+using TerrorMod.Content.Buffs.GoodBuffs;
 using TerrorMod.Content.Buffs.Debuffs.Misc;
 
 namespace TerrorMod.Content.NPCs.Hostile.Special;

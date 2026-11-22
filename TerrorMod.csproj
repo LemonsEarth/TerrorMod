@@ -1,38 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Tomat.Terraria.ModLoader.Sdk/2.1.2">
 
 	<!-- Import tModLoader mod properties -->
 	<Import Project="..\tModLoader.targets" />
 
-	<!-- General -->
 	<PropertyGroup>
-		
+    	<TmlBuildBootstrapFeatures>tomat.enablemod;lolxd87.splashskip;tomat.assethotreloading</TmlBuildBootstrapFeatures>
 	</PropertyGroup>
-	<ItemGroup>
-	  <None Remove="changelog.txt" />
-	  <None Remove="Common\Assets\Shaders\BlackSunShader.fx" />
-	  <None Remove="Common\Assets\Shaders\DesaturateShader.fx" />
-	  <None Remove="Common\Assets\Shaders\LaserShader.fx" />
-	  <None Remove="Common\Assets\Shaders\ProjectileLightShader.fx" />
-	  <None Remove="Common\Assets\Shaders\SphereShader.fx" />
-	  <None Remove="Common\Assets\Textures\noiseTexture.png" />
-	  <None Remove="Content\Buffs\Debuffs\InfectedCorrupt.png" />
-	  <None Remove="Content\Buffs\Debuffs\InfectedCrimson.png" />
-	  <None Remove="Content\NPCs\Bosses\InfiniteTerrorCage_Head_Boss.png" />
-	  <None Remove="Content\Projectiles\Hostile\DoomSphereLong.png" />
-	  <None Remove="Content\Projectiles\Hostile\ExplosionLarge.png" />
-	  <None Remove="Content\Tiles\Furniture\SimpleIceChest_Highlight.png" />
-	  <None Remove="Localization\en-US\Mods.TerrorMod.Buffs.hjson" />
-	  <None Remove="Localization\en-US\Mods.TerrorMod.Configs.hjson" />
-	  <None Remove="Localization\en-US\Mods.TerrorMod.Items.hjson" />
-	  <None Remove="Localization\en-US\Mods.TerrorMod.Messages.hjson" />
-	  <None Remove="Localization\en-US\Mods.TerrorMod.Projectiles.hjson" />
-	  <None Remove="Localization\en-US\Mods.TerrorMod.Tiles.hjson" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Core\Effects\" />
-	  <Folder Include="Core\Globals\Buffs\Debuffs\" />
-	</ItemGroup>
-
 	<!-- References -->
 
 </Project>
