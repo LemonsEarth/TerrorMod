@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using TerrorMod.Content.Buffs.Debuffs;
-
-namespace TerrorMod.Core.Globals.Items;
+﻿namespace TerrorMod.Core.Globals.Items;
 
 public class HealingItem : GlobalItem
 {

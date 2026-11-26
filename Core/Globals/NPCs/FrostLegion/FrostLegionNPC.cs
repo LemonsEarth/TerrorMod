@@ -1,6 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-
-namespace TerrorMod.Core.Globals.NPCs.FrostLegion;
+﻿namespace TerrorMod.Core.Globals.NPCs.FrostLegion;
 
 public class FrostLegionNPC : GlobalNPC
 {

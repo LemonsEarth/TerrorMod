@@ -1,7 +1,6 @@
 ﻿using Terraria.DataStructures;
 using TerrorMod.Content.Buffs.Debuffs;
 using Terraria.Localization;
-using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Core.Players;
 

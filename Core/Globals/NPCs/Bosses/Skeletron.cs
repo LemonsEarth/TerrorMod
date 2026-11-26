@@ -1,5 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-using TerrorMod.Core.Configs;
+﻿using TerrorMod.Core.Configs;
 using Terraria.GameContent.ItemDropRules;
 using TerrorMod.Content.Items.Accessories;
 

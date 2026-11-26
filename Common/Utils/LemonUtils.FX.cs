@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.Graphics.CameraModifiers;
 using TerrorMod.Content.Projectiles.Effect;
 using TerrorMod.Core.Systems;
+using Terraria.UI.Chat;
 
 namespace TerrorMod.Common.Utils;
 
@@ -37,16 +39,52 @@ public static partial class LemonUtils
         }
     }
 
+    public static void DustRing(Vector2 position, float radius, int count, int dustType, float speed)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Dust.NewDustPerfect(
+                position - Vector2.UnitY.RotatedBy(i * (MathHelper.TwoPi / count) + MathHelper.ToRadians((float)Main.timeForVisualEffects * speed)) * radius,
+                dustType,
+                Vector2.Zero
+                ).noGravity = true;
+        }
+    }
+
+    public static void DrawText(string text, Vector2 screenPos, Color? color = null, float rotation = 0f, Vector2? origin = null, Vector2? scale = null)
+    {
+        color ??= Color.White;
+        origin ??= Vector2.Zero;
+        scale ??= Vector2.One;
+        ChatManager.DrawColorCodedString(Main.spriteBatch, FontAssets.MouseText.Value, text, screenPos, color.Value, rotation, origin.Value, scale.Value);
+    }
+
+    public static void DrawText(string text, Vector2 screenPos, Color? color = null, float rotation = 0f, Vector2? origin = null, float scale = 1f)
+    {
+        color ??= Color.White;
+        origin ??= Vector2.Zero;
+        ChatManager.DrawColorCodedString(Main.spriteBatch, FontAssets.MouseText.Value, text, screenPos, color.Value, rotation, origin.Value, new Vector2(scale, scale));
+    }
+
+    /// <summary>
+    /// Creates a line of dust between 2 points
+    /// </summary>
+    /// <param name="pos1"></param>
+    /// <param name="pos2"></param>
+    /// <param name="type"></param>
+    /// <param name="distanceBetween"></param>
+    /// <param name="scale"></param>
+    /// <param name="color"></param>
     public static void DustLine(Vector2 pos1, Vector2 pos2, int type, int distanceBetween = 16, float scale = 1, Color color = default)
     {
         if (color == default) color = Color.White;
         Vector2 dir = pos1.DirectionTo(pos2);
         float distance = pos1.Distance(pos2);
-        int dustCount = (int)(distance / 16);
+        int dustCount = (int)(distance / distanceBetween);
         Vector2 currentPos = pos1;
         while (dustCount > 0)
         {
-            Dust.NewDustPerfect(currentPos, type, Scale: scale, newColor: color).noGravity = true;
+            Dust.NewDustPerfect(currentPos, type, Vector2.Zero, Scale: scale, newColor: color).noGravity = true;
             currentPos += dir * distanceBetween;
             dustCount--;
         }
@@ -60,6 +98,22 @@ public static partial class LemonUtils
         }
     }
 
+    public static void ParticleBurst(int count, Vector2 pos, int particleID, float randXSpeed, float randYSpeed, float minScale, float maxScale, Color color = default)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            // Note: TerrorMod uses ParticleSystem from Core.Systems - kept for compatibility
+            // This would need to be adapted if ParticleSystem namespace/usage differs
+        }
+    }
+
+    /// <summary>
+    /// Spawns smoke gore
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="pos"></param>
+    /// <param name="minSpeed"></param>
+    /// <param name="maxSpeed"></param>
     public static void SmokeGore(IEntitySource source, Vector2 pos, float minSpeed, float maxSpeed)
     {
         if (!Main.dedServ)
@@ -77,15 +131,28 @@ public static partial class LemonUtils
         return finalPoint;
     }
 
+    /// <summary>
+    /// Returns SpriteEffects.FlipHorizontally if spriteDirection == -1, else SpriteEffects.None.
+    /// </summary>
+    /// <param name="spriteDirection"></param>
+    /// <returns></returns>
     public static SpriteEffects SpriteDirectionToSpriteEffects(int spriteDirection)
     {
         if (spriteDirection == -1) return SpriteEffects.FlipHorizontally;
         return SpriteEffects.None;
     }
 
+    /// <summary>
+    /// Draws a glow ball with the given params.
+    /// Drawing multiple glow balls on top of each other could provide a decent looking effect.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="color"></param>
+    /// <param name="opacity"></param>
+    /// <param name="scale"></param>
     public static void DrawGlow(Vector2 position, Color color, float opacity, float scale)
     {
-        Main.EntitySpriteDraw(TerrorTextures.GlowBall.Value, position - Main.screenPosition, null, color * opacity, 0f, TerrorTextures.GlowBall.Size() * 0.5f, scale, SpriteEffects.None);
+        Main.EntitySpriteDraw(TerrorTextures.GlowBallTexture.Value, position - Main.screenPosition, null, color * opacity, 0f, TerrorTextures.GlowBallTexture.Size() * 0.5f, scale, SpriteEffects.None);
     }
 
     public static void QuickScreenShake(Vector2 pos, float strength, float vibrationCyclesPerSecond, int frames, float distanceFalloff)

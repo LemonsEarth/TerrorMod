@@ -1,6 +1,5 @@
 ﻿using Terraria.DataStructures;
 using TerrorMod.Content.NPCs.Hostile.Forest;
-using TerrorMod.Common.Utils;
 using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.Tiles;

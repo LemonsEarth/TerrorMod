@@ -1,9 +1,5 @@
-﻿using System.IO;
-using Terraria.DataStructures;
-using Terraria.ModLoader.IO;
-using Terraria.WorldBuilding;
+﻿using Terraria.DataStructures;
 using TerrorMod.Content.Projectiles.Hostile;
-using TerrorMod.Core.Players;
 
 namespace TerrorMod.Core.Systems.World;
 

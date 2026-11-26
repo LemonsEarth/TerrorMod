@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.Audio;
-using TerrorMod.Common.Utils;
 using TerrorMod.Common.Utils.Prim;
 
 namespace TerrorMod.Content.Projectiles.Hostile;

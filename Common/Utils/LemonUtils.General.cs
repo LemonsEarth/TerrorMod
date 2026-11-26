@@ -1,4 +1,6 @@
-﻿using TerrorMod.Content.Buffs.Debuffs.Movement;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Terraria.Utilities;
+using TerrorMod.Content.Buffs.Debuffs.Movement;
 
 namespace TerrorMod.Common.Utils;
 
@@ -10,7 +12,7 @@ public static partial class LemonUtils
     public static bool NotClient() => Main.netMode != NetmodeID.MultiplayerClient;
 
     /// <summary>
-    /// Accelerates an entity towards a position
+    /// Accelerates an entity towards a position.
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="pos">The position to accelerate towards</param>
@@ -28,6 +30,45 @@ public static partial class LemonUtils
         float XaccelMod = Math.Sign(direction.X) - Math.Sign(entity.velocity.X);
         float YaccelMod = Math.Sign(direction.Y) - Math.Sign(entity.velocity.Y);
         entity.velocity += new Vector2(XaccelMod * xDecel + xAccel * Math.Sign(direction.X), YaccelMod * yDecel + yAccel * Math.Sign(direction.Y));
+    }
+
+    public static void TurningMoveToPos(this Entity entity, Vector2 pos, float turningSpeedDegreesDenominator = 60f, float moveSpeed = 8f)
+    {
+        Vector2 dirToPos = entity.DirectionTo(pos);
+        float angleBetween = MathHelper.ToDegrees(AngleBetween(entity.velocity, dirToPos));
+        //Main.NewText(angleBetween);
+        if (MathF.Abs(angleBetween) > MathHelper.ToRadians(5))
+        {
+            entity.velocity = entity.velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.ToRadians(angleBetween / turningSpeedDegreesDenominator)) * moveSpeed;
+        }
+    }
+
+    /// <summary>
+    /// Returns 1 one out of "consequent" times, otherwise -1.
+    /// </summary>
+    /// <param name="rand"></param>
+    /// <param name="consequent"></param>
+    /// <returns></returns>
+    public static int NextSign(this UnifiedRandom rand, int consequent = 2)
+    {
+        return rand.NextBool(consequent).ToDirectionInt();
+    }
+
+    public static float NextRotation(this UnifiedRandom rand)
+    {
+        return Main.rand.NextFloat(0, MathHelper.TwoPi);
+    }
+
+    /// <summary>
+    /// Spawns ruby dust at point
+    /// </summary>
+    /// <param name="point"></param>
+    /// <returns></returns>
+    public static Dust DustPoint(Point point)
+    {
+        Dust dust = Dust.NewDustPerfect(point.ToWorldCoordinates(), DustID.GemRuby, Vector2.Zero);
+        dust.noGravity = true;
+        return dust;
     }
 
     /// <summary>
@@ -117,9 +158,35 @@ public static partial class LemonUtils
                     rect.Top <= other.Bottom);
     }
 
+    public static Rectangle Inflated(this Rectangle rect, int xChange, int yChange)
+    {
+        Rectangle newRect = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
+        newRect.Width += 2 * xChange;
+        newRect.Height += 2 * yChange;
+        newRect.X -= xChange;
+        newRect.Y -= yChange;
+        return newRect;
+    }
+
     public static float AngleBetween(Vector2 v1, Vector2 v2)
     {
         return MathF.Atan2(v1.X * v2.Y - v2.X * v1.Y, v1.X * v2.X + v1.Y * v2.Y);
+    }
+
+    /// <summary>
+    /// Get random vector2 within a rectangular area (improved from circular)
+    /// </summary>
+    /// <param name="rectHalfWidth"></param>
+    /// <param name="rectHalfHeight"></param>
+    /// <param name="minWidth"></param>
+    /// <param name="minHeight"></param>
+    /// <returns></returns>
+    public static Vector2 RandomVector2Rectangular(float rectHalfWidth, float rectHalfHeight, float minWidth = 0, float minHeight = 0)
+    {
+        Vector2 u = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(-MathHelper.Pi, MathHelper.Pi));
+        u.X *= Main.rand.NextFloat(minWidth, rectHalfWidth);
+        u.Y *= Main.rand.NextFloat(minHeight, rectHalfHeight);
+        return u;
     }
 
     public static Vector2 RandomVector2Circular(float circleHalfWidth, float circleHalfHeight, float minWidth = 0, float minHeight = 0)
@@ -163,6 +230,12 @@ public static partial class LemonUtils
         return closeness;
     }
 
+    /// <summary>
+    /// Returns the sign of num, or zeroDefault if num = 0
+    /// </summary>
+    /// <param name="num"></param>
+    /// <param name="zeroDefault"></param>
+    /// <returns></returns>
     public static int Sign(float num, int zeroDefault = 0)
     {
         if (num > 0)
@@ -179,6 +252,10 @@ public static partial class LemonUtils
         }
     }
 
+    /// <summary>
+    /// Returns the sign of num, or zeroDefault if num = 0
+    /// Casts zeroDefault to int
+    /// </summary>
     public static int Sign(float num, float zeroDefault = 0)
     {
         int _zeroDefault = (int)zeroDefault;
@@ -194,5 +271,32 @@ public static partial class LemonUtils
         {
             return _zeroDefault;
         }
+    }
+
+    public static void NewText(this object o)
+    {
+        Main.NewText(o ?? "null");
+    }
+
+    /// <summary>
+    /// Returns a random frame from a vertical spritesheet.
+    /// </summary>
+    /// <param name="texture"></param>
+    /// <param name="verticalFrames"></param>
+    /// <returns></returns>
+    public static Rectangle RandomFrame(this Texture2D texture, int verticalFrames = 1)
+    {
+        return texture.Frame(1, verticalFrames, 0, Main.rand.Next(0, verticalFrames));
+    }
+
+    /// <summary>
+    /// Returns a random frame from a vertical spritesheet.
+    /// </summary>
+    /// <param name="texture"></param>
+    /// <param name="verticalFrames"></param>
+    /// <returns></returns>
+    public static Rectangle RandomFrame(this Asset<Texture2D> texture, int verticalFrames = 1)
+    {
+        return texture.Frame(1, verticalFrames, 0, Main.rand.Next(0, verticalFrames));
     }
 }

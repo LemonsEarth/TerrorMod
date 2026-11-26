@@ -1,6 +1,4 @@
-﻿using TerrorMod.Content.Items.Special;
-using TerrorMod.Content.Items.Tools;
-using TerrorMod.Core.Players;
+﻿using TerrorMod.Content.Items.Tools;
 
 namespace TerrorMod.Content.Items.Accessories;
 

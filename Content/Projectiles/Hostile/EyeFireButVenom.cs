@@ -1,6 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-
-namespace TerrorMod.Content.Projectiles.Hostile;
+﻿namespace TerrorMod.Content.Projectiles.Hostile;
 
 public class EyeFireButVenom : ModProjectile
 {

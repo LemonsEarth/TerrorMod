@@ -1,5 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-using TerrorMod.Content.Projectiles.Hostile;
+﻿using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Configs;
 using TerrorMod.Core.Systems.World;
 

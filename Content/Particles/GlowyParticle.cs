@@ -1,0 +1,60 @@
+﻿using Microsoft.Xna.Framework.Graphics;
+using TerrorMod.Core.Systems;
+using TerrorMod.Core.Systems.Particles;
+
+namespace TerrorMod.Content.Particles;
+
+public class GlowyParticle : ParticleType
+{
+    public override string TexturePath => TerrorTextures.GlowBallTexturePath;
+
+    public override void OnSpawn(ref Particle particle)
+    {
+        particle.opacity = 0f;
+        particle.scale *= 2;
+    }
+
+    public override void Update(ref Particle particle)
+    {
+        float duration = particle.data[0];
+        float fadeInDuration = particle.data[1];
+        float fadeOutDuration = particle.data[2];
+        float slowDownMul = particle.data[3];
+        if (particle.timer < fadeInDuration)
+        {
+            particle.opacity += 1f / fadeInDuration;
+        }
+        else if (particle.timer > duration - fadeOutDuration)
+        {
+            particle.opacity -= 1f / fadeOutDuration;
+        }
+
+        particle.velocity *= slowDownMul;
+
+        if (particle.timer > duration)
+        {
+            Kill(ref particle);
+        }
+    }
+
+    public override void Draw(Particle particle)
+    {
+        /*var shader = GameShaders.Misc["TerrorMod:FireballShader"];
+        shader.Shader.Parameters["noiseStepThreshold"].SetValue(0.3f);
+        shader.UseColor(particle.color);
+        shader.UseImage1(ParacosmTextures.NoiseTexture);
+        shader.UseOpacity(particle.opacity);
+        shader.Apply();*/
+        Main.spriteBatch.Draw(
+            Texture.Value,
+            particle.position - Main.screenPosition,
+            null,
+            particle.color * particle.opacity,
+            0f,
+            Texture.Size() * 0.5f,
+            particle.scale * 0.33f,
+            SpriteEffects.None,
+            0
+            );
+    }
+}

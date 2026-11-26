@@ -1,5 +1,4 @@
 ﻿using Terraria.DataStructures;
-using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.GoodBuffs;
 using TerrorMod.Content.Buffs.Debuffs.Misc;
 using TerrorMod.Core.Globals.Items.Armor;

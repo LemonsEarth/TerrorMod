@@ -1,6 +1,5 @@
 ﻿using Terraria.Audio;
 using Terraria.DataStructures;
-using TerrorMod.Common.Utils;
 using TerrorMod.Core.Configs;
 using TerrorMod.Content.NPCs.Hostile.Special;
 

@@ -1,6 +1,4 @@
-﻿using TerrorMod.Core.Players;
-
-namespace TerrorMod.Content.Items.Accessories;
+﻿namespace TerrorMod.Content.Items.Accessories;
 
 public class PocketCalendar : ModItem
 {

@@ -10,7 +10,7 @@ namespace TerrorMod.Common.Utils;
 public static partial class LemonUtils
 {
     /// <param name="projectile"></param>
-    /// <returns>Projectile.GetOwner()</returns>
+    /// <returns>Main.player[projectile.owner]</returns>
     public static Player GetOwner(this Projectile projectile)
     {
         return Main.player[projectile.owner];
@@ -53,11 +53,20 @@ public static partial class LemonUtils
         return TextureAssets.Projectile[projectile.type].Value;
     }
 
+    public static void DrawProjectile(this Projectile projectile, Color color)
+    {
+        Texture2D texture = TextureAssets.Projectile[projectile.type].Value;
+        Rectangle sourceRect = texture.Frame(1, Main.projFrames[projectile.type], 0, projectile.frame);
+        Vector2 drawPos = projectile.Center - Main.screenPosition;
+        Vector2 drawOrigin = new Vector2(sourceRect.Width, sourceRect.Height) * 0.5f;
+        Main.EntitySpriteDraw(texture, drawPos, sourceRect, color, projectile.rotation, drawOrigin, projectile.scale, SpriteEffects.None, 0);
+    }
+
     public static void DrawAfterimages(this Projectile Projectile, Color lightColor, float opacityMultiplier = 1f)
     {
         Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
         Rectangle sourceRect = texture.Frame(1, Main.projFrames[Projectile.type], 0, Projectile.frame);
-        Vector2 drawOrigin = sourceRect.Size() * 0.5f;
+        Vector2 drawOrigin = new Vector2(sourceRect.Width, sourceRect.Height) * 0.5f;
         for (int k = Projectile.oldPos.Length - 1; k > 0; k--)
         {
             Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
@@ -80,18 +89,18 @@ public static partial class LemonUtils
     }
 
     /// <summary>
-    /// Gets closest chaseable NPC to a position under minDistance, returns null if none found
+    /// Gets closest chaseable NPC to a position, returns null if none found.
     /// </summary>
     /// <param name="pos"></param>
-    /// <param name="minDistance"></param>
+    /// <param name="maxDistance"></param>
     /// <returns></returns>
-    public static NPC GetClosestNPC(Vector2 pos, float minDistance = 0)
+    public static NPC GetClosestNPCFromProjectile(Vector2 pos, float maxDistance = 0)
     {
         NPC closestEnemy = null;
-        if (minDistance == 0) minDistance = 99999;
+        if (maxDistance == 0) maxDistance = 99999;
         foreach (var npc in Main.ActiveNPCs)
         {
-            if (npc.CanBeChasedBy() && (npc.Distance(pos) < minDistance))
+            if (npc.CanBeChasedBy() && (npc.Distance(pos) < maxDistance))
             {
                 if (closestEnemy == null)
                 {
@@ -113,14 +122,14 @@ public static partial class LemonUtils
         if (minDistance == 0) minDistance = 99999;
         foreach (var player in Main.ActivePlayers)
         {
-            if (player.Alive() && (player.Distance(pos) < minDistance))
+            if (player.IsAlive() && (player.Distance(pos) < minDistance))
             {
                 if (closestPlayer == null)
                 {
                     closestPlayer = player;
                 }
-                float distanceToNPC = pos.Distance(player.Center);
-                if (distanceToNPC < pos.Distance(closestPlayer.Center))
+                float distanceToPlayer = pos.Distance(player.Center);
+                if (distanceToPlayer < pos.Distance(closestPlayer.Center))
                 {
                     closestPlayer = player;
                 }

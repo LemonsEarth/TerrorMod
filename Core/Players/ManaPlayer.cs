@@ -1,8 +1,4 @@
-﻿using TerrorMod.Content.Buffs.Debuffs;
-using TerrorMod.Common.Utils;
-using System.Linq;
-
-namespace TerrorMod.Core.Players;
+﻿namespace TerrorMod.Core.Players;
 
 public class ManaPlayer : ModPlayer
 {

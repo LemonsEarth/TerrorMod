@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TerrorMod.Content.Buffs.Debuffs;
+﻿using TerrorMod.Content.Buffs.Debuffs;
 
 namespace TerrorMod.Core.Globals.Items;
 

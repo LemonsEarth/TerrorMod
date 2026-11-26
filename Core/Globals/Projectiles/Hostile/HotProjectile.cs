@@ -1,5 +1,4 @@
 ﻿using Terraria.DataStructures;
-using TerrorMod.Common.Utils;
 using TerrorMod.Content.Projectiles.Hostile;
 
 namespace TerrorMod.Core.Globals.Projectiles.Hostile;

@@ -110,7 +110,7 @@ public class PulseEffect : ModProjectile
     {
         Texture2D texture = TextureAssets.Projectile[Type].Value;
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
-        var shader = GameShaders.Misc["NeoParacosm:ShieldPulseShader"];
+        var shader = GameShaders.Misc["TerrorMod:ShieldPulseShader"];
         Main.instance.GraphicsDevice.Textures[1] = TerrorTextures.NoiseTexture.Value;
         shader.Shader.Parameters["time"].SetValue(AITimer / 60f);
         shader.Shader.Parameters["alwaysVisible"].SetValue(false);

@@ -1,5 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-using TerrorMod.Content.Buffs.Debuffs.Movement;
+﻿using TerrorMod.Content.Buffs.Debuffs.Movement;
 using TerrorMod.Content.Projectiles.Hostile;
 
 namespace TerrorMod.Content.NPCs.Bosses.BossAdds;

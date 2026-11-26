@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using System.Linq;
 
 namespace TerrorMod.Common.Utils;
 
@@ -9,29 +10,37 @@ namespace TerrorMod.Common.Utils;
 /// </summary>
 public static partial class LemonUtils
 {
+    /// <summary>
+    /// Checks if either master mode or FTW are enabled.
+    /// </summary>
+    /// <returns></returns>
     public static bool IsHard() => Main.masterMode || Main.getGoodWorld;
 
-    public static NPC GetClosestNPC(NPC npc, float minDistance = 0)
+    public static bool IsAlive(this NPC npc)
     {
-        NPC closestEnemy = null;
-        foreach (var _npc in Main.ActiveNPCs)
-        {
-            if (_npc.CanBeChasedBy() && (minDistance > 0 && _npc.Distance(npc.Center) < minDistance))
-            {
-                if (closestEnemy == null)
-                {
-                    closestEnemy = _npc;
-                }
-                float distanceToNPC = npc.Center.Distance(_npc.Center);
-                if (distanceToNPC < npc.Center.Distance(closestEnemy.Center))
-                {
-                    closestEnemy = _npc;
-                }
-            }
-        }
-        return closestEnemy;
+        return npc.life > 0;
     }
 
+    public static void StandardAnimation(this NPC NPC, int frameDuration, int frameHeight, int maxFrame = -1)
+    {
+        if (maxFrame == -1) maxFrame = Main.npcFrameCount[NPC.type];
+        NPC.frameCounter += 1;
+        if (NPC.frameCounter > frameDuration)
+        {
+            NPC.frame.Y += frameHeight;
+            NPC.frameCounter = 0;
+            if (NPC.frame.Y >= maxFrame * frameHeight)
+            {
+                NPC.frame.Y = 0;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Prevents the NPC from dropping anything.
+    /// Should be used in SetStaticDefaults().
+    /// </summary>
+    /// <param name="npc"></param>
     public static void DontDropAnything(this NPC npc)
     {
         NPCID.Sets.CantTakeLunchMoney[npc.type] = true;
@@ -39,17 +48,46 @@ public static partial class LemonUtils
         NPCID.Sets.NeverDropsResourcePickups[npc.type] = true;
     }
 
+    public static void HideFromBestiary(this NPC npc)
+    {
+        NPCID.Sets.NPCBestiaryDrawModifiers value = new NPCID.Sets.NPCBestiaryDrawModifiers()
+        {
+            Hide = true
+        };
+        NPCID.Sets.NPCBestiaryDrawOffset.Add(npc.type, value);
+    }
+
+    /// <summary>
+    /// Returns true if the NPC's target is below the NPC's bottom point + bottomMargin, false if not. Returns null if the NPC has no target.
+    /// </summary>
+    /// <returns></returns>
+    public static bool? ShouldFallThroughPlatforms(this NPC NPC, float bottomMargin = 8)
+    {
+        if (NPC.HasValidTarget)
+        {
+            if (NPC.GetTarget().Top.Y > NPC.Bottom.Y + bottomMargin)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return null;
+    }
+
     /// <summary>
     /// Attempts to find a safe position to teleport.
     /// </summary>
-    /// <returns>Chosen position. Returns Vector2.Zero if no safe position is found</returns>
+    /// <returns>Chosen position. Returns Vector2.Zero if no safe position is found.</returns>
     public static Vector2 FindSafeTeleportPosition(this NPC npc, Vector2 target, float maxDistanceToTarget, float minDistanceToTarget, int maxAttemptCount = 100)
     {
         int attemptCount = 0;
         while (attemptCount < maxAttemptCount)
         {
             Vector2 chosenPos = Vector2.Zero;
-            chosenPos = target + RandomVector2Circular(maxDistanceToTarget, maxDistanceToTarget, minDistanceToTarget, minDistanceToTarget);
+            chosenPos = target + RandomVector2Rectangular(maxDistanceToTarget, maxDistanceToTarget, minDistanceToTarget, minDistanceToTarget);
 
             Point16 topLeftTile = chosenPos.ToTileCoordinates16();
             Point16 bottomRightTile = (chosenPos + new Vector2(npc.width, npc.height)).ToTileCoordinates16();
@@ -83,6 +121,22 @@ public static partial class LemonUtils
         return Vector2.Zero;
     }
 
+    public static Player GetTarget(this NPC npc)
+    {
+        if (npc.target == -1)
+        {
+            return null;
+        }
+        return Main.player[npc.target];
+    }
+
+    /// <summary>
+    /// Basic DOT debuff effect.
+    /// Should be called in ModNPC.UpdateLifeRegen().
+    /// </summary>
+    /// <param name="npc"></param>
+    /// <param name="damagePerSecond"></param>
+    /// <param name="damage"></param>
     public static void DOTDebuff(this NPC npc, float damagePerSecond, ref int damage)
     {
         if (npc.lifeRegen > 0) npc.lifeRegen = 0;
@@ -93,6 +147,15 @@ public static partial class LemonUtils
         }
     }
 
+    /// <summary>
+    /// Gets random position on the NPC's hitbox.
+    /// Increase fluffX and fluffY to expand the range.
+    /// Useful for spawning dusts on the NPC.
+    /// </summary>
+    /// <param name="npc"></param>
+    /// <param name="fluffX"></param>
+    /// <param name="fluffY"></param>
+    /// <returns></returns>
     public static Vector2 RandomPos(this NPC npc, float fluffX = 0, float fluffY = 0)
     {
         Vector2 pos = npc.position + new Vector2(Main.rand.NextFloat(-fluffX, npc.width + fluffX), Main.rand.NextFloat(-fluffY, npc.height + fluffY));
@@ -100,17 +163,24 @@ public static partial class LemonUtils
     }
 
     /// <summary>
-    /// Used by custom NPCs such as the Researcher which don't use normal NPC interact behavior
+    /// Used by custom NPCs such as the Researcher which don't use normal NPC interact behavior.
     /// </summary>
-    /// <returns>Whether the *local player* can talk to the NPC or not</returns>
+    /// <returns>Whether the *local player* can talk to the NPC or not.</returns>
     public static bool CanTalkToNPC(NPC npc, float maxTalkDistance)
     {
-        return Main.LocalPlayer.Alive()
+        return Main.LocalPlayer.IsAlive()
         && npc.Hitbox.Contains(Main.MouseWorld.ToPoint())
         && Main.LocalPlayer.Distance(npc.Center) < maxTalkDistance
         && Main.mouseRight && Main.mouseRightRelease;
     }
 
+    /// <summary>
+    /// Draw basic afterimages.
+    /// Should be used in PreDraw() or PostDraw().
+    /// </summary>
+    /// <param name="npc"></param>
+    /// <param name="lightColor"></param>
+    /// <param name="opacityMultiplier"></param>
     public static void DrawAfterimages(this NPC npc, Color lightColor, float opacityMultiplier = 1f)
     {
         Texture2D texture = TextureAssets.Npc[npc.type].Value;
@@ -122,5 +192,39 @@ public static partial class LemonUtils
             Color color = (npc.GetAlpha(lightColor) * ((npc.oldPos.Length - k) / (float)npc.oldPos.Length)) * opacityMultiplier;
             Main.EntitySpriteDraw(texture, drawPos, sourceRect, color, npc.rotation, drawOrigin, npc.scale, SpriteEffects.None, 0);
         }
+    }
+
+    /// <summary>
+    /// Gets closest chaseable NPC to a position, returns null if none found.
+    /// Pass in an NPC's whoAmI to exclude them from being returned.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="maxDistance"></param>
+    /// <param name="excludeWhoAmIs"></param>
+    /// <returns></returns>
+    public static NPC GetClosestNPC(Vector2 pos, float maxDistance = 0, params int[] excludeWhoAmIs)
+    {
+        NPC closestEnemy = null;
+        if (maxDistance == 0) maxDistance = 99999;
+        foreach (var npc in Main.ActiveNPCs)
+        {
+            if (excludeWhoAmIs.Contains(npc.whoAmI))
+            {
+                continue;
+            }
+            if (npc.CanBeChasedBy() && (npc.Distance(pos) < maxDistance))
+            {
+                if (closestEnemy == null)
+                {
+                    closestEnemy = npc;
+                }
+                float distanceToNPC = pos.Distance(npc.Center);
+                if (distanceToNPC < pos.Distance(closestEnemy.Center))
+                {
+                    closestEnemy = npc;
+                }
+            }
+        }
+        return closestEnemy;
     }
 }

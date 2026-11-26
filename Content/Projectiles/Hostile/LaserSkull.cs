@@ -2,7 +2,6 @@
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.Audio;
-using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Content.Projectiles.Hostile;
 

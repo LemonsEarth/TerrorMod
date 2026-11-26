@@ -2,7 +2,6 @@
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
-using TerrorMod.Common.Utils;
 using TerrorMod.Content.NPCs.Bosses.Gores;
 
 namespace TerrorMod.Content.NPCs.Bosses;

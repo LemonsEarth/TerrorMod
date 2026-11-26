@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using TerrorMod.Common.Utils;
-
-namespace TerrorMod.Content.Buffs.Debuffs.Temperature;
+﻿namespace TerrorMod.Content.Buffs.Debuffs.Temperature;
 
 public class SuperColdDebuff : ModBuff
 {

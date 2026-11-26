@@ -1,6 +1,5 @@
 ﻿using TerrorMod.Core.Players;
 using Terraria.DataStructures;
-using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Content.Items.Consumables;
 

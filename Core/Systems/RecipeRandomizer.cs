@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Terraria.Utilities;
-using TerrorMod.Common.Utils;
 using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Systems;

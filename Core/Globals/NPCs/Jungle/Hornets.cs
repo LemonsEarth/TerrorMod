@@ -1,6 +1,5 @@
 ﻿using Terraria.Audio;
 using Terraria.DataStructures;
-using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Core.Globals.NPCs.Jungle;
 

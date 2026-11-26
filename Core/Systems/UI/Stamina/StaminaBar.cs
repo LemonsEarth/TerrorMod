@@ -23,19 +23,19 @@ public class StaminaBar : UIState
         // Create a UIElement for all the elements to sit on top of, this simplifies the numbers as nested elements can be positioned relative to the top left corner of this element. 
         // UIElement is invisible and has no padding.
         area = new UIElement();
-        area.Left.Set(-area.Width.Pixels - 600, 1f); // Place the resource bar to the left of the hearts.
-        area.Top.Set(30, 0f); // Placing it just a bit below the top of the screen.
+        area.Left.Set(0, 0.5f); // Place the resource bar to the left of the hearts.
+        area.Top.Set(0, 0.6f); // Placing it just a bit below the top of the screen.
         area.Width.Set(182, 0f); // We will be placing the following 2 UIElements within this 182x60 area.
         area.Height.Set(60, 0f);
 
         barFrame = new UIImage(ModContent.Request<Texture2D>("TerrorMod/Core/Systems/UI/Stamina/StaminaBarFrame")); // Frame of our resource bar
         barFrame.Left.Set(22, 0f);
         barFrame.Top.Set(0, 0f);
-        barFrame.Width.Set(138, 0f);
+        barFrame.Width.Set(136, 0f);
         barFrame.Height.Set(34, 0f);
 
         text = new UIText("0/0", 0.8f); // text to show stat
-        text.Width.Set(138, 0f);
+        text.Width.Set(136, 0f);
         text.Height.Set(34, 0f);
         text.Top.Set(40, 0f);
         text.Left.Set(0, 0f);
@@ -56,6 +56,9 @@ public class StaminaBar : UIState
     // Here we draw our UI
     protected override void DrawSelf(SpriteBatch spriteBatch)
     {
+        area.Left.Set(0 - area.Width.Pixels * 0.5f, 0.5f); // Place the resource bar to the left of the hearts.
+        area.Top.Set(0, 0.55f); // Placing it just a bit below the top of the screen.
+        area.Recalculate();
         base.DrawSelf(spriteBatch);
 
         var modPlayer = Main.LocalPlayer.GetModPlayer<StaminaPlayer>();
@@ -65,10 +68,10 @@ public class StaminaBar : UIState
 
         // Here we get the screen dimensions of the barFrame element, then tweak the resulting rectangle to arrive at a rectangle within the barFrame texture that we will draw the gradient. These values were measured in a drawing program.
         Rectangle hitbox = barFrame.GetInnerDimensions().ToRectangle();
-        hitbox.X += 12;
-        hitbox.Width -= 24;
-        hitbox.Y += 8;
-        hitbox.Height -= 16;
+        hitbox.X += 8;
+        hitbox.Width -= 16;
+        hitbox.Y += 4;
+        hitbox.Height -= 8;
 
         // Now, using this hitbox, we draw a gradient by drawing vertical lines while slowly interpolating between the 2 colors.
         int left = hitbox.Left;
@@ -78,7 +81,10 @@ public class StaminaBar : UIState
         {
             // float percent = (float)i / steps; // Alternate Gradient Approach
             float percent = (float)i / (right - left);
-            spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle(left + i, hitbox.Y, 1, hitbox.Height), Color.Lerp(gradientA, gradientB, percent));
+            spriteBatch.Draw(
+                TextureAssets.MagicPixel.Value,
+                new Rectangle(left + i, hitbox.Y, 1, hitbox.Height),
+                Color.Lerp(Color.PaleGreen, gradientB, MathF.Sin(percent - (float)Main.timeForVisualEffects / 10)));
         }
     }
 
@@ -86,7 +92,7 @@ public class StaminaBar : UIState
     {
         var modPlayer = Main.LocalPlayer.GetModPlayer<StaminaPlayer>();
         // Setting the text per tick to update and show our resource values.
-        text.SetText(StaminaUISystem.ExampleResourceText.Format(modPlayer.Stamina, modPlayer.MaxStamina));
+        //text.SetText(StaminaUISystem.ExampleResourceText.Format(modPlayer.Stamina, modPlayer.MaxStamina));
         base.Update(gameTime);
     }
 }

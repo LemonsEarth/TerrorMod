@@ -1,5 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-using TerrorMod.Content.Tiles.Blocks;
+﻿using TerrorMod.Content.Tiles.Blocks;
 using TerrorMod.Content.Tiles.Furniture;
 
 namespace TerrorMod.Core.Systems.World;

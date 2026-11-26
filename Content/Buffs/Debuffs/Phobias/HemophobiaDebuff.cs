@@ -1,6 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-
-namespace TerrorMod.Content.Buffs.Debuffs.Phobias;
+﻿namespace TerrorMod.Content.Buffs.Debuffs.Phobias;
 
 public class HemophobiaDebuff : ModBuff
 {

@@ -1,7 +1,6 @@
 ﻿using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using TerrorMod.Content.Items.Accessories;
-using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Core.Globals.NPCs.Dungeon;
 

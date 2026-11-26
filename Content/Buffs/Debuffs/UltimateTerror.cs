@@ -1,6 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-
-namespace TerrorMod.Content.Buffs.Debuffs;
+﻿namespace TerrorMod.Content.Buffs.Debuffs;
 
 public class UltimateTerror : ModBuff
 {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Terraria.Audio;
-using TerrorMod.Content.Buffs.Debuffs.Movement;
 
 namespace TerrorMod.Core.Players;
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using TerrorMod.Core.Systems;
 
 namespace TerrorMod.Core.Globals.Items;
 

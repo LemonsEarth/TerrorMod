@@ -1,5 +1,4 @@
 ﻿using Terraria.Audio;
-using TerrorMod.Common.Utils;
 using TerrorMod.Content.Projectiles.Hostile;
 using TerrorMod.Core.Configs;
 

@@ -2,9 +2,36 @@
 
 public static partial class LemonUtils
 {
+    /// <summary>
+    /// Checks if the player is not null, active, alive etc.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    public static bool IsAlive(this Player player)
+    {
+        return (player != null && player.active && !player.dead && !player.ghost);
+    }
+
     public static bool Alive(this Player player)
     {
         return (player != null || player.active || !player.dead || !player.ghost);
+    }
+
+    public static void AddBuffWithStackingTime(this Player player, int buffType, int time, int maxTime = 99999999)
+    {
+        if (player.HasBuff(buffType))
+        {
+            int index = player.FindBuffIndex(buffType);
+            int currentTime = player.buffTime[index];
+            if (currentTime + time < maxTime)
+            {
+                player.AddBuff(buffType, currentTime + time);
+            }
+        }
+        else
+        {
+            player.AddBuff(buffType, time);
+        }
     }
 
     public static float GetLifePercent(this Player player)

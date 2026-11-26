@@ -1,14 +1,13 @@
 global using Microsoft.Xna.Framework;
+global using Microsoft.Xna.Framework.Graphics;
 global using System;
 global using Terraria;
 global using Terraria.ID;
 global using Terraria.ModLoader;
+global using ReLogic.Content;
 global using TerrorMod.Common.Utils;
 global using static Terraria.ModLoader.ModContent;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System.IO;
-using Terraria.Audio;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using TerrorMod.Common.Assets.Sky;
@@ -19,7 +18,7 @@ namespace TerrorMod;
 // Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
 public class TerrorMod : Mod
 {
-    public static TerrorMod instance;
+    public static TerrorMod Instance { get; private set; }
 
     public TerrorMod()
     {
@@ -52,7 +51,7 @@ public class TerrorMod : Mod
 
     public override void Load()
     {
-        instance = this;
+        Instance = this;
 
         LoadMiscShader("LaserShader", "Common/Assets/Shaders/LaserShader");
         LoadMiscShader("SphereShader", "Common/Assets/Shaders/SphereShader");

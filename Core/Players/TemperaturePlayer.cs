@@ -1,9 +1,7 @@
 ﻿using Terraria.DataStructures;
 using Terraria.Graphics.Effects;
 using Terraria.Localization;
-using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.Buffs.Debuffs.Temperature;
-using TerrorMod.Core.Systems.World;
 using static TerrorMod.Core.Systems.World.SeasonSystem;
 
 namespace TerrorMod.Core.Players;
@@ -62,7 +60,7 @@ public class TemperaturePlayer : ModPlayer
     public override void PostUpdate()
     {
         //Player.potionDelay = 0;
-        
+
         //Player.ClearBuff(BuffID.PotionSickness);
         CheckAndAddEquipmentTemperature();
         CheckAndAddBuffTemerature();
@@ -70,6 +68,8 @@ public class TemperaturePlayer : ModPlayer
         CheckAndAddWaterTemperature();
         CheckAndAddLavaTemperature();
         AddSeasonTemperature();
+        CurrentTemperature = 0;
+        TargetTemperature = 0;
         LerpCurrentTemperature();
     }
 
@@ -380,14 +380,8 @@ public class TemperaturePlayer : ModPlayer
     {
         if (!Main.dedServ)
         {
-            if (CurrentTemperature > 0)
-            {
-                HeatShaderControl();
-            }
-            else
-            {
-                ColdShaderControl();
-            }
+            HeatShaderControl();
+            ColdShaderControl();
         }
 
         if (CurrentTemperature >= 100)

@@ -1,5 +1,4 @@
 ﻿using Terraria.Audio;
-using TerrorMod.Common.Utils;
 using TerrorMod.Content.Buffs.Debuffs;
 using TerrorMod.Content.NPCs.Hostile.Corruption;
 

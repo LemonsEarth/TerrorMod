@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Terraria.ModLoader.IO;
-using TerrorMod.Common.Utils;
 using TerrorMod.Core.Configs;
 
 namespace TerrorMod.Core.Globals.NPCs.Bosses;

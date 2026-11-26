@@ -1,5 +1,4 @@
-﻿using TerrorMod.Common.Utils;
-using TerrorMod.Content.Projectiles.Hostile;
+﻿using TerrorMod.Content.Projectiles.Hostile;
 using System.Linq;
 using TerrorMod.Core.Configs;
 using TerrorMod.Content.NPCs.Bosses;

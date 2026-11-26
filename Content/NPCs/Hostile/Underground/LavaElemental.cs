@@ -2,7 +2,6 @@
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
-using TerrorMod.Common.Utils;
 
 namespace TerrorMod.Content.NPCs.Hostile.Underground;
 
