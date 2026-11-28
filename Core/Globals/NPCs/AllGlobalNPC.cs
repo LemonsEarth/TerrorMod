@@ -22,7 +22,7 @@ public class AllGlobalNPC : GlobalNPC
     {
         if (SkullSystem.toughLuckSkullActive && Main.rand.NextBool(4))
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, Vector2.Zero, ProjectileType<ExplosionLarge>(), 20, 1f);
             }

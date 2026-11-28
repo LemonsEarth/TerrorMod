@@ -22,7 +22,7 @@ public class HungryCannon : ModProjectile
     {
         if (AITimer == 0)
         {
-            SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (0.3f, 0.6f)}, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.NPCDeath10 with { PitchRange = (0.3f, 0.6f) }, Projectile.Center);
             LemonUtils.DustCircle(Projectile.Center, 8, 3, DustID.GemRuby, 2f);
         }
 
@@ -33,11 +33,18 @@ public class HungryCannon : ModProjectile
 
         Projectile.rotation = rotation;
 
-        if (AITimer % 10 == 0)
+        if (AITimer % 5 == 0)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.UnitX.RotatedBy(rotation) * 5, ProjectileType<EyeFireButFire>(), Projectile.damage, 1f);
+                Projectile.NewProjectileDirect(
+                    Projectile.GetSource_FromAI(),
+                    Projectile.Center,
+                    Vector2.UnitX.RotatedBy(rotation) * 25,
+                    ProjectileType<HungryFlames>(),
+                    Projectile.damage,
+                    1f,
+                    ai0: 5);
             }
         }
 

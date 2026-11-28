@@ -67,8 +67,8 @@ public class DoomSphereLong : ModProjectile
         if (AITimer == 0)
         {
             if (Size == 0) Size = 1;
-            SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 0}, Projectile.Center);
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 4, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest}, Projectile.Center);
+            if (LemonUtils.NotClient())
             {
                 var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ProjectileType<DoomLaser>(), Projectile.damage, 2f, ai0: Size / 2, ai1: Rotation, ai2: RotPerSecond);
                 proj.timeLeft = Projectile.timeLeft;

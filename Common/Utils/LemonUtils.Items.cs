@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
+using TerrorMod.Core.Players;
 
 namespace TerrorMod.Common.Utils;
 
@@ -25,5 +26,10 @@ public static partial class LemonUtils
         Texture2D glowTexture = TextureAssets.Item[item.type].Value;
         spriteBatch.Draw(glowTexture, position, null, color, 0f, glowTexture.Size() * 0.5f, scale, SpriteEffects.None, 0);
         spriteBatch.Draw(origTexture, position, null, Color.White, 0f, origTexture.Size() * 0.5f, scale, SpriteEffects.None, 0);
+    }
+
+    public static int GetStaminaCost(Item item)
+    {
+        return StaminaConsumingItem.GetStaminaCost(item);
     }
 }

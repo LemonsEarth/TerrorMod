@@ -49,7 +49,7 @@ public class Skeletron : GlobalNPC
                     if (AttackTimer % 120 == 0 && AttackTimer > 60)
                     {
                         int amount = npc.life < npc.lifeMax * 0.75f ? 2 : 1;
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             for (int i = 0; i < 8 * amount; i++)
                             {
@@ -65,7 +65,7 @@ public class Skeletron : GlobalNPC
                     }
                     if (AttackTimer % 120 == 0 && AttackTimer > 60)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             for (int i = 0; i < 8; i++)
                             {
@@ -82,7 +82,7 @@ public class Skeletron : GlobalNPC
                         {
                             Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 600).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
                             LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
-                            if (Main.netMode != NetmodeID.MultiplayerClient)
+                            if (LemonUtils.NotClient())
                             {
                                 NPC skull = NPC.NewNPCDirect(npc.GetSource_FromAI(), (int)pos.X, (int)pos.Y, NPCID.CursedSkull, ai3: 1);
                             }
@@ -92,7 +92,7 @@ public class Skeletron : GlobalNPC
                 case 3:
                     if (AttackTimer % 120 == 0 && AttackTimer > 60)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             for (int i = -2; i <= 2; i++)
                             {
@@ -105,7 +105,7 @@ public class Skeletron : GlobalNPC
 
                     if (AttackTimer % 60 < 10 && AttackTimer % 2 == 0)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ProjectileID.Skull, npc.damage / 4, 1f);
                         };

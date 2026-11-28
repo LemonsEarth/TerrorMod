@@ -56,7 +56,7 @@ public class LaserSkull : ModProjectile
 
         if (AITimer >= WaitTime)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient && AITimer == WaitTime)
+            if (LemonUtils.NotClient() && AITimer == WaitTime)
             {
                 var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ProjectileType<DoomSphere>(), Projectile.damage, 1f, ai0: 0.75f, ai1: Rotation - MathHelper.PiOver2, ai2: 0);
                 proj.timeLeft = 120;

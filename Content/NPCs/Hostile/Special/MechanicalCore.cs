@@ -80,21 +80,21 @@ public class MechanicalCore : ModNPC
                 switch (AttackCount)
                 {
                     case < 2:
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(player.Center) * 10, ProjectileID.EyeBeam, NPC.damage / 5, 1f);
                         }
                         AttackTimer = ATTACK_CD_NORMAL;
                         break;
                     case < 4:
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(player.Center) * 8, ProjectileID.EyeBeam, NPC.damage / 5, 1f);
                         }
                         AttackTimer = ATTACK_CD_NORMAL / 3;
                         break;
                     case 5:
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             for (int i = 0; i < 8; i++)
                             {
@@ -125,7 +125,7 @@ public class MechanicalCore : ModNPC
             {
                 Vector2 pos = NPC.Center + (Vector2.UnitY * 100).RotatedBy(i * MathHelper.ToRadians(120));
                 LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     NPC.NewNPCDirect(NPC.GetSource_FromAI("ProbeSpawn"), (int)pos.X, (int)pos.Y, NPCID.Probe);
                 }

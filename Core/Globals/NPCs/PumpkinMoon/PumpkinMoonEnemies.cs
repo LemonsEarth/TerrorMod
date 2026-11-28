@@ -57,7 +57,7 @@ public class PumpkinMoonEnemies : GlobalNPC
         {
             if (AITimer % 100 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.DirectionTo(player.Center) * 10, ProjectileID.LostSoulHostile, npc.damage / 4, 1f);
                 }
@@ -73,7 +73,7 @@ public class PumpkinMoonEnemies : GlobalNPC
         {
             if (AITimer % 60 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     if (Main.rand.NextBool(4)) npc.velocity.Y -= 10;
                 }
@@ -99,7 +99,7 @@ public class PumpkinMoonEnemies : GlobalNPC
 
             if (AITimer % 180 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ProjectileID.HorsemanPumpkin, npc.damage / 4, 1f);
                 }
@@ -121,7 +121,7 @@ public class PumpkinMoonEnemies : GlobalNPC
     {
         if (npc.type == NPCID.MourningWood)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -135,7 +135,7 @@ public class PumpkinMoonEnemies : GlobalNPC
     {
         if (npc.type == NPCID.MourningWood)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 if (Main.rand.NextBool(20))
                 {

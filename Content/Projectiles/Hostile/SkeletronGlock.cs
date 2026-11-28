@@ -41,7 +41,7 @@ public class SkeletronGlock : ModProjectile
         int sign = Main.npc[(int)handIndex].spriteDirection;
         if (AITimer % 60 == 0)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromAI(), Projectile.Center, sign * Vector2.UnitX.RotatedBy(Projectile.rotation) * 20, ProjectileID.BombSkeletronPrime, Projectile.damage, 1f);
             }

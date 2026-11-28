@@ -30,7 +30,7 @@ public class Twins : GlobalNPC
     {
         if (npc.type == NPCID.Retinazer)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCType<ForgottenSibling>());
             }
@@ -102,7 +102,7 @@ public class Twins : GlobalNPC
             {
                 if (npc.localAI[2] == 0 && npc.ai[2] < 300)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         for (int i = -2; i <= 2; i++)
                         {

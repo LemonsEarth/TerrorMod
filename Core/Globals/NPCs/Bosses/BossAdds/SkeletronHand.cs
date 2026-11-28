@@ -28,7 +28,7 @@ public class SkeletronHand : GlobalNPC
         Player player = Main.player[npc.target];
         if (AITimer == 0 || !Main.projectile.Any(proj => proj.active && proj.type == ProjectileType<SkeletronGlock>() && proj.ai[1] == npc.whoAmI))
         { 
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ProjectileType<SkeletronGlock>(), npc.damage / 4, 1, ai1: npc.whoAmI);
             }

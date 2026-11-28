@@ -49,7 +49,7 @@ public class Zombies : GlobalNPC
 
         if (hurtInfo.Damage > target.statLife)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(new EntitySource_SpawnNPC("ZombieKilledPlayer"), (int)target.Center.X, (int)target.Center.Y, NPCID.Zombie, npc.whoAmI);
             }
@@ -61,7 +61,7 @@ public class Zombies : GlobalNPC
         if (npc.isLikeATownNPC) hit.Damage *= 2;
         if (hit.Damage > target.life)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(new EntitySource_SpawnNPC("ZombieKilledPlayer"), (int)target.Center.X, (int)target.Center.Y, NPCID.Zombie, npc.whoAmI);
             }

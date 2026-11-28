@@ -13,7 +13,7 @@ public class Mimics : GlobalNPC
     {
         if (AITimer % 30 == 0)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 if (Main.rand.NextBool(4))
                 {

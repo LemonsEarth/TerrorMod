@@ -51,7 +51,7 @@ public class WallOfFlesh : GlobalNPC
             {
                 float rot = npc.direction == 1 ? 0 : MathHelper.Pi;
                 npc.rotation = Utils.AngleLerp(rot, npc.Center.DirectionTo(snappedPosition).ToRotation(), (AITimer % attackRate) / (float)attackRate);
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitX.RotatedBy(npc.rotation) * 20, ProjectileType<EyeFireButFire>(), npc.damage / 5, 1f);
                 }
@@ -61,7 +61,7 @@ public class WallOfFlesh : GlobalNPC
         {
             if (AITimer % 120 == 0 && npc.life < npc.lifeMax * 0.5f)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Vector2 position = player.Center + new Vector2(npc.direction * Main.rand.Next(450, 750), Main.rand.Next(-500, 500));
                     int above = position.Y > player.Center.Y ? -1 : 1;
@@ -97,7 +97,7 @@ public class WallOfFlesh : GlobalNPC
         {
             player.AddBuff(BuffType<BeforeTheStormBuff>(), 72000);
         }
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             int maxCores = !Main.masterMode ? 4 : 8;
             for (int i = 0; i < maxCores; i++)

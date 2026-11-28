@@ -19,7 +19,7 @@ public class TheHungry : GlobalNPC
         if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
         if (AITimer % 600 == 0 && npc.HasValidTarget && AITimer > 0)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(Main.player[npc.target].Center) * 6, ProjectileID.Fireball, npc.damage / 3, 1f);
             }
@@ -31,7 +31,7 @@ public class TheHungry : GlobalNPC
     public override void OnKill(NPC npc)
     {
         if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
-        if (Main.netMode != NetmodeID.MultiplayerClient && npc.type == NPCID.TheHungryII)
+        if (LemonUtils.NotClient() && npc.type == NPCID.TheHungryII)
         {
             NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu, npc.whoAmI, ai3: 0.3f);
         }

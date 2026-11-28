@@ -24,7 +24,7 @@ public class HallowNPC : GlobalNPC
     public override void OnKill(NPC npc)
     {
         if (!npc.HasValidTarget) return;
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             if (Main.rand.NextBool(3))
             {

@@ -39,7 +39,7 @@ public class SkeletronPrime : GlobalNPC
         {
             if (AITimer % 60 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     if (npc.life < npc.lifeMax * 0.5f)
                     {
@@ -70,7 +70,7 @@ public class SkeletronPrime : GlobalNPC
             {
                 SoundEngine.PlaySound(SoundID.Roar with { Pitch = 1f, Volume = 0.7f, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest, MaxInstances = 1 });
 
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ProjectileID.Skull, npc.damage / 4, 1f);
                 };

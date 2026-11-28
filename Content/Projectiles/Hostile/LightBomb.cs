@@ -33,7 +33,7 @@ public class LightBomb : ModProjectile
 
     public override void OnKill(int timeLeft)
     {
-        /*if (Main.netMode != NetmodeID.MultiplayerClient)
+        /*if (LemonUtils.NotClient())
         {
             Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<StardustExplosion>(), Projectile.damage * 2, Projectile.knockBack);
         }*/

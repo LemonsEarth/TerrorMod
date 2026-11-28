@@ -72,7 +72,7 @@ public class Destroyer : GlobalNPC
 
             if (AITimer % 5 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Vector2 dir = npc.DirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-5, 5)));
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, dir * 7, ProjectileID.DeathLaser, npc.damage / 5, 1f);
@@ -104,7 +104,7 @@ public class Destroyer : GlobalNPC
         {
             if (AITimer % 10 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Vector2 dir = npc.DirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-15, 15)));
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, dir * 7, ProjectileID.DeathLaser, npc.damage / 7, 1f);
@@ -158,7 +158,7 @@ public class Destroyer : GlobalNPC
         if (AttackTimer > 0 && AttackTimer % 200 == 0 && npc.ai[0] % 16 == 0)
         {
             SoundEngine.PlaySound(SoundID.Zombie68 with { MaxInstances = 1, Pitch = 0f });
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCType<BombSlime>());
             }

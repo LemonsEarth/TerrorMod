@@ -68,7 +68,7 @@ public class DoomLaser : ModProjectile
     {
         if (AITimer == 0)
         {
-            SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 0 }, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.Zombie104 with { MaxInstances = 4, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
             if (Size == 0) Size = 1;
         }
         Projectile.velocity = Vector2.Zero;

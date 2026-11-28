@@ -31,7 +31,7 @@ public class BombExplosion : ModProjectile
         {
             Gore gore = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-2, 2)), Main.rand.Next(61, 64), Main.rand.NextFloat(0.5f, 2f));
         }
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             int explosionRadius = 5;
             int minTileX = (int)(Projectile.Center.X / 16f - explosionRadius);

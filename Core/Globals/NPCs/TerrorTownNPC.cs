@@ -32,7 +32,7 @@ public class TerrorTownNPC : GlobalNPC
         if (Main.getGoodWorld) chance = 2;
         if (Main.zenithWorld) chance = 1;
 
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             if (!spawnedSkelly && Main.rand.NextBool(chance))
             {

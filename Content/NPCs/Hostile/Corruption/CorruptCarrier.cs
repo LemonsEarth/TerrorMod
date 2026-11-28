@@ -68,7 +68,7 @@ public class CorruptCarrier : ModNPC
         if (AITimer % 3 == 0) Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Corruption);
         if (AttackTimer == FIRE_RATE)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Vector2 direction = NPC.Center.Distance(player.Center) < 600 ? NPC.Center.DirectionTo(player.Center) : Vector2.UnitY;
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, direction * 2, ProjectileType<CorruptCarrierProj>(), NPC.damage / 3, 1f);

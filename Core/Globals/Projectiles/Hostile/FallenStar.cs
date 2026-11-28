@@ -16,7 +16,7 @@ public class FallenStar : GlobalProjectile
     {
         if (Main.rand.NextBool(20) && Main.hardMode)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(projectile.GetSource_FromAI(), projectile.Center, projectile.velocity, ProjectileType<MeteorHostile>(), 20, 1f, ai1: 1);
             }

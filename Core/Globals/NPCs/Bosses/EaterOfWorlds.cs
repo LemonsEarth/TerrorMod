@@ -24,7 +24,7 @@ public class EaterOfWorlds : GlobalNPC
         Player player = Main.player[npc.target];
         if (npc.ai[0] % 4 == 0 && AITimer % (420 + npc.ai[0]) == 0) // ai0 is the segment number
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center - Vector2.UnitY * 900, Vector2.UnitY * 4, ProjectileID.CultistBossFireBallClone, npc.damage, 1f);
             }
@@ -32,7 +32,7 @@ public class EaterOfWorlds : GlobalNPC
 
         if (AITimer % npc.ai[0] == 0 && (NPC.CountNPCS(NPCID.EaterofWorldsBody) + NPC.CountNPCS(NPCID.EaterofWorldsHead) + NPC.CountNPCS(NPCID.EaterofWorldsTail)) <= 45)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 for (int i = -1; i <= 1; i += 2)
                 {

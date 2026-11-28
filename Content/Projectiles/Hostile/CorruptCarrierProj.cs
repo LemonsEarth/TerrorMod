@@ -79,7 +79,7 @@ public class CorruptCarrierProj : ModProjectile
 
     public override void OnKill(int timeLeft)
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.Zero), ProjectileID.VilePowder, 0, 1);
         }

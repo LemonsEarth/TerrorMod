@@ -137,7 +137,7 @@ public class InfiniteTerrorCage : ModNPC
     public override void OnKill()
     {
         if (spawnedHead) return;
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             spawnedHead = true;
             NPC.NewNPC(NPC.GetSource_Death(), (int)NPC.Center.X, (int)NPC.Center.Y + 30, NPCType<InfiniteTerrorHead>());

@@ -32,7 +32,7 @@ public class QueenBee : GlobalNPC
         switch (npc.ai[0])
         {
             case 1:
-                if (Main.netMode != NetmodeID.MultiplayerClient && npc.ai[1] == 0 && npc.life < npc.lifeMax * 0.7f)
+                if (LemonUtils.NotClient() && npc.ai[1] == 0 && npc.life < npc.lifeMax * 0.7f)
                 {
                     int chance = npc.life < npc.lifeMax * 0.25f ? 3 : 6;
                     if (Main.rand.NextBool(chance))
@@ -44,7 +44,7 @@ public class QueenBee : GlobalNPC
             case 2:
                 if (AITimer % 10 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         npc.ai[0] = Main.rand.NextFromList(0, 1, 3);
                     }
@@ -55,7 +55,7 @@ public class QueenBee : GlobalNPC
                 int rate = npc.life < npc.lifeMax * 0.36f ? 60 : 120;
                 if (npc.ai[1] % rate == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 12, ProjectileID.BeeHive, npc.damage / 3, 1);
                     }

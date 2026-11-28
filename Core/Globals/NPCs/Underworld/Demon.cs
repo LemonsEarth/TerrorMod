@@ -13,7 +13,7 @@ public class Demon : GlobalNPC
 
     public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             Projectile.NewProjectile(npc.GetSource_OnHurt(projectile), npc.Center, Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 2, Main.rand.Next(ProjectileID.GreekFire1, ProjectileID.GreekFire3), npc.damage / 4, 1f);
         }

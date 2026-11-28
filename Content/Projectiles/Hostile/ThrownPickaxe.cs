@@ -36,7 +36,7 @@ public class ThrownPickaxe : ModProjectile
 
     public override void OnKill(int timeLeft)
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             int explosionRadius = 2;
             int minTileX = (int)(Projectile.Center.X / 16f - explosionRadius);

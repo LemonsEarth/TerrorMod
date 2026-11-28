@@ -77,7 +77,7 @@ public class LavaElemental : ModNPC
 
         if (AttackTimer == FIRE_RATE)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 2, Main.rand.Next(ProjectileID.GreekFire1, ProjectileID.GreekFire3), NPC.damage / 4, 1f);
             }
@@ -97,7 +97,7 @@ public class LavaElemental : ModNPC
     {
         int tileX = (int)NPC.Center.X / 16;
         int tileY = (int)NPC.Center.Y / 16;
-        if (WorldGen.InWorld(tileX, tileY) && Main.netMode != NetmodeID.MultiplayerClient)
+        if (WorldGen.InWorld(tileX, tileY) && LemonUtils.NotClient())
         {
             WorldGen.PlaceLiquid(tileX, tileY, (byte)LiquidID.Lava, 255);
             NetMessage.SendTileSquare(-1, tileX, tileY);

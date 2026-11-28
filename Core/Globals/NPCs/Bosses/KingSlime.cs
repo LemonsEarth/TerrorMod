@@ -60,7 +60,7 @@ public class KingSlime : GlobalNPC
         if (npc.life < npc.lifeMax * 0.5f && canClone)
         {
             canClone = false;
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC clone = NPC.NewNPCDirect(npc.GetSource_FromAI("Half-Health"), (int)Main.player[npc.target].Center.X, (int)Main.player[npc.target].position.Y - 1000, npc.type);
                 clone.life = npc.lifeMax / 4;
@@ -78,7 +78,7 @@ public class KingSlime : GlobalNPC
             {
                 Vector2 pos = Main.player[npc.target].Center + (Vector2.UnitY * 800).RotatedBy(i * (MathHelper.Pi / (amount / 2)));
                 LemonUtils.DustCircle(pos, 8, 5, DustID.Granite, 3f);
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     NPC slime = NPC.NewNPCDirect(npc.GetSource_FromAI("PeriodicSlimeSpawn"), (int)pos.X, (int)pos.Y, NPCID.SlimeSpiked);
                 }

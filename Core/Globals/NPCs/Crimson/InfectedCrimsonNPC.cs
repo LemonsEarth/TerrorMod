@@ -44,7 +44,7 @@ public class InfectedCrimsonNPC : GlobalNPC
         {
             LemonUtils.DustCircle(npc.Center, 8, 1, DustID.GemRuby, 2f);
             SoundEngine.PlaySound(npc.DeathSound, npc.Center);
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(npc.GetSource_Death("Crimsoned"), (int)npc.Center.X, (int)npc.Center.Y, NPCType<CrimsonCarrier>());
             }

@@ -17,7 +17,7 @@ public class FireImp : GlobalNPC
     {
         if (AITimer % 180 == 0 && npc.HasValidTarget)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(Main.player[npc.target].Center) * 10, ProjectileType<FireballClone>(), npc.damage / 3, 1f);
             }

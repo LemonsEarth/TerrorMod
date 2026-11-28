@@ -30,7 +30,7 @@ public class EmpressOfLight : GlobalNPC
             case 2: // projspam
                 if (npc.ai[1] % 30 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Vector2 pos = player.Center + new Vector2(Math.Sign(player.velocity.X) * Main.rand.Next(600, 800), Main.rand.Next(-200, 200));
                         Projectile.NewProjectile(npc.GetSource_FromAI(), pos, new Vector2(10, 10), ProjectileID.HallowBossLastingRainbow, npc.damage / 4, 1f, ai0: 6.6f);
@@ -42,7 +42,7 @@ public class EmpressOfLight : GlobalNPC
                 {
                     for (int i = 0; i < 6; i++)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             float addRot = 360f / npc.ai[1];
                             Vector2 pos = player.Center + Vector2.UnitY.RotatedBy(MathHelper.ToRadians(60 + addRot * 15) * i) * 300;
@@ -56,7 +56,7 @@ public class EmpressOfLight : GlobalNPC
                 {
                     for (int i = -3; i <= 3; i++)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             Vector2 pos = player.Center + new Vector2(-800, i * 150);
                             Projectile.NewProjectile(npc.GetSource_FromAI(), pos, Vector2.Zero, ProjectileID.FairyQueenLance, npc.damage / 4, 1f);
@@ -67,7 +67,7 @@ public class EmpressOfLight : GlobalNPC
             case 9: // dash
                 if (npc.ai[1] % 10 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ProjectileID.HallowBossRainbowStreak, npc.damage / 4, 1f);
                     }

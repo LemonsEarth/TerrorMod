@@ -15,7 +15,7 @@ public class Unicorn : GlobalNPC
         Player player = Main.player[npc.target];
         if (AITimer % 300 == 0)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ProjectileID.FairyQueenLance, npc.damage / 4, 1f, ai0: npc.DirectionTo(player.Center).ToRotation());
             }

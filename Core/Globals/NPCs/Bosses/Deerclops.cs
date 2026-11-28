@@ -35,7 +35,7 @@ public class Deerclops : GlobalNPC
 
         if (npc.life <= npc.lifeMax / 2)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient && AITimer % 300 == 0)
+            if (LemonUtils.NotClient() && AITimer % 300 == 0)
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center - Vector2.UnitY * 300, Vector2.Zero, ProjectileType<InfiniteTerrorHeadProj>(), npc.damage / 4, 1f, ai0: MathHelper.PiOver2, ai1: 60, ai2: 20);
             }

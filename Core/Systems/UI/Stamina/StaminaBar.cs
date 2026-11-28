@@ -12,7 +12,6 @@ public class StaminaBar : UIState
 {
     // For this bar we'll be using a frame texture and then a gradient inside bar, as it's one of the more simpler approaches while still looking decent.
     // Once this is all set up make sure to go and do the required stuff for most UI's in the ModSystem class.
-    private UIText text;
     private UIElement area;
     private UIImage barFrame;
     private Color gradientA;
@@ -34,16 +33,10 @@ public class StaminaBar : UIState
         barFrame.Width.Set(136, 0f);
         barFrame.Height.Set(34, 0f);
 
-        text = new UIText("0/0", 0.8f); // text to show stat
-        text.Width.Set(136, 0f);
-        text.Height.Set(34, 0f);
-        text.Top.Set(40, 0f);
-        text.Left.Set(0, 0f);
-
         gradientA = Color.Green;
         gradientB = Color.White;
 
-        area.Append(text);
+        //area.Append(text);
         area.Append(barFrame);
         Append(area);
     }
@@ -61,11 +54,6 @@ public class StaminaBar : UIState
         area.Recalculate();
         base.DrawSelf(spriteBatch);
 
-        var modPlayer = Main.LocalPlayer.GetModPlayer<StaminaPlayer>();
-        // Calculate quotient
-        float quotient = (float)modPlayer.Stamina / modPlayer.MaxStamina; // Creating a quotient that represents the difference of your currentResource vs your maximumResource, resulting in a float of 0-1f.
-        quotient = Utils.Clamp(quotient, 0f, 1f); // Clamping it to 0-1f so it doesn't go over that.
-
         // Here we get the screen dimensions of the barFrame element, then tweak the resulting rectangle to arrive at a rectangle within the barFrame texture that we will draw the gradient. These values were measured in a drawing program.
         Rectangle hitbox = barFrame.GetInnerDimensions().ToRectangle();
         hitbox.X += 8;
@@ -76,16 +64,35 @@ public class StaminaBar : UIState
         // Now, using this hitbox, we draw a gradient by drawing vertical lines while slowly interpolating between the 2 colors.
         int left = hitbox.Left;
         int right = hitbox.Right;
-        int steps = (int)((right - left) * quotient);
-        for (int i = 0; i < steps; i += 1)
-        {
-            // float percent = (float)i / steps; // Alternate Gradient Approach
-            float percent = (float)i / (right - left);
-            spriteBatch.Draw(
-                TextureAssets.MagicPixel.Value,
-                new Rectangle(left + i, hitbox.Y, 1, hitbox.Height),
-                Color.Lerp(Color.PaleGreen, gradientB, MathF.Sin(percent - (float)Main.timeForVisualEffects / 10)));
-        }
+
+        var modPlayer = Main.LocalPlayer.GetModPlayer<StaminaPlayer>();
+        float quotient = (float)modPlayer.Stamina / modPlayer.MaxStamina;
+        quotient = Utils.Clamp(quotient, 0f, 1f);
+        int mainStaminaWidth = (int)(hitbox.Width * quotient);
+
+        // Background
+        spriteBatch.Draw(
+            TextureAssets.MagicPixel.Value,
+            new Rectangle(left, hitbox.Y, hitbox.Width, hitbox.Height),
+            Color.DarkGreen);
+
+        int yellowBarWidth = (int)(hitbox.Width * ((modPlayer.Stamina + modPlayer.LastConsumedStaminaAmount) / modPlayer.MaxStamina));
+        yellowBarWidth = Utils.Clamp(yellowBarWidth, 0, hitbox.Width);
+
+        // Slower yellow bar
+        spriteBatch.Draw(
+            TextureAssets.MagicPixel.Value,
+            new Rectangle(left, hitbox.Y, (int)yellowBarWidth, hitbox.Height),
+            Color.Yellow * 0.5f);
+
+        // Main stamina bar
+        Color stColor = modPlayer.Stamina != modPlayer.MaxStamina ?
+            Color.PaleGreen :
+            Color.Lerp(Color.PaleGreen, Color.White, MathF.Sin((float)Main.timeForVisualEffects / 10));
+        spriteBatch.Draw(
+            TextureAssets.MagicPixel.Value,
+            new Rectangle(left, hitbox.Y, mainStaminaWidth, hitbox.Height),
+            stColor);
     }
 
     public override void Update(GameTime gameTime)
@@ -105,16 +112,11 @@ internal class StaminaUISystem : ModSystem
 
     internal StaminaBar StaminaBar;
 
-    public static LocalizedText ExampleResourceText { get; private set; }
-
     public override void Load()
     {
         StaminaBar = new();
         StaminaBarUserInterface = new();
         StaminaBarUserInterface.SetState(StaminaBar);
-
-        string category = "UI";
-        ExampleResourceText ??= Mod.GetLocalization($"{category}.Stamina");
     }
 
     public override void UpdateUI(GameTime gameTime)

@@ -1,4 +1,6 @@
-﻿namespace TerrorMod.Common.Utils;
+﻿using TerrorMod.Core.Players;
+
+namespace TerrorMod.Common.Utils;
 
 public static partial class LemonUtils
 {
@@ -15,6 +17,11 @@ public static partial class LemonUtils
     public static bool Alive(this Player player)
     {
         return (player != null || player.active || !player.dead || !player.ghost);
+    }
+
+    public static float GetStamina(this Player player)
+    {
+        return player.GetModPlayer<StaminaPlayer>().Stamina;
     }
 
     public static void AddBuffWithStackingTime(this Player player, int buffType, int time, int maxTime = 99999999)

@@ -23,7 +23,7 @@ public class LunaticCultist : GlobalNPC
         if (npc.life <= npc.lifeMax / 2 && !summonedDragons)
         {
             summonedDragons = true;
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X + 100, (int)npc.Center.Y, NPCID.CultistDragonHead);
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X - 100, (int)npc.Center.Y, NPCID.CultistDragonHead);
@@ -35,7 +35,7 @@ public class LunaticCultist : GlobalNPC
             case 3: // fireballs
                 if (npc.ai[1] == 30)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         for (int i = 0; i < 8; i++)
                         {
@@ -48,7 +48,7 @@ public class LunaticCultist : GlobalNPC
             case 4:
                 if (npc.ai[1] == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         for (int i = 0; i < 6; i++)
                         {

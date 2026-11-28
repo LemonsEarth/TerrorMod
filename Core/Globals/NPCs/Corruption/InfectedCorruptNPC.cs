@@ -44,7 +44,7 @@ public class InfectedCorruptNPC : GlobalNPC
         {
             LemonUtils.DustCircle(npc.Center, 8, 5, DustID.Corruption, 3f);
             SoundEngine.PlaySound(npc.DeathSound, npc.Center);
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(npc.GetSource_Death("Corrupted"), (int)npc.Center.X, (int)npc.Center.Y, NPCType<CorruptCarrier>());
             }

@@ -58,7 +58,7 @@ public class TreeSpirit : ModNPC
 
         if (AttackTimer == FIRE_RATE)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(player.Center) * 10, ProjectileID.WoodenArrowHostile, NPC.damage, 1f);
                 LemonUtils.DustCircle(NPC.Center, 8, 6, DustID.WoodFurniture);

@@ -17,7 +17,7 @@ public class MeteorHostile : ModProjectile
     public override bool OnTileCollide(Vector2 oldVelocity)
     {
         SoundEngine.PlaySound(SoundID.Item89);
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             int num = Main.rand.Next(1, 4);
             Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, Vector2.Zero, ProjectileType<BombExplosion>(), 20, 1);

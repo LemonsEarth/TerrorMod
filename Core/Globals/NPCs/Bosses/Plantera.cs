@@ -33,7 +33,7 @@ public class Plantera : GlobalNPC
             }
             if (AITimer % 240 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     for (int i = 0; i < 8; i++)
                     {
@@ -54,7 +54,7 @@ public class Plantera : GlobalNPC
             {
                 if (AttackTimer % 15 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Vector2 pos = npc.Center + npc.Center.DirectionTo(player.Center) * (npc.width / 2);
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.DirectionTo(player.Center) * 20, ProjectileType<EyeFireButVenom>(), npc.damage / 5, 1f, ai1: 4, ai2: 3);

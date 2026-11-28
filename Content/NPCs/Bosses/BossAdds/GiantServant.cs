@@ -58,7 +58,7 @@ public class GiantServant : ModNPC
 
     public override void OnKill()
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             Projectile.NewProjectile(NPC.GetSource_Death(), NPC.Center, Vector2.Zero, ProjectileType<ExplosionLarge>(), NPC.damage, 1f);
         }

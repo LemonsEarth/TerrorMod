@@ -36,7 +36,7 @@ public class ApocalypseStone : ModItem
     public override bool? UseItem(Player player)
     {
         SoundEngine.PlaySound(SoundID.Roar, player.position);
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             NPC.SpawnBoss((int)player.MountedCenter.X, (int)player.MountedCenter.Y - 400, NPCType<InfiniteTerrorCage>(), player.whoAmI);
         }

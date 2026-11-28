@@ -16,7 +16,7 @@ public class Pixie : GlobalNPC
         Player player = Main.player[npc.target];
         if (AITimer % 600 == 0)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ProjectileID.HallowBossRainbowStreak, npc.damage / 4, 1f);
             }

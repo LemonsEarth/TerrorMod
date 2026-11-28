@@ -27,7 +27,7 @@ public class HotProjectile : GlobalProjectile
 
     public override void AI(Projectile projectile)
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             if (Main.rand.NextBool(20))
             {

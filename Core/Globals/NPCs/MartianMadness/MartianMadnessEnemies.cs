@@ -56,7 +56,7 @@ public class MartianMadnessEnemies : GlobalNPC
 
         else if (npc.type == NPCID.MartianTurret)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient && AITimer % 150 == 0)
+            if (LemonUtils.NotClient() && AITimer % 150 == 0)
             {
                 Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.DirectionTo(player.Center) * 8, ProjectileID.CultistBossLightningOrbArc, (int)(npc.damage * 1.5f), 1f, ai0: npc.DirectionTo(player.Center).ToRotation());
             }

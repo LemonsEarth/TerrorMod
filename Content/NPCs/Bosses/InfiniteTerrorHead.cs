@@ -31,7 +31,7 @@ public class InfiniteTerrorHead : ModNPC
     bool doDeath = false;
     int deathTimer = 0;
 
-    bool NotClient => Main.netMode != NetmodeID.MultiplayerClient;
+    bool NotClient => LemonUtils.NotClient();
 
     int HeadProj => ProjectileType<InfiniteTerrorHeadProj>();
     int LaserSkull => ProjectileType<LaserSkull>();
@@ -277,7 +277,7 @@ public class InfiniteTerrorHead : ModNPC
                 {
                     LemonUtils.DustCircle(new Vector2(Main.rand.NextFloat(NPC.position.X, NPC.position.X + NPC.width), Main.rand.NextFloat(NPC.position.Y, NPC.position.Y + NPC.height)), 16, 8, DustID.GemDiamond, Main.rand.NextFloat(1.2f, 2.5f));
                     SoundEngine.PlaySound(SoundID.NPCHit2);
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Gore.NewGore(NPC.GetSource_Death(), new Vector2(Main.rand.NextFloat(NPC.position.X, NPC.position.X + NPC.width), Main.rand.NextFloat(NPC.position.Y, NPC.position.Y + NPC.height)), Vector2.UnitY.RotatedByRandom(MathHelper.Pi * 2) * 10, GoreType<CageGore>());
                     }
@@ -385,7 +385,7 @@ public class InfiniteTerrorHead : ModNPC
                 NPC.rotation = MathHelper.ToRadians(deathTimer * 3);
                 if (deathTimer % 10 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         for (int i = 0; i < 10; i++)
                         {
@@ -1176,7 +1176,7 @@ public class InfiniteTerrorHead : ModNPC
 
     void SwitchAttacks()
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             Attack++;
             if (Attack > 8) Attack = 0;

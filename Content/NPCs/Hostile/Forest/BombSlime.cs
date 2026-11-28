@@ -58,7 +58,7 @@ public class BombSlime : ModNPC
 
         if (AITimer >= 300)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<BombExplosion>(), NPC.damage, 1f);
             }

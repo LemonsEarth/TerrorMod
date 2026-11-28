@@ -62,7 +62,7 @@ public class SolarEclipseEnemies : GlobalNPC
             case NPCID.Frankenstein:
                 if (AITimer % 120 == 0 && npc.life < npc.lifeMax)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         npc.HealEffect(npc.lifeMax / 5);
                         npc.life += npc.lifeMax / 5;
@@ -85,7 +85,7 @@ public class SolarEclipseEnemies : GlobalNPC
             case NPCID.Reaper:
                 if (AITimer % 60 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.DirectionTo(player.Center) * 5, ProjectileID.DemonSickle, npc.damage / 4, 1f);
                     }
@@ -102,7 +102,7 @@ public class SolarEclipseEnemies : GlobalNPC
                 {
                     if (AITimer % 30 == 0)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.MothronEgg);
                         }
@@ -129,7 +129,7 @@ public class SolarEclipseEnemies : GlobalNPC
     {
         if (npc.type == NPCID.Everscream)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 for (int i = 0; i < 6; i++)
                 {

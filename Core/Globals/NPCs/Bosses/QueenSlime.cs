@@ -25,7 +25,7 @@ public class QueenSlime : GlobalNPC
         switch (npc.ai[0])
         {
             case 0: //nothing
-                //if (Main.netMode != NetmodeID.MultiplayerClient)
+                //if (LemonUtils.NotClient())
                 //{
                 //    npc.ai[0] = 3;
                 //}
@@ -35,7 +35,7 @@ public class QueenSlime : GlobalNPC
                 if (npc.ai[1] > -40 && npc.ai[1] < -30)
                 {
                     npc.ai[1] = 0;
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         for (int i = -1; i <= 1; i++)
                         {
@@ -48,7 +48,7 @@ public class QueenSlime : GlobalNPC
             case 4:
                 if (npc.ai[1] == 30)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         for (int i = 0; i < 6; i++)
                         {

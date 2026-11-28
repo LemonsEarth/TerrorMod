@@ -42,7 +42,7 @@ public class Golem : GlobalNPC
             {
                 if (AttackTimer % 60 == 0)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         int dir = Main.rand.NextBool().ToDirectionInt();
                         Vector2 pos = player.Center + Vector2.UnitX * dir * 250;
@@ -52,7 +52,7 @@ public class Golem : GlobalNPC
             }
             if (AITimer % 600 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY * 2, ProjectileID.CultistBossLightningOrb, npc.damage / 4, 1);
                 }

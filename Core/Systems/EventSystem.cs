@@ -16,26 +16,26 @@ public class EventSystem : ModSystem
         if (HellbreachStartCheck())
         {
             hellbreachActive = true;
-            if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.StartMessage"), Color.OrangeRed);
+            if (LemonUtils.NotClient()) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.StartMessage"), Color.OrangeRed);
         }
 
         if (hellbreachActive && Utils.GetDayTimeAs24FloatStartingFromMidnight() > 19.50f)
         {
             hellbreachActive = false;
             finishedHellbreach = true;
-            if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.EndMessage"), Color.OrangeRed);
+            if (LemonUtils.NotClient()) ChatHelper.BroadcastChatMessage(NetworkText.FromKey("Mods.TerrorMod.Messages.Hellbreach.EndMessage"), Color.OrangeRed);
         }
 
         if ((int)Main.time == 1 && !Main.dayTime && DayCountSystem.DayCount == 3)
         {
             Main.bloodMoon = true;
-            if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("The Bloody Moon rises..."), Color.Red);
+            if (LemonUtils.NotClient()) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("The Bloody Moon rises..."), Color.Red);
         }
 
         if ((int)Main.time == 1 && Main.dayTime && DayCountSystem.DayCount % 10 == 0 && Main.hardMode)
         {
             Main.eclipse = true;
-            if (Main.netMode != NetmodeID.MultiplayerClient) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("A Solar Eclipse has begun!"), Color.OrangeRed);
+            if (LemonUtils.NotClient()) ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("A Solar Eclipse has begun!"), Color.OrangeRed);
         }
     }
 

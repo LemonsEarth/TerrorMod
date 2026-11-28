@@ -45,7 +45,7 @@ public class DartTrap : ModProjectile
 
         if (AITimer == 90)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 for (int i = 0; i < 5; i++)
                 {

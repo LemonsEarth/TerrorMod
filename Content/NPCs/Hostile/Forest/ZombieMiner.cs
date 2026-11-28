@@ -63,7 +63,7 @@ public class ZombieMiner : ModNPC
 
         if (AttackTimer == FIRE_RATE && NPC.Center.Distance(player.Center) < 500 && AttackCount < MAX_ATTACK_COUNT)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, NPC.Center.DirectionTo(player.Center) * 10, ProjectileType<ThrownPickaxe>(), NPC.damage, 1f);
             }

@@ -29,7 +29,7 @@ public class Spiders : GlobalNPC
                 Player player = Main.player[npc.target];
                 if (Collision.CanHit(npc, player))
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 5, ProjectileID.WebSpit, (int)(npc.damage * 0.4f), 1f);
                     }
@@ -52,7 +52,7 @@ public class Spiders : GlobalNPC
 
     public override void OnKill(NPC npc)
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             for (int i = 0; i < 8; i++)
             {

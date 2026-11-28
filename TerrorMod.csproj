@@ -5,6 +5,7 @@
 
 	<PropertyGroup>
     	<TmlBuildBootstrapFeatures>tomat.enablemod;lolxd87.splashskip;tomat.assethotreloading</TmlBuildBootstrapFeatures>
+			<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 	<!-- References -->
 

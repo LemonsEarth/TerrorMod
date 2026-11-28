@@ -37,7 +37,7 @@ public class MoonLord : GlobalNPC
             }
             if (AITimer >= 600)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Vector2 pos = player.Center + new Vector2(Math.Sign(player.velocity.X) * 300, -1500);
                     Projectile.NewProjectile(npc.GetSource_FromAI(), pos, Vector2.Zero, ProjectileType<DoomSphere>(), 50, 2f, ai0: 2f);
@@ -98,7 +98,7 @@ public class MoonLord : GlobalNPC
     public override void OnKill(NPC npc)
     {
         if (NPC.downedMoonlord || placed) return;
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             int counter = 0;
             while (counter < 1000)

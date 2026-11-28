@@ -29,7 +29,7 @@ public class DukeFishron : GlobalNPC
         Player player = Main.player[npc.target];
         if (AITimer % 60 == 0 && npc.life + 100 < npc.lifeMax && npc.life > npc.lifeMax / 3)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 npc.HealEffect(100);
                 npc.life += 100;
@@ -45,7 +45,7 @@ public class DukeFishron : GlobalNPC
                 npc.velocity *= 1.035f;
                 break;
             case 8: // sharknadoes p2
-                if (Main.netMode != NetmodeID.MultiplayerClient && npc.ai[2] == 60)
+                if (LemonUtils.NotClient() && npc.ai[2] == 60)
                 {
                     for (int i = 0; i < 4; i++)
                     {
@@ -57,7 +57,7 @@ public class DukeFishron : GlobalNPC
             case 9: // p3 transition
                 if (npc.ai[2] == 0 || npc.ai[2] == 170)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         int healAmount = (int)(npc.lifeMax * 0.25f) - npc.life;
                         npc.HealEffect(healAmount);
@@ -72,7 +72,7 @@ public class DukeFishron : GlobalNPC
                     npc.velocity *= 1.3f;
                     if (npc.ai[3] == 3)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ProjectileID.SharknadoBolt, npc.damage / 4, 1f, ai1: 1);
                         }
@@ -87,7 +87,7 @@ public class DukeFishron : GlobalNPC
                         SoundEngine.PlaySound(TerrorSFX.Thunder);
                         SoundEngine.PlaySound(SoundID.Thunder);
                         SoundEngine.PlaySound(SoundID.Thunder);
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             for (int i = -8; i <= 8; i++)
                             {

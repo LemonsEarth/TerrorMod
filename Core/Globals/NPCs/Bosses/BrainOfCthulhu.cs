@@ -42,7 +42,7 @@ public class BrainOfCthulhu : GlobalNPC
             }
             else if (phase2Timer % 30 == 0 && phase2Timer > 60)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.Center.DirectionTo(player.Center) * 10, ProjectileType<CrimsonCarrierProj>(), npc.damage / 3, 1f);
                 }

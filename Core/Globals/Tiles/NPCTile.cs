@@ -46,7 +46,7 @@ public class NPCTile : GlobalTile
         }
         if (type == TileID.Stone)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 int roll = Main.rand.Next(1, 500 / LemonUtils.GetDifficulty());
                 if (roll <= 1 * LemonUtils.GetDifficulty())
@@ -97,7 +97,7 @@ public class NPCTile : GlobalTile
 
         if (type == TileID.Trees)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 if (Main.rand.NextBool(10))
                 {
@@ -108,7 +108,7 @@ public class NPCTile : GlobalTile
 
         if (type == TileID.ShadowOrbs)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 if (Main.rand.NextBool(3))
                 {

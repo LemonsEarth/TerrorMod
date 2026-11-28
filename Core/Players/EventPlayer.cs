@@ -64,7 +64,7 @@ public class EventPlayer : ModPlayer
         {
             if (Main.rand.NextBool(30) && !NPC.AnyNPCs(NPCID.SnowBalla) && !NPC.AnyNPCs(NPCID.SnowmanGangsta) && !NPC.AnyNPCs(NPCID.MisterStabby))
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     int amount = Main.rand.Next(4, 10);
                     for (int i = 0; i < amount; i++)

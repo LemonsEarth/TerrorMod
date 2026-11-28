@@ -17,7 +17,7 @@ public class Paladin : GlobalNPC
             {
                 if (enemy.CanBeChasedBy() && enemy.Distance(npc.Center) < 1000 && enemy.type != NPCID.Paladin)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         int healAmount = enemy.life + (enemy.lifeMax / 100) <= enemy.lifeMax ? enemy.lifeMax / 20 : enemy.lifeMax - enemy.life;
                         healAmount = (int)MathHelper.Clamp(healAmount, 10, 40);

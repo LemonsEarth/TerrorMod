@@ -20,7 +20,7 @@ public class PlanteraTentacle : GlobalNPC
 
     public override void OnKill(NPC npc)
     {
-        if (Main.netMode != NetmodeID.MultiplayerClient && npc.type == NPCID.TheHungryII)
+        if (LemonUtils.NotClient() && npc.type == NPCID.TheHungryII)
         {
             NPC.NewNPC(new EntitySource_SpawnNPC(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu, npc.whoAmI, ai3: 0.3f);
         }

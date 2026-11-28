@@ -48,7 +48,7 @@ public class Pirates : GlobalNPC
         {
             if (npc.ai[1] == 21)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     for (int i = -1; i <= 1; i++)
                     {
@@ -74,7 +74,7 @@ public class Pirates : GlobalNPC
         if (!Main.rand.NextBool(10)) return;
         if (npc.type != NPCID.PirateShipCannon && npc.type != NPCID.PirateCaptain && npc.type != NPCID.PirateGhost)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.PirateGhost);
             }

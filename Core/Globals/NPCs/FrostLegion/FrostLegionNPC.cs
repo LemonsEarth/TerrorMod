@@ -49,7 +49,7 @@ public class FrostLegionNPC : GlobalNPC
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    if (LemonUtils.NotClient())
                     {
                         Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY.RotatedBy(MathHelper.PiOver4 * i) * Main.rand.NextFloat(2, 8), ProjectileID.SnowBallHostile, npc.damage / 4, 1f);
                     }

@@ -46,7 +46,7 @@ public class ServantOfCthulhu : GlobalNPC
     public override void OnKill(NPC npc)
     {
         if (!TerrorServerConfigs.serverConfig.EnableBossChanges) return;
-        if (Main.netMode != NetmodeID.MultiplayerClient)
+        if (LemonUtils.NotClient())
         {
             Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, Vector2.Zero, ProjectileType<ExplosionSmall>(), npc.damage, 1f);
         }

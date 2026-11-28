@@ -17,14 +17,14 @@ public class Explosives : GlobalItem
             item.stack--;
             if (item.type == ItemID.Bomb)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ProjectileID.Bomb, item.damage, 1f);
                 }
             }
             else if (item.type == ItemID.Dynamite)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(player.GetSource_FromAI(), player.Center, Vector2.Zero, ProjectileID.Dynamite, item.damage, 1f);
                 }

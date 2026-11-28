@@ -57,7 +57,7 @@ public class LivingCactus : ModNPC
 
         if (AttackTimer == FIRE_RATE && (NPC.Center.Distance(player.Center) < 200 || NPC.life < NPC.lifeMax))
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 for (int i = 0; i < 3; i++)
                 {

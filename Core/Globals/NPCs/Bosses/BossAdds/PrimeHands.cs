@@ -65,7 +65,7 @@ public class PrimeHands : GlobalNPC
                 {
                     if (AITimer % 120 == 0)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             for (int i = -2; i <= 2; i++)
                             {
@@ -100,7 +100,7 @@ public class PrimeHands : GlobalNPC
                     npc.MoveToPos(player.Center - Vector2.UnitY * 200, 0.7f, 0.7f, 1f, 0.7f);
                     if (AITimer > 400 && AITimer % 30 == 0)
                     {
-                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        if (LemonUtils.NotClient())
                         {
                             Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.UnitY * 5, ProjectileID.DeathLaser, npc.damage / 2, 1f);
                         }

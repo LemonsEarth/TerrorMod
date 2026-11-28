@@ -65,7 +65,7 @@ public class FrostMoonEnemies : GlobalNPC
         {
             if (AITimer % 600 == 0 && AITimer > 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCType<BombSlime>());
                 }
@@ -76,7 +76,7 @@ public class FrostMoonEnemies : GlobalNPC
         {
             if (AITimer % 30 == 0 && npc.ai[0] == 20)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, npc.DirectionTo(player.Center) * 10, ProjectileID.FrostWave, npc.damage / 4, 1f);
                 }
@@ -113,7 +113,7 @@ public class FrostMoonEnemies : GlobalNPC
 
             if (AITimer % 240 == 0)
             {
-                if (Main.netMode != NetmodeID.MultiplayerClient)
+                if (LemonUtils.NotClient())
                 {
                     Projectile.NewProjectile(npc.GetSource_FromAI(), player.Center - Vector2.UnitY * 600, Vector2.UnitY * 7, ProjectileID.CultistBossIceMist, npc.damage / 4, 1f, ai1: 1);
                 }
@@ -127,7 +127,7 @@ public class FrostMoonEnemies : GlobalNPC
     {
         if (npc.type == NPCID.Everscream)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 for (int i = 0; i < 6; i++)
                 {
@@ -141,7 +141,7 @@ public class FrostMoonEnemies : GlobalNPC
     {
         if (npc.type == NPCID.Everscream)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient)
+            if (LemonUtils.NotClient())
             {
                 if (Main.rand.NextBool(20))
                 {
